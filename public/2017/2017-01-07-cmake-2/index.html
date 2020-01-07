@@ -57,7 +57,7 @@
     "datePublished": "2017-01-07 23:59:59 \x2b0000 \x2b0000",
     "dateModified" : "2017-01-07 23:59:59 \x2b0000 \x2b0000",
     "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-07-cmake-2\/",
-    "wordCount" : "587",
+    "wordCount" : "561",
     "keywords" : [ "cmake", "静心明志"]
 }
 </script>
@@ -233,8 +233,8 @@ make
 <li><p>换个地方保存目标二进制
 不论是 SUBDIRS 还是 ADD_SUBDIRECTORY 指令(不论是否指定编译输出目录),我们都可以通过 SET 指令重新定义 EXECUTABLE_OUTPUT_PATH 和 LIBRARY_OUTPUT_PATH 变量来指定最终的目标二进制的位置(指最终生成的 hello 或者最终的共享库,不包含编译生成的中间文件)</p>
 
-<pre><code>	SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-	SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+<pre><code>	SET(EXECUTABLE_OUTPUT_PATH${PROJECT_BINARY_DIR}/bin)
+	SET(LIBRARY_OUTPUT_PATH${PROJECT_BINARY_DIR}/lib)
 </code></pre></li>
 </ol>
 
@@ -250,8 +250,8 @@ make
 
 <pre><code>	DESTDIR=
 	install:
-	mkdir -p $(DESTDIR)/usr/bin
-	install -m 755 hello $(DESTDIR)/usr/bin
+	mkdir-p$(DESTDIR)/usr/bin
+	install-m755hello$(DESTDIR)/usr/bin
 </code></pre></li>
 </ol>
 
@@ -265,8 +265,8 @@ make
 <pre><code>DESTDIR=
 PREFIX=/usr
 install:
-mkdir -p $(DESTDIR)/$(PREFIX)/bin
-install -m 755 hello $(DESTDIR)/$(PREFIX)/bin
+mkdir-p$(DESTDIR)/$(PREFIX)/bin
+install-m755hello$(DESTDIR)/$(PREFIX)/bin
 </code></pre>
 
 <p>那么我们的 HelloWorld 应该怎么进行安装呢?
@@ -290,7 +290,7 @@ install -m 755 hello $(DESTDIR)/$(PREFIX)/bin
 </code></pre>
 
 <p>参数中的 TARGETS 后面跟的就是我们通过 ADD_EXECUTABLE 或者 ADD_LIBRARY 定义的目标文件,可能是可执行二进制、动态库、静态库。目标类型也就相对应的有三种,ARCHIVE 特指静态库,LIBRARY 特指动态库,RUNTIME特指可执行目标二进制。
-DESTINATION 定义了安装的路径,如果路径以/开头,那么指的是绝对路径,这时候CMAKE_INSTALL_PREFIX 其实就无效了。如果你希望使用 CMAKE_INSTALL_PREFIX 来定义安装路径,就要写成相对路径,即不要以/开头,那么安装后的路径就是${CMAKE_INSTALL_PREFIX}/<DESTINATION 定义的路径>
+DESTINATION定义了安装的路径,如果路径以/开头,那么指的是绝对路径,这时候CMAKE_INSTALL_PREFIX其实就无效了。如果你希望使用CMAKE_INSTALL_PREFIX来定义安装路径,就要写成相对路径,即不要以/开头,那么安装后的路径就是${CMAKE_INSTALL_PREFIX}/<DESTINATION定义的路径>
 举个简单的例子:</p>
 
 <pre><code>INSTALL(TARGETS myrun mylib mystaticlib
@@ -302,11 +302,9 @@ ARCHIVE DESTINATION libstatic
 
 <p>上面的例子会将:</p>
 
-<ul>
-<li>可执行二进制 myrun 安装到${CMAKE_INSTALL_PREFIX}/bin 目录</li>
-<li>动态库 libmylib 安装到${CMAKE_INSTALL_PREFIX}/lib 目录</li>
-<li>静态库 libmystaticlib 安装到${CMAKE_INSTALL_PREFIX}/libstatic 目录</li>
-</ul>
+<p>-可执行二进制myrun安装到${CMAKE_INSTALL_PREFIX}/bin目录
+-动态库libmylib安装到${CMAKE_INSTALL_PREFIX}/lib目录
+-静态库libmystaticlib安装到${CMAKE_INSTALL_PREFIX}/libstatic目录</p>
 
 <p>特别注意的是你不需要关心 TARGETS 具体生成的路径,只需要写上 TARGETS 名称就可以了。
 普通文件的安装:</p>

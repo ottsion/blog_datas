@@ -57,7 +57,7 @@
     "datePublished": "2017-01-07 23:59:59 \x2b0000 \x2b0000",
     "dateModified" : "2017-01-07 23:59:59 \x2b0000 \x2b0000",
     "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-07-cmake-3\/",
-    "wordCount" : "312",
+    "wordCount" : "306",
     "keywords" : [ "cmake", "静心明志"]
 }
 </script>
@@ -210,7 +210,7 @@ void HelloFunc();
 <p>在 lib 目录下建立 CMakeLists.txt,内容如下:</p>
 
 <pre><code>SET(LIBHELLO_SRC hello.c)
-ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
+ADD_LIBRARY(helloSHARED${LIBHELLO_SRC})
 </code></pre>
 
 <h2 id="编译共享库">编译共享库</h2>
@@ -245,12 +245,12 @@ source1 source2 ... sourceN)
 <p>同样使用上面的指令,我们在支持动态库的基础上再为工程添加一个静态库,按照一般的习惯,静态库名字跟动态库名字应该是一致的,只不过后缀是.a 罢了。
 下面我们用这个指令再来添加静态库:</p>
 
-<pre><code>ADD_LIBRARY(hello STATIC ${LIBHELLO_SRC})
+<pre><code>ADD_LIBRARY(helloSTATIC${LIBHELLO_SRC})
 </code></pre>
 
 <p>然后再在 build 目录进行外部编译,我们会发现,静态库根本没有被构建,仍然只生成了一个动态库。因为 hello 作为一个 target 是不能重名的,所以,静态库构建指令无效。如果我们把上面的 hello 修改为 hello_static:</p>
 
-<pre><code>ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC})
+<pre><code>ADD_LIBRARY(hello_staticSTATIC${LIBHELLO_SRC})
 </code></pre>
 
 <p>就可以构建一个 libhello_static.a 的静态库了。

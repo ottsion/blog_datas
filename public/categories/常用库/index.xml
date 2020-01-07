@@ -246,7 +246,7 @@ Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.0);
 cd Documents/study/cmake/ mkdir t1 &amp;amp;&amp;amp; cd t1  建立main.cpp和CMakeLists.txt
 编写程序 main.cpp
 #include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;quot;Hello World from t1 main!\n&amp;quot;); return 0; }  CMakeLists.txt
-PROJECT (HELLO) SET (SRC_LIST main.cpp) MESSAGE (STATUS &amp;quot;THIS IS BINARY dir&amp;quot; ${HELLO_BINARY_DIR}) MESSAGE (STATUS &amp;quot;THIS IS SOURCE dir&amp;quot; ${HELLO_SOURCE_DIR}) ADD_EXECUTABLE (hello SRC_LIST)  编译过程 运行：
+PROJECT (HELLO) SET (SRC_LIST main.cpp) MESSAGE(STATUS&amp;quot;THISISBINARYdir&amp;quot;${HELLO_BINARY_DIR}) MESSAGE(STATUS&amp;quot;THISISSOURCEdir&amp;quot;${HELLO_SOURCE_DIR}) ADD_EXECUTABLE (hello SRC_LIST)  编译过程 运行：
 cmake . (注意命令后面的点号,代表本目录)。  输出大概是这个样子:
 -- Check for working C compiler: /usr/bin/gcc -- Check for working C compiler: /usr/bin/gcc -- works -- Check size of void* -- Check size of void* - done -- Check for working CXX compiler: /usr/bin/c++ -- Check for working CXX compiler: /usr/bin/c++ -- works -- This is BINARY dir /backup/cmake/t1 -- This is SOURCE dir /backup/cmake/t1 -- Configuring done -- Generating done -- Build files have been written to: /backup/cmake/t1  运行（当前目录）：</description>
     </item>

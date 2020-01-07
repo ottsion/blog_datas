@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ros on 静心明志</title>
+    <title>ROS on 静心明志</title>
     <link>https://ottsion.github.io/categories/ros/</link>
-    <description>Recent content in Ros on 静心明志</description>
+    <description>Recent content in ROS on 静心明志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 25 Jun 2017 23:59:59 +0000</lastBuildDate>
@@ -38,11 +38,12 @@ rosrun rviz rviz   选择添加/map 查看，topic选择/map ，选好fixed_fram
       
       <guid>https://ottsion.github.io/2017/2017-06-24-pioneer-laser/</guid>
       <description>先锋机器人使用手册 前期准备 我们这里说的环境是Ubuntu14.04，ROS-indigo版本，将pioneer机器人装入Ubuntu系统后用笔记本电脑实现控制。详细情况可以参考： ROS和pioneer ROS 。
-软件安装 安装Ubuntu  制作Ubuntu14.04 的U盘启动器后，记得找个含有$F_n$ 的键盘，使用快捷键进入机器人bios系统选择U盘启动。 如果是双系统记得安装过程中选择硬盘时为something else ，自己划分各盘容量。 选择实验室wifi链接，方便后期直接笔记本控制。  安装ROS 这里选用 indigo版本的ROS操作系，下面链接为官方安装地址，按照操作走完就可以了：官方地址
+软件安装 安装Ubuntu 1.制作Ubuntu14.04的U盘启动器后，记得找个含有$F_n$的键盘，使用快捷键进入机器人bios系统选择U盘启动。 2. 如果是双系统记得安装过程中选择硬盘时为something else ，自己划分各盘容量。 3. 选择实验室wifi链接，方便后期直接笔记本控制。
+安装ROS 这里选用 indigo版本的ROS操作系，下面链接为官方安装地址，按照操作走完就可以了：官方地址
 安装完毕后强烈建议学习初步教程，大概是十几篇简短文章，学完后掌握基本ROS下开发方法，了解ROS构成：Tutorials
 安装ROSARIA ROSARIA 提供了一个移动机器人与ROS平台的接口，通过它你可以实现与机器人的互动，所以第一步学习就是要安装好它。
  其中需要在pioneer 官网 安装ARIA 2.9.1-Ubuntu 12.04.2 (precise) or later, amd 64-bit architecture 千万不要忘记了，这是驱动的底层实现，没有这个只安装ROSARIA是不行的。这个选择sudo dpkg -i 安装方式。最终文件安装在/usr/local/下面。  具体安装步骤可以参考：这里
-1) 创建工作空间，如果有了直接走 2). $ . /opt/ros/indigo/setup.bash $ mkdir -p ~/catkin_ws/src $ cd ~/catkin_ws/src $ catkin_init_workspace $ cd ~/catkin_ws $ catkin_make $ cd ~/catkin_ws/src 2) 安装rosaria包: $ git clone https://github.</description>
+1) 创建工作空间，如果有了直接走 2). $./opt/ros/indigo/setup.bash $mkdir-p~/catkin_ws/src $cd~/catkin_ws/src $catkin_init_workspace $cd~/catkin_ws $catkin_make $cd~/catkin_ws/src 2) 安装rosaria包: $gitclonehttps://github.com/amor-ros-pkg/rosaria.git $source~/catkin_ws/devel/setup.bash $echo&amp;quot;source~/catkin_ws/devel/setup.bash&amp;quot;&amp;gt;&amp;gt;~/.bashrc $source~/.bashrc %rosdep可以安装额外需要的工具包 $rosdepupdate $rosdepinstallrosaria $cd~/catkin_ws/ $catkin_make  到此为止你应该安装好了两样东西： 1) Aria library 应该在/usr/local/ 目录下。 2) /catkin_ws/src/rosaria 已经编译到位。</description>
     </item>
     
     <item>
@@ -54,7 +55,7 @@ rosrun rviz rviz   选择添加/map 查看，topic选择/map ，选好fixed_fram
       <description>最终要实现在 desktop_hostname 电脑上运行roscore，并且运行 Turtlesim 程序，然后在 laptop_hostname 电脑上运行键盘控制程序，控制 Turtlesim 小乌龟移动。
 在pioneer中将机器人端视为desktop_hostname，自己的笔记本为B。
 一. 查看电脑ip  利用ifconfig查看ip地址。 利用hostname指令查看hostname。  二. 修改hosts文件 使用如下指令，分别打开 hosts 文件：
-$ sudo gedit /etc/hosts  在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:
+$sudogedit/etc/hosts  在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:
 127.0.0.1　localhost 127.0.1.1 [ desktop_hostname ] [IP_A] [ desktop_hostname ] [IP_B] [ laptop_hostname ]  同理，在电脑laptop_hostname端的 hosts 文件中，加入如下加粗指令：
 127.0.0.1　localhost 127.0.1.1 [ laptop_hostname ] [IP_B] [ laptop_hostname ] [IP_A] [ desktop_hostname ]  三. 电脑之间通信  在两台电脑上装上chrony包，用于实现同步：
 sudo apt-get install chrony  安装ssh</description>
@@ -67,12 +68,14 @@ sudo apt-get install chrony  安装ssh</description>
       
       <guid>https://ottsion.github.io/2017/2017-06-22-pioneer-ros-setup/</guid>
       <description>一. 安装Ubuntu 第一步首先需要给先锋机器人配置Ubuntu环境，这里选用Ubuntu14.04版本进行安装，安装步骤一般为：
- 制作Ubuntu14.04的U盘启动器 进入先锋机器人BIOS界面设置U盘启动，这里我试了F2、Esc、F10、F12。。。。都没起作用，最后找了个带$F_n$ 的键盘，一通$F_n+Esc+shift+ctrl+Del+F12$ 结果进入了。。。具体不清楚哪个起作用了。 按照一般双系统做法进行了系统安装，记得选磁盘一定要选择other那个，别直接默认结果格式化了已有的磁盘。  官方
+ 制作Ubuntu14.04的U盘启动器 2.进入先锋机器人BIOS界面设置U盘启动，这里我试了F2、Esc、F10、F12。。。。都没起作用，最后找了个带$F_n$的键盘，一通$F_n+Esc+shift+ctrl+Del+F12$结果进入了。。。具体不清楚哪个起作用了。 按照一般双系统做法进行了系统安装，记得选磁盘一定要选择other那个，别直接默认结果格式化了已有的磁盘。  官方
 二.安装ROS 安装原文：点击进入
  Setup your sources.list Setup your computer to accept software from packages.ros.org.
-sudo sh -c &#39;echo &amp;quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&amp;quot; &amp;gt; /etc/apt/sources.list.d/ros-latest.list&#39;  Set up your keys
+sudosh-c&#39;echo&amp;quot;debhttp://packages.ros.org/ros/ubuntu$(lsb_release-sc)main&amp;quot;&amp;gt;/etc/apt/sources.list.d/ros-latest.list&#39;  Set up your keys
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116  Installation
-sudo apt-get update sudo apt-get install ros-indigo-desktop-full apt-cache search ros-indigo sudo rosdep init rosdep update echo &amp;quot;source /opt/ros/indigo/setup.bash&amp;quot; &amp;gt;&amp;gt; ~/.</description>
+sudo apt-get update sudo apt-get install ros-indigo-desktop-full apt-cache search ros-indigo sudo rosdep init rosdep update echo &amp;quot;source /opt/ros/indigo/setup.bash&amp;quot; &amp;gt;&amp;gt; ~/.bashrc source ~/.bashrc sudo apt-get install python-rosinstall   ###三.安装ROSARIA###
+安装原文：官方信息
+cd ~/catkin_ws/src git clone https://github.</description>
     </item>
     
     <item>
@@ -83,10 +86,28 @@ sudo apt-get update sudo apt-get install ros-indigo-desktop-full apt-cache searc
       <guid>https://ottsion.github.io/2017/2017-06-22-3d-gangti-yundong/</guid>
       <description>三维刚体运动表示及其运算（李群李代数）  三维空间的刚体运动描述方式：旋转矩阵、变换矩阵、四元数和欧拉角。
 编程EIgen、soupha
-  向量加减法  $a \pm b = \sum_{i=0}^{n}{(a_i + b_i)} $
- 向量内积  $a \bullet b = aTb = \sum{i=1}^{3}{a_i b_i} = |a||b| \cos\langle a,b \rangle$
- 向量外积
- $a \times b = \begin{bmatrix} i &amp;amp; j &amp;amp; k \ a_1 &amp;amp; a_2 &amp;amp; a_3 \ b_1 &amp;amp; b_2 &amp;amp; b_3 \end{bmatrix} = \begin{bmatrix} a_2 b_3 -a_3 b_2 \ a_3 b_1 - a_1 b_3 \ a_1 b_2 - a_2 b_1 \end{bmatrix} = \begin{bmatrix} 0 &amp;amp; -a_3 &amp;amp; a_2 \ a_3 &amp;amp; 0 &amp;amp; -a_1 \ -a_2 &amp;amp; a_1 &amp;amp; 0 \end{bmatrix} b \triangleq \hat a b $</description>
+  向量加减法  $a\pmb=\sum_{i=0}^{n}{(a_i+b_i)}$
+ 向量内积  $a\bullet b=aTb=\sum{i=1}^{3}{a_ib_i}=|a||b|\cos\langle a,b\rangle​$
+ 向量外积  -$a\times b=\begin{bmatrix}i&amp;amp;j&amp;amp;k\a_1&amp;amp;a_2&amp;amp;a_3\b_1&amp;amp;b_2&amp;amp;b_3\end{bmatrix}=\begin{bmatrix}a_2b_3-a_3b_2\a_3b_1-a_1b_3\a_1b_2-a_2b_1\end{bmatrix}=\begin{bmatrix}0&amp;amp;-a_3&amp;amp;a_2\a_3&amp;amp;0&amp;amp;-a_1\-a_2&amp;amp;a_1&amp;amp;0\end{bmatrix}b\triangleq\hat ab$
+一. 旋转矩阵 设某坐标系$[e_1,e_2,e_3]$发生了一次旋转，变成了$[e_1^,e_2^,e_3^`]$,对于某个固定的向量a（向量不随坐标系旋转），它的坐标变换：
+$[e_1,e_2,e_3]\begin{bmatrix}a_1\a_2\a_3\end{bmatrix}=[e_1^,e_2^,e_3^]\begin{bmatrix}a_1^\a_2^\\a_3^\end{bmatrix}$
+左乘$\begin{bmatrix}e_1^T\e_2^T\e_3^T\end{bmatrix}$得到：
+$\begin{bmatrix}a_1\a_2\a_3\end{bmatrix}=\begin{bmatrix}e_1^Te_1^&amp;amp;e_1^Te_2^&amp;amp;e_1^Te_3^\\e_2^Te_1^&amp;amp;e_2^Te_2^&amp;amp;e_2^Te_3^\e_3^Te_1^&amp;amp;e_3^Te_2^&amp;amp;e_3^Te_3^\end{bmatrix}\begin{bmatrix}a_1^\a_2^\\a_3^\end{bmatrix}$
+其中上式中中间矩阵即为旋转矩阵(为特殊正交群)：
+$SO(n)=\left{R\in R^{n\times n}|RR_T=I,det&amp;reg;=1\right}​$
+二. 变换矩阵 对旋转加上平移：$a^`=Ra+t$ 这个表达式不适应于连乘，于是改写成下式：
+$\begin{bmatrix}a^`\1\end{bmatrix}=\begin{bmatrix}R&amp;amp;t\0^T&amp;amp;1\end{bmatrix}\triangleq{T}\begin{bmatrix}a\1\end{bmatrix}$
+这种结构的好处是可以连乘：$\tilde{b}=T_1\tilde{a}$,$\tilde{c}=T_2\tilde{b}$ ==&amp;gt;$\tilde{c}=T_2T_1\tilde{a}$
+这种用四个数表达三维向量的做法称为齐次坐标引入齐次坐标后，旋转和平移可以放入同一个矩阵，称为变换矩阵称为特殊欧氏群（Special Euclidean Group）
+$SE(3)=\left{T=\begin{bmatrix}R&amp;amp;t\0^T&amp;amp;1\end{bmatrix}\in R^{4\times4}|R\in SO(3),t\in R^3\right}$
+类似的定义反向变换：
+$T^{-1}=\begin{bmatrix}R^T&amp;amp;-R^Tt\0^T&amp;amp;1\end{bmatrix}$
+三. 角轴/旋转向量 三维旋转：三自由度，用$R^3​$向量表示
+方向为旋转轴、长度为转过的角度：$w=\theta n$
+角轴与旋转矩阵的不同:
+ 旋转矩阵：九个量，有正交性约束和行列式值约束 角轴：三个量，没有约束 注意它们只是表达方式的不同，但表达的东西可以是同一个 角轴也就是第四章要介绍的李代数  转换关系：
+ 轴角转旋转矩阵：罗德里格斯公式（Rodrigues&amp;rsquo;s Formula ）：  $R=\cos\theta I+(1-\cos\theta)nn^T+\sin\theta\hat{n}$
+ 旋转矩阵转轴角：  角度：$\theta=\arccos(\frac{tr&amp;reg;-1}{2})$</description>
     </item>
     
     <item>

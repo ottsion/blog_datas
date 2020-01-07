@@ -10,10 +10,17 @@ googleAnalytics = ""
 
 preserveTaxonomyNames = true
 
+mathjax = true
+mathjaxEnableSingleDollar = true 
+mathjaxEnableAutoNumber = false
+linkToMarkDown = false
+
+
 [blackfriday]
   hrefTargetBlank = true
   nofollowLinks = true
   noreferrerLinks = true
+  smartypants = false
 
 [Permalinks]
  posts = "/:year/:filename/"

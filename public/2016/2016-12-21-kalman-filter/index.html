@@ -303,7 +303,7 @@ b.Ak,Ck,wk的协方差Q,vk的协方差R，系统协方差初始值P0,状态初�
     valid_iter = range(1,n_iter) # Pminus not valid at step 0  
     pylab.plot(valid_iter,Pminus[valid_iter],label='a priori error estimate')  
     pylab.xlabel('Iteration')  
-    pylab.ylabel('$(Voltage)^2$')  
+    pylab.ylabel('$(Voltage)^2$')
     pylab.setp(pylab.gca(),'ylim',[0,.01])  
     pylab.show()  
 </code></pre>

@@ -57,7 +57,7 @@
     "datePublished": "2017-06-20 23:59:59 \x2b0000 \x2b0000",
     "dateModified" : "2017-06-20 23:59:59 \x2b0000 \x2b0000",
     "url" : "https:\/\/ottsion.github.io\/2017\/2017-06-20-ros-dynamixel\/",
-    "wordCount" : "172",
+    "wordCount" : "169",
     "keywords" : [ "ros, Dynamxel", "静心明志"]
 }
 </script>
@@ -250,7 +250,7 @@ USB2Dynamixel连接USB接口，舵机连接USB2DYnamixel接口，舵机外部供
 <pre><code>    &lt;!-- -*- mode: XML -*- --&gt;
     &lt;launch&gt;
         &lt;!-- Load controller configuration to parameter server --&gt;
-        &lt;rosparam file=&quot;$(find dynamixel_tutorials)/config/dynamixel_joint_controllers.yaml&quot; command=&quot;load&quot;/&gt;
+&lt;rosparamfile=&quot;$(finddynamixel_tutorials)/config/dynamixel_joint_controllers.yaml&quot;command=&quot;load&quot;/&gt;
 
         &lt;!-- start specified joint controllers --&gt;
         &lt;node name=&quot;dynamixel_controller_spawner&quot; pkg=&quot;dynamixel_controllers&quot; type=&quot;controller_spawner.py&quot;

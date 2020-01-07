@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : " ROS多电脑之间的通信",
     "headline" : " ROS多电脑之间的通信",
-    "description" : "最终要实现在 desktop_hostname 电脑上运行roscore，并且运行 Turtlesim 程序，然后在 laptop_hostname 电脑上运行键盘控制程序，控制 Turtlesim 小乌龟移动。\n在pioneer中将机器人端视为desktop_hostname，自己的笔记本为B。\n一. 查看电脑ip  利用ifconfig查看ip地址。 利用hostname指令查看hostname。  二. 修改hosts文件 使用如下指令，分别打开 hosts 文件：\n$ sudo gedit \/etc\/hosts  在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:\n127.0.0.1　localhost 127.0.1.1 [ desktop_hostname ] [IP_A] [ desktop_hostname ] [IP_B] [ laptop_hostname ]  同理，在电脑laptop_hostname端的 hosts 文件中，加入如下加粗指令：\n127.0.0.1　localhost 127.0.1.1 [ laptop_hostname ] [IP_B] [ laptop_hostname ] [IP_A] [ desktop_hostname ]  三. 电脑之间通信  在两台电脑上装上chrony包，用于实现同步：\nsudo apt-get install chrony  安装ssh",
+    "description" : "最终要实现在 desktop_hostname 电脑上运行roscore，并且运行 Turtlesim 程序，然后在 laptop_hostname 电脑上运行键盘控制程序，控制 Turtlesim 小乌龟移动。\n在pioneer中将机器人端视为desktop_hostname，自己的笔记本为B。\n一. 查看电脑ip  利用ifconfig查看ip地址。 利用hostname指令查看hostname。  二. 修改hosts文件 使用如下指令，分别打开 hosts 文件：\n$sudogedit\/etc\/hosts  在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:\n127.0.0.1　localhost 127.0.1.1 [ desktop_hostname ] [IP_A] [ desktop_hostname ] [IP_B] [ laptop_hostname ]  同理，在电脑laptop_hostname端的 hosts 文件中，加入如下加粗指令：\n127.0.0.1　localhost 127.0.1.1 [ laptop_hostname ] [IP_B] [ laptop_hostname ] [IP_A] [ desktop_hostname ]  三. 电脑之间通信  在两台电脑上装上chrony包，用于实现同步：\nsudo apt-get install chrony  安装ssh",
     "inLanguage" : "en-us",
     "author" : "caicai",
     "creator" : "caicai",
@@ -57,7 +57,7 @@
     "datePublished": "2017-06-22 23:59:59 \x2b0000 \x2b0000",
     "dateModified" : "2017-06-22 23:59:59 \x2b0000 \x2b0000",
     "url" : "https:\/\/ottsion.github.io\/2017\/2017-06-22-ssh-ubuntu\/",
-    "wordCount" : "108",
+    "wordCount" : "105",
     "keywords" : [ "ros, ssh", "静心明志"]
 }
 </script>
@@ -169,7 +169,7 @@
 
 <p>使用如下指令，分别打开 hosts 文件：</p>
 
-<pre><code>$ sudo gedit /etc/hosts
+<pre><code>$sudogedit/etc/hosts
 </code></pre>
 
 <p>在<strong>电脑desktop_hostname端</strong>的 hosts文件 中添加如下加粗指令:</p>

@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "先锋机器人使用手册",
     "headline" : "先锋机器人使用手册",
-    "description" : "先锋机器人使用手册 前期准备 我们这里说的环境是Ubuntu14.04，ROS-indigo版本，将pioneer机器人装入Ubuntu系统后用笔记本电脑实现控制。详细情况可以参考： ROS和pioneer ROS 。\n软件安装 安装Ubuntu  制作Ubuntu14.04 的U盘启动器后，记得找个含有$F_n$ 的键盘，使用快捷键进入机器人bios系统选择U盘启动。 如果是双系统记得安装过程中选择硬盘时为something else ，自己划分各盘容量。 选择实验室wifi链接，方便后期直接笔记本控制。  安装ROS 这里选用 indigo版本的ROS操作系，下面链接为官方安装地址，按照操作走完就可以了：官方地址\n安装完毕后强烈建议学习初步教程，大概是十几篇简短文章，学完后掌握基本ROS下开发方法，了解ROS构成：Tutorials\n安装ROSARIA ROSARIA 提供了一个移动机器人与ROS平台的接口，通过它你可以实现与机器人的互动，所以第一步学习就是要安装好它。\n 其中需要在pioneer 官网 安装ARIA 2.9.1-Ubuntu 12.04.2 (precise) or later, amd 64-bit architecture 千万不要忘记了，这是驱动的底层实现，没有这个只安装ROSARIA是不行的。这个选择sudo dpkg -i 安装方式。最终文件安装在\/usr\/local\/下面。  具体安装步骤可以参考：这里\n1) 创建工作空间，如果有了直接走 2). $ . \/opt\/ros\/indigo\/setup.bash $ mkdir -p ~\/catkin_ws\/src $ cd ~\/catkin_ws\/src $ catkin_init_workspace $ cd ~\/catkin_ws $ catkin_make $ cd ~\/catkin_ws\/src 2) 安装rosaria包: $ git clone https:\/\/github.",
+    "description" : "先锋机器人使用手册 前期准备 我们这里说的环境是Ubuntu14.04，ROS-indigo版本，将pioneer机器人装入Ubuntu系统后用笔记本电脑实现控制。详细情况可以参考： ROS和pioneer ROS 。\n软件安装 安装Ubuntu 1.制作Ubuntu14.04的U盘启动器后，记得找个含有$F_n$的键盘，使用快捷键进入机器人bios系统选择U盘启动。 2. 如果是双系统记得安装过程中选择硬盘时为something else ，自己划分各盘容量。 3. 选择实验室wifi链接，方便后期直接笔记本控制。\n安装ROS 这里选用 indigo版本的ROS操作系，下面链接为官方安装地址，按照操作走完就可以了：官方地址\n安装完毕后强烈建议学习初步教程，大概是十几篇简短文章，学完后掌握基本ROS下开发方法，了解ROS构成：Tutorials\n安装ROSARIA ROSARIA 提供了一个移动机器人与ROS平台的接口，通过它你可以实现与机器人的互动，所以第一步学习就是要安装好它。\n 其中需要在pioneer 官网 安装ARIA 2.9.1-Ubuntu 12.04.2 (precise) or later, amd 64-bit architecture 千万不要忘记了，这是驱动的底层实现，没有这个只安装ROSARIA是不行的。这个选择sudo dpkg -i 安装方式。最终文件安装在\/usr\/local\/下面。  具体安装步骤可以参考：这里\n1) 创建工作空间，如果有了直接走 2). $.\/opt\/ros\/indigo\/setup.bash $mkdir-p~\/catkin_ws\/src $cd~\/catkin_ws\/src $catkin_init_workspace $cd~\/catkin_ws $catkin_make $cd~\/catkin_ws\/src 2) 安装rosaria包: $gitclonehttps:\/\/github.com\/amor-ros-pkg\/rosaria.git $source~\/catkin_ws\/devel\/setup.bash $echo\x26quot;source~\/catkin_ws\/devel\/setup.bash\x26quot;\x26gt;\x26gt;~\/.bashrc $source~\/.bashrc %rosdep可以安装额外需要的工具包 $rosdepupdate $rosdepinstallrosaria $cd~\/catkin_ws\/ $catkin_make  到此为止你应该安装好了两样东西： 1) Aria library 应该在\/usr\/local\/ 目录下。 2) \/catkin_ws\/src\/rosaria 已经编译到位。",
     "inLanguage" : "en-us",
     "author" : "caicai",
     "creator" : "caicai",
@@ -57,7 +57,7 @@
     "datePublished": "2017-06-24 23:59:59 \x2b0000 \x2b0000",
     "dateModified" : "2017-06-24 23:59:59 \x2b0000 \x2b0000",
     "url" : "https:\/\/ottsion.github.io\/2017\/2017-06-24-pioneer-laser\/",
-    "wordCount" : "261",
+    "wordCount" : "209",
     "keywords" : [ "ROS, pioneer", "静心明志"]
 }
 </script>
@@ -164,11 +164,9 @@
 
 <h3 id="安装ubuntu">安装Ubuntu</h3>
 
-<ol>
-<li>制作<code>Ubuntu14.04</code> 的U盘启动器后，记得找个含有$F_n$ 的键盘，使用快捷键进入机器人<code>bios</code>系统选择U盘启动。</li>
-<li>如果是双系统记得安装过程中选择硬盘时为<code>something else</code> ，自己划分各盘容量。</li>
-<li>选择实验室wifi链接，方便后期直接笔记本控制。</li>
-</ol>
+<p>1.制作<code>Ubuntu14.04</code>的U盘启动器后，记得找个含有$F_n$的键盘，使用快捷键进入机器人<code>bios</code>系统选择U盘启动。
+2. 如果是双系统记得安装过程中选择硬盘时为<code>something else</code> ，自己划分各盘容量。
+3. 选择实验室wifi链接，方便后期直接笔记本控制。</p>
 
 <h3 id="安装ros">安装ROS</h3>
 
@@ -187,23 +185,23 @@
 <p>具体安装步骤可以参考：<a href="http://wiki.ros.org/ROSARIA/Tutorials/How%20to%20use%20ROSARIA" rel="nofollow noreferrer" target="_blank">这里</a></p>
 
 <pre><code>1) 创建工作空间，如果有了直接走 2).
-$ . /opt/ros/indigo/setup.bash
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws/src
-$ catkin_init_workspace
-$ cd ~/catkin_ws
-$ catkin_make
-$ cd ~/catkin_ws/src
+$./opt/ros/indigo/setup.bash
+$mkdir-p~/catkin_ws/src
+$cd~/catkin_ws/src
+$catkin_init_workspace
+$cd~/catkin_ws
+$catkin_make
+$cd~/catkin_ws/src
 2) 安装rosaria包:
-$ git clone https://github.com/amor-ros-pkg/rosaria.git
-$ source ~/catkin_ws/devel/setup.bash
-$ echo &quot;source ~/catkin_ws/devel/setup.bash&quot; &gt;&gt; ~/.bashrc
-$ source ~/.bashrc
+$gitclonehttps://github.com/amor-ros-pkg/rosaria.git
+$source~/catkin_ws/devel/setup.bash
+$echo&quot;source~/catkin_ws/devel/setup.bash&quot;&gt;&gt;~/.bashrc
+$source~/.bashrc
 %rosdep可以安装额外需要的工具包
-$ rosdep update
-$ rosdep install rosaria
-$ cd ~/catkin_ws/
-$ catkin_make
+$rosdepupdate
+$rosdepinstallrosaria
+$cd~/catkin_ws/
+$catkin_make
 </code></pre>
 
 <p>到此为止你应该安装好了两样东西：
@@ -322,8 +320,8 @@ $ catkin_make
 
 <tr>
 <td>指令步骤</td>
-<td>(1) $ roscore</td>
-<td align="left">(2)rosrun rosaria ROSAria _port:=/dev/ttyS0</td>
+<td>(1)$roscore</td>
+<td align="left">(2)rosrunrosariaROSAria_port:=/dev/ttyS0</td>
 </tr>
 </tbody>
 </table>
@@ -369,19 +367,19 @@ $ catkin_make
 
 <p>强烈不建议<code>apt-get</code>安装lms1xx，选择如下：</p>
 
-<pre><code>$ git clone https://github.com/ncnynl/LMS1xx.git
+<pre><code>$gitclonehttps://github.com/ncnynl/LMS1xx.git
 #编译
-$ cd  ~/catkin_ws
-$ catkin_make
+$cd~/catkin_ws
+$catkin_make
 </code></pre>
 
 <p>LMSxxx激光雷达的的默认IP地址是<code>192.168.0.1</code></p>
 
 <p>最后执行测试：</p>
 
-<pre><code>$ roscore
-$ rosrun lms1xx LMS1xx_node _host:=192.168.0.1
-$ rosrun rviz rviz
+<pre><code>$roscore
+$rosrunlms1xxLMS1xx_node_host:=192.168.0.1
+$rosrunrvizrviz
 </code></pre>
 
 <p>注意：<code>_host</code>可以在<code>LMS1xx_node</code>中直接设置好，并不用每次输入。</p>
