@@ -7,12 +7,11 @@ script: hugo
 deploy:
     provider: pages
     skip_cleanup: true
-    github_token: sunfc
+    github_token: a418ac94828a9c2b8fdc549db762845e0dc9f70e 
     on:
         branch: master
     local_dir: public
     repo: ottsion/ottsion.github.io
-    fqdn: <custom-domain-if-needed>
     target_branch: master
     email: emsunfc@163.com
     name: ottsion
