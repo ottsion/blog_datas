@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           tensorflow--tensorboard | 静心明志
+       
+  </title>
+  <meta name="title" content="tensorflow--tensorboard | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "tensorflow--tensorboard",
+    "headline" : "tensorflow--tensorboard",
+    "description" : "来源：Tensorflow 自带可视化Tensorboard使用方法 附项目代码 Tensorboard： 如何更直观的观察数据在神经网络中的变化，或是已经构建的神经网络的结构。上一篇文章说到，可以使用matplotlib第三方可视化，来进行一定程度上的可视化。然而Tensorflow也自带了可视化模块Tensorboard，并且能更直观的看见整个神经网络的结构。 上面的结构图甚至可以展开，变成： 使用： 结构图：\n with tensorflow .name_scope(layer_name):  直接使用以上代码生成一个带可展开符号的一个域，并且支持嵌套操作：\nwith tf.name_scope(layer_name): with tf.name_scope(\x27weights\x27):  节点一般是变量或常量，需要加一个“name=‘’”参数，才会展示和命名，如：\nwith tf.name_scope(\x26lsquo;weights\x26rsquo;):\nWeights = tf.Variable(tf.random_normal([in_size,out_size]))\n结构图符号及意义： 变量： 变量则可使用Tensorflow.histogram_summary()方法：\ntf.histogram_summary(layer_name\x2b\x26quot;\/weights\x26quot;,Weights) #name命名，Weights赋值  常量： 常量则可使用Tensorflow.scalar_summary()方法：\ntf.scalar_summary(\x27loss\x27,loss) #命名和赋值  展示： 最后需要整合和存储SummaryWriter：\n#合并到Summary中 merged = tf.merge_all_summaries() #选定可视化存储目录 writer = tf.train.SummaryWriter(\x26quot;\/目录\x26quot;,sess.graph)  merged也是需要run的，因此还需要：\nresult = sess.run(merged) #merged也是需要run的   writer.add_summary(result,i) 执行： 运行后，会在相应的目录里生成一个文件，执行：\ntensorboard --logdir=\x26quot;\/目录\x26quot;  会给出一段网址： 浏览器中打开这个网址即可，因为有兼容问题，firefox并不能很好的兼容，建议使用Chrome。\n常量在Event中，结构图在Graphs中，变量在最后两个Tag中。\n附项目代码：\nimport tensorflow as tf import numpy as np def add_layer(inputs,in_size,out_size,n_layer,activation_function=None): #activation_function=None线性函数 layer_name=\x26quot;layer%s\x26quot; % n_layer with tf.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-tensorflow-tensorboard\/",
+    "wordCount" : "185",
+    "keywords" : [ "DL, tensorboard", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">tensorflow--tensorboard</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"> 深度学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>来源：<a href="http://blog.csdn.net/jerry81333/article/details/53004903" rel="nofollow noreferrer" target="_blank">Tensorflow 自带可视化Tensorboard使用方法 附项目代码</a>
+Tensorboard：
+如何更直观的观察数据在神经网络中的变化，或是已经构建的神经网络的结构。上一篇文章说到，可以使用matplotlib第三方可视化，来进行一定程度上的可视化。然而Tensorflow也自带了可视化模块Tensorboard，并且能更直观的看见整个神经网络的结构。
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-2e4c64e474929abb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+上面的结构图甚至可以展开，变成：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-3c0ff9b872625bcb?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>使用：
+<strong>结构图：</strong></p>
+
+<pre><code> with tensorflow .name_scope(layer_name):
+</code></pre>
+
+<p>直接使用以上代码生成一个带可展开符号的一个域，并且支持嵌套操作：</p>
+
+<pre><code>with tf.name_scope(layer_name):  
+    with tf.name_scope('weights'): 
+</code></pre>
+
+<p>节点一般是变量或常量，需要加一个“name=‘’”参数，才会展示和命名，如：</p>
+
+<p>with tf.name_scope(&lsquo;weights&rsquo;):<br />
+      Weights = tf.Variable(tf.random_normal([in_size,out_size]))</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-99ca84e75e677afb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+结构图符号及意义：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-2822b92bbab742d5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<hr />
+
+<p><strong>变量：</strong>
+变量则可使用Tensorflow.histogram_summary()方法：</p>
+
+<pre><code>tf.histogram_summary(layer_name+&quot;/weights&quot;,Weights) #name命名，Weights赋值 
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-bc758ad2b640bcc8?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<strong>常量：</strong>
+常量则可使用Tensorflow.scalar_summary()方法：</p>
+
+<pre><code>tf.scalar_summary('loss',loss) #命名和赋值  
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-81ab0aaf6737534e?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p><strong>展示：</strong>
+最后需要整合和存储SummaryWriter：</p>
+
+<pre><code>#合并到Summary中  
+merged = tf.merge_all_summaries()  
+#选定可视化存储目录  
+writer = tf.train.SummaryWriter(&quot;/目录&quot;,sess.graph)  
+</code></pre>
+
+<p>merged也是需要run的，因此还需要：</p>
+
+<pre><code>result = sess.run(merged) #merged也是需要run的  
+</code></pre>
+
+<p>        writer.add_summary(result,i)  </p>
+
+<p><strong>执行：</strong>
+运行后，会在相应的目录里生成一个文件，执行：</p>
+
+<pre><code>tensorboard --logdir=&quot;/目录&quot;  
+</code></pre>
+
+<p>会给出一段网址：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-1705f1e4c97413e3?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+浏览器中打开这个网址即可，因为有兼容问题，firefox并不能很好的兼容，建议使用Chrome。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-9d96ce9238708f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>常量在Event中，结构图在Graphs中，变量在最后两个Tag中。</p>
+
+<p>附项目代码：</p>
+
+<pre><code>import tensorflow as tf  
+import numpy as np  
+  
+def add_layer(inputs,in_size,out_size,n_layer,activation_function=None): #activation_function=None线性函数  
+    layer_name=&quot;layer%s&quot; % n_layer  
+    with tf.name_scope(layer_name):  
+        with tf.name_scope('weights'):  
+            Weights = tf.Variable(tf.random_normal([in_size,out_size])) #Weight中都是随机变量  
+            tf.histogram_summary(layer_name+&quot;/weights&quot;,Weights) #可视化观看变量  
+        with tf.name_scope('biases'):  
+            biases = tf.Variable(tf.zeros([1,out_size])+0.1) #biases推荐初始值不为0  
+            tf.histogram_summary(layer_name+&quot;/biases&quot;,biases) #可视化观看变量  
+        with tf.name_scope('Wx_plus_b'):  
+            Wx_plus_b = tf.matmul(inputs,Weights)+biases #inputs*Weight+biases  
+            tf.histogram_summary(layer_name+&quot;/Wx_plus_b&quot;,Wx_plus_b) #可视化观看变量  
+        if activation_function is None:  
+            outputs = Wx_plus_b  
+        else:  
+            outputs = activation_function(Wx_plus_b)  
+        tf.histogram_summary(layer_name+&quot;/outputs&quot;,outputs) #可视化观看变量  
+        return outputs  
+  
+#创建数据x_data，y_data  
+x_data = np.linspace(-1,1,300)[:,np.newaxis] #[-1,1]区间，300个单位，np.newaxis增加维度  
+noise = np.random.normal(0,0.05,x_data.shape) #噪点  
+y_data = np.square(x_data)-0.5+noise  
+  
+with tf.name_scope('inputs'): #结构化  
+    xs = tf.placeholder(tf.float32,[None,1],name='x_input')  
+    ys = tf.placeholder(tf.float32,[None,1],name='y_input')  
+  
+#三层神经，输入层（1个神经元），隐藏层（10神经元），输出层（1个神经元）  
+l1 = add_layer(xs,1,10,n_layer=1,activation_function=tf.nn.relu) #隐藏层  
+prediction = add_layer(l1,10,1,n_layer=2,activation_function=None) #输出层  
+  
+#predition值与y_data差别  
+with tf.name_scope('loss'):  
+    loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys-prediction),reduction_indices=[1])) #square()平方,sum()求和,mean()平均值  
+    tf.scalar_summary('loss',loss) #可视化观看常量  
+with tf.name_scope('train'):  
+    train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss) #0.1学习效率,minimize(loss)减小loss误差  
+  
+init = tf.initialize_all_variables()  
+sess = tf.Session()  
+#合并到Summary中  
+merged = tf.merge_all_summaries()  
+#选定可视化存储目录  
+writer = tf.train.SummaryWriter(&quot;Desktop/&quot;,sess.graph)  
+sess.run(init) #先执行init  
+  
+#训练1k次  
+for i in range(1000):  
+    sess.run(train_step,feed_dict={xs:x_data,ys:y_data})  
+    if i%50==0:  
+        result = sess.run(merged,feed_dict={xs:x_data,ys:y_data}) #merged也是需要run的  
+        writer.add_summary(result,i) #result是summary类型的，需要放入writer中，i步数（x轴）
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/dl-tensorboard/">
+                    #DL, tensorboard</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/" class="prev" rel="prev" title="tensorflow--各种损失函数"><i class="iconfont icon-left"></i>&nbsp;tensorflow--各种损失函数</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/" class="next" rel="next" title="tensorflow--tensor-变换">tensorflow--tensor-变换&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

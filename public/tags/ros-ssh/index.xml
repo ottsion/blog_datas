@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ros, ssh on 静心明志</title>
+    <link>https://ottsion.github.io/tags/ros-ssh/</link>
+    <description>Recent content in ros, ssh on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Jun 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/ros-ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title> ROS多电脑之间的通信</title>
+      <link>https://ottsion.github.io/2017/2017-06-22-ssh-ubuntu/</link>
+      <pubDate>Thu, 22 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-22-ssh-ubuntu/</guid>
+      <description>最终要实现在 desktop_hostname 电脑上运行roscore，并且运行 Turtlesim 程序，然后在 laptop_hostname 电脑上运行键盘控制程序，控制 Turtlesim 小乌龟移动。
+在pioneer中将机器人端视为desktop_hostname，自己的笔记本为B。
+一. 查看电脑ip  利用ifconfig查看ip地址。 利用hostname指令查看hostname。  二. 修改hosts文件 使用如下指令，分别打开 hosts 文件：
+$ sudo gedit /etc/hosts  在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:
+127.0.0.1　localhost 127.0.1.1 [ desktop_hostname ] [IP_A] [ desktop_hostname ] [IP_B] [ laptop_hostname ]  同理，在电脑laptop_hostname端的 hosts 文件中，加入如下加粗指令：
+127.0.0.1　localhost 127.0.1.1 [ laptop_hostname ] [IP_B] [ laptop_hostname ] [IP_A] [ desktop_hostname ]  三. 电脑之间通信  在两台电脑上装上chrony包，用于实现同步：
+sudo apt-get install chrony  安装ssh</description>
+    </item>
+    
+  </channel>
+</rss>

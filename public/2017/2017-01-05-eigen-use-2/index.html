@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-05-lunwen1/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-05-eigen-use-3/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-05-eigen-use-2/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Eigen矩阵库——初步用法（二） | 静心明志
+       
+  </title>
+  <meta name="title" content="Eigen矩阵库——初步用法（二） | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Eigen矩阵库——初步用法（二）",
+    "headline" : "Eigen矩阵库——初步用法（二）",
+    "description" : "星期四, 05. 一月 2017 12:48下午\n 主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C\x2b\x2b的\x2b，-，*，原文链接在后面\n 矩阵的运算 Eigen提供\x2b、-、一元操作符“-”、\x2b=、-=，例如：\n 二元操作符\x2b\/-表示两矩阵相加（矩阵中对应元素相加\/减，返回一个临时矩阵）： B\x2bC 或 B-C；\n 一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;\n 组合操作法\x2b=或者-=表示（对应每隔元素都做相应操作）：A \x2b= B 或者 A-=B\n  矩阵的加减操作代码如下：\n#include\x26lt;iostream\x26gt; #include\x26lt;eigen3\/Eigen\/Dense\x26gt; using namespace Eigen; int main() { Matrix2d a; a \x26lt;\x26lt; 1,2, 3,4; MatrixXd b(2,2); b \x26lt;\x26lt; 2,3, 1,4; std::cout\x26lt;\x26lt;\x26quot;a\x2bb=\\n\x26quot;\x26lt;\x26lt;a\x2bb\x26lt;\x26lt;std::endl; std::cout\x26lt;\x26lt;\x26quot;a-b=\\n\x26quot;\x26lt;\x26lt;a-b\x26lt;\x26lt;std::endl; std::cout\x26lt;\x26lt;\x26quot;Doing a \x2b= b;\\n\x26quot;\x26lt;\x26lt;std::endl; a \x2b= b; std::cout\x26lt;\x26lt;\x26quot;Now a =\\n\x26quot;\x26lt;\x26lt;a\x26lt;\x26lt;std::endl; Vector3d v(1,2,3); Vector3d w(1,0,0); std::cout\x26lt;\x26lt;\x26quot;-v\x2bw-v=\\n\x26quot;\x26lt;\x26lt;-v\x2bw-v\x26lt;\x26lt;std::endl; }  运行结果：\na\x2bb= 3 5 4 8 a-b= -1 -1 2 0 Doing a \x2b= b; Now a = 3 5 4 8 -v\x2bw-v= -1 -4 -6  另外，矩阵还提供与标量（单一个数字）的乘除操作，表示每个元素都与该标量进行乘除操作。例如： 二元操作符*在：A*a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。 对于aA、A\/a、A=a、A \/=a也是一样，例如下面的代码：",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-05 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-05 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-05-eigen-use-2\/",
+    "wordCount" : "407",
+    "keywords" : [ "eigen", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Eigen矩阵库——初步用法（二）</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-05 itemprop="datePublished">January 5, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>星期四, 05. 一月 2017 12:48下午</p>
+
+<hr />
+
+<blockquote>
+<p>主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C++的+，-，*，原文链接在后面</p>
+</blockquote>
+
+<hr />
+
+<h2 id="矩阵的运算">矩阵的运算</h2>
+
+<p>Eigen提供+、-、一元操作符“-”、+=、-=，例如：</p>
+
+<ul>
+<li><p>二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；</p></li>
+
+<li><p>一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;</p></li>
+
+<li><p>组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B</p></li>
+</ul>
+
+<p>矩阵的加减操作代码如下：</p>
+
+<pre><code>#include&lt;iostream&gt;
+#include&lt;eigen3/Eigen/Dense&gt;
+using namespace Eigen;
+int main()
+{
+  Matrix2d a;
+  a &lt;&lt; 1,2,
+  3,4;
+  MatrixXd b(2,2);
+  b &lt;&lt; 2,3,
+  1,4;
+  std::cout&lt;&lt;&quot;a+b=\n&quot;&lt;&lt;a+b&lt;&lt;std::endl;
+  std::cout&lt;&lt;&quot;a-b=\n&quot;&lt;&lt;a-b&lt;&lt;std::endl;
+  std::cout&lt;&lt;&quot;Doing a += b;\n&quot;&lt;&lt;std::endl;
+  a += b;
+  std::cout&lt;&lt;&quot;Now a =\n&quot;&lt;&lt;a&lt;&lt;std::endl;
+  
+  Vector3d v(1,2,3);
+  Vector3d w(1,0,0);
+  std::cout&lt;&lt;&quot;-v+w-v=\n&quot;&lt;&lt;-v+w-v&lt;&lt;std::endl;
+  
+}
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre><code>a+b=
+3 5
+4 8
+a-b=
+-1 -1
+ 2  0
+Doing a += b;
+Now a =
+3 5
+4 8
+-v+w-v=
+-1
+-4
+-6
+</code></pre>
+
+<p>另外，矩阵还提供与标量（单一个数字）的乘除操作，表示每个元素都与该标量进行乘除操作。例如：
+二元操作符*在：A*a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。
+对于a<em>A、A/a、A</em>=a、A /=a也是一样，例如下面的代码：</p>
+
+<pre><code>#include &lt;iostream&gt;  
+#include &lt;eigen3/Eigen/Dense&gt;  
+using namespace Eigen; 
+int main() 
+{ 
+Matrix2d a; 
+a &lt;&lt; 1, 2, 
+3, 4; 
+Vector3d v(1,2,3); 
+std::cout &lt;&lt; &quot;a * 2.5 =\n&quot; &lt;&lt; a * 2.5 &lt;&lt; std::endl; 
+std::cout &lt;&lt; &quot;0.1 * v =\n&quot; &lt;&lt; 0.1 * v &lt;&lt; std::endl; 
+std::cout &lt;&lt; &quot;Doing v *= 2;&quot; &lt;&lt; std::endl; 
+v *= 2; 
+std::cout &lt;&lt; &quot;Now v =\n&quot; &lt;&lt; v &lt;&lt; std::endl; 
+} 
+</code></pre>
+
+<p>输出结果为：</p>
+
+<pre><code>a * 2.5 =
+2.5  5
+7.5 10
+0.1 * v =
+0.1
+0.2
+0.3
+Doing v *= 2;
+Now v =
+2
+4
+6
+</code></pre>
+
+<p><strong>需要注意</strong>：
+在Eigen中，算术操作例如 “操作符+”并不会自己执行计算操作，他们只是返回一个“算术表达式对象”，而实际的计算则会延迟到后面的赋值时才进行。这些不影响你的使用，它只是为了方便Eigen的优化。</p>
+
+<h2 id="求矩阵的转置-共轭矩阵-伴随矩阵">求矩阵的转置、共轭矩阵、伴随矩阵。</h2>
+
+<p>可以通过 成员函数<code>transpose()</code>, <code>conjugate()</code>,和 <code>adjoint()</code>来完成，注意这些函数返回操作后的结果，而不会对原矩阵的元素进行直接操作，如果要让原矩阵的进行转换，则需要使用响应的<code>InPlace</code>函数，例如：<code>transposeInPlace()</code> 、<code>adjointInPlace()</code>之类。
+演示代码如下：</p>
+
+<pre><code>  MatrixXcf m = MatrixXcf::Random(2,2);
+  std::cout &lt;&lt; &quot;Here is the matrix m\n&quot; &lt;&lt; m &lt;&lt; std::endl; 
+  std::cout &lt;&lt; &quot;Here is the matrix m^T\n&quot; &lt;&lt; m.transpose() &lt;&lt; std::endl; 
+  std::cout &lt;&lt; &quot;Here is the conjugate of m\n&quot; &lt;&lt; m.conjugate() &lt;&lt; std::endl; 
+  std::cout &lt;&lt; &quot;Here is the matrix m^*\n&quot; &lt;&lt; m.adjoint() &lt;&lt; std::endl; 
+</code></pre>
+
+<p>结果如下：</p>
+
+<pre><code>Here is the matrix m
+(-0.211234,0.680375) (-0.604897,0.823295)
+  (0.59688,0.566198) (0.536459,-0.329554)
+Here is the matrix m^T
+(-0.211234,0.680375)   (0.59688,0.566198)
+(-0.604897,0.823295) (0.536459,-0.329554)
+Here is the conjugate of m
+(-0.211234,-0.680375) (-0.604897,-0.823295)
+  (0.59688,-0.566198)   (0.536459,0.329554)
+Here is the matrix m^*
+(-0.211234,-0.680375) (0.59688,-0.566198)
+(-0.604897,-0.823295) (0.536459,0.329554)
+</code></pre>
+
+<h2 id="矩阵相乘-矩阵向量相乘">矩阵相乘、矩阵向量相乘</h2>
+
+<p>矩阵的相乘，矩阵与向量的相乘也是使用操作符*，共有<em>和</em>=两种操作符，其用法可以参考如下代码：</p>
+
+<pre><code>#include&lt;iostream&gt;
+#include&lt;eigen3/Eigen/Dense&gt;
+using namespace Eigen;
+using namespace std;
+int main()
+{
+  Matrix2d mat;
+  mat&lt;&lt;1,2,
+  3,4;
+  Vector2d u(-1,1),v(2,0);
+  std::cout &lt;&lt; &quot;Here is mat*mat:\n&quot; &lt;&lt; mat*mat &lt;&lt; std::endl;
+  std::cout &lt;&lt; &quot;Here is mat*u:\n&quot; &lt;&lt; mat*u &lt;&lt; std::endl; 
+  std::cout &lt;&lt; &quot;Here is u^T*mat:\n&quot; &lt;&lt; u.transpose()*mat &lt;&lt; std::endl; 
+  std::cout &lt;&lt; &quot;Here is u^T*v:\n&quot; &lt;&lt; u.transpose()*v &lt;&lt; std::endl; 
+  std::cout &lt;&lt; &quot;Here is u*v^T:\n&quot; &lt;&lt; u*v.transpose() &lt;&lt; std::endl; 
+
+  std::cout &lt;&lt; &quot;Let's multiply mat by itself&quot; &lt;&lt; std::endl; 
+  mat = mat*mat; 
+  std::cout &lt;&lt; &quot;Now mat is mat:\n&quot; &lt;&lt; mat &lt;&lt; std::endl; 
+}
+</code></pre>
+
+<pre><code>Here is mat*mat:
+ 7 10
+15 22
+Here is mat*u:
+1
+1
+Here is u^T*mat:
+2 2
+Here is u^T*v:
+-2
+Here is u*v^T:
+-2 -0
+ 2  0
+Let's multiply mat by itself
+Now mat is mat:
+ 7 10
+15 22
+</code></pre>
+
+<h2 id="文章来源">文章来源</h2>
+
+<p><a href="http://blog.csdn.net/houjixin/article/details/8492841" title="点击跳转" rel="nofollow noreferrer" target="_blank">C++开源矩阵计算工具——Eigen的简单用法（二）  逍遥子_</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-05-eigen-use-2/>https://ottsion.github.io/2017/2017-01-05-eigen-use-2/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/eigen/">
+                    #eigen</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-05-lunwen1/" class="prev" rel="prev" title="基于 Kinect 的机器人臂手系统的目标抓取[丁美昆]"><i class="iconfont icon-left"></i>&nbsp;基于 Kinect 的机器人臂手系统的目标抓取[丁美昆]</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-05-eigen-use-3/" class="next" rel="next" title="Eigen矩阵库——初步用法（三）">Eigen矩阵库——初步用法（三）&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

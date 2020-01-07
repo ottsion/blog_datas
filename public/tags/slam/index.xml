@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>slam on 静心明志</title>
+    <link>https://ottsion.github.io/tags/slam/</link>
+    <description>Recent content in slam on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 22 Jun 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/slam/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>三维刚体运动表示及其运算</title>
+      <link>https://ottsion.github.io/2017/2017-06-22-3d-gangti-yundong/</link>
+      <pubDate>Thu, 22 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-22-3d-gangti-yundong/</guid>
+      <description>三维刚体运动表示及其运算（李群李代数）  三维空间的刚体运动描述方式：旋转矩阵、变换矩阵、四元数和欧拉角。
+编程EIgen、soupha
+  向量加减法  $a \pm b = \sum_{i=0}^{n}{(a_i + b_i)} $
+ 向量内积  $a \bullet b = aTb = \sum{i=1}^{3}{a_i b_i} = |a||b| \cos\langle a,b \rangle$
+ 向量外积
+ $a \times b = \begin{bmatrix} i &amp;amp; j &amp;amp; k \ a_1 &amp;amp; a_2 &amp;amp; a_3 \ b_1 &amp;amp; b_2 &amp;amp; b_3 \end{bmatrix} = \begin{bmatrix} a_2 b_3 -a_3 b_2 \ a_3 b_1 - a_1 b_3 \ a_1 b_2 - a_2 b_1 \end{bmatrix} = \begin{bmatrix} 0 &amp;amp; -a_3 &amp;amp; a_2 \ a_3 &amp;amp; 0 &amp;amp; -a_1 \ -a_2 &amp;amp; a_1 &amp;amp; 0 \end{bmatrix} b \triangleq \hat a b $</description>
+    </item>
+    
+  </channel>
+</rss>

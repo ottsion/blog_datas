@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DL, tensorboard on 静心明志</title>
+    <link>https://ottsion.github.io/tags/dl-tensorboard/</link>
+    <description>Recent content in DL, tensorboard on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 May 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/dl-tensorboard/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tensorflow--tensorboard</title>
+      <link>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/</link>
+      <pubDate>Thu, 11 May 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/</guid>
+      <description>来源：Tensorflow 自带可视化Tensorboard使用方法 附项目代码 Tensorboard： 如何更直观的观察数据在神经网络中的变化，或是已经构建的神经网络的结构。上一篇文章说到，可以使用matplotlib第三方可视化，来进行一定程度上的可视化。然而Tensorflow也自带了可视化模块Tensorboard，并且能更直观的看见整个神经网络的结构。 上面的结构图甚至可以展开，变成： 使用： 结构图：
+ with tensorflow .name_scope(layer_name):  直接使用以上代码生成一个带可展开符号的一个域，并且支持嵌套操作：
+with tf.name_scope(layer_name): with tf.name_scope(&#39;weights&#39;):  节点一般是变量或常量，需要加一个“name=‘’”参数，才会展示和命名，如：
+with tf.name_scope(&amp;lsquo;weights&amp;rsquo;):
+Weights = tf.Variable(tf.random_normal([in_size,out_size]))
+结构图符号及意义： 变量： 变量则可使用Tensorflow.histogram_summary()方法：
+tf.histogram_summary(layer_name+&amp;quot;/weights&amp;quot;,Weights) #name命名，Weights赋值  常量： 常量则可使用Tensorflow.scalar_summary()方法：
+tf.scalar_summary(&#39;loss&#39;,loss) #命名和赋值  展示： 最后需要整合和存储SummaryWriter：
+#合并到Summary中 merged = tf.merge_all_summaries() #选定可视化存储目录 writer = tf.train.SummaryWriter(&amp;quot;/目录&amp;quot;,sess.graph)  merged也是需要run的，因此还需要：
+result = sess.run(merged) #merged也是需要run的   writer.add_summary(result,i) 执行： 运行后，会在相应的目录里生成一个文件，执行：
+tensorboard --logdir=&amp;quot;/目录&amp;quot;  会给出一段网址： 浏览器中打开这个网址即可，因为有兼容问题，firefox并不能很好的兼容，建议使用Chrome。
+常量在Event中，结构图在Graphs中，变量在最后两个Tag中。
+附项目代码：
+import tensorflow as tf import numpy as np def add_layer(inputs,in_size,out_size,n_layer,activation_function=None): #activation_function=None线性函数 layer_name=&amp;quot;layer%s&amp;quot; % n_layer with tf.</description>
+    </item>
+    
+  </channel>
+</rss>

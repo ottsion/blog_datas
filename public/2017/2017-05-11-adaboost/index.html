@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-boosting/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-adaboost/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           adaboost算法 | 静心明志
+       
+  </title>
+  <meta name="title" content="adaboost算法 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "adaboost算法",
+    "headline" : "adaboost算法",
+    "description" : "链接:\n1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法\n转自：原地址 提升方法（boosting）是一种常用的统计学习方法，应用广泛且有效。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。 本章首先介绍提升方法的思路和代表性的提升算法AdaBoost，然后通过训练误差分析探讨AdaBoost为什么能够提高学习精度，并且从前向分布加法模型的角度解释AdaBoost，最后叙述提升方法更具体的事例——提升术（boosting tree）。AdaBoost算法是1995年由Freund和Schapire提出的，提升树是2000年由Friedman等人提出的。（开头几段内容来自《统计学习方法》） Adaboost算法基本原理\n提升方法的基本思路 提升方法是基于这样一种思想：对于一个复杂任务来说，将多个专家的判断进行适当的综合所得出的判断，要比其中任何一个专家单独的判断好。通俗点说，就是”三个臭皮匠顶个诸葛亮”。 Leslie Valiant首先提出了“强可学习（strongly learnable）”和”弱可学习（weakly learnable）”的概念，并且指出：在概率近似正确（probably approximately correct, PAC）学习的框架中，一个概念（一个类），如果存在一个多项式的学习算法能够学习它，并且正确率很高，那么就称这个概念是强可学习的，如果正确率不高，仅仅比随即猜测略好，那么就称这个概念是弱可学习的。2010年的图灵奖给了L. Valiant，以表彰他的PAC理论 。非常有趣的是Schapire后来证明强可学习与弱可学习是等价的，也就是说，在PAC学习的框架下，一个概念是强可学习的充要条件是这个概念是可学习的。 这样一来，问题便成为，在学习中，如果已经发现了“弱学习算法”，那么能否将它提升（boost）为”强学习算法”。大家知道，发现弱学习算法通常比发现强学习算法容易得多。那么如何具体实施提升，便成为开发提升方法时所要解决的问题。关于提升方法的研究很多，有很多算法被提出。最具代表性的是AdaBoost算法（Adaptive Boosting Algorithm），可以说，AdaBoost实现了PAC的理想。 对于分类问题而言，给定一个训练数据，求一个比较粗糙的分类器（即弱分类器）要比求一个精确的分类器（即强分类器）容易得多。提升方法就是从弱学习算法出发，反复学习，得到一系列弱分类器，然后组合这些弱分类器，构成一个强分类器。大多数的提升方法都是改变训练数据的概率分布（训练数据中的各个数据点的权值分布），调用弱学习算法得到一个弱分类器，再改变训练数据的概率分布，再调用弱学习算法得到一个弱分类器，如此反复，得到一系列弱分类器。 这样，对于提升方法来说，有两个问题需要回答：一是在每一轮如何如何改变训练数据的概率分布；而是如何将多个弱分类器组合成一个强分类器。 关于第一个问题，AdaBoost的做法是，提高那些被前几轮弱分类器线性组成的分类器错误分类的的样本的权值。这样一来，那些没有得到正确分类的数据，由于权值加大而受到后一轮的弱分类器的更大关注。于是，分类问题被一系列的弱分类器”分而治之”。至于第二个问题，AdaBoost采取加权多数表决的方法。具体地，加大分类误差率小的弱分类器的权值，使其在表决中起较大的作用，减小分类误差率大的弱分类器的权值，使其在表决中起较小的作用。 AdaBoost的巧妙之处就在于它将这些想法自然而然且有效地实现在一种算法里。\nAdaBoost算法 输入：训练数据集T={(x1,y1),(x2,y2),…,(xN,yN)}，其中xi∈X⊆Rn，表示输入数据，yi∈Y={-1,\x2b1}，表示类别标签；弱学习算法。 输出：最终分类器G(x)。 流程： 初始化训练数据的概率分布，刚开始为均匀分布\nD1=(w11,w12,…,w1N), 其中w1i= , i=1,2,..,N . Dm表示在第m轮迭代开始前，训练数据的概率分布（或权值分布），wmi表示在第i个样本的权值， 。对m=1,2,…,M，使用具有权值分布Dm的训练数据集进行学习（任意选一种模型都可以，例如朴素贝叶斯，决策树，SVM等，并且每一轮迭代都可以用不同的模型），得到一个弱分类器 计算Gm(x)在训练数据集上的分类误差率 计算弱分类器Gm(x)的系数 更新训练数据的权值分布 这里，Zm是规范化因子 这样 ，它使Dm\x2b1称为一个概率分布。将M个基本分类器进行线性组合 得到最终分类器 对AdaBoost算法作如下说明： 步骤(1) 初始时假设训练数据集具有均匀分布，即每个训练样本在弱分类器的学习中作用相同。 步骤(2) \x26copy; αm表示Gm(x)在最终分类器中的重要性。由式(公式 2)可知，当em ≤1\/2时，αm≥0，并且αm随着em的减小而增大，即意味着误差率越小的基本分类器在最终分类器中的作用越大。 (d) 式可以写成： 由此可知，被弱分类器Gm(x)误分类的样本的权值得以扩大，而被正确分类的样本的权值得以缩小。因此误分类样本在下一轮学习中起到更大的作用。不改变所给的训练数据，而不断改变训练数据权值的分布，使得训练数据在基本分类器的学习中起不同的作用，这是AdaBoost的一个特点。 步骤(3) 这里，αm之和并不等于1。f(x)的符号决定实例x的类别，f(x)的绝对值表示分类的确信度。利用基本分类器进行线性组合得到最终分类器是AdaBoost的另一个特点。\nAdaBoost的例子 例 1 给定如表 1所示训练数据。假设弱分类器由G(x)=sign(x-v)产生，其中v为常量，表示阀值。试用AdaBoost算法学习一个强分类器。 表 1 训练数据样本",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-adaboost\/",
+    "wordCount" : "191",
+    "keywords" : [ "ml,adaboost, boost", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">adaboost算法</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>链接:</p>
+
+<p><a href="http://www.jianshu.com/p/25d650e5cb59" rel="nofollow noreferrer" target="_blank">1. 线性回归总结</a>
+<a href="http://www.jianshu.com/p/dda5eb64f425" rel="nofollow noreferrer" target="_blank">2. 正则化</a>
+<a href="http://www.jianshu.com/p/5ccc01385f40" rel="nofollow noreferrer" target="_blank">3. 逻辑回归</a>
+<a href="http://www.jianshu.com/p/7128dde2af6f" rel="nofollow noreferrer" target="_blank">4. Boosting</a>
+<a href="http://www.jianshu.com/p/b3f189767ad3" rel="nofollow noreferrer" target="_blank">5. Adaboost算法</a></p>
+
+<hr />
+
+<p>转自：<a href="http://www.sigvc.org/bbs/thread-727-1-1.html" rel="nofollow noreferrer" target="_blank">原地址</a>
+提升方法（boosting）是一种常用的统计学习方法，应用广泛且有效。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。
+本章首先介绍提升方法的思路和代表性的提升算法AdaBoost，然后通过训练误差分析探讨AdaBoost为什么能够提高学习精度，并且从前向分布加法模型的角度解释AdaBoost，最后叙述提升方法更具体的事例——提升术（boosting tree）。AdaBoost算法是1995年由Freund和Schapire提出的，提升树是2000年由Friedman等人提出的。（开头几段内容来自《统计学习方法》）
+<strong>Adaboost算法基本原理</strong></p>
+
+<p><strong>提升方法的基本思路</strong>
+提升方法是基于这样一种思想：对于一个复杂任务来说，将多个专家的判断进行适当的综合所得出的判断，要比其中任何一个专家单独的判断好。通俗点说，就是”三个臭皮匠顶个诸葛亮”。
+<a href="http://www.seas.harvard.edu/directory/valiant" rel="nofollow noreferrer" target="_blank">Leslie Valiant</a>首先提出了“强可学习（strongly learnable）”和”弱可学习（weakly learnable）”的概念，并且指出：在概率近似正确（probably approximately correct, PAC）学习的框架中，一个概念（一个类），如果存在一个多项式的学习算法能够学习它，并且正确率很高，那么就称这个概念是强可学习的，如果正确率不高，仅仅比随即猜测略好，那么就称这个概念是弱可学习的。<a href="http://news.harvard.edu/gazette/story/2011/03/leslie-valiant-wins-turing-award/" rel="nofollow noreferrer" target="_blank">2010年的图灵奖给了L. Valiant，以表彰他的PAC理论
+</a>。非常有趣的是Schapire后来证明强可学习与弱可学习是等价的，也就是说，在PAC学习的框架下，一个概念是强可学习的充要条件是这个概念是可学习的。
+这样一来，问题便成为，在学习中，如果已经发现了“弱学习算法”，那么能否将它提升（boost）为”强学习算法”。大家知道，发现弱学习算法通常比发现强学习算法容易得多。那么如何具体实施提升，便成为开发提升方法时所要解决的问题。关于提升方法的研究很多，有很多算法被提出。最具代表性的是AdaBoost算法（Adaptive Boosting Algorithm），可以说，AdaBoost实现了PAC的理想。
+对于分类问题而言，给定一个训练数据，求一个比较粗糙的分类器（即弱分类器）要比求一个精确的分类器（即强分类器）容易得多。提升方法就是从弱学习算法出发，反复学习，得到一系列弱分类器，然后组合这些弱分类器，构成一个强分类器。大多数的提升方法都是改变训练数据的概率分布（训练数据中的各个数据点的权值分布），调用弱学习算法得到一个弱分类器，再改变训练数据的概率分布，再调用弱学习算法得到一个弱分类器，如此反复，得到一系列弱分类器。
+这样，对于提升方法来说，有两个问题需要回答：一是在每一轮如何如何改变训练数据的概率分布；而是如何将多个弱分类器组合成一个强分类器。
+关于第一个问题，AdaBoost的做法是，提高那些被前几轮弱分类器线性组成的分类器错误分类的的样本的权值。这样一来，那些没有得到正确分类的数据，由于权值加大而受到后一轮的弱分类器的更大关注。于是，分类问题被一系列的弱分类器”分而治之”。至于第二个问题，AdaBoost采取加权多数表决的方法。具体地，加大分类误差率小的弱分类器的权值，使其在表决中起较大的作用，减小分类误差率大的弱分类器的权值，使其在表决中起较小的作用。
+AdaBoost的巧妙之处就在于它将这些想法自然而然且有效地实现在一种算法里。</p>
+
+<p><strong>AdaBoost算法</strong>
+输入：训练数据集T={(x1,y1),(x2,y2),…,(xN,yN)}，其中xi∈X⊆Rn，表示输入数据，yi∈Y={-1,+1}，表示类别标签；弱学习算法。
+输出：最终分类器G(x)。
+流程：
+初始化训练数据的概率分布，刚开始为均匀分布</p>
+
+<p>D1=(w11,w12,…,w1N), 其中w1i= 
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-549055717a868700.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+, i=1,2,..,N   . Dm表示在第m轮迭代开始前，训练数据的概率分布（或权值分布），wmi表示在第i个样本的权值，
+ <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-0051d59990c6756c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+。对m=1,2,…,M，使用具有权值分布Dm的训练数据集进行学习（任意选一种模型都可以，例如朴素贝叶斯，决策树，SVM等，并且每一轮迭代都可以用不同的模型），得到一个弱分类器
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-f60f42b1875956ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+计算Gm(x)在训练数据集上的分类误差率
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-11f5fe23645c693f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+计算弱分类器Gm(x)的系数
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-544eb2e68545f530.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>更新训练数据的权值分布
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-0d70197d267f8261.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-879d0383b295d1f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>这里，Zm是规范化因子
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-6bdcdf564ef21167.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>这样 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-0d0cd483e9916a2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+，它使Dm+1称为一个概率分布。将M个基本分类器进行线性组合
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-7cb27b779d69120a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>得到最终分类器
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-cbde26761f3f70ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>对AdaBoost算法作如下说明：
+步骤(1) 初始时假设训练数据集具有均匀分布，即每个训练样本在弱分类器的学习中作用相同。
+步骤(2) &copy; αm表示Gm(x)在最终分类器中的重要性。由式(公式 2)可知，当em ≤1/2时，αm≥0，并且αm随着em的减小而增大，即意味着误差率越小的基本分类器在最终分类器中的作用越大。
+(d) 式可以写成：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-7676122d6a6b2390.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>由此可知，被弱分类器Gm(x)误分类的样本的权值得以扩大，而被正确分类的样本的权值得以缩小。因此误分类样本在下一轮学习中起到更大的作用。不改变所给的训练数据，而不断改变训练数据权值的分布，使得训练数据在基本分类器的学习中起不同的作用，这是AdaBoost的一个特点。
+步骤(3) 这里，αm之和并不等于1。f(x)的符号决定实例x的类别，f(x)的绝对值表示分类的确信度。利用基本分类器进行线性组合得到最终分类器是AdaBoost的另一个特点。</p>
+
+<p><strong>AdaBoost的例子</strong>
+例 1 给定如表 1所示训练数据。假设弱分类器由G(x)=sign(x-v)产生，其中v为常量，表示阀值。试用AdaBoost算法学习一个强分类器。
+表 1 训练数据样本</p>
+
+<p>序号      1      2      3      4      5      6      7      8      9      10
+x           0      1      2      3      4      5      6      7      8       9
+y          1       1      1      -1    -1    -1      1       1     1       -1
+<strong>解</strong>
+初始化训练数据的权值分布
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-693e58938189ecd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>当m=1，进行第一轮迭代
+在权值分布为D1的情况下，用一根垂直扫描线从左到右扫描，会发现，阀值v取2.5时分类误差率最低，故基本分类器G1(x)=sign(x-2.5)。</p>
+
+<p>G1(x)在训练数据集上的误差率 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-8395f287a308719d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+，第7,8,9个实例被误分类。</p>
+
+<p>计算G1(x)的系数： <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-5b53b65dc2418124.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+=0.4236。</p>
+
+<p>更新训练数据的权值分布：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-68afb7cedcf7e3c8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>分类器sign[f1(x)]在训练数据集上有3个误分类点，因此，继续迭代。
+当m=2，进行第二轮迭代
+在权值分布为D2的情况下，阀值v取8.5时分类误差率最低，故基本分类器G2(x)=sign(x-8.5)。</p>
+
+<p>G2(x)在训练数据集上的误差率e2=0.07143+0.07143+0.07143+0.07143，第4,5,6个实例被错误分类。</p>
+
+<p>计算G2(x)的系数：α2=0.6496。</p>
+
+<p>更新训练数据的权值分布：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-bee099ba38cc1abb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>分类器sign[f2(x)]在训练数据集上有3个误分类点，因此，继续迭代。
+当m=3，进行第三轮迭代
+在权值分布为D3的情况下，阀值v取5.5时分类误差率最低，故基本分类器G3(x)=-sign(x-5.5)，注意，这里符号反向了。</p>
+
+<p>G3(x)在训练数据集上的误差率e3=0.0455+0.0455+0.0455+0.0455=0.1820，第1,2,3,10个实例被误分类。</p>
+
+<p>计算G3(x)的系数：α2=0.7514。</p>
+
+<p>更新训练数据的权值分布：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-32f5ce0d3b2c9f89.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>分类器sign[f3(x)]在训练数据集上的误分类点个数为0，因此，终止迭代。
+于是，最终分类器为
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-66386a981c75f920.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>注意，G1(x)，G2(x)和G3(x)，是一个sign函数，从图像看是一个方波图，而最终分类器G(x)也是一个方波图，由三个波形图叠加合成。从信号的角度看，这是振幅叠加。G1(x)，G2(x)和G3(x)都是弱分类器，分类正确率仅大于0.5，但线性组合而成的分类器G(x)正确率是100%，是一个强分类器。
+<strong>AdaBoost算法的训练误差分析</strong>
+AdaBoost最基本的性质是它能在学习过程中不断减少训练误差，关于这个问题有下面的两个定理：
+<strong>定理 1 (AdaBoost的训练误差界</strong><strong>) </strong>AdaBoost算法的最终分类器的训练误差界为
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-36bf3d5259dee3dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+(公式 8)
+这里，G(x),f(x)和Zm分别由(公式 7)、(公式 6)和(公式 5)给出。
+证明当G(xi) ≠yi时，I(G(xi) ≠yi)=1，yif(xi) &lt; 0，因而exp(-yif(xi)) ≥1，所以 
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-488d95001a9b6860.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+成立；
+当G(xi) =yi时，I(G(xi) ≠yi)=0，又因为exp(-yif(xi)) ≥0，所以 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-589d691f9a35abd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+成立；
+可见， <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-bdde8d9c94e61f49.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+恒成立。
+所以 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-4395ec8933f931e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+成立。
+不等式的后半部分推导要用到Zm的定义式(公式 5)及(公式 4)的变形：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-9ba456a228f0508e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>先推导如下：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-c41305b3ca9f1ae5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>（<strong>定理</strong><strong> 1</strong>的证明@特级飞行员舒克有很大贡献）
+这一定理说明，可以在每一轮选取最适当的Gm使得Zm最小，从而使训练误差下降最快。对二类分类问题，有如下结果：
+<strong>定理 2 （二类分类问题AdaBoost的训练误差界）</strong>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-484cd6a92311dc4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+(公式 9)
+在这里， <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-6fea66dec4c1e006.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+。
+<strong>证明</strong>由Zm的定义式(公式 5)得
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-77ddc99738fe1962.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> </p>
+
+<p>因此等式 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-72ea03197c23d61e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+成立。
+接下来要证明不等式 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-70bf8970384614a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+，两边平方，即 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-79224a9ef0c0b9f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+。(这个思路由@<a href="http://weibo.com/liyong3forever" rel="nofollow noreferrer" target="_blank">liyong3forever
+</a>贡献，李航书中的那个泰勒展开式的思路并不好)
+因为 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-5e8881f4f5633f36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+，em∈[0,1]，所以 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-a1ba9ba1541e9549.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+，令 <figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-ea7083da4381f7ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+，问题变成了证明在闭区间[0,1]上不等式1-x≤e-x成立。这里，可以利用函数的单调性，导数等性质来证明，也可以用MATLAB画出图像来实际看看。
+<strong>推论</strong><strong> 1</strong>如果存在γ&gt;0，对所有m有γm≥γ，则
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-2d4ead22c9898bb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure> 
+(公式 10)
+这表明在此条件下，AdaBoost的训练误差是以指数速率下降的。这一性质当然是很有吸引力的。
+注意，AdaBoost算法不需要知道下界γ。这正是Freund与Schapire设计AdaBoost时所考虑的。与一些早期的提升方法不同，AdaBoost具有适应性，即它能适应弱分类器各自的训练误差率。这也是它的名称的由来，Ada是Adaptive的简写。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-adaboost/>https://ottsion.github.io/2017/2017-05-11-adaboost/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/mladaboost-boost/">
+                    #ml,adaboost, boost</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-boosting/" class="prev" rel="prev" title="Boosting算法"><i class="iconfont icon-left"></i>&nbsp;Boosting算法</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/" class="next" rel="next" title=" ROS学习之rqt_plot绘图"> ROS学习之rqt_plot绘图&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

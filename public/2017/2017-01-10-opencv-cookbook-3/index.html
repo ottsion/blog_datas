@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           opencv视觉编程学习第三部分代码 | 静心明志
+       
+  </title>
+  <meta name="title" content="opencv视觉编程学习第三部分代码 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "opencv视觉编程学习第三部分代码",
+    "headline" : "opencv视觉编程学习第三部分代码",
+    "description" : "星期二, 10. 一月 2017 03:12下午\n 这部分主要是对兴趣区域的介绍,以及对Ma_的模板类介绍\n 如何实现 第一步便是定义ROI，定以后可以把ROI当做普通Mat实例进行操作，关键在于ROI本身就是Mat对象，它与它的父图指向同一个数据缓冲区，并且有一个头部信息表示ROI的坐标，可用下面的方法插入小标志：\ncv::Mat imageROI( image, cv:;Rect( image.cols-logo.cols, image.rows-logo.rows, \/\/ROI的坐标 logo.cols, logo.rows \/\/ROI的大小 ) ); logo.copyTo(imageROI);  同样的可以用以下方法:\nimageROI = image( cv::Range(image.rows-logo.rows, image.rows), cv::Range(image.cols-logo.cols, image.cols) );  要定义图像中一些行组成的ROI：\ncv::Mat imageRIO = image.rowRange(start, end);  要定义图像中一些列组成的ROI：\ncv::Mat imageRIO = image.colRange(start, end);  图像掩码  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows)); cv::Mat mask(logo); \/\/把标志作为掩码，必须是灰度图像 logo.copyTo(imageROI,mask); \/\/插入标志，只复制掩码不为0的位置  Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：\ncv::Mat_\x26lt;uchar\x26gt; im2(image); im2(50, 100) = 0; \/\/访问第50行100列的值  Mat与Mat_相互转换也是很简单的。",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-10 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-10 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-10-opencv-cookbook-3\/",
+    "wordCount" : "207",
+    "keywords" : [ "opencv,图像处理", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">opencv视觉编程学习第三部分代码</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-10 itemprop="datePublished">January 10, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<hr />
+
+<p>星期二, 10. 一月 2017 03:12下午</p>
+
+<blockquote>
+<p>这部分主要是对兴趣区域的介绍,以及对Ma_的模板类介绍</p>
+</blockquote>
+
+<hr />
+
+<h2 id="如何实现">如何实现</h2>
+
+<p>第一步便是定义ROI，定以后可以把ROI当做普通Mat实例进行操作，关键在于ROI本身就是Mat对象，它与它的父图指向同一个数据缓冲区，并且有一个头部信息表示ROI的坐标，可用下面的方法插入小标志：</p>
+
+<pre><code>cv::Mat imageROI(
+	image,
+	cv:;Rect(
+		image.cols-logo.cols, image.rows-logo.rows,     //ROI的坐标
+                logo.cols, logo.rows                                                    //ROI的大小
+	 )
+);
+logo.copyTo(imageROI);
+</code></pre>
+
+<p>同样的可以用以下方法:</p>
+
+<pre><code>imageROI = image(
+	cv::Range(image.rows-logo.rows, image.rows),
+	cv::Range(image.cols-logo.cols,  image.cols)
+);
+</code></pre>
+
+<p>要定义图像中一些行组成的ROI：</p>
+
+<pre><code>cv::Mat imageRIO = image.rowRange(start, end);
+</code></pre>
+
+<p>要定义图像中一些列组成的ROI：</p>
+
+<pre><code>cv::Mat imageRIO = image.colRange(start, end);
+</code></pre>
+
+<h2 id="图像掩码">图像掩码</h2>
+
+<pre><code>  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows));
+  cv::Mat mask(logo);                //把标志作为掩码，必须是灰度图像
+  logo.copyTo(imageROI,mask);    //插入标志，只复制掩码不为0的位置
+</code></pre>
+
+<h2 id="ma-的模板类">Ma_的模板类</h2>
+
+<p>模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：</p>
+
+<pre><code>cv::Mat_&lt;uchar&gt;  im2(image);
+im2(50, 100) = 0; //访问第50行100列的值
+</code></pre>
+
+<p>Mat与Mat_相互转换也是很简单的。</p>
+
+<h2 id="代码演示-rio">代码演示(RIO)</h2>
+
+<pre><code>#include&lt;iostream&gt;
+#include&lt;opencv2/core/core.hpp&gt;
+#include&lt;opencv2/highgui/highgui.hpp&gt;
+
+const std::string imageAddr = &quot;/home/ottsion/Pictures/opencvImage/hua.jpg&quot;;
+const std::string logoAddr = &quot;/home/ottsion/Pictures/opencvImage/logo1.jpg&quot;;
+
+
+void ROItest1(cv::Mat image, cv::Mat logo)
+{
+  //在图像左上角放置一个logo
+  //cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows));
+  cv::Mat imageRIO(image, cv::Rect(0, 0,logo.rows,logo.cols));
+  logo.copyTo(imageRIO);
+  cv::namedWindow(&quot;copt to part zone&quot;);
+  cv::imshow(&quot;copt to part zone&quot;, image);
+}
+
+void ROItest2(cv::Mat image, cv::Mat logo)
+{
+  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows));
+  cv::Mat mask(logo);
+  logo.copyTo(imageROI,mask);
+  cv::namedWindow(&quot;use mask&quot;);
+  cv::imshow(&quot;use mask&quot;, image);
+}
+int main()
+{
+  cv::Mat image = cv::imread(imageAddr, CV_LOAD_IMAGE_GRAYSCALE);
+  cv::Mat logo = cv::imread(logoAddr, CV_LOAD_IMAGE_GRAYSCALE);
+  
+  //矩形区域选择复制
+  ROItest1(image, logo);
+  cv::waitKey(0);
+  
+  //使用图像掩码
+  ROItest2(image, logo);
+  cv::waitKey(0);
+  return 0;
+}
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/opencv/2017-01-10 16:02:07屏幕截图.png" data-sizes="auto" alt="效果图" title="xiaoguotu" class="lazyload"><figcaption class="image-caption">效果图</figcaption></figure></p>
+
+<h2 id="代码演示-salt">代码演示(salt)</h2>
+
+<pre><code>#include&lt;iostream&gt;
+#include&lt;opencv2/core/core.hpp&gt;
+#include&lt;opencv2/highgui/highgui.hpp&gt;
+
+void salt(cv::Mat image, int n)
+{
+  int i,j;
+  for(int k=0;k&lt;n;k++)
+  {
+    i = std::rand()%image.rows;
+    j = std::rand()%image.cols;
+    if(image.type()==CV_8UC1)
+      image.at&lt;uchar&gt;(i,j) = 255;
+    else if(image.type()==CV_8UC3)
+    {
+      //cv::Vec3b表示三个8位的数值
+      image.at&lt;cv::Vec3b&gt;(i,j)[0] = 255;
+      image.at&lt;cv::Vec3b&gt;(i,j)[1] = 255;
+      image.at&lt;cv::Vec3b&gt;(i,j)[2] = 255;
+    }
+  }
+}
+
+int main()
+{
+  cv::Mat image = cv::imread(&quot;/home/ottsion/Pictures/opencvImage/hua.jpg&quot;);
+  salt(image, 3000);
+  
+  cv::namedWindow(&quot;image after salt&quot;);
+  cv::imshow(&quot;image after salt&quot;, image);
+  cv::waitKey(0);
+  
+}
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/opencv/2017-01-10 17:10:51屏幕截图.png" data-sizes="auto" alt="效果图" title="xiaoguotu" class="lazyload"><figcaption class="image-caption">效果图</figcaption></figure></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                    #opencv,图像处理</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/" class="prev" rel="prev" title="opencv视觉编程学习第二部分代码"><i class="iconfont icon-left"></i>&nbsp;opencv视觉编程学习第二部分代码</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/" class="next" rel="next" title="opencv视觉编程学习第一部分代码">opencv视觉编程学习第一部分代码&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

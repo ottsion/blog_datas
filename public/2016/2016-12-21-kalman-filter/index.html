@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2016/2016-12-21-test/" />
+  <link rel="next" href="https://ottsion.github.io/2016/2016-12-21-harris-feature-detect/" />
+  <link rel="canonical" href="https://ottsion.github.io/2016/2016-12-21-kalman-filter/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           卡尔曼滤波算法理论 | 静心明志
+       
+  </title>
+  <meta name="title" content="卡尔曼滤波算法理论 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "卡尔曼滤波算法理论",
+    "headline" : "卡尔曼滤波算法理论",
+    "description" : "星期三, 21. 十二月 2016 07:57下午\n 卡尔曼滤波是一种高效率的递归滤波器（自回归滤波器），它能够从一系列的不完全及包含噪声的测量中，估计动态系统的状态。\n 卡尔曼滤波简介 \x26emsp;\x26emsp;卡尔曼滤波的一个典型实例是从一组有限的，包含噪声的，通过对物体位置的观察序列（可能有偏差）预测出物体的位置的坐标及速度。在很多工程应用（如雷达、计算机视觉）中都可以找到它的身影。同时，卡尔曼滤波也是控制理论以及控制系统工程中的一个重要课题。例如，对于雷达来说，人们感兴趣的是其能够跟踪目标。但目标的位置、速度、加速度的测量值往往在任何时候都有噪声。卡尔曼滤波利用目标的动态信息，设法去掉噪声的影响，得到一个关于目标位置的好的估计。这个估计可以是对当前目标位置的估计（滤波），也可以是对于将来位置的估计（预测），也可以是对过去位置的估计（插值或平滑）。这种滤波方法以它的发明者鲁道夫.E.卡尔曼（Rudolph E. Kalman）命名，原文地址 。\n\x26emsp;\x26emsp;卡尔曼滤波是一种递归的估计，即只要获知上一时刻状态的估计值以及当前状态的观测值就可以计算出当前状态的估计值，因此不需要记录观测或者估计的历史信息。卡尔曼滤波器与大多数滤波器不同之處，在於它是一种纯粹的时域滤波器，它不需要像低通滤波器等频域滤波器那样，需要在频域设计再转换到时域实现。\n初识卡尔曼滤波 \x26emsp;\x26emsp;先举个简单例子说明卡尔曼滤波干嘛的，下面有三幅图，第一幅是原图，小车匀速前行，第二幅的时候可以预测出当前位置，但是越往后随着各种误差会很难判断出小车的位置了，假如我们有一个新加入的量，比如一个雷达用来探测小车位置，也就是有两种方法，误差小的时候没啥，误差大了的时候该怎么去判断小车在哪里，哪个的测量值更可靠，如何求得那个比例值，使其能够得出目前的位置。\n初始小车行驶：\n前进一段时间：\n加入了另一种方式：\nkalmanfilter方式：\n数学公式介绍 下面是卡尔曼滤波算法的五大式：\n公式中详细的说明了滤波方法的步骤，主要如下（用的符号有点不同，意思一样）： 首先给出一个控制理论中公式\n卡尔曼滤波就是利用状态过程噪声和测量噪声对状态进行估计。 一个状态在一个时刻点k的状态进入下一个时刻点k\x2b1状态，会有很多外界因素的干扰，我们把干扰就叫做过程噪声，用w表示。任何一个测量仪器，都会有误差，我们把这个误差叫做量测噪声，用v表示。 回到上面那个公式，状态方程表示状态在不断的更新，从一个时刻点进入下一个时刻点，这个很好理解。关键是量测方程，它表示，我们不断更新的状态有几个能用测量仪器测出来，比如，汽车运动状态参数有很多，比如速度，轮速，滑移率等，但是我们只能测量出轮速，因此量测方程要做的就是把状态参数中能量测的状态拿出来。\n演化过程 1.首先假定我们只有一个线性方程求取下一时刻的位置信息\n2.不考虑测量噪声取出能测量的状态，也很简单：\n3.用测量仪器测量出来的状态值（大家可以考虑到：测量的值就是被各种噪声干扰后的真实值）减去上面不考虑噪声得到的测量值：\n这个值在数学上是一个定义值，叫做新息，有很多有趣的性质，感兴趣的可以自己谷歌。 我们对步骤暂且停一停。这个叫新息的值有什么用？由上面的过程我们可以明显看到，它反映了过程噪声和测量噪声综合对测量状态值的影响，也就是它包含了w和v的情况。 一个数值c由两部分内容a和b组成，那么怎样用数学表达式来表达？ 一般有两种做法： I.直接相加：c=a\x2bb; II. 用比例的方法：a=n*c,b=(1-n)*c 卡尔曼采用了方法II，用比例的方法来做（其实这也是为什么叫做滤波的原因，因为滤波就是给权值之类的操作）。也就是说，过程噪声w=新息*一个比例。这样得到的过程噪声加上原来（第一步）不考虑过程噪声的状态值不就是优化值了吗？ 也就是：\nOkay，都写到这里了，有必要做一下前提假设： a. 什么高斯噪声，均值为零一堆； b.Ak,Ck,wk的协方差Q,vk的协方差R，系统协方差初始值P0,状态初始值X0，都已知。 那么到目前为止我们的思路就是清楚了，找到一个合适的Hk值（卡尔曼增益），那么我们就能得到状态的最优值。\n这是误差协方差矩阵。 思路：使得误差协方差矩阵Pk最小的Hk。 为什么？这里我从感观的角度说明自己的理解，欢迎讨论。 协方差表示什么，协方差表示两者之间的联系或者关系，关系越大，协方差越大。误差协方差越小说明过程噪声和量测噪声的关系越小。关系越小能做什么，这要回到我们第3步讨论的我们用比例的方法分开了w和v。用比例分开，到底多少属于w，多少是v，如果关系越小，分开的越精确，比如一堆白砂糖和盐，如果两种混合的很均匀，我们说它关系很大，也就越难用比例的方法将其分开。 4.求的误差协方差矩阵Pk\n自然是把里面的Xk先得到，然后公式运算，通过上面的步骤我们也容易得到：\n然后复杂的数学计算，和之前假设的高斯噪声，新息的性质之类，就能得到下面的卡尔曼滤波递推公式：\n通过上面的解释，我们也就不难知道这些公式都在干嘛，知道干嘛就可以了。在知道A,C,P0,Q,R的情况下，整个公式的运算流程也都很清晰了。\nPython下代码如下所示：\n #coding=utf-8 import numpy import pylab #这里是假设A=1，H=1的情况 # 参数初始化 n_iter = 50 sz = (n_iter,) # size of array x = -0.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2016",
+    "datePublished": "2016-12-21 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2016-12-21 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2016\/2016-12-21-kalman-filter\/",
+    "wordCount" : "252",
+    "keywords" : [ "kalman filter", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">卡尔曼滤波算法理论</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2016-12-21 itemprop="datePublished">December 21, 2016</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/algorithm/"> Algorithm </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>星期三, 21. 十二月 2016 07:57下午</p>
+
+<blockquote>
+<p>卡尔曼滤波是一种高效率的递归滤波器（自回归滤波器），它能够从一系列的不完全及包含噪声的测量中，估计动态系统的状态。</p>
+</blockquote>
+
+<h2 id="卡尔曼滤波简介">卡尔曼滤波简介</h2>
+
+<p>&emsp;&emsp;卡尔曼滤波的一个典型实例是从一组有限的，包含噪声的，通过对物体位置的观察序列（可能有偏差）预测出物体的位置的坐标及速度。在很多工程应用（如雷达、计算机视觉）中都可以找到它的身影。同时，卡尔曼滤波也是控制理论以及控制系统工程中的一个重要课题。例如，对于雷达来说，人们感兴趣的是其能够跟踪目标。但目标的位置、速度、加速度的测量值往往在任何时候都有噪声。卡尔曼滤波利用目标的动态信息，设法去掉噪声的影响，得到一个关于目标位置的好的估计。这个估计可以是对当前目标位置的估计（滤波），也可以是对于将来位置的估计（预测），也可以是对过去位置的估计（插值或平滑）。这种滤波方法以它的发明者鲁道夫.E.卡尔曼（Rudolph E. Kalman）命名，<a href="http://www.cs.unc.edu/~welch/kalman/media/pdf/Kalman1960.pdf" rel="nofollow noreferrer" target="_blank">原文地址</a> 。</p>
+
+<p>&emsp;&emsp;卡尔曼滤波是一种递归的估计，即只要获知上一时刻状态的估计值以及当前状态的观测值就可以计算出当前状态的估计值，因此不需要记录观测或者估计的历史信息。卡尔曼滤波器与大多数滤波器不同之處，在於它是一种纯粹的时域滤波器，它不需要像低通滤波器等频域滤波器那样，需要在频域设计再转换到时域实现。</p>
+
+<h2 id="初识卡尔曼滤波">初识卡尔曼滤波</h2>
+
+<p>&emsp;&emsp;先举个简单例子说明卡尔曼滤波干嘛的，下面有三幅图，第一幅是原图，小车匀速前行，第二幅的时候可以预测出当前位置，但是越往后随着各种误差会很难判断出小车的位置了，假如我们有一个新加入的量，比如一个雷达用来探测小车位置，也就是有两种方法，误差小的时候没啥，误差大了的时候该怎么去判断小车在哪里，哪个的测量值更可靠，如何求得那个比例值，使其能够得出目前的位置。</p>
+
+<p>初始小车行驶：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/xiaoche1.jpg.png" data-sizes="auto" alt="小车1" title="小车1" class="lazyload"><figcaption class="image-caption">小车1</figcaption></figure></p>
+
+<p>前进一段时间：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/xiaoche2.png" data-sizes="auto" alt="小车2" title="小车2" class="lazyload"><figcaption class="image-caption">小车2</figcaption></figure></p>
+
+<p>加入了另一种方式：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/xiaoche3.png" data-sizes="auto" alt="小车3" title="小车3" class="lazyload"><figcaption class="image-caption">小车3</figcaption></figure></p>
+
+<p>kalmanfilter方式：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/xiaoche4.png" data-sizes="auto" alt="小车4" title="小车4" class="lazyload"><figcaption class="image-caption">小车4</figcaption></figure></p>
+
+<h2 id="数学公式介绍">数学公式介绍</h2>
+
+<p>下面是卡尔曼滤波算法的五大式：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/wudagongshi.png" data-sizes="auto" alt="五大公式" title="五大公式" class="lazyload"><figcaption class="image-caption">五大公式</figcaption></figure></p>
+
+<p>公式中详细的说明了滤波方法的步骤，主要如下（用的符号有点不同，意思一样）：
+首先给出一个控制理论中公式</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao1.png" data-sizes="auto" alt="推导1" title="推导1" class="lazyload"><figcaption class="image-caption">推导1</figcaption></figure></p>
+
+<p>卡尔曼滤波就是利用状态过程噪声和测量噪声对状态进行估计。
+一个状态在一个时刻点k的状态进入下一个时刻点k+1状态，会有很多外界因素的干扰，我们把干扰就叫做过程噪声，用w表示。任何一个测量仪器，都会有误差，我们把这个误差叫做量测噪声，用v表示。
+回到上面那个公式，状态方程表示状态在不断的更新，从一个时刻点进入下一个时刻点，这个很好理解。关键是量测方程，它表示，我们不断更新的状态有几个能用测量仪器测出来，比如，汽车运动状态参数有很多，比如速度，轮速，滑移率等，但是我们只能测量出轮速，因此量测方程要做的就是把状态参数中能量测的状态拿出来。</p>
+
+<h3 id="演化过程">演化过程</h3>
+
+<p>1.首先假定我们只有一个线性方程求取下一时刻的位置信息</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao2.png" data-sizes="auto" alt="推导2" title="推导2" class="lazyload"><figcaption class="image-caption">推导2</figcaption></figure></p>
+
+<p>2.不考虑测量噪声取出能测量的状态，也很简单：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao3.png" data-sizes="auto" alt="推导3" title="推导3" class="lazyload"><figcaption class="image-caption">推导3</figcaption></figure></p>
+
+<p>3.用<strong>测量仪器测量</strong>出来的状态值（大家可以考虑到：测量的值就是被各种噪声干扰后的真实值）减去上面<strong>不考虑噪声</strong>得到的测量值：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao4.png" data-sizes="auto" alt="推导4" title="推导4" class="lazyload"><figcaption class="image-caption">推导4</figcaption></figure></p>
+
+<p>这个值在数学上是一个定义值，叫做新息，有很多有趣的性质，感兴趣的可以自己谷歌。
+我们对步骤暂且停一停。这个叫新息的值有什么用？由上面的过程我们可以明显看到，它反映了<strong>过程噪声</strong>和<strong>测量噪声</strong>综合对测量状态值的影响，也就是它包含了w和v的情况。
+一个数值c由两部分内容a和b组成，那么怎样用数学表达式来表达？
+一般有两种做法：
+I.直接相加：c=a+b;
+II. 用比例的方法：a=n*c,b=(1-n)*c
+卡尔曼采用了方法II，用比例的方法来做（其实这也是为什么叫做滤波的原因，因为滤波就是给权值之类的操作）。也就是说，过程噪声w=新息*一个比例。这样得到的过程噪声加上原来（第一步）不考虑过程噪声的状态值不就是优化值了吗？ 也就是：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao5.png" data-sizes="auto" alt="推导5" title="推导5" class="lazyload"><figcaption class="image-caption">推导5</figcaption></figure></p>
+
+<p>Okay，都写到这里了，有必要做一下前提假设：
+a. 什么高斯噪声，均值为零一堆；
+b.Ak,Ck,wk的协方差Q,vk的协方差R，系统协方差初始值P0,状态初始值X0，都已知。
+那么到目前为止我们的思路就是清楚了，找到一个合适的Hk值（卡尔曼增益），那么我们就能得到状态的最优值。</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao6.png" data-sizes="auto" alt="推导6" title="推导6" class="lazyload"><figcaption class="image-caption">推导6</figcaption></figure></p>
+
+<p>这是误差协方差矩阵。
+思路：使得误差协方差矩阵Pk最小的Hk。
+为什么？这里我从感观的角度说明自己的理解，欢迎讨论。
+协方差表示什么，协方差表示两者之间的联系或者关系，关系越大，协方差越大。误差协方差越小说明过程噪声和量测噪声的关系越小。关系越小能做什么，这要回到我们第3步讨论的我们用比例的方法分开了w和v。用比例分开，到底多少属于w，多少是v，如果关系越小，分开的越精确，比如一堆白砂糖和盐，如果两种混合的很均匀，我们说它关系很大，也就越难用比例的方法将其分开。
+4.求的误差协方差矩阵Pk</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao6.png" data-sizes="auto" alt="推导6" title="推导6" class="lazyload"><figcaption class="image-caption">推导6</figcaption></figure></p>
+
+<p>自然是把里面的Xk先得到，然后公式运算，通过上面的步骤我们也容易得到：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao7.png" data-sizes="auto" alt="推导7" title="推导7" class="lazyload"><figcaption class="image-caption">推导7</figcaption></figure></p>
+
+<p>然后复杂的数学计算，和之前假设的高斯噪声，新息的性质之类，就能得到下面的卡尔曼滤波递推公式：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/tuidao8.png" data-sizes="auto" alt="推导8" title="推导8" class="lazyload"><figcaption class="image-caption">推导8</figcaption></figure></p>
+
+<p>通过上面的解释，我们也就不难知道这些公式都在干嘛，知道干嘛就可以了。在知道A,C,P0,Q,R的情况下，整个公式的运算流程也都很清晰了。</p>
+
+<p>Python下代码如下所示：</p>
+
+<pre><code>    #coding=utf-8  
+    import numpy  
+    import pylab  
+
+    #这里是假设A=1，H=1的情况  
+
+    # 参数初始化  
+    n_iter = 50  
+    sz = (n_iter,) # size of array  
+    x = -0.37727 # truth value (typo in example at top of p. 13 calls this z)真实值  
+    z = numpy.random.normal(x,0.1,size=sz) # observations (normal about x, sigma=0.1)观测值  
+
+    Q = 1e-5 # process variance  
+
+    # 分配数组空间  
+    xhat=numpy.zeros(sz)      # a posteri estimate of x 滤波估计值  
+    P=numpy.zeros(sz)         # a posteri error estimate滤波估计协方差矩阵  
+    xhatminus=numpy.zeros(sz) # a priori estimate of x 估计值  
+    Pminus=numpy.zeros(sz)    # a priori error estimate估计协方差矩阵  
+    K=numpy.zeros(sz)         # gain or blending factor卡尔曼增益  
+
+    R = 0.1**2 # estimate of measurement variance, change to see effect  
+
+    # intial guesses  
+    xhat[0] = 0.0  
+    P[0] = 1.0  
+
+    for k in range(1,n_iter):  
+        # 预测  
+        xhatminus[k] = xhat[k-1]  #X(k|k-1) = AX(k-1|k-1) + BU(k) + W(k),A=1,BU(k) = 0  
+        Pminus[k] = P[k-1]+Q      #P(k|k-1) = AP(k-1|k-1)A' + Q(k) ,A=1  
+
+        # 更新  
+        K[k] = Pminus[k]/( Pminus[k]+R ) #Kg(k)=P(k|k-1)H'/[HP(k|k-1)H' + R],H=1  
+        xhat[k] = xhatminus[k]+K[k]*(z[k]-xhatminus[k]) #X(k|k) = X(k|k-1) + Kg(k)[Z(k) - HX(k|k-1)], H=1  
+        P[k] = (1-K[k])*Pminus[k] #P(k|k) = (1 - Kg(k)H)P(k|k-1), H=1  
+
+    pylab.figure()  
+    pylab.plot(z,'k+',label='noisy measurements')     #观测值  
+    pylab.plot(xhat,'b-',label='a posteri estimate')  #滤波估计值  
+    pylab.axhline(x,color='g',label='truth value')    #真实值  
+    pylab.legend()  
+    pylab.xlabel('Iteration')  
+    pylab.ylabel('Voltage')  
+
+    pylab.figure()  
+    valid_iter = range(1,n_iter) # Pminus not valid at step 0  
+    pylab.plot(valid_iter,Pminus[valid_iter],label='a priori error estimate')  
+    pylab.xlabel('Iteration')  
+    pylab.ylabel('$(Voltage)^2$')  
+    pylab.setp(pylab.gca(),'ylim',[0,.01])  
+    pylab.show()  
+</code></pre>
+
+<p>截图如下：</p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/figure_1.png" data-sizes="auto" alt="运行图1" title="运行图1" class="lazyload"><figcaption class="image-caption">运行图1</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/kalmanfilter/figure_2.png" data-sizes="auto" alt="运行图2" title="运行图2" class="lazyload"><figcaption class="image-caption">运行图2</figcaption></figure></p>
+
+<h3 id="文中链接">文中链接:</h3>
+
+<p>卡尔曼滤波算法&ndash;核心公式推导导论：<a href="https://zhuanlan.zhihu.com/p/24312995" rel="nofollow noreferrer" target="_blank">链接地址</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2016/2016-12-21-kalman-filter/>https://ottsion.github.io/2016/2016-12-21-kalman-filter/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/kalman-filter/">
+                    #kalman filter</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2016/2016-12-21-test/" class="prev" rel="prev" title="第一篇测试样本"><i class="iconfont icon-left"></i>&nbsp;第一篇测试样本</a>
+         
+        
+        <a href="https://ottsion.github.io/2016/2016-12-21-harris-feature-detect/" class="next" rel="next" title="Harris角点检测基础原理和效果">Harris角点检测基础原理和效果&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

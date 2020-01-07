@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-05-eigen-use-2/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-05-eigen-code/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-05-eigen-use-3/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Eigen矩阵库——初步用法（三） | 静心明志
+       
+  </title>
+  <meta name="title" content="Eigen矩阵库——初步用法（三） | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Eigen矩阵库——初步用法（三）",
+    "headline" : "Eigen矩阵库——初步用法（三）",
+    "description" : "星期四, 05. 一月 2017 12:49下午\n 本节主要涉及Eigen的块操作以及QR分解。Eigen的QR分解非常绕人，搞了很久才搞明白是怎么回事，最后是一个使用Eigen的矩阵操作完成二维高斯拟合求取光点的代码例子，关于二维高斯拟合求取光点的详细内容可参考：链接\n 矩阵的块操作 矩阵的块表示 矩阵的块操作有两种使用方法，其定义形式为：\nmatrix.block(i,j,p,q); (1) matrix.block\x26lt;p,q\x26gt;(i,j) (2)   定义（1）表示返回从矩阵的(i, j)开始，每行取p个元素，每列取q个元素所组成的临时新矩阵对象，原矩阵的元素不变。\n 定义（2）中block\x26lt;p, q\x26gt;可理解为一个p行q列的子矩阵，该定义表示从原矩阵中第(i, j)开始，获取一个p行q列的子矩阵，返回该子矩阵组成的临时 矩阵对象，原矩阵的元素不变。\n  演示代码如下：\n#include\x26lt;iostream\x26gt; #include\x26lt;eigen3\/Eigen\/Dense\x26gt; using namespace std; int main() { Eigen::MatrixXf m(4,4); m\x26lt;\x26lt;1,2,3,4, 5,6,7,8, 9,10,11,12, 13,14,15,16; cout\x26lt;\x26lt;\x26quot;Block in the middle\x26quot;\x26lt;\x26lt;endl; cout\x26lt;\x26lt;m.block\x26lt;2,2\x26gt;(1,1)\x26lt;\x26lt;endl\x26lt;\x26lt;endl; for(int i=1;i\x26lt;=3;i\x2b\x2b) { cout\x26lt;\x26lt;\x26quot;block of size \x26quot;\x26lt;\x26lt;i\x26lt;\x26lt;\x26quot;x\x26quot;\x26lt;\x26lt;i\x26lt;\x26lt;endl; cout\x26lt;\x26lt;m.block(0,0,i,i)\x26lt;\x26lt;endl\x26lt;\x26lt;endl; } }  运行结果：\nBlock in the middle 6 7 10 11 block of size 1x1 1 block of size 2x2 1 2 5 6 block of size 3x3 1 2 3 5 6 7 9 10 11  通过上述方式获取的子矩阵即可以作为左值也可以作为右值，也就是即可以用这个子矩阵给其他矩阵赋值，也可以给这个子矩阵对象赋值。",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-05 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-05 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-05-eigen-use-3\/",
+    "wordCount" : "472",
+    "keywords" : [ "eigen", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Eigen矩阵库——初步用法（三）</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-05 itemprop="datePublished">January 5, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>星期四, 05. 一月 2017 12:49下午</p>
+
+<hr />
+
+<blockquote>
+<p>本节主要涉及Eigen的块操作以及QR分解。Eigen的QR分解非常绕人，搞了很久才搞明白是怎么回事，最后是一个使用Eigen的矩阵操作完成二维高斯拟合求取光点的代码例子，关于二维高斯拟合求取光点的详细内容可参考：<a href="http://blog.csdn.NET/hjx_1000/article/details/8490653" title="点击跳转" rel="nofollow noreferrer" target="_blank">链接</a></p>
+</blockquote>
+
+<hr />
+
+<h2 id="矩阵的块操作">矩阵的块操作</h2>
+
+<h3 id="矩阵的块表示">矩阵的块表示</h3>
+
+<p>矩阵的块操作有两种使用方法，其定义形式为：</p>
+
+<pre><code>matrix.block(i,j,p,q);        	   (1)
+matrix.block&lt;p,q&gt;(i,j)   		   (2)
+</code></pre>
+
+<ul>
+<li><p>定义（1）表示返回从矩阵的<code>(i, j)</code>开始，每行取p个元素，每列取q个元素所组成的临时新矩阵对象，原矩阵的元素不变。</p></li>
+
+<li><p>定义（2）中<code>block&lt;p, q&gt;</code>可理解为一个p行q列的子矩阵，该定义表示从原矩阵中第<code>(i, j)</code>开始，获取一个p行q列的子矩阵，返回该子矩阵组成的临时 矩阵对象，原矩阵的元素不变。</p></li>
+</ul>
+
+<p>演示代码如下：</p>
+
+<pre><code class="language-C">#include&lt;iostream&gt;
+#include&lt;eigen3/Eigen/Dense&gt;
+using namespace std;
+int main()
+{
+  Eigen::MatrixXf m(4,4);
+  m&lt;&lt;1,2,3,4,
+  5,6,7,8,
+  9,10,11,12,
+  13,14,15,16;
+  cout&lt;&lt;&quot;Block in the middle&quot;&lt;&lt;endl;
+  cout&lt;&lt;m.block&lt;2,2&gt;(1,1)&lt;&lt;endl&lt;&lt;endl;
+  for(int i=1;i&lt;=3;i++)
+  {
+    cout&lt;&lt;&quot;block of size &quot;&lt;&lt;i&lt;&lt;&quot;x&quot;&lt;&lt;i&lt;&lt;endl;
+    cout&lt;&lt;m.block(0,0,i,i)&lt;&lt;endl&lt;&lt;endl;
+  }
+}
+</code></pre>
+
+<p>运行结果：</p>
+
+<pre><code>Block in the middle
+ 6  7
+10 11
+
+block of size 1x1
+1
+
+block of size 2x2
+1 2
+5 6
+
+block of size 3x3
+ 1  2  3
+ 5  6  7
+ 9 10 11
+</code></pre>
+
+<p>通过上述方式获取的子矩阵即可以作为左值也可以作为右值，也就是即可以用这个子矩阵给其他矩阵赋值，也可以给这个子矩阵对象赋值。</p>
+
+<h3 id="获取其指定行-列">获取其指定行/列</h3>
+
+<p>矩阵也提供了获取其指定行/列的函数，其实获取某行/列也是一种特殊的获取子块。可以通过<code>.col()</code>和 <code>.row()</code>来完成获取指定列/行的操作，参数为列/行的索引。
+注意：</p>
+
+<ul>
+<li><p>需与获取矩阵的行数/列数的函数<code>rows()</code>,<code>cols()</code>的进行区别，不要弄混淆。</p></li>
+
+<li><p>函数参数为响应行/列的索引，需注意矩阵的行列均以0开始。</p></li>
+</ul>
+
+<p>下面的代码段用于演示获取矩阵的指定行列：</p>
+
+<pre><code>#include&lt;eigen3/Eigen/Dense&gt; 
+#include &lt;iostream&gt;  
+using namespace std; 
+int main() 
+{ 
+	Eigen::MatrixXf m(3,3); 
+	m &lt;&lt; 1,2,3, 
+	4,5,6, 
+	7,8,9; 
+	cout &lt;&lt; &quot;Here is the matrix m:&quot; &lt;&lt; endl &lt;&lt; m &lt;&lt; endl; 
+	cout &lt;&lt; &quot;2nd Row: &quot; &lt;&lt; m.row(1) &lt;&lt; endl; 
+	m.col(2) += 3 * m.col(0); 
+	cout &lt;&lt; &quot;After adding 3 times the first column into the third column, the matrix m is:\n&quot;; 
+	cout &lt;&lt; m &lt;&lt; endl; 
+} 
+</code></pre>
+
+<p>输出结果为：</p>
+
+<pre><code>Here is the matrix m:
+1 2 3
+4 5 6
+7 8 9
+2nd Row: 4 5 6
+After adding 3 times the first column into the third column, the matrix m is:
+ 1  2  6
+ 4  5 18
+ 7  8 30
+</code></pre>
+
+<h3 id="向量的块操作">向量的块操作</h3>
+
+<p>向量的块操作，其实向量只是一个特殊的矩阵，但是Eigen也为它单独提供了一些简化的块操作，如下三种形式：</p>
+
+<ul>
+<li>获取向量的前n个元素：<code>vector.head(n)</code>;</li>
+<li>获取向量尾部的n个元素：<code>vector.tail(n)</code>;</li>
+<li>获取从向量的第i个元素开始的n个元素：<code>vector.segment(i,n)</code>;</li>
+</ul>
+
+<p>其用法可参考如下代码段</p>
+
+<pre><code>#include&lt;eigen3/Eigen/Dense&gt; 
+#include &lt;iostream&gt; 
+using namespace std; 
+int main() 
+{ 
+    Eigen::ArrayXf v(6); 
+    v &lt;&lt; 1, 2, 3, 4, 5, 6; 
+    cout &lt;&lt; &quot;v.head(3) =&quot; &lt;&lt; endl &lt;&lt; v.head(3) &lt;&lt; endl &lt;&lt; endl; 
+    cout &lt;&lt; &quot;v.tail&lt;3&gt;() = &quot; &lt;&lt; endl &lt;&lt; v.tail&lt;3&gt;() &lt;&lt; endl &lt;&lt; endl; 
+    v.segment(1,4) *= 2; 
+    cout &lt;&lt; &quot;after 'v.segment(1,4) *= 2', v =&quot; &lt;&lt; endl &lt;&lt; v &lt;&lt; endl; 
+} 
+</code></pre>
+
+<p>输出结果为：</p>
+
+<pre><code>v.head(3) =
+1
+2
+3
+
+v.tail&lt;3&gt;() = 
+4
+5
+6
+
+after 'v.segment(1,4) *= 2', v =
+1
+4
+6
+8
+10
+6
+</code></pre>
+
+<h2 id="qr分解">QR分解</h2>
+
+<p>Eigen的QR分解非常绕人，它总共提供了下面这些矩阵的分解方式：</p>
+
+<table>
+<thead>
+<tr>
+<th>Decomposition</th>
+<th align="center">Method</th>
+<th align="right">Requirements on the matrix</th>
+<th align="right">Speed</th>
+<th align="right">Accuracy</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>PartialPivLU</td>
+<td align="center">partialPivLu()</td>
+<td align="right">Invertible</td>
+<td align="right">++</td>
+<td align="right">+</td>
+</tr>
+
+<tr>
+<td>FullPivLU</td>
+<td align="center">fullPivLu()</td>
+<td align="right">None</td>
+<td align="right">-</td>
+<td align="right">+++</td>
+</tr>
+
+<tr>
+<td>HouseholderQR</td>
+<td align="center">householderQr()</td>
+<td align="right">None</td>
+<td align="right">++</td>
+<td align="right">+</td>
+</tr>
+
+<tr>
+<td>ColPivHouseholderQR</td>
+<td align="center">colPivHouseholderQr()</td>
+<td align="right">None</td>
+<td align="right">+</td>
+<td align="right">++</td>
+</tr>
+
+<tr>
+<td>FullPivHouseholderQR</td>
+<td align="center">fullPivHouseholderQr()</td>
+<td align="right">None</td>
+<td align="right">-</td>
+<td align="right">+++</td>
+</tr>
+
+<tr>
+<td>LLT</td>
+<td align="center">llt()</td>
+<td align="right">Positive definite</td>
+<td align="right">++ +</td>
+<td align="right">+</td>
+</tr>
+
+<tr>
+<td>LDLT</td>
+<td align="center">ldlt()</td>
+<td align="right">Positive or negative semidefinite</td>
+<td align="right">+++</td>
+<td align="right">++</td>
+</tr>
+</tbody>
+</table>
+
+<p>由于作者只用到了QR分解，而且Eigen的QR分解开始使用时确实不容易入手，因此这里只提供了householderQR的分解方式的演示代码：</p>
+
+<pre><code>void QR2() 
+{ 
+    Matrix3d A; 
+    A&lt;&lt;1,1,1, 
+        2,-1,-1,  
+        2,-4,5;  
+  
+    HouseholderQR&lt;Matrix3d&gt; qr; 
+    qr.compute(A); 
+    MatrixXd R = qr.matrixQR().triangularView&lt;Upper&gt;(); 
+    MatrixXd Q =  qr.householderQ(); 
+    std::cout &lt;&lt; &quot;QR2(): HouseholderQR---------------------------------------------&quot;&lt;&lt; std::endl; 
+    std::cout &lt;&lt; &quot;A &quot;&lt;&lt; std::endl &lt;&lt;A &lt;&lt; std::endl &lt;&lt; std::endl; 
+    std::cout &lt;&lt;&quot;qr.matrixQR()&quot;&lt;&lt; std::endl &lt;&lt; qr.matrixQR() &lt;&lt; std::endl &lt;&lt; std::endl; 
+    std::cout &lt;&lt; &quot;R&quot;&lt;&lt; std::endl &lt;&lt;R &lt;&lt; std::endl &lt;&lt; std::endl; 
+    std::cout &lt;&lt; &quot;Q &quot;&lt;&lt; std::endl &lt;&lt;Q &lt;&lt; std::endl &lt;&lt; std::endl; 
+    std::cout &lt;&lt;&quot;Q*R&quot; &lt;&lt; std::endl &lt;&lt;Q*R &lt;&lt; std::endl &lt;&lt; std::endl; 
+} 
+</code></pre>
+
+<p>运行结果如下：</p>
+
+<pre><code>QR2(): HouseholderQR---------------------------------------------
+A 
+ 1  1  1
+ 2 -1 -1
+ 2 -4  5
+
+qr.matrixQR()
+-3  3 -3
+0.5 -3  3
+0.5 -1 -3
+
+R
+-3  3 -3
+ 0 -3  3
+ 0  0 -3
+
+Q 
+-0.333333 -0.666667 -0.666667
+-0.666667 -0.333333  0.666667
+-0.666667  0.666667 -0.333333
+
+Q*R
+ 1  1  1
+ 2 -1 -1
+ 2 -4  5
+</code></pre>
+
+<h2 id="原文来源">原文来源</h2>
+
+<p><a href="http://blog.csdn.net/houjixin/article/details/8494582" title="点击跳转" rel="nofollow noreferrer" target="_blank">C++开源矩阵计算工具——Eigen的简单用法（三） 逍遥子_</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-05-eigen-use-3/>https://ottsion.github.io/2017/2017-01-05-eigen-use-3/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/eigen/">
+                    #eigen</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-05-eigen-use-2/" class="prev" rel="prev" title="Eigen矩阵库——初步用法（二）"><i class="iconfont icon-left"></i>&nbsp;Eigen矩阵库——初步用法（二）</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-05-eigen-code/" class="next" rel="next" title="Eigen矩阵库——代码演示">Eigen矩阵库——代码演示&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

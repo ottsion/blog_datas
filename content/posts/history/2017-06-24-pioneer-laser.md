@@ -17,7 +17,7 @@ tags: ["ROS, pioneer"]
 
 ### 安装Ubuntu
 
-1. 制作`Ubuntu14.04` 的U盘启动器后，记得找个含有$F_n$ 的键盘，使用快捷键进入机器人`bios`系统选择U盘启动。
+1.制作`Ubuntu14.04`的U盘启动器后，记得找个含有$F_n$的键盘，使用快捷键进入机器人`bios`系统选择U盘启动。
 2. 如果是双系统记得安装过程中选择硬盘时为`something else` ，自己划分各盘容量。
 3. 选择实验室wifi链接，方便后期直接笔记本控制。
 
@@ -37,23 +37,23 @@ tags: ["ROS, pioneer"]
 
 ```
 1) 创建工作空间，如果有了直接走 2).
-$ . /opt/ros/indigo/setup.bash
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws/src
-$ catkin_init_workspace
-$ cd ~/catkin_ws
-$ catkin_make
-$ cd ~/catkin_ws/src
+$./opt/ros/indigo/setup.bash
+$mkdir-p~/catkin_ws/src
+$cd~/catkin_ws/src
+$catkin_init_workspace
+$cd~/catkin_ws
+$catkin_make
+$cd~/catkin_ws/src
 2) 安装rosaria包:
-$ git clone https://github.com/amor-ros-pkg/rosaria.git
-$ source ~/catkin_ws/devel/setup.bash
-$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
-$ source ~/.bashrc
+$gitclonehttps://github.com/amor-ros-pkg/rosaria.git
+$source~/catkin_ws/devel/setup.bash
+$echo"source~/catkin_ws/devel/setup.bash">>~/.bashrc
+$source~/.bashrc
 %rosdep可以安装额外需要的工具包
-$ rosdep update
-$ rosdep install rosaria
-$ cd ~/catkin_ws/
-$ catkin_make
+$rosdepupdate
+$rosdepinstallrosaria
+$cd~/catkin_ws/
+$catkin_make
 ```
 
 到此为止你应该安装好了两样东西：
@@ -126,7 +126,7 @@ $ catkin_make
 |      | 我的笔记本         | 机器人pioneer                               |
 | ---- | ------------- | :--------------------------------------- |
 | IP   | 192.168.1.102 | 192.168.1.10                             |
-| 指令步骤 | (1) $ roscore | (2)rosrun rosaria ROSAria _port:=/dev/ttyS0 |
+|指令步骤|(1)$roscore|(2)rosrunrosariaROSAria_port:=/dev/ttyS0|
 
 **注意：** 
 
@@ -168,10 +168,10 @@ $ catkin_make
 强烈不建议`apt-get`安装lms1xx，选择如下：
 
 ```
-$ git clone https://github.com/ncnynl/LMS1xx.git
+$gitclonehttps://github.com/ncnynl/LMS1xx.git
 #编译
-$ cd  ~/catkin_ws
-$ catkin_make
+$cd~/catkin_ws
+$catkin_make
 ```
 
 LMSxxx激光雷达的的默认IP地址是`192.168.0.1`
@@ -179,9 +179,9 @@ LMSxxx激光雷达的的默认IP地址是`192.168.0.1`
 最后执行测试：
 
 ```
-$ roscore
-$ rosrun lms1xx LMS1xx_node _host:=192.168.0.1
-$ rosrun rviz rviz
+$roscore
+$rosrunlms1xxLMS1xx_node_host:=192.168.0.1
+$rosrunrvizrviz
 ```
 
 注意：`_host`可以在`LMS1xx_node`中直接设置好，并不用每次输入。

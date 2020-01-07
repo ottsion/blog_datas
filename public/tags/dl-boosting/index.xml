@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dl, Boosting on 静心明志</title>
+    <link>https://ottsion.github.io/tags/dl-boosting/</link>
+    <description>Recent content in dl, Boosting on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 May 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/dl-boosting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MNIST数字检测</title>
+      <link>https://ottsion.github.io/2017/2017-05-11-mnist-digit-rec/</link>
+      <pubDate>Thu, 11 May 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-05-11-mnist-digit-rec/</guid>
+      <description>学习Tensorflow第一课：
+from tensorflow.examples.tutorials.mnist import input_data mnist = input_data.read_data_sets(&#39;MNIST_data&#39;, one_hot=True) import tensorflow as tf sess = tf.InteractiveSession() def weight_variable(shape): initial = tf.truncated_normal(shape, stddev=0.1) return tf.Variable(initial) def bias_variable(shape): initial = tf.constant(0.1, shape=shape) return tf.Variable(initial) def conv2d(x, W): return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding=&#39;SAME&#39;) def max_pool_2x2(x): return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding=&#39;SAME&#39;) W_conv1 = weight_variable([5, 5, 1, 32]) b_conv1 = bias_variable([32]) x_image = tf.reshape(x, [-1,28,28,1]) h_conv1 = tf.</description>
+    </item>
+    
+  </channel>
+</rss>

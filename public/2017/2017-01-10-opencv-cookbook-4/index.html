@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-07-cmake-2/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-6/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           opencv视觉编程学习第四部分代码 | 静心明志
+       
+  </title>
+  <meta name="title" content="opencv视觉编程学习第四部分代码 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "opencv视觉编程学习第四部分代码",
+    "headline" : "opencv视觉编程学习第四部分代码",
+    "description" : "星期二, 10. 一月 2017 05:48下午\n 这部分主要是操作像素\n Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：\ncv::Mat_\x26lt;uchar\x26gt; im2(image); im2(50, 100) = 0; \/\/访问第50行100列的值  Mat与Mat_相互转换也是很简单的。\n一般情况下Mat类读取像素：\nimage.at\x26lt;uchar\x26gt;(i,j) = 255;  指针读取 除了一般的\n uchar* data = image.ptr\x26lt;uchar\x26gt;(i); for(int j=0;j\x26lt;nc;j\x2b\x2b) { data[j] = data[j]\/div*div\x2bdiv\/2; }  我们还可以用以下语句执行：\n*data = *data\/div*div \x2b div\/2 ; data\x2b\x2b  代码演示(salt) #include\x26lt;iostream\x26gt; #include\x26lt;opencv2\/core\/core.hpp\x26gt; #include\x26lt;opencv2\/highgui\/highgui.hpp\x26gt; void salt(cv::Mat image, int n) { int i,j; for(int k=0;k\x26lt;n;k\x2b\x2b) { i = std::rand()%image.rows; j = std::rand()%image.cols; if(image.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-10 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-10 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-10-opencv-cookbook-4\/",
+    "wordCount" : "468",
+    "keywords" : [ "opencv,图像处理", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">opencv视觉编程学习第四部分代码</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-10 itemprop="datePublished">January 10, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<hr />
+
+<p>星期二, 10. 一月 2017 05:48下午</p>
+
+<blockquote>
+<p>这部分主要是操作像素</p>
+</blockquote>
+
+<hr />
+
+<h2 id="ma-的模板类">Ma_的模板类</h2>
+
+<p>模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：</p>
+
+<pre><code>cv::Mat_&lt;uchar&gt;  im2(image);
+im2(50, 100) = 0; //访问第50行100列的值
+</code></pre>
+
+<p>Mat与Mat_相互转换也是很简单的。</p>
+
+<p>一般情况下Mat类读取像素：</p>
+
+<pre><code>image.at&lt;uchar&gt;(i,j) = 255;
+</code></pre>
+
+<h2 id="指针读取">指针读取</h2>
+
+<p>除了一般的</p>
+
+<pre><code>    uchar* data = image.ptr&lt;uchar&gt;(i);
+    for(int j=0;j&lt;nc;j++)
+    {
+      data[j] = data[j]/div*div+div/2;
+    }
+</code></pre>
+
+<p>我们还可以用以下语句执行：</p>
+
+<pre><code>*data = *data/div*div + div/2 ; data++
+</code></pre>
+
+<h2 id="代码演示-salt">代码演示(salt)</h2>
+
+<pre><code>#include&lt;iostream&gt;
+#include&lt;opencv2/core/core.hpp&gt;
+#include&lt;opencv2/highgui/highgui.hpp&gt;
+
+void salt(cv::Mat image, int n)
+{
+  int i,j;
+  for(int k=0;k&lt;n;k++)
+  {
+    i = std::rand()%image.rows;
+    j = std::rand()%image.cols;
+    if(image.type()==CV_8UC1)
+      image.at&lt;uchar&gt;(i,j) = 255;
+    else if(image.type()==CV_8UC3)
+    {
+      //cv::Vec3b表示三个8位的数值
+      image.at&lt;cv::Vec3b&gt;(i,j)[0] = 255;
+      image.at&lt;cv::Vec3b&gt;(i,j)[1] = 255;
+      image.at&lt;cv::Vec3b&gt;(i,j)[2] = 255;
+    }
+  }
+}
+
+int main()
+{
+  cv::Mat image = cv::imread(&quot;/home/ottsion/Pictures/opencvImage/hua.jpg&quot;);
+  salt(image, 3000);
+  
+  cv::namedWindow(&quot;image after salt&quot;);
+  cv::imshow(&quot;image after salt&quot;, image);
+  cv::waitKey(0);
+  
+}
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/opencv/2017-01-10 17:10:51屏幕截图.png" data-sizes="auto" alt="效果图" title="xiaoguotu" class="lazyload"><figcaption class="image-caption">效果图</figcaption></figure></p>
+
+<h2 id="代码演示减色函数">代码演示减色函数</h2>
+
+<pre><code>void colorReduce(cv::Mat image,int div)
+{
+  int nl = image.rows;
+  int nc = image.channels()*image.cols;
+  for(int i=0;i&lt;nl;i++)
+  {
+    uchar* data = image.ptr&lt;uchar&gt;(i);
+    for(int j=0;j&lt;nc;j++)
+    {
+      data[j] = data[j]/div*div+div/2;
+    }
+  }
+  cv::namedWindow(&quot;image after colorReduce&quot;);
+  cv::imshow(&quot;image after colorReduce&quot;, image);
+}
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/opencv/2017-01-10 17:46:00屏幕截图.png" data-sizes="auto" alt="效果图" title="xiaoguotu" class="lazyload"><figcaption class="image-caption">效果图</figcaption></figure></p>
+
+<h2 id="更有效的扫描方式">更有效的扫描方式：</h2>
+
+<pre><code>void colorReduce6(cv::Mat image, int div=64) {
+
+      int nl= image.rows; // number of lines
+      int nc= image.cols * image.channels(); // total number of elements per line
+
+      if (image.isContinuous())  {
+          // then no padded pixels
+          std::cout &lt;&lt; &quot;Image is continuous&quot; &lt;&lt; std::endl;
+          nc= nc*nl;
+          nl= 1;  // it is now a 1D array
+       }
+
+      int n= static_cast&lt;int&gt;(log(static_cast&lt;double&gt;(div))/log(2.0) + 0.5);
+      // mask used to round the pixel value
+      uchar mask= 0xFF&lt;&lt;n; // e.g. for div=16, mask= 0xF0
+
+      for (int j=0; j&lt;nl; j++) {
+
+          uchar* data= image.ptr&lt;uchar&gt;(j);
+
+          for (int i=0; i&lt;nc; i++) {
+
+            // process each pixel ---------------------
+
+            *data &amp;= mask;
+            *data++ += div&gt;&gt;1;
+
+            // end of pixel processing ----------------
+
+            } // end of line
+      }
+}
+</code></pre>
+
+<pre><code>void colorReduce7(cv::Mat image, int div=64) {
+
+      if (image.isContinuous()) {
+        // no padded pixels
+        image.reshape(1,   // new number of channels
+                      1) ; // new number of rows
+      }
+      // number of columns set accordingly
+
+      int nl= image.rows; // number of lines
+      int nc= image.cols*image.channels() ; // number of columns
+
+      int n= static_cast&lt;int&gt;(log(static_cast&lt;double&gt;(div))/log(2.0) + 0.5);
+      // mask used to round the pixel value
+      uchar mask= 0xFF&lt;&lt;n; // e.g. for div=16, mask= 0xF0
+
+      for (int j=0; j&lt;nl; j++) {
+
+          uchar* data= image.ptr&lt;uchar&gt;(j);
+
+          for (int i=0; i&lt;nc; i++) {
+
+            // process each pixel ---------------------
+
+            *data &amp;= mask;
+            *data++ += div&gt;&gt;1;
+
+            // end of pixel processing ----------------
+
+            } // end of line
+      }
+}
+
+</code></pre>
+
+<h2 id="迭代器的遍历">迭代器的遍历</h2>
+
+<p>共有两种方式：</p>
+
+<pre><code>  cv::Mat_&lt;cv::vec3b&gt;::iterator it = image.begin&lt;cv::Vec3b&gt;();
+
+  cv::MatIterator_&lt;cv::Vec3b&gt; it;
+</code></pre>
+
+<pre><code>void colorReduceByIt(cv::Mat image, int div)
+{
+  cv::Mat_&lt;cv::vec3b&gt;::iterator it = image.begin&lt;cv::Vec3b&gt;();
+  cv::Mat_&lt;cv::Vec3b&gt;::iterator itend = image.end&lt;cv::Vec3b&gt;();
+  for(; it!=itend; it++)
+  {
+    (*it)[0] = (*it)[0]/div*div+div/2;
+    (*it)[1] = (*it)[1]/div*div+div/2;
+    (*it)[2] = (*it)[2]/div*div+div/2;
+  }
+  cv::namedWindow(&quot;image after colorReduceByIt&quot;);
+  cv::imshow(&quot;image after colorReduceByIt&quot;, image);
+}
+</code></pre>
+
+<h2 id="锐化效果">锐化效果</h2>
+
+<pre><code>void sharpen(cv::Mat &amp;image, cv::Mat &amp;result)
+{
+  result.create(image.size(), image.type());
+  int nchannels = image.channels();
+  
+  for(int j=0;j&lt;image.rows-1;j++)
+  {
+    const uchar* previous = image.ptr&lt;const uchar&gt;(j-1);
+    const uchar* current = image.ptr&lt;const uchar&gt;(j);
+    const uchar* next = image.ptr&lt;const uchar&gt;(j+1);
+    
+    uchar *output = result.ptr&lt;uchar&gt;(j);
+    
+    for(int i=nchannels; i&lt;(image.cols-1)*nchannels; i++)
+    {
+      *output ++= cv::saturate_cast&lt;uchar&gt;(
+	5*current[i] - current[i-nchannels]-current[i+nchannels]-previous[i]-next[i]
+      );
+    }
+  }
+  
+  result.row(0).setTo(cv::Scalar(0));
+  result.row(result.rows-1).setTo(cv::Scalar(0));
+  result.col(0).setTo(cv::Scalar(0));
+  result.col(result.cols-1).setTo(cv::Scalar(0));
+  cv::namedWindow(&quot;image after sharpen&quot;);
+  cv::imshow(&quot;image after sharpen&quot;, image);
+}
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-src="../../../pic/mybolg_pic/opencv/2017-01-10 19:29:11屏幕截图.png" data-sizes="auto" alt="效果图" title="xiaoguotu" class="lazyload"><figcaption class="image-caption">效果图</figcaption></figure></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                    #opencv,图像处理</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-07-cmake-2/" class="prev" rel="prev" title=" cmake实践学习 （2）"><i class="iconfont icon-left"></i>&nbsp; cmake实践学习 （2）</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-6/" class="next" rel="next" title="opencv视觉编程学习第五部分代码">opencv视觉编程学习第五部分代码&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

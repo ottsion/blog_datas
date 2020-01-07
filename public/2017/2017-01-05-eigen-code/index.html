@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-05-eigen-use-3/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-07-cmake-4/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-05-eigen-code/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Eigen矩阵库——代码演示 | 静心明志
+       
+  </title>
+  <meta name="title" content="Eigen矩阵库——代码演示 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Eigen矩阵库——代码演示",
+    "headline" : "Eigen矩阵库——代码演示",
+    "description" : "星期四, 05. 一月 2017 02:13下午\n 有关eigen库的一些基本使用方法\n 矩阵、向量初始化 #include \x26lt;iostream\x26gt; #include \x26quot;Eigen\/Dense\x26quot; using namespace Eigen; int main() { MatrixXf m1(3,4); \/\/动态矩阵，建立3行4列。 MatrixXf m2(4,3); \/\/4行3列，依此类推。 MatrixXf m3(3,3); Vector3f v1; \/\/若是静态数组，则不用指定行或者列 \/* 初始化 *\/ Matrix3d m = Matrix3d::Random(); m1 = MatrixXf::Zero(3,4); \/\/用0矩阵初始化,要指定行列数 m2 = MatrixXf::Zero(4,3); m3 = MatrixXf::Identity(3,3); \/\/用单位矩阵初始化 v1 = Vector3f::Zero(); \/\/同理，若是静态的，不用指定行列数 m1 \x26lt;\x26lt; 1,0,0,1, \/\/也可以以这种方式初始化 1,5,0,1, 0,0,9,1; m2 \x26lt;\x26lt; 1,0,0, 0,4,0, 0,0,7, 1,1,1; \/\/向量初始化，与矩阵类似 Vector3d v3(1,2,3); VectorXf vx(30); }  C\x2b\x2b数组和矩阵转换 使用Map函数，可以实现Eigen的矩阵和c\x2b\x2b中的数组直接转换,语法如下：",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-05 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-05 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-05-eigen-code\/",
+    "wordCount" : "593",
+    "keywords" : [ "eigen", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Eigen矩阵库——代码演示</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-05 itemprop="datePublished">January 5, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>星期四, 05. 一月 2017 02:13下午</p>
+
+<hr />
+
+<blockquote>
+<p>有关eigen库的一些基本使用方法</p>
+</blockquote>
+
+<hr />
+
+<h2 id="矩阵-向量初始化">矩阵、向量初始化</h2>
+
+<pre><code>#include &lt;iostream&gt;
+#include &quot;Eigen/Dense&quot;
+using namespace Eigen;
+int main()
+{
+    MatrixXf m1(3,4);   //动态矩阵，建立3行4列。
+    MatrixXf m2(4,3);   //4行3列，依此类推。
+    MatrixXf m3(3,3);
+
+    Vector3f v1;        //若是静态数组，则不用指定行或者列
+    /* 初始化 */
+    Matrix3d m = Matrix3d::Random();
+    m1 = MatrixXf::Zero(3,4);       //用0矩阵初始化,要指定行列数
+    m2 = MatrixXf::Zero(4,3);
+    m3 = MatrixXf::Identity(3,3);   //用单位矩阵初始化
+    v1 = Vector3f::Zero();          //同理，若是静态的，不用指定行列数
+
+    m1 &lt;&lt; 1,0,0,1,      //也可以以这种方式初始化
+        1,5,0,1,
+        0,0,9,1;
+    m2 &lt;&lt; 1,0,0,
+        0,4,0,
+        0,0,7,
+        1,1,1;
+    //向量初始化，与矩阵类似
+    Vector3d v3(1,2,3);
+    VectorXf vx(30);
+}
+</code></pre>
+
+<h2 id="c-数组和矩阵转换">C++数组和矩阵转换</h2>
+
+<p>使用Map函数，可以实现Eigen的矩阵和c++中的数组直接转换,语法如下：</p>
+
+<pre><code>//@param MatrixType 矩阵类型
+//@param MapOptions 可选参数，指的是指针是否对齐，Aligned, or Unaligned. The default is Unaligned.
+//@param StrideType 可选参数，步长
+/*
+    Map&lt;typename MatrixType,
+        int MapOptions,
+        typename StrideType&gt;
+*/
+    int i;
+    //数组转矩阵
+    double *aMat = new double[20];
+    for(i =0;i&lt;20;i++)
+    {
+        aMat[i] = rand()%11;
+    }
+    //静态矩阵，编译时确定维数 Matrix&lt;double,4,5&gt; 
+    Eigen:Map&lt;Matrix&lt;double,4,5&gt; &gt; staMat(aMat);
+
+
+    //输出
+    for (int i = 0; i &lt; staMat.size(); i++)
+        std::cout &lt;&lt; *(staMat.data() + i) &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+
+
+    //动态矩阵，运行时确定 MatrixXd
+    Map&lt;MatrixXd&gt; dymMat(aMat,4,5);
+
+
+    //输出，应该和上面一致
+    for (int i = 0; i &lt; dymMat.size(); i++)
+        std::cout &lt;&lt; *(dymMat.data() + i) &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; std::endl &lt;&lt; std::endl;
+
+    //Matrix中的数据存在一维数组中，默认是行优先的格式，即一行行的存
+    //data()返回Matrix中的指针
+    dymMat.data();
+</code></pre>
+
+<h2 id="矩阵基础操作">矩阵基础操作</h2>
+
+<p>eigen重载了基础的+ - * / += -= = /= 可以表示标量和矩阵或者矩阵和矩阵</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;Eigen/Dense&gt;
+using namespace Eigen;
+int main()
+{
+    //单个取值，单个赋值
+    double value00 = staMat(0,0);
+    double value10 = staMat(1,0);
+    staMat(0,0) = 100;
+    std::cout &lt;&lt; value00 &lt;&lt;value10&lt;&lt;std::endl;
+    std::cout &lt;&lt;staMat&lt;&lt;std::endl&lt;&lt;std::endl;
+    //加减乘除示例 Matrix2d 等同于 Matrix&lt;double,2,2&gt;
+    Matrix2d a;
+     a &lt;&lt; 1, 2,
+     3, 4;
+    MatrixXd b(2,2);
+     b &lt;&lt; 2, 3,
+     1, 4;
+
+    Matrix2d c = a + b;
+    std::cout&lt;&lt; c&lt;&lt;std::endl&lt;&lt;std::endl;
+
+    c = a - b;
+    std::cout&lt;&lt;c&lt;&lt;std::endl&lt;&lt;std::endl;
+
+    c = a * 2;
+    std::cout&lt;&lt;c&lt;&lt;std::endl&lt;&lt;std::endl;
+
+    c = 2.5 * a;
+    std::cout&lt;&lt;c&lt;&lt;std::endl&lt;&lt;std::endl;
+
+    c = a / 2;
+    std::cout&lt;&lt;c&lt;&lt;std::endl&lt;&lt;std::endl;
+
+    c = a * b;
+    std::cout&lt;&lt;c&lt;&lt;std::endl&lt;&lt;std::endl;
+</code></pre>
+
+<h2 id="点积和叉积">点积和叉积</h2>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;Eigen/Dense&gt;
+using namespace Eigen;
+using namespace std;
+int main()
+{
+    //点积、叉积(针对向量的)
+    Vector3d v(1,2,3);
+    Vector3d w(0,1,2);
+    std::cout&lt;&lt;v.dot(w)&lt;&lt;std::endl&lt;&lt;std::endl;
+    std::cout&lt;&lt;w.cross(v)&lt;&lt;std::endl&lt;&lt;std::endl;
+}
+*/
+</code></pre>
+
+<h2 id="转置-伴随-行列式-逆矩阵">转置、伴随、行列式、逆矩阵</h2>
+
+<p>小矩阵（4 * 4及以下）eigen会自动优化，默认采用LU分解，效率不高</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;Eigen/Dense&gt;
+using namespace std;
+using namespace Eigen;
+int main()
+{
+    Matrix2d c;
+     c &lt;&lt; 1, 2,
+     3, 4;
+    //转置、伴随
+    std::cout&lt;&lt;c&lt;&lt;std::endl&lt;&lt;std::endl;
+    std::cout&lt;&lt;&quot;转置\n&quot;&lt;&lt;c.transpose()&lt;&lt;std::endl&lt;&lt;std::endl;
+    std::cout&lt;&lt;&quot;伴随\n&quot;&lt;&lt;c.adjoint()&lt;&lt;std::endl&lt;&lt;std::endl;
+    //逆矩阵、行列式
+    std::cout &lt;&lt; &quot;行列式： &quot; &lt;&lt; c.determinant() &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;逆矩阵\n&quot; &lt;&lt; c.inverse() &lt;&lt; std::endl;
+}
+</code></pre>
+
+<h2 id="计算特征值和特征向量">计算特征值和特征向量</h2>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;Eigen/Dense&gt;
+using namespace std;
+using namespace Eigen;
+int main()
+{
+    //特征向量、特征值
+    std::cout &lt;&lt; &quot;Here is the matrix A:\n&quot; &lt;&lt; a &lt;&lt; std::endl;
+    SelfAdjointEigenSolver&lt;Matrix2d&gt; eigensolver(a);
+    if (eigensolver.info() != Success) abort();
+     std::cout &lt;&lt; &quot;特征值:\n&quot; &lt;&lt; eigensolver.eigenvalues() &lt;&lt; std::endl;
+     std::cout &lt;&lt; &quot;Here's a matrix whose columns are eigenvectors of A \n&quot;
+     &lt;&lt; &quot;corresponding to these eigenvalues:\n&quot;
+     &lt;&lt; eigensolver.eigenvectors() &lt;&lt; std::endl;
+}
+</code></pre>
+
+<h2 id="解线性方程">解线性方程</h2>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;Eigen/Dense&gt;
+using namespace std;
+using namespace Eigen;
+int main()
+{
+    //线性方程求解 Ax =B;
+    Matrix4d A;
+    A &lt;&lt; 2,-1,-1,1,
+        1,1,-2,1,
+        4,-6,2,-2,
+        3,6,-9,7;
+
+    Vector4d B(2,4,4,9);
+
+    Vector4d x = A.colPivHouseholderQr().solve(B);
+    Vector4d x2 = A.llt().solve(B);
+    Vector4d x3 = A.ldlt().solve(B);    
+
+
+    std::cout &lt;&lt; &quot;The solution is:\n&quot; &lt;&lt; x &lt;&lt;&quot;\n\n&quot;&lt;&lt;x2&lt;&lt;&quot;\n\n&quot;&lt;&lt;x3 &lt;&lt;std::endl;
+}
+</code></pre>
+
+<p>除了<code>colPivHouseholderQr</code>、<code>LLT</code>、<code>LDLT</code>，还有以下的函数可以求解线性方程组，请注意精度和速度： 解小矩阵（4*4）基本没有速度差别</p>
+
+<h2 id="最小二乘求解">最小二乘求解</h2>
+
+<p>最小二乘求解有两种方式，jacobiSvd或者colPivHouseholderQr，4*4以下的小矩阵速度没有区别，jacobiSvd可能更快，大矩阵最好用colPivHouseholderQr</p>
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;Eigen/Dense&gt;
+using namespace std;
+using namespace Eigen;
+int main()
+{
+    MatrixXf A1 = MatrixXf::Random(3, 2);
+    std::cout &lt;&lt; &quot;Here is the matrix A:\n&quot; &lt;&lt; A1 &lt;&lt; std::endl;
+    VectorXf b1 = VectorXf::Random(3);
+    std::cout &lt;&lt; &quot;Here is the right hand side b:\n&quot; &lt;&lt; b1 &lt;&lt; std::endl;
+    //jacobiSvd 方式:Slow (but fast for small matrices)
+    std::cout &lt;&lt; &quot;The least-squares solution is:\n&quot;
+    &lt;&lt; A1.jacobiSvd(ComputeThinU | ComputeThinV).solve(b1) &lt;&lt; std::endl;
+    //colPivHouseholderQr方法:fast
+    std::cout &lt;&lt; &quot;The least-squares solution is:\n&quot;
+    &lt;&lt; A1.colPivHouseholderQr().solve(b1) &lt;&lt; std::endl;
+}
+</code></pre>
+
+<h2 id="稀疏矩阵">稀疏矩阵</h2>
+
+<p>稀疏矩阵的头文件包括：</p>
+
+<pre><code>  #include &lt;Eigen/SparseCore&gt;
+  #include &lt;Eigen/SparseCholesky&gt;
+  #include &lt;Eigen/IterativeLinearSolvers&gt;
+  #include &lt;Eigen/Sparse&gt;
+</code></pre>
+
+<p>初始化有两种方式：
+ 1. 使用三元组插入</p>
+
+<pre><code>typedef Eigen::Triplet&lt;double&gt; T;
+std::vector&lt;T&gt; tripletList;
+triplets.reserve(estimation_of_entries); //estimation_of_entries是预估的条目
+for(...)
+{
+    tripletList.push_back(T(i,j,v_ij));//第 i,j个有值的位置的值
+}
+SparseMatrixType mat(rows,cols);
+mat.setFromTriplets(tripletList.begin(), tripletList.end());
+// mat is ready to go!
+</code></pre>
+
+<ol>
+<li><p>直接将已知的非0值插入</p>
+
+<pre><code>SparseMatrix&lt;double&gt; mat(rows,cols);
+mat.reserve(VectorXi::Constant(cols,6));
+for(...)
+{
+// i,j 个非零值 v_ij != 0
+mat.insert(i,j) = v_ij;
+}
+mat.makeCompressed(); // optional
+</code></pre></li>
+</ol>
+
+<p>稀疏矩阵支持大部分一元和二元运算:</p>
+
+<pre><code>sm1.real() sm1.imag() -sm1 0.5*sm1 
+sm1+sm2 sm1-sm2 sm1.cwiseProduct(sm2) 
+</code></pre>
+
+<p>二元运算中，稀疏矩阵和普通矩阵可以混合使用</p>
+
+<p>//dm表示普通矩阵
+<code>dm2 = sm1 + dm1;</code>
+也支持计算转置矩阵和伴随矩阵</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-05-eigen-code/>https://ottsion.github.io/2017/2017-01-05-eigen-code/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/eigen/">
+                    #eigen</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-05-eigen-use-3/" class="prev" rel="prev" title="Eigen矩阵库——初步用法（三）"><i class="iconfont icon-left"></i>&nbsp;Eigen矩阵库——初步用法（三）</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-07-cmake-4/" class="next" rel="next" title=" cmake实践学习 （4）"> cmake实践学习 （4）&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

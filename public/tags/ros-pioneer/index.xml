@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ros, pioneer on 静心明志</title>
+    <link>https://ottsion.github.io/tags/ros-pioneer/</link>
+    <description>Recent content in ros, pioneer on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Jun 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/ros-pioneer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>先锋机器人下gmapping测试运行</title>
+      <link>https://ottsion.github.io/2017/2017-06-25-ros-gmapping-slam-with-laser/</link>
+      <pubDate>Sun, 25 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-25-ros-gmapping-slam-with-laser/</guid>
+      <description>配置前期 这里是我的机器人和电脑环境安装步骤，以下激光slam测试前提是进行了先锋机器人使用手册 的所有包安装及运行测试
+下载gmapping包  sudo apt-get install ros-indigo-slam-gmapping  运行步骤  笔记本端启动
+roscore  远程ssh连接到机器人，启动机器人：
+ssh robot@pioneer rosrun rosaria ROSAria _port:=/dev/ttyS0   如果遇到权限问题参考上一篇：sudo chmod a+rw /dev/ttyS0
+ 启动激光数据，发送topic为/scan :
+rosrun lms1xx LMS1xx_node _host:=192.168.0.1   这里注意之前说过激光和机器人也是通过网线连接，各自有ip地址，所以我是在机器人端启动的激光指令。（先决条件是激光和机器人连接已经设置好，相关两者网络连接看先锋机器人使用手册）
+ 笔记本端启动gmapping程序：
+rosrun gmapping slam_gmapping scan:=scan   前面说过我的激光数据topic是/scan 。
+ 这里通过rviz查看效果：
+rosrun rviz rviz   选择添加/map 查看，topic选择/map ，选好fixed_frame 。
+如果出现状态错误，可能是因为你的激光与世界坐标间没有tf转换，可以添加启动：
+ &amp;lt;launch&amp;gt; &amp;lt;node pkg=&amp;quot;tf&amp;quot; type=&amp;quot;static_transform_publisher&amp;quot; name=&amp;quot;map_nav_broadcaster&amp;quot; args=&amp;quot;0 0 0 0 0 0 /base_link /laser 100&amp;quot; /&amp;gt; &amp;lt;/launch&amp;gt;   这时候我们可以启动让小车运动</description>
+    </item>
+    
+    <item>
+      <title>先锋机器人使用手册</title>
+      <link>https://ottsion.github.io/2017/2017-06-24-pioneer-laser/</link>
+      <pubDate>Sat, 24 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-24-pioneer-laser/</guid>
+      <description>先锋机器人使用手册 前期准备 我们这里说的环境是Ubuntu14.04，ROS-indigo版本，将pioneer机器人装入Ubuntu系统后用笔记本电脑实现控制。详细情况可以参考： ROS和pioneer ROS 。
+软件安装 安装Ubuntu  制作Ubuntu14.04 的U盘启动器后，记得找个含有$F_n$ 的键盘，使用快捷键进入机器人bios系统选择U盘启动。 如果是双系统记得安装过程中选择硬盘时为something else ，自己划分各盘容量。 选择实验室wifi链接，方便后期直接笔记本控制。  安装ROS 这里选用 indigo版本的ROS操作系，下面链接为官方安装地址，按照操作走完就可以了：官方地址
+安装完毕后强烈建议学习初步教程，大概是十几篇简短文章，学完后掌握基本ROS下开发方法，了解ROS构成：Tutorials
+安装ROSARIA ROSARIA 提供了一个移动机器人与ROS平台的接口，通过它你可以实现与机器人的互动，所以第一步学习就是要安装好它。
+ 其中需要在pioneer 官网 安装ARIA 2.9.1-Ubuntu 12.04.2 (precise) or later, amd 64-bit architecture 千万不要忘记了，这是驱动的底层实现，没有这个只安装ROSARIA是不行的。这个选择sudo dpkg -i 安装方式。最终文件安装在/usr/local/下面。  具体安装步骤可以参考：这里
+1) 创建工作空间，如果有了直接走 2). $ . /opt/ros/indigo/setup.bash $ mkdir -p ~/catkin_ws/src $ cd ~/catkin_ws/src $ catkin_init_workspace $ cd ~/catkin_ws $ catkin_make $ cd ~/catkin_ws/src 2) 安装rosaria包: $ git clone https://github.</description>
+    </item>
+    
+    <item>
+      <title> 先锋机器人在ROS上的安装</title>
+      <link>https://ottsion.github.io/2017/2017-06-22-pioneer-ros-setup/</link>
+      <pubDate>Thu, 22 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-22-pioneer-ros-setup/</guid>
+      <description>一. 安装Ubuntu 第一步首先需要给先锋机器人配置Ubuntu环境，这里选用Ubuntu14.04版本进行安装，安装步骤一般为：
+ 制作Ubuntu14.04的U盘启动器 进入先锋机器人BIOS界面设置U盘启动，这里我试了F2、Esc、F10、F12。。。。都没起作用，最后找了个带$F_n$ 的键盘，一通$F_n+Esc+shift+ctrl+Del+F12$ 结果进入了。。。具体不清楚哪个起作用了。 按照一般双系统做法进行了系统安装，记得选磁盘一定要选择other那个，别直接默认结果格式化了已有的磁盘。  官方
+二.安装ROS 安装原文：点击进入
+ Setup your sources.list Setup your computer to accept software from packages.ros.org.
+sudo sh -c &#39;echo &amp;quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&amp;quot; &amp;gt; /etc/apt/sources.list.d/ros-latest.list&#39;  Set up your keys
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116  Installation
+sudo apt-get update sudo apt-get install ros-indigo-desktop-full apt-cache search ros-indigo sudo rosdep init rosdep update echo &amp;quot;source /opt/ros/indigo/setup.bash&amp;quot; &amp;gt;&amp;gt; ~/.</description>
+    </item>
+    
+  </channel>
+</rss>

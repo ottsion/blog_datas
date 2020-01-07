@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-11-opencv-cookbook-7/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-logistic-regression/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-14-moveit-01/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           ROS moveit随便看看源码 | 静心明志
+       
+  </title>
+  <meta name="title" content="ROS moveit随便看看源码 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "ROS moveit随便看看源码",
+    "headline" : "ROS moveit随便看看源码",
+    "description" : "星期六, 14. 一月 2017 10:31上午\n 主要看看路径规划在moveit里到底咋作的\n  利用moveit进行机械臂路径规划很简单，利用 moveit_commander.move_group.MoveGroupCommander类即可， 类中有go方法和plan、execute两种选择，今天看一下深入plan里面到底怎么写。\n plan方法 def moveit_commander.move_group.MoveGroupCommander.plan ( self, joints = None )   Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) Definition at line 425 of file move_group.py.  进入代码发现写的是：\n def plan(self, joints = None): \x26quot;\x26quot;\x26quot; Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) \x26quot;\x26quot;\x26quot; if type(joints) is JointState: self.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-14 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-14 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-14-moveit-01\/",
+    "wordCount" : "1338",
+    "keywords" : [ "moveit", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">ROS moveit随便看看源码</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-14 itemprop="datePublished">January 14, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/ros/"> Ros </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<hr />
+
+<p>星期六, 14. 一月 2017 10:31上午</p>
+
+<blockquote>
+<p>主要看看路径规划在moveit里到底咋作的</p>
+</blockquote>
+
+<hr />
+
+<blockquote>
+<p>利用moveit进行机械臂路径规划很简单，利用
+moveit_commander.move_group.MoveGroupCommander类即可，
+类中有go方法和plan、execute两种选择，今天看一下深入plan里面到底怎么写。</p>
+</blockquote>
+
+<h2 id="plan方法">plan方法</h2>
+
+<pre><code>def moveit_commander.move_group.MoveGroupCommander.plan 	( 	  	self,
+		  	joints = None 
+	)
+</code></pre>
+
+<ul>
+<li>Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument)</li>
+<li>Definition at line 425 of file move_group.py.</li>
+</ul>
+
+<p>进入代码发现写的是：</p>
+
+<pre><code> def plan(self, joints = None):
+         &quot;&quot;&quot; Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) &quot;&quot;&quot;
+         if type(joints) is JointState:
+             self.set_joint_value_target(joints)
+
+         elif type(joints) is Pose:
+             self.set_pose_target(joints)
+
+         elif not joints == None:
+             try:
+                 self.set_joint_value_target(self.get_remembered_joint_values()[joints])
+             except:
+                 self.set_joint_value_target(joints)
+         plan = RobotTrajectory()
+         plan.deserialize(self._g.compute_plan())
+         return plan
+</code></pre>
+
+<p>发现最终运行的是<code>plan = RobotTrajectory()</code>来定义结果存放的变量，运行<code>plan.deserialize(self._g.compute_plan())</code>这条语句，应该就是他生成了路径，我们再看看这个函数<code>self._g.compute_plan()</code>：
+定义<code>self._g = _moveit_move_group_interface.MoveGroup(name, robot_description)</code>是这样的，也就是说路径规划是在<code>_moveit_move_group_interface</code>下的<code>MoveGroup</code>中生成的。
+接下来看看这里面是啥：
+只找到<code>moveit::planning_interface::MoveGroup</code>，却发现里面也有 <code>结构plan</code>,再深入看<code>结构plan</code>，里面是：</p>
+
+<pre><code>//The amount of time it took to generate the plan. 
+planning_time_  moveit::planning_interface::MoveGroup::Plan   double    
+//  The full starting state used for planning. 
+start_state_    moveit::planning_interface::MoveGroup::Plan   moveit_msgs::RobotState
+The trajectory of the robot (may not contain joints that are the same as for the start_state_) 
+trajectory_     moveit::planning_interface::MoveGroup::Plan   moveit_msgs::RobotTrajectory
+</code></pre>
+
+<p>写到这里突然理解，估计前面是python路线的，现在转到了c++路线，但是原理应该差不多。
+继续上面的<code>moveit::planning_interface::MoveGroup</code>，他的<a href="http://docs.ros.org/indigo/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1MoveGroup.html" rel="nofollow noreferrer" target="_blank">公共类</a>里我发现了设置目标点方法：</p>
+
+<ul>
+<li><p>Setting a joint state target (goal)</p>
+
+<pre><code>	There are 2 types of goal targets:
+	    a JointValueTarget (aka JointStateTarget) specifies an absolute value for each joint (angle for rotational joints or position for prismatic joints).
+	    a PoseTarget (Position, Orientation, or Pose) specifies the pose of one or more end effectors (and the planner can use any joint values that reaches the pose(s)).
+	Only one or the other is used for planning. Calling any of the set*JointValueTarget() functions sets the current goal target to the JointValueTarget. Calling any of the setPoseTarget(), setOrientationTarget(), setRPYTarget(), setPositionTarget() functions sets the current goal target to the Pose target.
+
+	bool 	setJointValueTarget (const std::vector&lt; double &gt; &amp;group_variable_values)
+	 	Set the JointValueTarget and use it for future planning requests.
+	bool 	setJointValueTarget (const std::map&lt; std::string, double &gt; &amp;variable_values)
+	 	Set the JointValueTarget and use it for future planning requests.
+	bool 	setJointValueTarget (const robot_state::RobotState &amp;robot_state)
+	 	Set the JointValueTarget and use it for future planning requests.
+	bool 	setJointValueTarget (const std::string &amp;joint_name, const std::vector&lt; double &gt; &amp;values)
+	 	Set the JointValueTarget and use it for future planning requests.
+	bool 	setJointValueTarget (const std::string &amp;joint_name, double value)
+	 	Set the JointValueTarget and use it for future planning requests.
+	bool 	setJointValueTarget (const sensor_msgs::JointState &amp;state)
+	 	Set the JointValueTarget and use it for future planning requests.
+	bool 	setJointValueTarget (const geometry_msgs::Pose &amp;eef_pose, const std::string &amp;end_effector_link=&quot;&quot;)
+	 	Set the joint state goal for a particular joint by computing IK.
+	bool 	setJointValueTarget (const geometry_msgs::PoseStamped &amp;eef_pose, const std::string &amp;end_effector_link=&quot;&quot;)
+	 	Set the joint state goal for a particular joint by computing IK.
+	bool 	setJointValueTarget (const Eigen::Affine3d &amp;eef_pose, const std::string &amp;end_effector_link=&quot;&quot;)
+	 	Set the joint state goal for a particular joint by computing IK.
+	bool 	setApproximateJointValueTarget (const geometry_msgs::Pose &amp;eef_pose, const std::string &amp;end_effector_link=&quot;&quot;)
+	 	Set the joint state goal for a particular joint by computing IK.
+	bool 	setApproximateJointValueTarget (const geometry_msgs::PoseStamped &amp;eef_pose, const std::string &amp;end_effector_link=&quot;&quot;)
+	 	Set the joint state goal for a particular joint by computing IK.
+	bool 	setApproximateJointValueTarget (const Eigen::Affine3d &amp;eef_pose, const std::string &amp;end_effector_link=&quot;&quot;)
+	 	Set the joint state goal for a particular joint by computing IK.
+	void 	setRandomTarget ()
+	 	Set the joint state goal to a random joint configuration.
+	bool 	setNamedTarget (const std::string &amp;name)
+	 	Set the current joint values to be ones previously remembered by rememberJointValues() or, if not found, that are specified in the SRDF under the name name as a group state.
+	const robot_state::RobotState &amp; 	getJointValueTarget () const
+	 	Get the currently set joint state goal. 
+
+</code></pre></li>
+</ul>
+
+<hr />
+
+<ul>
+<li>Setting a pose target (goal)</li>
+</ul>
+
+<p>Setting a Pose (or Position or Orientation) target disables any previously set JointValueTarget.
+For groups that have multiple end effectors, a pose can be set for each end effector in the group. End effectors which do not have a pose target set will end up in arbitrary positions.</p>
+
+<hr />
+
+<ul>
+<li><p>Planning a path from the start position to the Target (goal) position, and executing that plan.</p>
+
+<pre><code>	Planning a path from the start position to the Target (goal) position, and executing that plan.
+	
+	MoveItErrorCode 	asyncMove ()
+	 	Plan and execute a trajectory that takes the group of joints declared in the constructor to the specified target. This call is not blocking (does not wait for the execution of the trajectory to complete).
+	MoveItErrorCode 	move ()
+	 	Plan and execute a trajectory that takes the group of joints declared in the constructor to the specified target. This call is always blocking (waits for the execution of the trajectory to complete) and requires an asynchronous spinner to be started.
+	MoveItErrorCode 	plan (Plan &amp;plan)
+	 	Compute a motion plan that takes the group declared in the constructor from the current state to the specified target. No execution is performed. The resulting plan is stored in plan.
+	MoveItErrorCode 	asyncExecute (const Plan &amp;plan)
+	 	Given a plan, execute it without waiting for completion. Return true on success.
+	MoveItErrorCode 	execute (const Plan &amp;plan)
+	 	Given a plan, execute it while waiting for completion. Return true on success.
+	double 	computeCartesianPath (const std::vector&lt; geometry_msgs::Pose &gt; &amp;waypoints, double eef_step, double jump_threshold, moveit_msgs::RobotTrajectory &amp;trajectory, bool avoid_collisions=true, moveit_msgs::MoveItErrorCodes *error_code=NULL)
+	 	Compute a Cartesian path that follows specified waypoints with a step size of at most eef_step meters between end effector configurations of consecutive points in the result trajectory. The reference frame for the waypoints is that specified by setPoseReferenceFrame(). No more than jump_threshold is allowed as change in distance in the configuration space of the robot (this is to prevent 'jumps' in IK solutions). Collisions are avoided if avoid_collisions is set to true. If collisions cannot be avoided, the function fails. Return a value that is between 0.0 and 1.0 indicating the fraction of the path achieved as described by the waypoints. Return -1.0 in case of error.
+	void 	stop ()
+	 	Stop any trajectory execution, if one is active.
+	void 	allowLooking (bool flag)
+	 	Specify whether the robot is allowed to look around before moving if it determines it should (default is true)
+	void 	allowReplanning (bool flag)
+	 	Specify whether the robot is allowed to replan if it detects changes in the environment. 
+</code></pre></li>
+
+<li><p>Query current robot state</p></li>
+
+<li><p>Manage named joint configurations</p></li>
+
+<li><p>Manage planning constraints</p></li>
+</ul>
+
+<p>从上面的代码中可以看到具体的路径规划函数<code>MoveItErrorCode    plan (Plan &amp;plan)</code> ,进入代码看到：</p>
+
+<pre><code>    moveit::planning_interface::MoveItErrorCode     moveit::planning_interface::MoveGroup::plan(Plan &amp;plan)
+    {
+         return impl_-&gt;plan(plan);
+    }
+</code></pre>
+
+<p>其具体是有<code>MoveGroupImpl *   impl_</code>来实现的，继续挖掘<code>moveit::planning_interface::MoveGroup::MoveGroupImpl</code><a href="http://docs.ros.org/indigo/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1MoveGroup_1_1MoveGroupImpl.html" rel="nofollow noreferrer" target="_blank">类</a>往下看：</p>
+
+<pre><code>MoveItErrorCode     move (bool wait)
+    MoveGroupImpl (const Options &amp;opt, const boost::shared_ptr&lt; tf::Transformer &gt; &amp;tf, const ros::Duration &amp;wait_for_server)
+MoveItErrorCode     pick (const std::string &amp;object, const std::vector&lt; moveit_msgs::Grasp &gt; &amp;grasps)
+MoveItErrorCode     place (const std::string &amp;object, const std::vector&lt; geometry_msgs::PoseStamped &gt; &amp;poses)
+    Place an object at one of the specified possible locations.
+MoveItErrorCode     place (const std::string &amp;object, const std::vector&lt; moveit_msgs::PlaceLocation &gt; &amp;locations)
+MoveItErrorCode     plan (Plan &amp;plan)
+</code></pre>
+
+<p>其还有私有属性<code>std::string     planner_id_</code>用来指定规划算法名。
+终于函数里面不是空的了，看到<code>plan</code>函数如下：</p>
+
+<pre><code> MoveItErrorCode plan(Plan &amp;plan)
+   {
+     if (!move_action_client_)
+     {
+       return MoveItErrorCode(moveit_msgs::MoveItErrorCodes::FAILURE);
+     }
+     if (!move_action_client_-&gt;isServerConnected())
+     {
+       return MoveItErrorCode(moveit_msgs::MoveItErrorCodes::FAILURE);
+     }
+
+     moveit_msgs::MoveGroupGoal goal;
+     constructGoal(goal);
+     goal.planning_options.plan_only = true;
+     goal.planning_options.look_around = false;
+     goal.planning_options.replan = false;
+     goal.planning_options.planning_scene_diff.is_diff = true;
+     goal.planning_options.planning_scene_diff.robot_state.is_diff = true;
+
+     move_action_client_-&gt;sendGoal(goal);
+     if (!move_action_client_-&gt;waitForResult())
+     {
+       ROS_INFO_STREAM(&quot;MoveGroup action returned early&quot;);
+     }
+     if (move_action_client_-&gt;getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+     {
+       plan.trajectory_ = move_action_client_-&gt;getResult()-&gt;planned_trajectory;
+       plan.start_state_ = move_action_client_-&gt;getResult()-&gt;trajectory_start;
+       plan.planning_time_ = move_action_client_-&gt;getResult()-&gt;planning_time;
+       return MoveItErrorCode(move_action_client_-&gt;getResult()-&gt;error_code);
+     }
+     else
+     {
+       ROS_WARN_STREAM(&quot;Fail: &quot; &lt;&lt; move_action_client_-&gt;getState().toString() &lt;&lt; &quot;: &quot; &lt;&lt; move_action_client_-&gt;getState().getText());
+       return MoveItErrorCode(move_action_client_-&gt;getResult()-&gt;error_code);
+     }
+    }
+</code></pre>
+
+<p>核心是：</p>
+
+<pre><code>move_action_client_-&gt;sendGoal(goal);
+move_action_client_-&gt;waitForResult();
+</code></pre>
+
+<p>也就是说通过action方式进行规划，继续&hellip;</p>
+
+<pre><code>boost::scoped_ptr&lt;actionlib::SimpleActionClient&lt;moveit_msgs::MoveGroupAction&gt; &gt; 
+    moveit::planning_interface::MoveGroup::MoveGroupImpl::move_action_client_ 
+</code></pre>
+
+<p>继续看<code>actionlib::SimpleActionClient&lt; ActionSpec &gt;</code>,<a href="http://docs.ros.org/indigo/api/actionlib/html/classactionlib_1_1SimpleActionClient.html" rel="nofollow noreferrer" target="_blank">来自这里</a></p>
+
+<p>消息类型<code>moveit_msgs::MoveGroupAction&gt;</code>；</p>
+
+<p>里面果然有：</p>
+
+<pre><code>void    cancelAllGoals ()
+    Cancel all goals currently running on the action server.
+void    cancelGoal ()
+    Cancel the goal that we are currently pursuing.
+void    cancelGoalsAtAndBeforeTime (const ros::Time &amp;time)
+    Cancel all goals that were stamped at and before the specified time.
+ResultConstPtr  getResult () const
+    Get the Result of the current goal.
+SimpleClientGoalState   getState () const
+    Get the state information for this goal.
+bool    isServerConnected () const
+    Checks if the action client is successfully connected to the action server.
+void    sendGoal (const Goal &amp;goal, SimpleDoneCallback done_cb=SimpleDoneCallback(), SimpleActiveCallback active_cb=SimpleActiveCallback(), SimpleFeedbackCallback feedback_cb=SimpleFeedbackCallback())
+    Sends a goal to the ActionServer, and also registers callbacks.
+SimpleClientGoalState   sendGoalAndWait (const Goal &amp;goal, const ros::Duration &amp;execute_timeout=ros::Duration(0, 0), const ros::Duration &amp;preempt_timeout=ros::Duration(0, 0))
+    Sends a goal to the ActionServer, and waits until the goal completes or a timeout is exceeded.
+    SimpleActionClient (const std::string &amp;name, bool spin_thread=true)
+    Simple constructor.
+    SimpleActionClient (ros::NodeHandle &amp;n, const std::string &amp;name, bool spin_thread=true)
+    Constructor with namespacing options.
+void    stopTrackingGoal ()
+    Stops tracking the state of the current goal. Unregisters this goal's callbacks.
+bool    waitForResult (const ros::Duration &amp;timeout=ros::Duration(0, 0))
+    Blocks until this goal finishes.
+bool    waitForServer (const ros::Duration &amp;timeout=ros::Duration(0, 0)) const
+    Waits for the ActionServer to connect to this client.
+    ~SimpleActionClient ()
+</code></pre>
+
+<p>其中<code>sendGoal (const Goal &amp;goal, SimpleDoneCallback done_cb=SimpleDoneCallback(), SimpleActiveCallback active_cb=SimpleActiveCallback(), SimpleFeedbackCallback feedback_cb=SimpleFeedbackCallback())</code>的函数主要意义是：
+    Sends a goal to the ActionServer, and also registers callbacks.
+查看simple_action_client.h：</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-14-moveit-01/>https://ottsion.github.io/2017/2017-01-14-moveit-01/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/moveit/">
+                    #moveit</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-11-opencv-cookbook-7/" class="prev" rel="prev" title="opencv视觉编程学习第七部分代码"><i class="iconfont icon-left"></i>&nbsp;opencv视觉编程学习第七部分代码</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-logistic-regression/" class="next" rel="next" title="逻辑回归">逻辑回归&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

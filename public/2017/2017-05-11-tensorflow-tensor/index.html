@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-dropout/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           tensorflow--tensor-变换 | 静心明志
+       
+  </title>
+  <meta name="title" content="tensorflow--tensor-变换 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "tensorflow--tensor-变换",
+    "headline" : "tensorflow--tensor-变换",
+    "description" : "来源：tensorflow学习笔记（二）：tensor 变换 矩阵操作\n#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算 tf.reduce_sum(a, 1） #对axis1 tf.reduce_mean(a,0) #每列均值  第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）\n#关于concat，可以用来进行降维 3D-\x26gt;2D , 2D-\x26gt;1D tf.concat(concat_dim, data) #arr = np.zeros([2,3,4,5,6]) In [6]: arr2.shape Out[6]: (2, 3, 4, 5) In [7]: np.concatenate(arr2, 0).shape Out[7]: (6, 4, 5) :(2*3, 4, 5) In [9]: np.concatenate(arr2, 1).shape Out[9]: (3, 8, 5) :(3, 2*4, 5) #tf.concat() t1 = [[1, 2, 3], [4, 5, 6]] t2 = [[7, 8, 9], [10, 11, 12]] # 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成 #shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1 #tensor[2:,:]是之前的t2 tf.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-tensorflow-tensor\/",
+    "wordCount" : "476",
+    "keywords" : [ "DL, tensor", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">tensorflow--tensor-变换</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"> 深度学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>来源：<a href="http://blog.csdn.net/u012436149/article/details/52871772" rel="nofollow noreferrer" target="_blank">tensorflow学习笔记（二）：tensor 变换</a>
+矩阵操作</p>
+
+<pre><code>#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算
+tf.reduce_sum(a, 1） #对axis1
+tf.reduce_mean(a,0) #每列均值
+</code></pre>
+
+<p>第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）</p>
+
+<pre><code>#关于concat，可以用来进行降维 3D-&gt;2D , 2D-&gt;1D
+tf.concat(concat_dim, data)
+#arr = np.zeros([2,3,4,5,6])
+In [6]: arr2.shape
+Out[6]: (2, 3, 4, 5)
+In [7]: np.concatenate(arr2, 0).shape
+Out[7]: (6, 4, 5)   :(2*3, 4, 5)
+In [9]: np.concatenate(arr2, 1).shape
+Out[9]: (3, 8, 5)   :(3, 2*4, 5)
+#tf.concat()
+t1 = [[1, 2, 3], [4, 5, 6]]
+t2 = [[7, 8, 9], [10, 11, 12]]
+# 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成
+#shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1
+#tensor[2:,:]是之前的t2
+tf.concat(0, [t1, t2]) ==&gt; [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+
+# 将t1, t2进行concat，axis为1，等价于将shape=[2, 2, 3]的Tensor concat成
+#shape=[2, 6]的tensor。在新生成的Tensor中tensor[:,:3]代表之前的t1
+#tensor[:,3:]是之前的t2
+tf.concat(1, [t1, t2]) ==&gt; [[1, 2, 3, 7, 8, 9], [4, 5, 6, 10, 11, 12]]
+</code></pre>
+
+<p>concat是将list中的向量给连接起来，axis表示将那维的数据连接起来，而其他维的结构保持不变</p>
+
+<pre><code>#squeeze 降维 维度为1的降掉
+tf.squeeze(arr, [])
+降维， 将维度为1 的降掉
+arr = tf.Variable(tf.truncated_normal([3,4,1,6,1], stddev=0.1))
+arr2 = tf.squeeze(arr, [2,4])
+arr3 = tf.squeeze(arr) #降掉所以是1的维
+
+#split
+tf.split(split_dim, num_split, value, name='split')
+# 'value' is a tensor with shape [5, 30]
+# Split 'value' into 3 tensors along dimension 1
+split0, split1, split2 = tf.split(1, 3, value)
+tf.shape(split0) ==&gt; [5, 10]
+
+#embedding
+mat = np.array([1,2,3,4,5,6,7,8,9]).reshape((3,-1))
+ids = [[1,2], [0,1]]
+res = tf.nn.embedding_lookup(mat, ids)
+res.eval()
+array([[[4, 5, 6],
+        [7, 8, 9]],
+
+       [[1, 2, 3],
+        [4, 5, 6]]])
+
+#扩展维度，如果想用广播特性的话，经常会用到这个函数
+# 't' is a tensor of shape [2]
+#一次扩展一维
+shape(tf.expand_dims(t, 0)) ==&gt; [1, 2]
+shape(tf.expand_dims(t, 1)) ==&gt; [2, 1]
+shape(tf.expand_dims(t, -1)) ==&gt; [2, 1]
+# 't2' is a tensor of shape [2, 3, 5]
+shape(tf.expand_dims(t2, 0)) ==&gt; [1, 2, 3, 5]
+shape(tf.expand_dims(t2, 2)) ==&gt; [2, 3, 1, 5]
+shape(tf.expand_dims(t2, 3)) ==&gt; [2, 3, 5, 1]
+</code></pre>
+
+<p>tf.slice()</p>
+
+<pre><code>tf.slice(input_, begin, size, name=None)
+</code></pre>
+
+<p> 先看例子</p>
+
+<pre><code>import tensorflow as tf
+import numpy as np
+sess = tf.InteractiveSession()
+a = np.array([[1,2,3,4,5],[4,5,6,7,8],[9,10,11,12,13]])
+tf.slice(a,[1,2],[-1,2]).eval()
+
+#array([[ 6,  7],
+#       [11, 12]])
+</code></pre>
+
+<p>理解tf.slice()最好是从返回值上去理解，现在假设input的shape是[a1, a2,a3], begin的值是[b1, b2, b3],size的值是[s1, s2, s3],那么tf.slice()返回的值就是 input[b1:b1+s1, b2:b2+s2, b3:b3+s3]。 如果 si=−1，那么 返回值就是 input[b1:b1+s1,&hellip;, bi: ,&hellip;]</p>
+
+<p><strong>注意：input[1:2] 取不到input[2]</strong>
+tf.stack()
+tf.stack(values, axis=0, name=’stack’)
+将 a list of R 维的Tensor堆成 R+1维的Tensor。 Given a list of length N of tensors of shape (A, B, C); if axis == 0 then the output tensor will have the shape (N, A, B, C)这时 res[i,:,:,:] 就是原 list中的第 i 个 tensor. if axis == 1 then the output tensor will have the shape (A, N, B, C).这时 res[:,i,:,:] 就是原list中的第 i 个 tensor</p>
+
+<p>Etc.</p>
+
+<pre><code># 'x' is [1, 4]
+# 'y' is [2, 5]
+# 'z' is [3, 6]
+stack([x, y, z]) =&gt; [[1, 4], [2, 5], [3, 6]]  # Pack along first dim.
+stack([x, y, z], axis=1) =&gt; [[1, 2, 3], [4, 5, 6]]
+</code></pre>
+
+<p>tf.gather()</p>
+
+<pre><code>tf.gather(params, indices, validate_indices=None, name=None)
+</code></pre>
+
+<p>indices must be an integer tensor of any dimension (usually 0-D or 1-D). Produces an output tensor with shape indices.shape + params.shape[1:]</p>
+
+<pre><code># Scalar indices, 会降维
+output[:, ..., :] = params[indices, :, ... :]
+
+# Vector indices
+output[i, :, ..., :] = params[indices[i], :, ... :]
+
+# Higher rank indices，会升维
+output[i, ..., j, :, ... :] = params[indices[i, ..., j], :, ..., :]
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/dl-tensor/">
+                    #DL, tensor</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/" class="prev" rel="prev" title="tensorflow--tensorboard"><i class="iconfont icon-left"></i>&nbsp;tensorflow--tensorboard</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-tensorflow-dropout/" class="next" rel="next" title="tensorflow--dropout">tensorflow--dropout&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

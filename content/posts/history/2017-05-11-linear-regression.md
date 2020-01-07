@@ -93,7 +93,7 @@ plt.show()
 ## 多项式回归 ##
 我们可以通过设计高阶特征在线性回归的基础上实现多项式回归。对于线性回归的hypothesis,
 ![](http://upload-images.jianshu.io/upload_images/1070582-dc5bc59068a9dc44.latex?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-令$ x2=x1^2, x3=x1^3 $,实现了一个3次多项式的回归：
+令$x2=x1^2,x3=x1^3$,实现了一个3次多项式的回归：
 ![](http://upload-images.jianshu.io/upload_images/1070582-c19a0861cca368f4.latex?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 这也是用线性模型实现非线性的常用方法。这种方式能够拟合出非线性的超平面，有时候表现出很好的特性
 ```

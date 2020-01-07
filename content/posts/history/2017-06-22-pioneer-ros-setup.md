@@ -14,7 +14,7 @@ tags: ["ros, pioneer"]
 第一步首先需要给先锋机器人配置Ubuntu环境，这里选用Ubuntu14.04版本进行安装，安装步骤一般为：
 
 1. 制作Ubuntu14.04的U盘启动器
-2. 进入先锋机器人BIOS界面设置U盘启动，这里我试了F2、Esc、F10、F12。。。。都没起作用，最后找了个带$F_n$ 的键盘，一通$F_n+Esc+shift+ctrl+Del+F12$  结果进入了。。。具体不清楚哪个起作用了。
+2.进入先锋机器人BIOS界面设置U盘启动，这里我试了F2、Esc、F10、F12。。。。都没起作用，最后找了个带$F_n$的键盘，一通$F_n+Esc+shift+ctrl+Del+F12$结果进入了。。。具体不清楚哪个起作用了。
 3. 按照一般双系统做法进行了系统安装，记得选磁盘一定要选择other那个，别直接默认结果格式化了已有的磁盘。
 
 [官方](http://robots.mobilerobots.com/wiki/Reinstalling_Linux)
@@ -27,7 +27,7 @@ tags: ["ros, pioneer"]
   Setup your computer to accept software from packages.ros.org.
 
 ```
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudosh-c'echo"debhttp://packages.ros.org/ros/ubuntu$(lsb_release-sc)main">/etc/apt/sources.list.d/ros-latest.list'
 ```
 
 2. Set up your keys

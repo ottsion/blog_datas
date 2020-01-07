@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-linear-regression/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-regularization/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-shengcheng-model-panding-model/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           生成模型与判别模型 | 静心明志
+       
+  </title>
+  <meta name="title" content="生成模型与判别模型 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "生成模型与判别模型",
+    "headline" : "生成模型与判别模型",
+    "description" : "来源： 生成模型与判别模型\n一、决策函数Y=f(X)或者条件概率分布P(Y|X)\n 监督学习的任务就是从数据中学习一个模型（也叫分类器），应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。\n 决策函数Y=f(X)：你输入一个X，它就输出一个Y，这个Y与一个阈值比较，根据比较结果判定X属于哪个类别。例如两类（w1和w2）分类问题，如果Y大于阈值，X就属于类w1，如果小于阈值就属于类w2。这样就得到了该X对应的类别了。\n 条件概率分布P(Y|X)：你输入一个X，它通过比较它属于所有类的概率，然后输出概率最大的那个作为该X对应的类别。例如：如果P(w1|X)大于P(w2|X)，那么我们就认为X是属于w1类的。\n 所以上面两个模型都可以实现对给定的输入X预测相应的输出Y的功能。实际上通过条件概率分布P(Y|X)进行预测也是隐含着表达成决策函数Y=f(X)的形式的。例如也是两类w1和w2，那么我们求得了P(w1|X)和P(w2|X)，那么实际上判别函数就可以表示为Y= P(w1|X)\/P(w2|X)，如果Y大于1或者某个阈值，那么X就属于类w1，如果小于阈值就属于类w2。而同样，很神奇的一件事是，实际上决策函数Y=f(X)也是隐含着使用P(Y|X)的。因为一般决策函数Y=f(X)是通过学习算法使你的预测和训练数据之间的误差平方最小化，而贝叶斯告诉我们，虽然它没有显式的运用贝叶斯或者以某种形式计算概率，但它实际上也是在隐含的输出极大似然假设（MAP假设）。也就是说学习器的任务是在所有假设模型有相等的先验概率条件下，输出极大似然假设。\n 所以呢，分类器的设计就是在给定训练数据的基础上估计其概率模型P(Y|X)。如果可以估计出来，那么就可以分类了。但是一般来说，概率模型是比较难估计的。给一堆数给你，特别是数不多的时候，你一般很难找到这些数满足什么规律吧。那能否不依赖概率模型直接设计分类器呢？事实上，分类器就是一个决策函数（或决策面），如果能够从要解决的问题和训练样本出发直接求出判别函数，就不用估计概率模型了，这就是决策函数Y=f(X)的伟大使命了。例如支持向量机，我已经知道它的决策函数（分类面）是线性的了，也就是可以表示成Y=f(X)=WX\x2bb的形式，那么我们通过训练样本来学习得到W和b的值就可以得到Y=f(X)了。还有一种更直接的分类方法，它不用事先设计分类器，而是只确定分类原则，根据已知样本（训练样本）直接对未知样本进行分类。包括近邻法，它不会在进行具体的预测之前求出概率模型P(Y|X)或者决策函数Y=f(X)，而是在真正预测的时候，将X与训练数据的各类的Xi比较，和哪些比较相似，就判断它X也属于Xi对应的类。\n 实际上，说了那么多，也不知道自己表达清楚了没有。那我们是谈生成模型和判别模型，上面到底啰嗦了那么多到底有啥阴谋啊？呵呵，往下说就知道了。\n 二、生成方法和判别方法\n 监督学习方法又分生成方法（Generative approach）和判别方法（Discriminative approach），所学到的模型分别称为生成模型（Generative Model）和判别模型（Discriminative Model）。咱们先谈判别方法，因为它和前面说的都差不多，比较容易明白。\n 判别方法：由数据直接学习决策函数Y=f(X)或者条件概率分布P(Y|X)作为预测的模型，即判别模型。基本思想是有限样本条件下建立判别函数，不考虑样本的产生模型，直接研究预测模型。典型的判别模型包括k近邻，感知级，决策树，支持向量机等。\n 生成方法：由数据学习联合概率密度分布P(X,Y)，然后求出条件概率分布P(Y|X)作为预测的模型，即生成模型：P(Y|X)= P(X,Y)\/ P(X)。基本思想是首先建立样本的联合概率概率密度模型P(X,Y)，然后再得到后验概率P(Y|X)，再利用它进行分类，就像上面说的那样。注意了哦，这里是先求出P(X,Y)才得到P(Y|X)的，然后这个过程还得先求出P(X)。P(X)就是你的训练数据的概率分布。哎，刚才说了，需要你的数据样本非常多的时候，你得到的P(X)才能很好的描述你数据真正的分布。例如你投硬币，你试了100次，得到正面的次数和你的试验次数的比可能是3\/10，然后你直觉告诉你，可能不对，然后你再试了500次，哎，这次正面的次数和你的试验次数的比可能就变成4\/10，这时候你半信半疑，不相信上帝还有一个手，所以你再试200000次，这时候正面的次数和你的试验次数的比（就可以当成是正面的概率了）就变成5\/10了。这时候，你就觉得很靠谱了，觉得自己就是那个上帝了。呵呵，真啰嗦，还差点离题了。\n 还有一个问题就是，在机器学习领域有个约定俗成的说法是：不要去学那些对这个任务没用的东西。例如，对于一个分类任务：对一个给定的输入x，将它划分到一个类y中。那么，如果我们用生成模型：p(x,y)=p(y|x).p(x)\n 那么，我们就需要去对p(x)建模，但这增加了我们的工作量，这让我们很不爽（除了上面说的那个估计得到P(X)可能不太准确外）。实际上，因为数据的稀疏性，导致我们都是被强迫地使用弱独立性假设去对p(x)建模的，所以就产生了局限性。所以我们更趋向于直观的使用判别模型去分类。\n 这样的方法之所以称为生成方法，是因为模型表示了给定输入X产生输出Y的生成关系。用于随机生成的观察值建模，特别是在给定某些隐藏参数情况下。典型的生成模型有：朴素贝叶斯和隐马尔科夫模型等。\n 三、生成模型和判别模型的优缺点\n 在监督学习中，两种方法各有优缺点，适合于不同条件的学习问题。\n 生成方法的特点：上面说到，生成方法学习联合概率密度分布P(X,Y)，所以就可以从统计的角度表示数据的分布情况，能够反映同类数据本身的相似度。但它不关心到底划分各类的那个分类边界在哪。生成方法可以还原出联合概率分布P(Y|X)，而判别方法不能。生成方法的学习收敛速度更快，即当样本容量增加的时候，学到的模型可以更快的收敛于真实模型，当存在隐变量时，仍可以用生成方法学习。此时判别方法就不能用。\n 判别方法的特点：判别方法直接学习的是决策函数Y=f(X)或者条件概率分布P(Y|X)。不能反映训练数据本身的特性。但它寻找不同类别之间的最优分类面，反映的是异类数据之间的差异。直接面对预测，往往学习的准确率更高。由于直接学习P(Y|X)或P(X)，可以对数据进行各种程度上的抽象、定义特征并使用特征，因此可以简化学习问题。\n 四、生成模型和判别模型的联系\n 由生成模型可以得到判别模型，但由判别模型得不到生成模型。\n 五、再形象点可以吗\n 例如我们有一个输入数据x，然后我们想将它分类为标签y。（迎面走过来一个人，你告诉我这个是男的还是女的）\n 生成模型学习联合概率分布p(x,y)，而判别模型学习条件概率分布p(y|x)。\n下面是个简单的例子：\n例如我们有以下(x,y)形式的数据：(1,0), (1,0), (2,0), (2, 1)\n那么p(x,y)是：\n y=0 y=1\n \x26mdash;\x26mdash;\x26mdash;\x26ndash;\n x=1 | 1\/2 0",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-shengcheng-model-panding-model\/",
+    "wordCount" : "71",
+    "keywords" : [ "ML", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">生成模型与判别模型</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>来源： <a href="http://blog.csdn.net/zouxy09/article/details/8195017" rel="nofollow noreferrer" target="_blank">生成模型与判别模型</a></p>
+
+<p><strong>一、决策函数Y=f(X)或者条件概率分布P(Y|X)</strong></p>
+
+<p>   监督学习的任务就是从数据中学习一个模型（也叫分类器），应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。</p>
+
+<p><strong>       决策函数Y=f(X)：</strong>你输入一个X，它就输出一个Y，这个Y与一个阈值比较，根据比较结果判定X属于哪个类别。例如两类（w1和w2）分类问题，如果Y大于阈值，X就属于类w1，如果小于阈值就属于类w2。这样就得到了该X对应的类别了。</p>
+
+<p><strong>       条件概率分布P(Y|X)：</strong>你输入一个X，它通过比较它属于所有类的概率，然后输出概率最大的那个作为该X对应的类别。例如：如果P(w1|X)大于P(w2|X)，那么我们就认为X是属于w1类的。</p>
+
+<p>   所以上面两个模型都可以实现对给定的输入X预测相应的输出Y的功能。实际上通过条件概率分布P(Y|X)进行预测也是隐含着表达成决策函数Y=f(X)的形式的。例如也是两类w1和w2，那么我们求得了P(w1|X)和P(w2|X)，那么实际上判别函数就可以表示为Y=
+ P(w1|X)/P(w2|X)，如果Y大于1或者某个阈值，那么X就属于类w1，如果小于阈值就属于类w2。而同样，很神奇的一件事是，实际上决策函数Y=f(X)也是隐含着使用P(Y|X)的。因为一般决策函数Y=f(X)是通过学习<a href="http://lib.csdn.net/base/datastructure" rel="nofollow noreferrer" target="_blank">算法</a>使你的预测和训练数据之间的误差平方最小化，而贝叶斯告诉我们，虽然它没有显式的运用贝叶斯或者以某种形式计算概率，但它实际上也是在隐含的输出极大似然假设（MAP假设）。也就是说学习器的任务是在所有假设模型有相等的先验概率条件下，输出极大似然假设。</p>
+
+<p>   所以呢，分类器的设计就是在给定训练数据的基础上估计其概率模型P(Y|X)。如果可以估计出来，那么就可以分类了。但是一般来说，概率模型是比较难估计的。给一堆数给你，特别是数不多的时候，你一般很难找到这些数满足什么规律吧。那能否不依赖概率模型直接设计分类器呢？事实上，分类器就是一个决策函数（或决策面），如果能够从要解决的问题和训练样本出发直接求出判别函数，就不用估计概率模型了，这就是决策函数Y=f(X)的伟大使命了。例如支持向量机，我已经知道它的决策函数（分类面）是线性的了，也就是可以表示成Y=f(X)=WX+b的形式，那么我们通过训练样本来学习得到W和b的值就可以得到Y=f(X)了。还有一种更直接的分类方法，它不用事先设计分类器，而是只确定分类原则，根据已知样本（训练样本）直接对未知样本进行分类。包括近邻法，它不会在进行具体的预测之前求出概率模型P(Y|X)或者决策函数Y=f(X)，而是在真正预测的时候，将X与训练数据的各类的Xi比较，和哪些比较相似，就判断它X也属于Xi对应的类。</p>
+
+<p>   实际上，说了那么多，也不知道自己表达清楚了没有。那我们是谈生成模型和判别模型，上面到底啰嗦了那么多到底有啥阴谋啊？呵呵，往下说就知道了。</p>
+
+<p> </p>
+
+<p><strong>二、生成方法和判别方法</strong></p>
+
+<p>   监督学习方法又分生成方法（Generative approach）和判别方法（Discriminative approach），所学到的模型分别称为生成模型（Generative Model）和判别模型（Discriminative Model）。咱们先谈判别方法，因为它和前面说的都差不多，比较容易明白。</p>
+
+<p><strong>       判别方法：</strong>由数据直接学习决策函数Y=f(X)或者条件概率分布P(Y|X)作为预测的模型，即判别模型。基本思想是有限样本条件下建立判别函数，不考虑样本的产生模型，直接研究预测模型。典型的判别模型包括k近邻，感知级，决策树，支持向量机等。</p>
+
+<p><strong>       生成方法：</strong>由数据学习联合概率密度分布P(X,Y)，然后求出条件概率分布P(Y|X)作为预测的模型，即生成模型：P(Y|X)= P(X,Y)/ P(X)。基本思想是首先建立样本的联合概率概率密度模型P(X,Y)，然后再得到后验概率P(Y|X)，再利用它进行分类，就像上面说的那样。注意了哦，这里是先求出P(X,Y)才得到P(Y|X)的，然后这个过程还得先求出P(X)。P(X)就是你的训练数据的概率分布。哎，刚才说了，需要你的数据样本非常多的时候，你得到的P(X)才能很好的描述你数据真正的分布。例如你投硬币，你试了100次，得到正面的次数和你的试验次数的比可能是3/10，然后你直觉告诉你，可能不对，然后你再试了500次，哎，这次正面的次数和你的试验次数的比可能就变成4/10，这时候你半信半疑，不相信上帝还有一个手，所以你再试200000次，这时候正面的次数和你的试验次数的比（就可以当成是正面的概率了）就变成5/10了。这时候，你就觉得很靠谱了，觉得自己就是那个上帝了。呵呵，真啰嗦，还差点离题了。</p>
+
+<p>   还有一个问题就是，在<a href="http://lib.csdn.net/base/machinelearning" rel="nofollow noreferrer" target="_blank">机器学习</a>领域有个约定俗成的说法是：不要去学那些对这个任务没用的东西。例如，对于一个分类任务：对一个给定的输入x，将它划分到一个类y中。那么，如果我们用生成模型：p(x,y)=p(y|x).p(x)</p>
+
+<p> 那么，我们就需要去对p(x)建模，但这增加了我们的工作量，这让我们很不爽（除了上面说的那个估计得到P(X)可能不太准确外）。实际上，因为数据的稀疏性，导致我们都是被强迫地使用弱独立性假设去对p(x)建模的，所以就产生了局限性。所以我们更趋向于直观的使用判别模型去分类。</p>
+
+<p>   这样的方法之所以称为生成方法，是因为模型表示了给定输入X产生输出Y的生成关系。用于随机生成的观察值建模，特别是在给定某些隐藏参数情况下。典型的生成模型有：朴素贝叶斯和隐马尔科夫模型等。</p>
+
+<p> </p>
+
+<p><strong>三、生成模型和判别模型的优缺点</strong></p>
+
+<p> 在监督学习中，两种方法各有优缺点，适合于不同条件的学习问题。</p>
+
+<p><strong>        生成方法的特点：</strong>上面说到，生成方法学习联合概率密度分布P(X,Y)，所以就可以从统计的角度表示数据的分布情况，能够反映同类数据本身的相似度。但它不关心到底划分各类的那个分类边界在哪。生成方法可以还原出联合概率分布P(Y|X)，而判别方法不能。生成方法的学习收敛速度更快，即当样本容量增加的时候，学到的模型可以更快的收敛于真实模型，当存在隐变量时，仍可以用生成方法学习。此时判别方法就不能用。</p>
+
+<p><strong>       判别方法的特点：</strong>判别方法直接学习的是决策函数Y=f(X)或者条件概率分布P(Y|X)。不能反映训练数据本身的特性。但它寻找不同类别之间的最优分类面，反映的是异类数据之间的差异。直接面对预测，往往学习的准确率更高。由于直接学习P(Y|X)或P(X)，可以对数据进行各种程度上的抽象、定义特征并使用特征，因此可以简化学习问题。</p>
+
+<p> </p>
+
+<p><strong>四、生成模型和判别模型的联系</strong></p>
+
+<p> 由生成模型可以得到判别模型，但由判别模型得不到生成模型。</p>
+
+<p> </p>
+
+<p><strong>五、再形象点可以吗</strong></p>
+
+<p>   例如我们有一个输入数据x，然后我们想将它分类为标签y。（迎面走过来一个人，你告诉我这个是男的还是女的）</p>
+
+<p> 生成模型学习联合概率分布p(x,y)，而判别模型学习条件概率分布p(y|x)。</p>
+
+<p>下面是个简单的例子：</p>
+
+<p>例如我们有以下(x,y)形式的数据：(1,0), (1,0), (2,0), (2, 1)</p>
+
+<p>那么p(x,y)是：</p>
+
+<p>                y=0   y=1</p>
+
+<p>               &mdash;&mdash;&mdash;&ndash;</p>
+
+<p>          x=1 | 1/2   0</p>
+
+<p>          x=2 | 1/4   <sup>1</sup>&frasl;<sub>4</sub></p>
+
+<p>而p(y|x) 是：</p>
+
+<p>               y=0   y=1</p>
+
+<p>               &mdash;&mdash;&mdash;&ndash;</p>
+
+<p>          x=1| 1     0</p>
+
+<p>          x=2| 1/2   <sup>1</sup>&frasl;<sub>2</sub></p>
+
+<p> 我们为了将一个样本x分类到一个类y，最自然的做法就是条件概率分布p(y|x)，这就是为什么我们对其直接求p(y|x)方法叫做判别算法。而生成算法求p(x,y)，而p(x,y)可以通过贝叶斯方法转化为p(y|x)，然后再用其分类。但是p(x,y)还有其他作用，例如，你可以用它去生成(x,y)对。</p>
+
+<p> </p>
+
+<p>   再假如你的任务是识别一个语音属于哪种语言。例如对面一个人走过来，和你说了一句话，你需要识别出她说的到底是汉语、英语还是法语等。那么你可以有两种方法达到这个目的：</p>
+
+<p>1、学习每一种语言，你花了大量精力把汉语、英语和法语等都学会了，我指的学会是你知道什么样的语音对应什么样的语言。然后再有人过来对你哄，你就可以知道他说的是什么语音，你就可以骂他是“米国人还是小日本了”。（呵呵，切勿将政治掺杂在技术里面）</p>
+
+<p>2、不去学习每一种语言，你只学习这些语言模型之间的差别，然后再分类。意思是指我学会了汉语和英语等语言的发音是有差别的，我学会这种差别就好了。</p>
+
+<p> 那么第一种方法就是生成方法，第二种方法是判别方法。</p>
+
+<p> </p>
+
+<p> 生成算法尝试去找到底这个数据是怎么生成的（产生的），然后再对一个信号进行分类。基于你的生成假设，那么那个类别最有可能产生这个信号，这个信号就属于那个类别。判别模型不关心数据是怎么生成的，它只关心信号之间的差别，然后用差别来简单对给定的一个信号进行分类。</p>
+
+<p> </p>
+
+<p><strong>六、对于跟踪算法</strong></p>
+
+<p>  跟踪算法一般来说可以分为两类：基于外观模型的生成模型或者基于外观模型的判别模型。</p>
+
+<p><strong>        生成模型：</strong>一般是学习一个代表目标的模型，然后通过它去搜索图像区域，然后最小化重构误差。类似于生成模型描述一个目标，然后就是模式匹配了，在图像中找到和这个模型最匹配的区域，就是目标了。</p>
+
+<p><strong>        判别模型：</strong>将跟踪问题看成一个二分类问题，然后找到目标和背景的决策边界。它不管目标是怎么描述的，那只要知道目标和背景的差别在哪，然后你给一个图像，它看它处于边界的那一边，就归为哪一类。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-shengcheng-model-panding-model/>https://ottsion.github.io/2017/2017-05-11-shengcheng-model-panding-model/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/ml/">
+                    #ML</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-linear-regression/" class="prev" rel="prev" title="线性回归"><i class="iconfont icon-left"></i>&nbsp;线性回归</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-regularization/" class="next" rel="next" title="正则化">正则化&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

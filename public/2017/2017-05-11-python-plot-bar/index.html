@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-dropout/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-mnist-digit-rec/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-python-plot-bar/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Python绘制精美图表之双柱形图 | 静心明志
+       
+  </title>
+  <meta name="title" content="Python绘制精美图表之双柱形图 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Python绘制精美图表之双柱形图",
+    "headline" : "Python绘制精美图表之双柱形图",
+    "description" : "#!\/usr\/bin\/env python # coding: utf-8 import matplotlib as mpl mpl.use(\x27Agg\x27) import matplotlib.pyplot as plt import numpy as np # 必须配置中文字体，否则会显示成方块 # 注意所有希望图表显示的中文必须为unicode格式 custom_font = mpl.font_manager.FontProperties(fname=\x27\/Library\/Fonts\/华文细黑.ttf\x27) font_size = 10 # 字体大小 fig_size = (8, 6) # 图表大小 names = (u\x27小明\x27, u\x27小红\x27) # 姓名 subjects = (u\x27语文\x27, u\x27数学\x27, u\x27英语\x27) # 科目 scores = ((65, 90, 75), (85, 80, 90)) # 成绩 # 更新字体大小 mpl.rcParams[\x27font.size\x27] = font_size # 更新图表大小 mpl.rcParams[\x27figure.figsize\x27] = fig_size # 设置柱形图宽度 bar_width = 0.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-python-plot-bar\/",
+    "wordCount" : "149",
+    "keywords" : [ "python", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Python绘制精美图表之双柱形图</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/python/"> python </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <pre><code>#!/usr/bin/env python
+# coding: utf-8
+
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 必须配置中文字体，否则会显示成方块
+# 注意所有希望图表显示的中文必须为unicode格式
+custom_font = mpl.font_manager.FontProperties(fname='/Library/Fonts/华文细黑.ttf')
+
+font_size = 10 # 字体大小
+fig_size = (8, 6) # 图表大小
+
+names = (u'小明', u'小红') # 姓名
+subjects = (u'语文', u'数学', u'英语') # 科目
+scores = ((65, 90, 75), (85, 80, 90)) # 成绩
+
+# 更新字体大小
+mpl.rcParams['font.size'] = font_size
+# 更新图表大小
+mpl.rcParams['figure.figsize'] = fig_size
+# 设置柱形图宽度
+bar_width = 0.35
+
+index = np.arange(len(scores[0]))
+# 绘制「小明」的成绩
+rects1 = plt.bar(index, scores[0], bar_width, color='#0072BC', label=names[0])
+# 绘制「小红」的成绩
+rects2 = plt.bar(index + bar_width, scores[1], bar_width, color='#ED1C24', label=names[1])
+# X轴标题
+plt.xticks(index + bar_width, subjects, fontproperties=custom_font)
+# Y轴范围
+plt.ylim(ymax=100, ymin=0)
+# 图表标题
+plt.title(u'企鹅班同学成绩对比', fontproperties=custom_font)
+# 图例显示在图表下方
+plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.03), fancybox=True, ncol=5, prop=custom_font)
+
+# 添加数据标签
+def add_labels(rects):
+    for rect in rects:
+        height = rect.get_height()
+        plt.text(rect.get_x() + rect.get_width() / 2, height, height, ha='center', va='bottom')
+        # 柱形图边缘用白色填充，纯粹为了美观
+        rect.set_edgecolor('white')
+
+add_labels(rects1)
+add_labels(rects2)
+
+# 图表输出到本地
+plt.savefig('scores_par.png')
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-add97529635ca7eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-python-plot-bar/>https://ottsion.github.io/2017/2017-05-11-python-plot-bar/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/python/">
+                    #python</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-tensorflow-dropout/" class="prev" rel="prev" title="tensorflow--dropout"><i class="iconfont icon-left"></i>&nbsp;tensorflow--dropout</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-mnist-digit-rec/" class="next" rel="next" title="MNIST数字检测">MNIST数字检测&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

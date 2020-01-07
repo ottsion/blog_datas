@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>opencv,图像处理 on 静心明志</title>
+    <link>https://ottsion.github.io/tags/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</link>
+    <description>Recent content in opencv,图像处理 on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Jul 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ubuntu14.04下安装opencv3.2.0</title>
+      <link>https://ottsion.github.io/2017/2017-07-09-ubuntu-opencv3/</link>
+      <pubDate>Sun, 09 Jul 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-07-09-ubuntu-opencv3/</guid>
+      <description>一、下载 OpenCV 3.2：
+​ 网址：http://opencv.org/releases.html
+二、安装常用依赖项：
+sudo apt-get install build-essential libgtk2.0-dev libvtk5-dev libjpeg-dev libtiff4-dev libjasper-dev libopenexr-dev libtbb-dev  三、安装 opencv 3.2：
+ 建立编译文件目录,并切换到该目录下：
+mkdir build cd build  开始编译(.. 为上层目录，不可缺少)：
+cmake .. make   ​ 如果遇到这样的错误：&amp;ndash; ICV: Downloading ippicv_linux_20151201.tgz&amp;hellip; CMake Error at 3rdparty/ippicv/downloader.cmake:73 (file): file DOWNLOAD HASH mismatch
+​ 去这里（点击打开链接）下载ippicv_linux_20151201.tgz 并粘贴（替换）到目录opencv-3.2.0/3rdparty/ippicv/downloads/Linux-808b791a6eac9ed78d32a7666804320e/
+ make -j4 (-j4表示开启4个线程编译，取决于CPU的速度，比如我make -j7)
+make j4  安装：默认安装到 /usr/local 下
+sudo make install   </description>
+    </item>
+    
+    <item>
+      <title>opencv视觉编程学习第七部分代码</title>
+      <link>https://ottsion.github.io/2017/2017-01-11-opencv-cookbook-7/</link>
+      <pubDate>Wed, 11 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-11-opencv-cookbook-7/</guid>
+      <description>星期三, 11. 一月 2017 11:47上午
+ 这部分主要是用类处理彩色图像
+ 像素与标量之间的差 #include &amp;quot;ColorDetector.h&amp;quot; cv::Mat ColorDetector::process(const cv::Mat &amp;amp;image){ cv::Mat output; cv::absdiff(image, cv::Scalar(target), output); std::vector&amp;lt;cv::Mat&amp;gt; images; cv::split(output, images); output=image[0]+images[1]+images[2]; cv::threshold( output, output, maxDist, 255, cv::THRESH_BINARY_INV ); return output; }  运行：
+int main() { ColorDetector cdetect ; cv::Mat image = cv::imread(&amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;); if(image.empty()) return 0; cdetect.setTargetColor(20,100,130); cv::namedWindow(&amp;quot;image&amp;quot;); cv::imshow(&amp;quot;image&amp;quot;,cdetect.process(image)); cv::waitKey(0); return 0; }  得出结果是：
+转换颜色空间 CIE L*a*b色彩空间 L表示每个像素的亮度，ab表示颜色信息。
+cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){ result.create(image.rows, image.cols, CV_8U); cv::cvtColor(image, converted, CV_BRG2LAB); cv::Mat_&amp;lt;cv::Vec3b&amp;gt;::iterator it = converted.</description>
+    </item>
+    
+    <item>
+      <title>opencv视觉编程学习第一部分代码</title>
+      <link>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/</link>
+      <pubDate>Tue, 10 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/</guid>
+      <description>星期二, 10. 一月 2017 01:44下午
+ 这部分主要是读取并显示图像，并对图像进行基本操作，比如画图和写字，同时添加图片点击事件的操作
+ 代码学习 #include&amp;lt;iostream&amp;gt; #include&amp;lt;string&amp;gt; #include &amp;quot;opencv2/core/core.hpp&amp;quot; #include &amp;quot;opencv2/highgui/highgui.hpp&amp;quot; #include &amp;lt;boost/concept_check.hpp&amp;gt; using namespace std; //图片地址 const string imageAddr0 = &amp;quot;/home/ottsion/Documents/2.jpg&amp;quot;; const string imageAddr1 = &amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;; /** * 根据图片信息显示图片 * @param windowName 显示窗口名称 * @param image opcv的图片信息 */ void showImage(string windowName, cv::Mat image); /** * 根据地址，读取图片信息 * @param imageAddr 图片地址 * @param image opcv的图片信息 */ void readImage(string imageAddr, cv::Mat&amp;amp; image); /** * 将图片进行水平或者垂直翻转 * @param image opcv的图片信息 */ void convertImage(cv::Mat&amp;amp; image); /** * 读取时将图片灰度化或者三通道读取 * @param image opcv的图片信息 */ void getImageByTypes(cv::Mat&amp;amp; image); /** * 鼠标点击事件响应 * @param event 整数，表示鼠标触发事件的类型 * @param x 鼠标事件出发时位置（像素坐标显示） * @param y 鼠标事件出发时位置 * @param flags 表示事件发生时按下了鼠标的哪个键 * @param param 执行任意对象的指针，作为附加参数发送给函数 */ void onMouse(int event, int x, int y, int flags, void* param); /** * 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数 * @param windowName 图像窗口名称 * @param image 图像信息 */ void callBackFunc(string windowName, cv::Mat&amp;amp; image); /** * 在图像上绘画和写入文本 * @param windowName 图像窗口名称 * @param image 图像信息 */ void drawAndWriteOnImage(string windowName, cv::Mat image); void showImage(string windowName, cv::Mat image) { //先定义窗口 cv::namedWindow(windowName); //显示图片 cv::imshow(windowName, image); } void readImage(string imageAddr, cv::Mat&amp;amp; image) { //读取图片 image = cv::imread(imageAddr); if(image.</description>
+    </item>
+    
+    <item>
+      <title>opencv视觉编程学习第三部分代码</title>
+      <link>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/</link>
+      <pubDate>Tue, 10 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/</guid>
+      <description>星期二, 10. 一月 2017 03:12下午
+ 这部分主要是对兴趣区域的介绍,以及对Ma_的模板类介绍
+ 如何实现 第一步便是定义ROI，定以后可以把ROI当做普通Mat实例进行操作，关键在于ROI本身就是Mat对象，它与它的父图指向同一个数据缓冲区，并且有一个头部信息表示ROI的坐标，可用下面的方法插入小标志：
+cv::Mat imageROI( image, cv:;Rect( image.cols-logo.cols, image.rows-logo.rows, //ROI的坐标 logo.cols, logo.rows //ROI的大小 ) ); logo.copyTo(imageROI);  同样的可以用以下方法:
+imageROI = image( cv::Range(image.rows-logo.rows, image.rows), cv::Range(image.cols-logo.cols, image.cols) );  要定义图像中一些行组成的ROI：
+cv::Mat imageRIO = image.rowRange(start, end);  要定义图像中一些列组成的ROI：
+cv::Mat imageRIO = image.colRange(start, end);  图像掩码  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows)); cv::Mat mask(logo); //把标志作为掩码，必须是灰度图像 logo.copyTo(imageROI,mask); //插入标志，只复制掩码不为0的位置  Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
+cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100列的值  Mat与Mat_相互转换也是很简单的。</description>
+    </item>
+    
+    <item>
+      <title>opencv视觉编程学习第二部分代码</title>
+      <link>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/</link>
+      <pubDate>Tue, 10 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/</guid>
+      <description>星期二, 10. 一月 2017 01:44下午
+ 这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况
+ 代码学习 #include&amp;lt;iostream&amp;gt; #include&amp;lt;string&amp;gt; #include&amp;lt;opencv2/core/core.hpp&amp;gt; #include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt; const std::string imageAddr = &amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;; //测试函数，创建一个图像 cv::Mat function(){ cv::Mat ima(500, 500, CV_8U, 50); return ima; } int main() { cv::namedWindow(&amp;quot;Image 1&amp;quot;); cv::namedWindow(&amp;quot;Image 2&amp;quot;); cv::namedWindow(&amp;quot;Image 3&amp;quot;); cv::namedWindow(&amp;quot;Image 4&amp;quot;); cv::namedWindow(&amp;quot;Image 5&amp;quot;); cv::namedWindow(&amp;quot;Image&amp;quot;); //创建一个240*320的新图像 cv::Mat image1(240, 320, CV_8U, 100); cv::imshow(&amp;quot;Image&amp;quot;, image1); cv::waitKey(0); //重新分配一个新的图像 image1.create(200, 200, CV_8U); image1 = 200; cv::imshow(&amp;quot;Image&amp;quot;, image1); cv::waitKey(0); //创建一个红色的图像，通道依次为BGR cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255)); //或者 //cv::Mat image2(cv::Size(320, 240), CV_8UC3); //image2 = cv::Scalar(0, 0, 255)； cv::imshow(&amp;quot;Image&amp;quot;, image2); cv::waitKey(0); //读入一个图像 cv::Mat image3 = cv::imread(imageAddr); //所有图像指向同一个数据块 cv::Mat image4(image3); image1 = image3; //这些图像都是原图像的副本 image3.</description>
+    </item>
+    
+    <item>
+      <title>opencv视觉编程学习第五部分代码</title>
+      <link>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-5/</link>
+      <pubDate>Tue, 10 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-5/</guid>
+      <description>星期二, 10. 一月 2017 07:57下午
+ 这部分主要是图像加减及各种运算
+ 两图相加 主要有以下方法：
+ //c[i] = a[i]+b[i] cv::add(imageA, imageB, resultC); //c[i] = a[i]+k cv::add(imageA, cv::Scalar(k), resultC); //c[i] = k1*a[i]+k2*b[i]+k3 cv::addWeighted(imageA, k1, imageB, k2, k3, resultC); //c[i] = k*a[i]+b[i] cv::scaleAdd(imageA, k, imageB, resultC);  甚至于掩码：
+ //if (mask[i]) c[i] = a[i] + b[i] cv::add(imageA, imageB, resultC, mask);  但有一点，所有这种处理必须进行cv::Saturate_cast&amp;lt;&amp;gt;()函数转换结果，以确保结果在0-256之间，避免溢出。
+其他运算 以下括号内省略
+###加减乘除
+ cv::subtract(); cv::absdiff(); cv::multiply(); cv::divide();  位运算符  cv::bitwise_and(); cv::bitwise_or(); cv::bitwise_xor(); cv::bitwise_not();  单输入运算 cv::sqrt(); cv::pow(); cv::abs(); cv::cuberoot(); cv::exp(); cv::log();  代码演示 #include &amp;lt;vector&amp;gt; #include &amp;lt;opencv2/core/core.</description>
+    </item>
+    
+    <item>
+      <title>opencv视觉编程学习第五部分代码</title>
+      <link>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-6/</link>
+      <pubDate>Tue, 10 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-6/</guid>
+      <description>星期二, 10. 一月 2017 07:57下午
+ 这部分主要是图像加减及各种运算
+ 图像波浪化 #include &amp;lt;opencv2/core/core.hpp&amp;gt; #include &amp;lt;opencv2/highgui/highgui.hpp&amp;gt; #include &amp;lt;opencv2/imgproc/imgproc.hpp&amp;gt; #include &amp;lt;math.h&amp;gt; // remapping an image by creating wave effects void wave(const cv::Mat &amp;amp;image, cv::Mat &amp;amp;result) { // the map functions cv::Mat srcX(image.rows,image.cols,CV_32F); // x-map cv::Mat srcY(image.rows,image.cols,CV_32F); // y-map // creating the mapping for (int i=0; i&amp;lt;image.rows; i++) { for (int j=0; j&amp;lt;image.cols; j++) { srcX.at&amp;lt;float&amp;gt;(i,j)= j; srcY.at&amp;lt;float&amp;gt;(i,j)= i+3*sin(j/6.0); // horizontal flipping // srcX.at&amp;lt;float&amp;gt;(i,j)= image.</description>
+    </item>
+    
+    <item>
+      <title>opencv视觉编程学习第四部分代码</title>
+      <link>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/</link>
+      <pubDate>Tue, 10 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/</guid>
+      <description>星期二, 10. 一月 2017 05:48下午
+ 这部分主要是操作像素
+ Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
+cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100列的值  Mat与Mat_相互转换也是很简单的。
+一般情况下Mat类读取像素：
+image.at&amp;lt;uchar&amp;gt;(i,j) = 255;  指针读取 除了一般的
+ uchar* data = image.ptr&amp;lt;uchar&amp;gt;(i); for(int j=0;j&amp;lt;nc;j++) { data[j] = data[j]/div*div+div/2; }  我们还可以用以下语句执行：
+*data = *data/div*div + div/2 ; data++  代码演示(salt) #include&amp;lt;iostream&amp;gt; #include&amp;lt;opencv2/core/core.hpp&amp;gt; #include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt; void salt(cv::Mat image, int n) { int i,j; for(int k=0;k&amp;lt;n;k++) { i = std::rand()%image.rows; j = std::rand()%image.cols; if(image.</description>
+    </item>
+    
+    <item>
+      <title>Harris角点检测基础原理和效果</title>
+      <link>https://ottsion.github.io/2016/2016-12-21-harris-feature-detect/</link>
+      <pubDate>Wed, 21 Dec 2016 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2016/2016-12-21-harris-feature-detect/</guid>
+      <description>学习opencv系列， feature2d 模块. 2D特征框架框架下面，Harris 角点检测子部分
+ 图像特征及类型 在计算机视觉中，我们通常需要寻找两张图上的匹配关键点。为什么？因为一旦我们知道了两张图是相关联的，我 们就可以使用 *both 图像来提取它们中的信息。 匹配关键点 是指在场景中可以很容易识别出来的特性 . 这些特性就是这里所说的特征 。因此,特征应该有什么样的特性呢?应该具有可识别的 独一无二 性。
+图像特征类型:
+ 边缘 角点 (感兴趣关键点) 斑点(Blobs) (感兴趣区域)  这里Harris 角点检测子计算的是角点特征。
+图像特征为什么可以使用角点，因为角点是两个边缘的连接点，它代表了两个边缘变化的方向上的点。图像梯度有很高的变化。这种变化是可以用来帮助检测角点的。
+特征检测原理 由于角点代表了图像像素梯度变化，我们将寻找这个”变化”。 考虑到一个灰度图像I.划动窗口w(x,y)(with displacements u 在x方向和 v 方向)I计算像素灰度变化。
+其中:
+ w(x,y) is the window at position (x,y) I(x,y) is the intensity at (x,y) I(x+u,y+v) is the intensity at the moved window (x+u,y+v)  为了寻找带角点的窗口，我们搜索像素灰度变化较大的窗口。于是, 我们期望最大化以下式子:
+使用 泰勒(Taylor)展开式:
+式子可以展开为:
+一个举证表达式可以写为:</description>
+    </item>
+    
+  </channel>
+</rss>

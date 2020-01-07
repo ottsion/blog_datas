@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DL, loss on 静心明志</title>
+    <link>https://ottsion.github.io/tags/dl-loss/</link>
+    <description>Recent content in DL, loss on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 May 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/dl-loss/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tensorflow--各种损失函数</title>
+      <link>https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/</link>
+      <pubDate>Thu, 11 May 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/</guid>
+      <description>来源：tensorflow学习笔记（三）：损失函数
+sparse_softmax_cross_entropy_with_logits tf.python.ops.nn_ops.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)
+def sparse_softmax_cross_entropy_with_logits(logits, labels, name=None): #logits是最后一层的z（输入） #A common use case is to have logits of shape `[batch_size, num_classes]` and #labels of shape `[batch_size]`. But higher dimensions are supported. #Each entry in `labels` must be an index in `[0, num_classes)` #输出：loss [batch_size]  softmax_cross_entropy_with_logits tf.python.ops.nn_ops.softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None)
+def softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None): #`logits` and `labels` must have the same shape `[batch_size, num_classes]` #return loss:[batch_size], 里面保存是batch中每个样本的cross entropy  sigmoid_cross_entropy_with_logits tf.</description>
+    </item>
+    
+  </channel>
+</rss>

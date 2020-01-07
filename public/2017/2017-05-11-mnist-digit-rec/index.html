@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-python-plot-bar/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-boosting/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-mnist-digit-rec/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           MNIST数字检测 | 静心明志
+       
+  </title>
+  <meta name="title" content="MNIST数字检测 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "MNIST数字检测",
+    "headline" : "MNIST数字检测",
+    "description" : "学习Tensorflow第一课：\nfrom tensorflow.examples.tutorials.mnist import input_data mnist = input_data.read_data_sets(\x27MNIST_data\x27, one_hot=True) import tensorflow as tf sess = tf.InteractiveSession() def weight_variable(shape): initial = tf.truncated_normal(shape, stddev=0.1) return tf.Variable(initial) def bias_variable(shape): initial = tf.constant(0.1, shape=shape) return tf.Variable(initial) def conv2d(x, W): return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding=\x27SAME\x27) def max_pool_2x2(x): return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding=\x27SAME\x27) W_conv1 = weight_variable([5, 5, 1, 32]) b_conv1 = bias_variable([32]) x_image = tf.reshape(x, [-1,28,28,1]) h_conv1 = tf.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-mnist-digit-rec\/",
+    "wordCount" : "191",
+    "keywords" : [ "dl, Boosting", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">MNIST数字检测</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"> 深度学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>学习Tensorflow第一课：</p>
+
+<pre><code>from tensorflow.examples.tutorials.mnist import input_data  
+mnist = input_data.read_data_sets('MNIST_data', one_hot=True)  
+import tensorflow as tf  
+sess = tf.InteractiveSession()  
+  
+def weight_variable(shape):  
+  initial = tf.truncated_normal(shape, stddev=0.1)  
+  return tf.Variable(initial)  
+  
+def bias_variable(shape):  
+  initial = tf.constant(0.1, shape=shape)  
+  return tf.Variable(initial)  
+  
+def conv2d(x, W):  
+  return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')  
+  
+def max_pool_2x2(x):  
+  return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],  
+                        strides=[1, 2, 2, 1], padding='SAME')  
+  
+W_conv1 = weight_variable([5, 5, 1, 32])  
+b_conv1 = bias_variable([32])  
+  
+x_image = tf.reshape(x, [-1,28,28,1])  
+  
+h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)  
+h_pool1 = max_pool_2x2(h_conv1)  
+  
+W_conv2 = weight_variable([5, 5, 32, 64])  
+b_conv2 = bias_variable([64])  
+  
+h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)  
+h_pool2 = max_pool_2x2(h_conv2)  
+  
+W_fc1 = weight_variable([7 * 7 * 64, 1024])  
+b_fc1 = bias_variable([1024])  
+  
+h_pool2_flat = tf.reshape(h_pool2, [-1, 7*7*64])  
+h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)  
+  
+keep_prob = tf.placeholder(tf.float32)  
+h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)  
+  
+W_fc2 = weight_variable([1024, 10])  
+b_fc2 = bias_variable([10])  
+  
+y_conv=tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)  
+  
+cross_entropy = -tf.reduce_sum(y_*tf.log(y_conv))  
+train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)  
+correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))  
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))  
+sess.run(tf.initialize_all_variables())  
+for i in range(20000):  
+  batch = mnist.train.next_batch(50)  
+  if i%100 == 0:  
+    train_accuracy = accuracy.eval(feed_dict={  
+        x:batch[0], y_: batch[1], keep_prob: 1.0})  
+    print(&quot;step %d, training accuracy %g&quot;%(i, train_accuracy))  
+  train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})  
+  
+print(&quot;test accuracy %g&quot;%accuracy.eval(feed_dict={  
+    x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))  
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-161359fdb9e76e44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png" class="lazyload"><figcaption class="image-caption">Paste_Image.png</figcaption></figure></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-mnist-digit-rec/>https://ottsion.github.io/2017/2017-05-11-mnist-digit-rec/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/dl-boosting/">
+                    #dl, Boosting</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-python-plot-bar/" class="prev" rel="prev" title="Python绘制精美图表之双柱形图"><i class="iconfont icon-left"></i>&nbsp;Python绘制精美图表之双柱形图</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-boosting/" class="next" rel="next" title="Boosting算法">Boosting算法&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on 静心明志</title>
+    <link>https://ottsion.github.io/categories/python/</link>
+    <description>Recent content in python on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 May 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python绘制精美图表之双柱形图</title>
+      <link>https://ottsion.github.io/2017/2017-05-11-python-plot-bar/</link>
+      <pubDate>Thu, 11 May 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-05-11-python-plot-bar/</guid>
+      <description>#!/usr/bin/env python # coding: utf-8 import matplotlib as mpl mpl.use(&#39;Agg&#39;) import matplotlib.pyplot as plt import numpy as np # 必须配置中文字体，否则会显示成方块 # 注意所有希望图表显示的中文必须为unicode格式 custom_font = mpl.font_manager.FontProperties(fname=&#39;/Library/Fonts/华文细黑.ttf&#39;) font_size = 10 # 字体大小 fig_size = (8, 6) # 图表大小 names = (u&#39;小明&#39;, u&#39;小红&#39;) # 姓名 subjects = (u&#39;语文&#39;, u&#39;数学&#39;, u&#39;英语&#39;) # 科目 scores = ((65, 90, 75), (85, 80, 90)) # 成绩 # 更新字体大小 mpl.rcParams[&#39;font.size&#39;] = font_size # 更新图表大小 mpl.rcParams[&#39;figure.figsize&#39;] = fig_size # 设置柱形图宽度 bar_width = 0.</description>
+    </item>
+    
+  </channel>
+</rss>

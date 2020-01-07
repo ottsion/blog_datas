@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-07-cmake-3/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-07-cmake-2/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+            cmake实践学习 （2） | 静心明志
+       
+  </title>
+  <meta name="title" content=" cmake实践学习 （2） | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : " cmake实践学习 （2）",
+    "headline" : " cmake实践学习 （2）",
+    "description" : "星期六, 07. 一月 2017 06:17下午\n 来源：cmake实践\n 更好一点的 Hello World 从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。 本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:\n 为工程添加一个子目录 src,用来放置工程源代码; 添加一个子目录 doc,用来放置这个工程的文档 hello.txt 在工程目录添加文本文件 COPYRIGHT, README; 在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制 将构建后的目标文件放入构建目录的 bin 子目录; 最终安装这些文件:将 hello 二进制与 runhello.sh 安装至\/usr\/bin,将 doc 目录的内容以及 COPYRIGHT\/README 安装到\/usr\/share\/doc\/cmake\/t2,将  新建代码目录  准备工作: 在\/backup\/cmake\/目录下建立 t2 目录。 将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。\n 添加子目录 src:\n\tmkdir src mv main.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-07 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-07 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-07-cmake-2\/",
+    "wordCount" : "587",
+    "keywords" : [ "cmake", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline"> cmake实践学习 （2）</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-07 itemprop="datePublished">January 7, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<hr />
+
+<p>星期六, 07. 一月 2017 06:17下午</p>
+
+<blockquote>
+<p>来源：cmake实践</p>
+</blockquote>
+
+<hr />
+
+<p>更好一点的 Hello World
+从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。
+本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:</p>
+
+<ol>
+<li>为工程添加一个子目录 src,用来放置工程源代码;</li>
+<li>添加一个子目录 doc,用来放置这个工程的文档 hello.txt</li>
+<li>在工程目录添加文本文件 COPYRIGHT, README;</li>
+<li>在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制</li>
+<li>将构建后的目标文件放入构建目录的 bin 子目录;</li>
+<li>最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/usr/bin,将 doc 目录的内容以及 COPYRIGHT/README 安装到/usr/share/doc/cmake/t2,将</li>
+</ol>
+
+<h2 id="新建代码目录">新建代码目录</h2>
+
+<ol>
+<li><p>准备工作:
+在/backup/cmake/目录下建立 t2 目录。
+将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。</p></li>
+
+<li><p>添加子目录 src:</p>
+
+<pre><code>	mkdir src
+	mv main.c src
+</code></pre>
+
+<p>现在的工程看起来是这个样子:</p></li>
+
+<li><p>一个子目录 src,一个 CMakeLists.txt。</p></li>
+
+<li><p>上一节我们提到,需要为任何子目录建立一个 CMakeLists.txt,进入子目录 src,编写 CMakeLists.txt 如下:</p>
+
+<pre><code>ADD_EXECUTABLE(hello main.c)
+</code></pre></li>
+</ol>
+
+<ul>
+<li><p>将 t2 工程的 CMakeLists.txt 修改为:</p>
+
+<pre><code>	PROJECT(HELLO)
+	ADD_SUBDIRECTORY(src bin)
+</code></pre></li>
+</ul>
+
+<p>然后建立 build 目录,进入 build 目录进行外部编译。</p>
+
+<pre><code>cmake
+..
+make
+</code></pre>
+
+<p>构建完成后,你会发现生成的目标文件 hello 位于 build/bin 目录中。语法解释:</p>
+
+<h3 id="add-subdirectory-指令">ADD_SUBDIRECTORY 指令</h3>
+
+<pre><code>ADD_SUBDIRECTORY(source_dir [binary_dir] [EXCLUDE_FROM_ALL])
+</code></pre>
+
+<p>这个指令用于向当前工程添加存放源文件的子目录,并可以指定中间二进制和目标二进制存放的位置。EXCLUDE_FROM_ALL 参数的含义是将这个目录从编译过程中排除,比如,工程
+的 example,可能就需要工程构建完成后,再进入 example 目录单独进行构建(当然,你也可以通过定义依赖来解决此类问题)。</p>
+
+<p>上面的例子定义了将 src 子目录加入工程,并指定编译输出(包含编译中间结果)路径为bin 目录。如果不进行 bin 目录的指定,那么编译结果(包括中间结果)都将存放在build/src 目录(这个目录跟原有的 src 目录对应),指定 bin 目录后,相当于在编译时将 src 重命名为 bin,所有的中间结果和目标二进制都将存放在 bin 目录。</p>
+
+<p>这里需要提一下的是 SUBDIRS 指令,使用方法是:<code>SUBDIRS(dir1 dir2...)</code>,但是这个指令已经不推荐使用。它可以一次添加多个子目录,并且,即使外部编译,子目录体系仍然会被保存。如果我们在上面的例子中将 ADD_SUBDIRECTORY (src bin)修改为 SUBDIRS(src)。那么在 build 目录中将出现一个 src 目录,生成的目标代码 hello 将存放在 src 目录中。</p>
+
+<ol>
+<li><p>换个地方保存目标二进制
+不论是 SUBDIRS 还是 ADD_SUBDIRECTORY 指令(不论是否指定编译输出目录),我们都可以通过 SET 指令重新定义 EXECUTABLE_OUTPUT_PATH 和 LIBRARY_OUTPUT_PATH 变量来指定最终的目标二进制的位置(指最终生成的 hello 或者最终的共享库,不包含编译生成的中间文件)</p>
+
+<pre><code>	SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+	SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+</code></pre></li>
+</ol>
+
+<p>在第一节我们提到了<projectname>_BINARY_DIR 和 PROJECT_BINARY_DIR 变量,他们指的编译发生的当前目录,如果是内部编译,就相当于 PROJECT_SOURCE_DIR 也就是工程代码所在目录,如果是外部编译,指的是外部编译所在目录,也就是本例中的 build目录。
+所以,上面两个指令分别定义了:可执行二进制的输出路径为 build/bin 和库的输出路径为 build/lib.</p>
+
+<p>本节我们没有提到共享库和静态库的构建,所以,你可以不考虑第二条指令。
+问题是,我应该把这两条指令写在工程的 CMakeLists.txt 还是 src 目录下的CMakeLists.txt,把握一个简单的原则,在哪里 ADD_EXECUTABLE 或 ADD_LIBRARY,如果需要改变目标存放路径,就在哪里加入上述的定义。在这个例子里,当然就是指 src 下的 CMakeLists.txt 了。</p>
+
+<ol>
+<li><p>如何安装。
+安装的需要有两种,一种是从代码编译后直接 make install 安装,一种是打包时的指定目录安装。所以,即使最简单的手工编写的 Makefile,看起来也是这个样子的:</p>
+
+<pre><code>	DESTDIR=
+	install:
+	mkdir -p $(DESTDIR)/usr/bin
+	install -m 755 hello $(DESTDIR)/usr/bin
+</code></pre></li>
+</ol>
+
+<p>你可以通过:</p>
+
+<pre><code>make install
+</code></pre>
+
+<p>将 hello 直接安装到/usr/bin 目录,也可以通过 make install  DESTDIR=/tmp/test 将他安装在/tmp/test/usr/bin 目录,打包时这个方式经常被使用。稍微复杂一点的是还需要定义 PREFIX,一般 autotools 工程,会运行这样的指令:./configure –prefix=/usr 或者./configure &ndash;prefix=/usr/local 来指定PREFIX比如上面的 Makefile 就可以改写成:</p>
+
+<pre><code>DESTDIR=
+PREFIX=/usr
+install:
+mkdir -p $(DESTDIR)/$(PREFIX)/bin
+install -m 755 hello $(DESTDIR)/$(PREFIX)/bin
+</code></pre>
+
+<p>那么我们的 HelloWorld 应该怎么进行安装呢?
+这里需要引入一个新的 cmake 指令 INSTALL 和一个非常有用的变量CMAKE_INSTALL_PREFIX。CMAKE_INSTALL_PREFIX 变量类似于 configure 脚本的 – prefix,常见的使用方法看
+起来是这个样子:</p>
+
+<pre><code>cmake -DCMAKE_INSTALL_PREFIX=/usr .
+</code></pre>
+
+<p>INSTALL 指令用于定义安装规则,安装的内容可以包括目标二进制、动态库、静态库以及文件、目录、脚本等。INSTALL 指令包含了各种安装类型,我们需要一个个分开解释:目标文件的安装:</p>
+
+<pre><code>INSTALL(TARGETS targets...
+[[ARCHIVE|LIBRARY|RUNTIME]
+[DESTINATION &lt;dir&gt;]
+[PERMISSIONS permissions...]
+[CONFIGURATIONS
+[Debug|Release|...]]
+[COMPONENT &lt;component&gt;]
+[OPTIONAL]
+] [...])
+</code></pre>
+
+<p>参数中的 TARGETS 后面跟的就是我们通过 ADD_EXECUTABLE 或者 ADD_LIBRARY 定义的目标文件,可能是可执行二进制、动态库、静态库。目标类型也就相对应的有三种,ARCHIVE 特指静态库,LIBRARY 特指动态库,RUNTIME特指可执行目标二进制。
+DESTINATION 定义了安装的路径,如果路径以/开头,那么指的是绝对路径,这时候CMAKE_INSTALL_PREFIX 其实就无效了。如果你希望使用 CMAKE_INSTALL_PREFIX 来定义安装路径,就要写成相对路径,即不要以/开头,那么安装后的路径就是${CMAKE_INSTALL_PREFIX}/<DESTINATION 定义的路径>
+举个简单的例子:</p>
+
+<pre><code>INSTALL(TARGETS myrun mylib mystaticlib
+RUNTIME DESTINATION bin
+LIBRARY DESTINATION lib
+ARCHIVE DESTINATION libstatic
+)
+</code></pre>
+
+<p>上面的例子会将:</p>
+
+<ul>
+<li>可执行二进制 myrun 安装到${CMAKE_INSTALL_PREFIX}/bin 目录</li>
+<li>动态库 libmylib 安装到${CMAKE_INSTALL_PREFIX}/lib 目录</li>
+<li>静态库 libmystaticlib 安装到${CMAKE_INSTALL_PREFIX}/libstatic 目录</li>
+</ul>
+
+<p>特别注意的是你不需要关心 TARGETS 具体生成的路径,只需要写上 TARGETS 名称就可以了。
+普通文件的安装:</p>
+
+<pre><code>INSTALL(FILES files... DESTINATION &lt;dir&gt;
+[PERMISSIONS permissions...]
+[CONFIGURATIONS [Debug|Release|...]]
+[COMPONENT &lt;component&gt;]
+[RENAME &lt;name&gt;] [OPTIONAL])
+</code></pre>
+
+<p>可用于安装一般文件,并可以指定访问权限,文件名是此指令所在路径下的相对路径。如果默认不定义权限 PERMISSIONS,安装后的权限为:OWNER_WRITE, OWNER_READ,GROUP_READ,和 WORLD_READ,即 644 权限。
+非目标文件的可执行程序安装(比如脚本之类):</p>
+
+<pre><code>INSTALL(PROGRAMS files... DESTINATION &lt;dir&gt;
+[PERMISSIONS permissions...]
+[CONFIGURATIONS [Debug|Release|...]]
+[COMPONENT &lt;component&gt;]
+[RENAME &lt;name&gt;] [OPTIONAL])
+</code></pre>
+
+<p>跟上面的 FILES 指令使用方法一样,唯一的不同是安装后权限为:OWNER_EXECUTE, GROUP_EXECUTE, 和 WORLD_EXECUTE,即 755 权限
+目录的安装:</p>
+
+<pre><code>INSTALL(DIRECTORY dirs... DESTINATION &lt;dir&gt;
+[FILE_PERMISSIONS permissions...]
+[DIRECTORY_PERMISSIONS permissions...]
+[USE_SOURCE_PERMISSIONS]
+[CONFIGURATIONS [Debug|Release|...]]
+[COMPONENT &lt;component&gt;]
+[[PATTERN &lt;pattern&gt; | REGEX &lt;regex&gt;]
+[EXCLUDE] [PERMISSIONS permissions...]] [...])
+</code></pre>
+
+<p>这里主要介绍其中的 DIRECTORY、PATTERN 以及 PERMISSIONS 参数。DIRECTORY 后面连接的是所在 Source 目录的相对路径,但务必注意:abc 和 abc/有很大的区别。如果目录名不以/结尾,那么这个目录将被安装为目标路径下的 abc,如果目录名以/结尾,代表将这个目录中的内容安装到目标路径,但不包括这个目录本身。PATTERN 用于使用正则表达式进行过滤,PERMISSIONS 用于指定 PATTERN 过滤后的文件权限。
+我们来看一个例子:</p>
+
+<pre><code>INSTALL(DIRECTORY icons scripts/ DESTINATION share/myprojPATTERN &quot;CVS&quot; EXCLUDE
+PATTERN &quot;scripts/*&quot;
+PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+GROUP_EXECUTE GROUP_READ)
+</code></pre>
+
+<p>这条指令的执行结果是:将 icons 目录安装到 <prefix>/share/myproj,将 scripts/中的内容安装到<prefix>/share/myproj不包含目录名为 CVS 的目录,对于 scripts/* 文件指定权限为 OWNER_EXECUTE，OWNER_WRITE OWNER_READ GROUP_EXECUTE GROUP_READ.
+安装时 CMAKE 脚本的执行:</p>
+
+<pre><code>INSTALL([[SCRIPT &lt;file&gt;] [CODE &lt;code&gt;]] [...])
+</code></pre>
+
+<p>SCRIPT 参数用于在安装时调用 cmake 脚本文件(也就是<abc>.cmake 文件) CODE 参数用于执行 CMAKE 指令,必须以双引号括起来。比如:</p>
+
+<pre><code>INSTALL(CODE &quot;MESSAGE(\&quot;Sample install message.\&quot;)&quot;)
+</code></pre>
+
+<p>安装还有几个被标记为过时的指令,比如 INSTALL_FILES 等,这些指令已经不再推荐使用,所以,这里就不再赘述了。
+下面,我们就来改写我们的工程文件,让他来支持各种文件的安装,并且,我们要使用
+CMAKE_INSTALL_PREFIX 指令。
+ 5. 修改 Helloworld 支持安装
+在本节开头我们定义了本节的任务如下:</p>
+
+<ul>
+<li>为工程添加一个子目录 src,用来存储源代码;</li>
+<li>添加一个子目录 doc,用来存储这个工程的文档 hello.txt</li>
+<li>在工程目录添加文本文件 COPYRIGHT, README;</li>
+<li>在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制</li>
+<li>将构建后的目标文件放入构建目录的 bin 子目录;</li>
+<li>最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/<prefix>/bin,将doc 目录中的 hello.txt 以及 COPYRIGHT/README 安装到/<prefix>/share/doc/cmake/t2,将首先我们先补上为添加的文件。</li>
+</ul>
+
+<p>添加 doc 目录及文件:cd /backup/cmake/t2</p>
+
+<pre><code>mkdir doc
+vi doc/hello.txt
+</code></pre>
+
+<p>随便填写一些内容并保存
+在工程目录添加 runhello.sh 脚本,内容为:
+hello
+添加工程目录中的 COPYRIGHT 和 README</p>
+
+<pre><code>touch COPYRIGHT
+touch README
+</code></pre>
+
+<p>下面改写各目录的 CMakeLists.txt 文件。
+1,安装 COPYRIGHT/README,直接修改主工程文件 CMakelists.txt,加入以下指令:</p>
+
+<pre><code>INSTALL(FILES COPYRIGHT README DESTINATION share/doc/cmake/t2)
+</code></pre>
+
+<p>2,安装 runhello.sh,直接修改主工程文件 CMakeLists.txt,加入如下指令:</p>
+
+<pre><code>INSTALL(PROGRAMS runhello.sh DESTINATION bin)
+</code></pre>
+
+<p>3,安装 doc 中的 hello.txt,这里有两种方式:一是通过在 doc 目录建立CMakeLists.txt 并将 doc 目录通过 ADD_SUBDIRECTORY 加入工程来完成。另一种方法是直接在工程目录通过INSTALL(DIRECTORY 来完成),前者比较简单,各位可以根据兴趣自己完成,我们来尝试后者,顺便演示以下 DIRECTORY 的安装。因为 hello.txt 要安装到/<prefix>/share/doc/cmake/t2,所以我们不能直接安装整个 doc 目录,这里采用的方式是安装 doc 目录中的内容,也就是使用 ” doc/”在工程文件中添加</p>
+
+<pre><code>INSTALL(DIRECTORY doc/ DESTINATION share/doc/cmake/t2)
+</code></pre>
+
+<p>6,尝试我们修改的结果:
+现在进入 build 目录进行外部编译,注意使用 CMAKE_INSTALL_PREFIX 参数,这里我们
+将它安装到了/tmp/t2 目录:</p>
+
+<pre><code>cmake -DCMAKE_INSTALL_PREFIX=/tmp/t2/usr ..
+</code></pre>
+
+<p>然后运行</p>
+
+<pre><code>make
+make install
+</code></pre>
+
+<p>让我们进入/tmp/t2 目录看一下安装结果:</p>
+
+<pre><code>./usr
+./usr/share
+./usr/share/doc./usr/share/doc/cmake
+./usr/share/doc/cmake/t2
+./usr/share/doc/cmake/t2/hello.txt
+./usr/share/doc/cmake/t2/README
+./usr/share/doc/cmake/t2/COPYRIGHT
+./usr/bin
+./usr/bin/hello
+./usr/bin/runhello.sh
+</code></pre>
+
+<p>如果你要直接安装到系统,可以使用如下指令:</p>
+
+<pre><code>cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+</code></pre>
+
+<p>7,一个疑问
+如果我没有定义 CMAKE_INSTALL_PREFIX 会安装到什么地方?
+你可以尝试以下,cmake ..;make;make install,你会发现CMAKE_INSTALL_PREFIX 的默认定义是/usr/local
+8,小结:
+本小节主要描述了如何在工程中使用多目录、各种安装指令以及CMAKE_INSTALL_PREFIX 变量(你真够牛的,这么点东西居然罗唆了这么多文字)在下一小节,我们将探讨如何在 cmake 中构建动态库和静态库,以及如何使用外部头文件和外部共享库,毕竟,这是程序编写中最长使用的(对了,你知道用怎样的 gcc 参数可以直接构建静态库和动态库吗?)</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-07-cmake-2/>https://ottsion.github.io/2017/2017-01-07-cmake-2/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/cmake/">
+                    #cmake</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-07-cmake-3/" class="prev" rel="prev" title=" cmake实践学习 （3）"><i class="iconfont icon-left"></i>&nbsp; cmake实践学习 （3）</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/" class="next" rel="next" title="opencv视觉编程学习第四部分代码">opencv视觉编程学习第四部分代码&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

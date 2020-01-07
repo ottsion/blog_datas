@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-14-moveit-01/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-linear-regression/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-logistic-regression/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           逻辑回归 | 静心明志
+       
+  </title>
+  <meta name="title" content="逻辑回归 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "逻辑回归",
+    "headline" : "逻辑回归",
+    "description" : "链接: 1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法\n线性回归是通过拟合来达到目的，而逻辑回归呢侧重的是探寻概率，它不去寻找拟合的超平面，而是去寻找某个数据的类别归属问题。\n一. 预测函数 怎么去预测？我们知道Sigmoid函数是如上这样的，它的表现是：将数据归纳在0-1之间，那么我们能不能通过去计算出的结果去拟合这样一个概率，使之成为一种分类的依据？答案是肯定的。凡事的概率都在0和1之间，拟合了概率，就是拟合了判定条件。 二. 具体做法 我们知道线性回归是这样子的： 将Sigmoid函数加载到这个结果上，不就是将结果0-1概率化了么： 所以是这样子的：\n三. 损失函数 这样一来针对已有数据那就是0\/1问题，要么概率为1的数据，要么概率为0的数据：\n对于我们来说概率可以简写合并成： 取其似然函数： 我们要做的是在最大似然估计就是求使 L(θ )取最大值时的θ 这里可以自己做主，我选用下面作为损失函数，要是最大似然估计最大，就要使J(θ)函数最小，通过不断的优化θ使得J函数最小，进而L函数概率最大，完成任务。 四. 求解过程 1. 梯度下降法： 2. 矩阵法： 通过依次求解A，E, θ得到最终解。（A为线性回归的θ*X）\n参考： 逻辑回归 逻辑回归模型(Logistic Regression, LR)基础 - 文赛平 机器学习—逻辑回归理论简介",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-logistic-regression\/",
+    "wordCount" : "45",
+    "keywords" : [ "ML, logistic", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">逻辑回归</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>链接:
+<a href="http://www.jianshu.com/p/25d650e5cb59" rel="nofollow noreferrer" target="_blank">1. 线性回归总结</a>
+<a href="http://www.jianshu.com/p/dda5eb64f425" rel="nofollow noreferrer" target="_blank">2. 正则化</a>
+<a href="http://www.jianshu.com/p/5ccc01385f40" rel="nofollow noreferrer" target="_blank">3. 逻辑回归</a>
+<a href="http://www.jianshu.com/p/7128dde2af6f" rel="nofollow noreferrer" target="_blank">4. Boosting</a>
+<a href="http://www.jianshu.com/p/b3f189767ad3" rel="nofollow noreferrer" target="_blank">5. Adaboost算法</a></p>
+
+<hr />
+
+<p>线性回归是通过拟合来达到目的，而逻辑回归呢侧重的是探寻概率，它不去寻找拟合的超平面，而是去寻找某个数据的类别归属问题。</p>
+
+<h2 id="一-预测函数">一. 预测函数</h2>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-5c59b3157c894162.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Sigmoid函数" class="lazyload"><figcaption class="image-caption">Sigmoid函数</figcaption></figure>
+怎么去预测？我们知道Sigmoid函数是如上这样的，它的表现是：将数据归纳在0-1之间，那么我们能不能通过去计算出的结果去拟合这样一个概率，使之成为一种分类的依据？答案是肯定的。凡事的概率都在0和1之间，拟合了概率，就是拟合了判定条件。
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-c6bb6e213e44e023.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png" class="lazyload"><figcaption class="image-caption">Paste_Image.png</figcaption></figure></p>
+
+<h2 id="二-具体做法">二. 具体做法</h2>
+
+<p>我们知道线性回归是这样子的：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-565cc6d9fc3faee1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+将Sigmoid函数加载到这个结果上，不就是将结果0-1概率化了么：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-ab8f313c8197ff8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="逻辑回归表达式" class="lazyload"><figcaption class="image-caption">逻辑回归表达式</figcaption></figure>
+所以是这样子的：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-2d1fa60f7cf7603c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="回归对比" class="lazyload"><figcaption class="image-caption">回归对比</figcaption></figure></p>
+
+<h2 id="三-损失函数">三. 损失函数</h2>
+
+<p>这样一来针对已有数据那就是0/1问题，要么概率为1的数据，要么概率为0的数据：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-1f60b3545160cf7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="样本评判" class="lazyload"><figcaption class="image-caption">样本评判</figcaption></figure></p>
+
+<p>对于我们来说概率可以简写合并成：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-51dee1961aa7c869.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+取其似然函数：
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-c0f75e10e16945bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+我们要做的是在最大似然估计就是求使 L(θ )取最大值时的θ
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-555314c1e307d924.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对数函数" class="lazyload"><figcaption class="image-caption">对数函数</figcaption></figure>
+这里可以自己做主，我选用下面作为损失函数，要是最大似然估计最大，就要使J(θ)函数最小，通过不断的优化θ使得J函数最小，进而L函数概率最大，完成任务。
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-71dee2fb29891cc4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="损失函数" class="lazyload"><figcaption class="image-caption">损失函数</figcaption></figure></p>
+
+<h2 id="四-求解过程">四. 求解过程</h2>
+
+<h3 id="1-梯度下降法">1. 梯度下降法：</h3>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-01c8694cdd246ef6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="迭代函数" class="lazyload"><figcaption class="image-caption">迭代函数</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-0d89fe43f219754b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="具体求解" class="lazyload"><figcaption class="image-caption">具体求解</figcaption></figure></p>
+
+<h3 id="2-矩阵法">2. 矩阵法：</h3>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-bce9b8bbf198b2f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="求解过程" class="lazyload"><figcaption class="image-caption">求解过程</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-990451f1c8336281.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="最终公式" class="lazyload"><figcaption class="image-caption">最终公式</figcaption></figure>
+通过依次求解A，E, θ得到最终解。（A为线性回归的θ*X）</p>
+
+<p>参考：
+<a href="http://blog.csdn.net/pakko/article/details/37878837" rel="nofollow noreferrer" target="_blank">逻辑回归</a>
+<a href="http://www.tuicool.com/articles/auQFju" rel="nofollow noreferrer" target="_blank">逻辑回归模型(Logistic Regression, LR)基础 - 文赛平</a>
+<a href="http://www.mamicode.com/info-detail-501714.html" rel="nofollow noreferrer" target="_blank">机器学习—逻辑回归理论简介</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-logistic-regression/>https://ottsion.github.io/2017/2017-05-11-logistic-regression/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/ml-logistic/">
+                    #ML, logistic</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-14-moveit-01/" class="prev" rel="prev" title="ROS moveit随便看看源码"><i class="iconfont icon-left"></i>&nbsp;ROS moveit随便看看源码</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-linear-regression/" class="next" rel="next" title="线性回归">线性回归&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

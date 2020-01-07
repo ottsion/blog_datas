@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>杂记 on 静心明志</title>
+    <link>https://ottsion.github.io/categories/%E6%9D%82%E8%AE%B0/</link>
+    <description>Recent content in 杂记 on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Dec 2016 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/categories/%E6%9D%82%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>git的使用</title>
+      <link>https://ottsion.github.io/2016/2016-12-21-how-to-use-git/</link>
+      <pubDate>Wed, 21 Dec 2016 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2016/2016-12-21-how-to-use-git/</guid>
+      <description>本篇主要说明git基础用法，随着我用，不断加吧
+ 登陆账户 首先最好登陆账户，之后用来上传下载很方便了
+git config --global user.name &amp;quot;your_username&amp;quot; git config --global user.email your_email@domain.com  创建一个本地代码库 转到需要的地址，然后初始化环境，Git会在saveFile文件夹内创建一个名为.git的隐藏文件夹，那就是你的本地代码库。
+cd d:\saveFile\ git init  加载修改文件 在仓库目录或者当前目录下，有全部加载和部分加载
+git add . //全部加载 git add my_file, my_other_file //部分加载  提交文件 提交之前先写注释，修改文档的说明，然后查看当前状态，最后提交
+git commit -m &amp;quot;initial commit&amp;quot; git status git push origin master  回滚到之前的提交状态 查看版本信息，然后选择ID迁出
+git log  显示：
+commit ca82a6dff817ec66f44342007202690a93763949Author: your_username your_email@domain.comDate: Mon Nov 4 12:52:11 2013 -0700 changes the frontpage layout commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7Author: your_username your_email@domain.</description>
+    </item>
+    
+    <item>
+      <title>第一篇测试样本</title>
+      <link>https://ottsion.github.io/2016/2016-12-21-test/</link>
+      <pubDate>Wed, 21 Dec 2016 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2016/2016-12-21-test/</guid>
+      <description>这是摘要部分的内容，将会显示在上面，模板套用的别人的，看着很喜欢。
+ 标题正文 正常显示部分，会显示正文
+编写代码 正常显示部分，会显示正文
+小标题 文章正文，一下为代码格式
+#include&amp;lt;stdio.h&amp;gt; int main() { print(&amp;quot;hello&amp;quot;); }  小标题 sudo apt-get insatll libdev
+小标题 我们直接看下onLayout的代码：
+X = np.array([ [0,0,1],[0,1,1],[1,0,1],[1,1,1] ]) y = np.array([[0,1,1,0]]).T syn0 = 2*np.random.random((3,4)) - 1 syn1 = 2*np.random.random((4,1)) - 1 for j in xrange(60000): l1 = 1/(1+np.exp(-(np.dot(X,syn0)))) l2 = 1/(1+np.exp(-(np.dot(l1,syn1)))) l2_delta = (y - l2)*(l2*(1-l2)) l1_delta = l2_delta.dot(syn1.T) * (l1 * (1-l1)) syn1 += l1.T.dot(l2_delta) syn0 += X.T.dot(l1_delta)  再有：</description>
+    </item>
+    
+  </channel>
+</rss>

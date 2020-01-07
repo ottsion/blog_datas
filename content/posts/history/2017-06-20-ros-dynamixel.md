@@ -92,7 +92,7 @@ ID 搜索默认从1~25 若查找不到，可以更改controller_manager.launch�
     <!-- -*- mode: XML -*- -->
     <launch>
         <!-- Load controller configuration to parameter server -->
-        <rosparam file="$(find dynamixel_tutorials)/config/dynamixel_joint_controllers.yaml" command="load"/>
+<rosparamfile="$(finddynamixel_tutorials)/config/dynamixel_joint_controllers.yaml"command="load"/>
 
         <!-- start specified joint controllers -->
         <node name="dynamixel_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"

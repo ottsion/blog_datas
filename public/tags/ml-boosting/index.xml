@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ml, Boosting on 静心明志</title>
+    <link>https://ottsion.github.io/tags/ml-boosting/</link>
+    <description>Recent content in ml, Boosting on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 May 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/ml-boosting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Boosting算法</title>
+      <link>https://ottsion.github.io/2017/2017-05-11-boosting/</link>
+      <pubDate>Thu, 11 May 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-05-11-boosting/</guid>
+      <description>链接: 1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法
+模型来源 提升算法是常用的有效的统计学习算法，属于迭代算法，它通过不断地使用一个弱学习器弥补前一个弱学习器的“不足”的过程，来串行地构造一个较强的学习器，这个强学习器能够使目标函数值足够小。从优化的角度分析，与一般的在参数空间搜索最优解的学习算法（如神经网络）类似，Boosting也是一个迭代搜索，且最优的算法，不同的是，它的搜索空间是学习器空间，或说函数空间（Function space），它的搜索方向是构造不断完善的强学习器，以达到目标函数（或说误差函数）足够小的目的。 Bagging也是一种常用的统计学习方法，两者经常放在一起对比，它们不同的是，Bagging将在Bootstrap采样得到的不同训练子集上的弱学习器的结果综合考虑，各个弱学习器的构建过程是并行的。而Boosting是通过串行地不断迭加弱学习器形成一个强学习器，是学习模型的提升过程。此外，Boosting迭代在降低训练误差的同时，使模型预测的确信度（margin）不断提高，是它获得较好泛化能力的主要原因，而Bagging主要是通过平均来降低模型的方差(variation).
+example 为说明Boosting的主要过程，下面举一个简化的例子。 假设训练数据集为(x1,y1),(x2,y2),&amp;hellip;,(xn,yn)我们的任务是寻找使这个回归问题的均方误差最小的模型F(x). 如果已经有一个初始的模型f,且f(x1)=0.8,但y1=0.9 ,f(x2)=1.4,但y2=1.3 …显然f是不完美的，我们可以采用不断完善f的方式,如不断在f的基础上增加模型（如决策树）h,即：f(x)←f(x)+h(x),使f 趋于F. 我们希望： f(x1)+h(x1)=y1 ====&amp;gt; h(x1)=y1−f(x1) f(x2)+h(x2)=y2 ====&amp;gt; h(x2)=y2−f(x2) ... ====&amp;gt; ... f(xn)+h(xn)=yn ====&amp;gt; h(xn)=yn−f(xn)  然而恰好满足上式的h可能不存在，但我们总可以找到使残差yi−f(xi)变小的h. 上述过程等价于拟合如下数据集：
+(x1,y1−f(x1)) (x2,y2−f(x2)) ... (xn,yn−f(xn))  上述一次叠加h的过程就是Boosting的一次迭代。要使f足够接近F一般需要多次迭代。
+依据损失函数的不同具体分类有：
+链接:关于AdaBoost的算法推导
+Gradient Boosting 和Adaboost不同，Gradient Boosting 在迭代的时候选择梯度下降的方向来保证最后的结果最好。 损失函数用来描述模型的“靠谱”程度，假设模型没有过拟合，损失函数越大，模型的错误率越高 如果我们的模型能够让损失函数持续的下降，则说明我们的模型在不停的改进，而最好的方式就是让损失函数在其梯度方向上下降。 import numpy as np import matplotlib.pyplot as plt from sklearn import ensemble from sklearn import datasets from sklearn.</description>
+    </item>
+    
+  </channel>
+</rss>

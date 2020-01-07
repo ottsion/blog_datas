@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2016/2016-12-21-kalman-filter/" />
+  <link rel="next" href="https://ottsion.github.io/2016/2016-12-21-how-to-use-git/" />
+  <link rel="canonical" href="https://ottsion.github.io/2016/2016-12-21-harris-feature-detect/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Harris角点检测基础原理和效果 | 静心明志
+       
+  </title>
+  <meta name="title" content="Harris角点检测基础原理和效果 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Harris角点检测基础原理和效果",
+    "headline" : "Harris角点检测基础原理和效果",
+    "description" : "学习opencv系列， feature2d 模块. 2D特征框架框架下面，Harris 角点检测子部分\n 图像特征及类型 在计算机视觉中，我们通常需要寻找两张图上的匹配关键点。为什么？因为一旦我们知道了两张图是相关联的，我 们就可以使用 *both 图像来提取它们中的信息。 匹配关键点 是指在场景中可以很容易识别出来的特性 . 这些特性就是这里所说的特征 。因此,特征应该有什么样的特性呢?应该具有可识别的 独一无二 性。\n图像特征类型:\n 边缘 角点 (感兴趣关键点) 斑点(Blobs) (感兴趣区域)  这里Harris 角点检测子计算的是角点特征。\n图像特征为什么可以使用角点，因为角点是两个边缘的连接点，它代表了两个边缘变化的方向上的点。图像梯度有很高的变化。这种变化是可以用来帮助检测角点的。\n特征检测原理 由于角点代表了图像像素梯度变化，我们将寻找这个”变化”。 考虑到一个灰度图像I.划动窗口w(x,y)(with displacements u 在x方向和 v 方向)I计算像素灰度变化。\n其中:\n w(x,y) is the window at position (x,y) I(x,y) is the intensity at (x,y) I(x\x2bu,y\x2bv) is the intensity at the moved window (x\x2bu,y\x2bv)  为了寻找带角点的窗口，我们搜索像素灰度变化较大的窗口。于是, 我们期望最大化以下式子:\n使用 泰勒(Taylor)展开式:\n式子可以展开为:\n一个举证表达式可以写为:",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2016",
+    "datePublished": "2016-12-21 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2016-12-21 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2016\/2016-12-21-harris-feature-detect\/",
+    "wordCount" : "274",
+    "keywords" : [ "opencv,图像处理", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Harris角点检测基础原理和效果</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2016-12-21 itemprop="datePublished">December 21, 2016</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<blockquote>
+<p>学习opencv系列， feature2d 模块. 2D特征框架框架下面，Harris 角点检测子部分</p>
+</blockquote>
+
+<h2 id="图像特征及类型">图像特征及类型</h2>
+
+<p>在计算机视觉中，我们通常需要寻找两张图上的匹配关键点。为什么？因为一旦我们知道了两张图是相关联的，我 们就可以使用 *both 图像来提取它们中的信息。 <strong>匹配关键点</strong> 是指在场景中可以很容易识别出来的特性 . 这些特性就是这里所说的特征 。因此,特征应该有什么样的特性呢?应该具有可识别的 <strong>独一无二</strong> 性。</p>
+
+<p>图像特征类型:</p>
+
+<ul>
+<li>边缘</li>
+<li>角点 (感兴趣关键点)</li>
+<li>斑点(Blobs) (感兴趣区域)</li>
+</ul>
+
+<p>这里<strong>Harris 角点检测子</strong>计算的是角点特征。</p>
+
+<p>图像特征为什么可以使用角点，因为角点是两个边缘的连接点，它代表了两个边缘变化的方向上的点。图像梯度有很高的变化。这种变化是可以用来帮助检测角点的。</p>
+
+<h2 id="特征检测原理">特征检测原理</h2>
+
+<p>由于角点代表了图像像素梯度变化，我们将寻找这个”变化”。
+考虑到一个灰度图像I.划动窗口w(x,y)(with displacements u 在x方向和 v 方向)I计算像素灰度变化。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/fAVd2FN.png" alt="公式" class="lazyload"><figcaption class="image-caption">公式</figcaption></figure></p>
+
+<p>其中:</p>
+
+<ol>
+<li>w(x,y) is the window at position (x,y)</li>
+<li>I(x,y) is the intensity at (x,y)</li>
+<li>I(x+u,y+v) is the intensity at the moved window (x+u,y+v)</li>
+</ol>
+
+<p>为了寻找带角点的窗口，我们搜索像素灰度变化较大的窗口。于是, 我们期望最大化以下式子:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/DY8qTHR.png" alt="公式2" class="lazyload"><figcaption class="image-caption">公式2</figcaption></figure></p>
+
+<p>使用 泰勒(Taylor)展开式:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/BN6HoH6.png" alt="公式3" class="lazyload"><figcaption class="image-caption">公式3</figcaption></figure></p>
+
+<p>式子可以展开为:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/oeXrVia.png" alt="公式4" class="lazyload"><figcaption class="image-caption">公式4</figcaption></figure></p>
+
+<p>一个举证表达式可以写为:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/02o30xI.png" alt="公式5" class="lazyload"><figcaption class="image-caption">公式5</figcaption></figure></p>
+
+<p>表示为:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/TWVrGlv.png" alt="公式6" class="lazyload"><figcaption class="image-caption">公式6</figcaption></figure></p>
+
+<p>因此我们有等式:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/RoMrrNw.png" alt="公式7" class="lazyload"><figcaption class="image-caption">公式7</figcaption></figure></p>
+
+<p>每个窗口中计算得到一个值。这个值决定了这个窗口中是否包含了角点:</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/NY9zjwF.png" alt="公式8" class="lazyload"><figcaption class="image-caption">公式8</figcaption></figure></p>
+
+<p>其中:</p>
+
+<ol>
+<li>det(M) = \lambda<em>{1}\lambda</em>{2}</li>
+<li>trace(M) = \lambda<em>{1}+\lambda</em>{2}</li>
+</ol>
+
+<p>一个窗口，它的分数 R 大于一个特定值，这个窗口就可以被认为是&rdquo;角点&rdquo;</p>
+
+<h2 id="效果演示代码">效果演示代码</h2>
+
+<pre><code>#include &quot;opencv2/highgui.hpp&quot;
+#include &quot;opencv2/imgproc/imgproc.hpp&quot;
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+using namespace std;
+using namespace cv;
+
+Mat src, src_gray;
+int thresh = 200;
+int max_thresh = 255;
+
+char* source_window = &quot;Source image&quot;;
+char* corners_window = &quot;Corners detected&quot;;
+
+void cornerHarris_demo( int , void* );
+
+int main(int argc, char** argv)
+{
+    argv[1] = &quot;C:/Users/SUNFC/Pictures/22.jpg&quot;;
+    /// Load source image and convert it to gray
+    src = imread( argv[1], 1);
+    cvtColor( src, src_gray, CV_BGR2GRAY);
+
+    /// Create a window and a trackbar
+    namedWindow( source_window, CV_WINDOW_AUTOSIZE);
+    createTrackbar(&quot;Threshold:&quot;, source_window, &amp;thresh, max_thresh, cornerHarris_demo);
+    imshow( source_window,src);
+    cornerHarris_demo(0,0);
+
+    waitKey(0);
+    return 0;
+
+}
+
+void cornerHarris_demo(int, void*)
+{
+    Mat dst, dst_norm, dst_norm_scaled;
+    dst = Mat::zeros(src.size(), CV_32FC1);
+
+    /// Detector parameters
+    int blockSize = 2;
+    int apertureSize = 3;
+    double k = 0.04;
+
+    /// Detecting corners
+    cornerHarris( src_gray, dst, blockSize, apertureSize, k , BORDER_DEFAULT);
+
+    /// Normalizing
+    normalize(dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+    convertScaleAbs(dst_norm, dst_norm_scaled);
+
+    /// Drawing a circle around corners
+    for (int j = 0; j &lt; dst_norm.rows; j++)
+    {
+        for (int i = 0; i &lt; dst_norm.cols; i++)
+        {
+            if ((int)dst_norm.at&lt;float&gt;(j, i) &gt; thresh)
+            {
+                circle(dst_norm_scaled, Point(i, j), 5, Scalar(0), 2, 8, 0);
+            }
+        }
+    }
+    /// Showing the result
+    namedWindow(corners_window, CV_WINDOW_AUTOSIZE);
+    imshow(corners_window, dst_norm_scaled);
+}
+</code></pre>
+
+<p>结果：</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/kqlq0CR.png" alt="结果1" class="lazyload"><figcaption class="image-caption">结果1</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://i.imgur.com/LKGaXrj.png" alt="结果2" class="lazyload"><figcaption class="image-caption">结果2</figcaption></figure></p>
+
+<p>后续慢慢加入详解&hellip;.</p>
+
+<p>学习来源：</p>
+
+<p>opencv:<a href="http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/features2d/trackingmotion/harris_detector/harris_detector.html#harris-detector" rel="nofollow noreferrer" target="_blank">链接地址</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2016/2016-12-21-harris-feature-detect/>https://ottsion.github.io/2016/2016-12-21-harris-feature-detect/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                    #opencv,图像处理</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2016/2016-12-21-kalman-filter/" class="prev" rel="prev" title="卡尔曼滤波算法理论"><i class="iconfont icon-left"></i>&nbsp;卡尔曼滤波算法理论</a>
+         
+        
+        <a href="https://ottsion.github.io/2016/2016-12-21-how-to-use-git/" class="next" rel="next" title="git的使用">git的使用&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

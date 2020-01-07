@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-5/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           opencv视觉编程学习第二部分代码 | 静心明志
+       
+  </title>
+  <meta name="title" content="opencv视觉编程学习第二部分代码 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "opencv视觉编程学习第二部分代码",
+    "headline" : "opencv视觉编程学习第二部分代码",
+    "description" : "星期二, 10. 一月 2017 01:44下午\n 这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况\n 代码学习 #include\x26lt;iostream\x26gt; #include\x26lt;string\x26gt; #include\x26lt;opencv2\/core\/core.hpp\x26gt; #include\x26lt;opencv2\/highgui\/highgui.hpp\x26gt; const std::string imageAddr = \x26quot;\/home\/ottsion\/Pictures\/opencvImage\/hua.jpg\x26quot;; \/\/测试函数，创建一个图像 cv::Mat function(){ cv::Mat ima(500, 500, CV_8U, 50); return ima; } int main() { cv::namedWindow(\x26quot;Image 1\x26quot;); cv::namedWindow(\x26quot;Image 2\x26quot;); cv::namedWindow(\x26quot;Image 3\x26quot;); cv::namedWindow(\x26quot;Image 4\x26quot;); cv::namedWindow(\x26quot;Image 5\x26quot;); cv::namedWindow(\x26quot;Image\x26quot;); \/\/创建一个240*320的新图像 cv::Mat image1(240, 320, CV_8U, 100); cv::imshow(\x26quot;Image\x26quot;, image1); cv::waitKey(0); \/\/重新分配一个新的图像 image1.create(200, 200, CV_8U); image1 = 200; cv::imshow(\x26quot;Image\x26quot;, image1); cv::waitKey(0); \/\/创建一个红色的图像，通道依次为BGR cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255)); \/\/或者 \/\/cv::Mat image2(cv::Size(320, 240), CV_8UC3); \/\/image2 = cv::Scalar(0, 0, 255)； cv::imshow(\x26quot;Image\x26quot;, image2); cv::waitKey(0); \/\/读入一个图像 cv::Mat image3 = cv::imread(imageAddr); \/\/所有图像指向同一个数据块 cv::Mat image4(image3); image1 = image3; \/\/这些图像都是原图像的副本 image3.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-10 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-10 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-10-opencv-cookbook-2\/",
+    "wordCount" : "142",
+    "keywords" : [ "opencv,图像处理", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">opencv视觉编程学习第二部分代码</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-10 itemprop="datePublished">January 10, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<hr />
+
+<p>星期二, 10. 一月 2017 01:44下午</p>
+
+<blockquote>
+<p>这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况</p>
+</blockquote>
+
+<hr />
+
+<h2 id="代码学习">代码学习</h2>
+
+<pre><code class="language-C++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;opencv2/core/core.hpp&gt;
+#include&lt;opencv2/highgui/highgui.hpp&gt;
+const std::string imageAddr = &quot;/home/ottsion/Pictures/opencvImage/hua.jpg&quot;;
+
+
+//测试函数，创建一个图像
+cv::Mat function(){
+  cv::Mat ima(500, 500, CV_8U, 50);
+  return ima;
+}
+
+int main()
+{
+  cv::namedWindow(&quot;Image 1&quot;);
+  cv::namedWindow(&quot;Image 2&quot;);
+  cv::namedWindow(&quot;Image 3&quot;);
+  cv::namedWindow(&quot;Image 4&quot;);
+  cv::namedWindow(&quot;Image 5&quot;);
+  cv::namedWindow(&quot;Image&quot;);
+  
+  //创建一个240*320的新图像
+  cv::Mat image1(240, 320, CV_8U, 100);
+  cv::imshow(&quot;Image&quot;, image1);
+  cv::waitKey(0);
+  
+  //重新分配一个新的图像
+  image1.create(200, 200, CV_8U);
+  image1 = 200;
+  
+  cv::imshow(&quot;Image&quot;, image1);
+  cv::waitKey(0);
+  
+  //创建一个红色的图像，通道依次为BGR
+  cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255));
+  //或者
+  //cv::Mat image2(cv::Size(320, 240), CV_8UC3);
+  //image2 =  cv::Scalar(0, 0, 255)；
+  cv::imshow(&quot;Image&quot;, image2);
+  cv::waitKey(0);
+  
+  //读入一个图像
+  cv::Mat image3 = cv::imread(imageAddr);
+  
+  //所有图像指向同一个数据块
+  cv::Mat image4(image3);
+  image1 = image3;
+  
+  //这些图像都是原图像的副本
+  image3.copyTo(image2);
+  cv::Mat image5 = image3.clone();
+  
+  //转换图像用来测试
+  cv::flip(image3, image3, 1);
+  
+  //检查哪些图像在这个过程中受损
+  cv::imshow(&quot;Image 3&quot;, image3);
+  cv::imshow(&quot;Image 1&quot;, image1); 
+  cv::imshow(&quot;Image 2&quot;, image2);
+  cv::imshow(&quot;Image 4&quot;, image4);
+  cv::imshow(&quot;Image 5&quot;, image5);
+  cv::waitKey(0);
+  
+  //从函数中获取一个灰度图像
+  cv::Mat gray = function();
+  cv::imshow(&quot;Image&quot;, gray);
+  cv::waitKey(0);
+  
+  //作为灰度图像读入
+  image1 = cv::imread(imageAddr, CV_LOAD_IMAGE_GRAYSCALE);
+  image1.convertTo(image2, CV_32F, 1/255.0, 0.0);
+  cv::imshow(&quot;Image&quot; ,image2);
+  cv::waitKey(0);
+  
+  return 0;
+}
+
+
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/opencv%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+                    #opencv,图像处理</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-5/" class="prev" rel="prev" title="opencv视觉编程学习第五部分代码"><i class="iconfont icon-left"></i>&nbsp;opencv视觉编程学习第五部分代码</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/" class="next" rel="next" title="opencv视觉编程学习第三部分代码">opencv视觉编程学习第三部分代码&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

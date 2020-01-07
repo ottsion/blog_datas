@@ -23,7 +23,7 @@ tags: ["ros, ssh"]
 使用如下指令，分别打开 hosts 文件：
 
 ```
-$ sudo gedit /etc/hosts
+$sudogedit/etc/hosts
 ```
 
 在**电脑desktop_hostname端**的 hosts文件 中添加如下加粗指令:

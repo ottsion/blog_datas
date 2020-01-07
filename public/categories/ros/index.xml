@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ros on 静心明志</title>
+    <link>https://ottsion.github.io/categories/ros/</link>
+    <description>Recent content in Ros on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Jun 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/categories/ros/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>先锋机器人下gmapping测试运行</title>
+      <link>https://ottsion.github.io/2017/2017-06-25-ros-gmapping-slam-with-laser/</link>
+      <pubDate>Sun, 25 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-25-ros-gmapping-slam-with-laser/</guid>
+      <description>配置前期 这里是我的机器人和电脑环境安装步骤，以下激光slam测试前提是进行了先锋机器人使用手册 的所有包安装及运行测试
+下载gmapping包  sudo apt-get install ros-indigo-slam-gmapping  运行步骤  笔记本端启动
+roscore  远程ssh连接到机器人，启动机器人：
+ssh robot@pioneer rosrun rosaria ROSAria _port:=/dev/ttyS0   如果遇到权限问题参考上一篇：sudo chmod a+rw /dev/ttyS0
+ 启动激光数据，发送topic为/scan :
+rosrun lms1xx LMS1xx_node _host:=192.168.0.1   这里注意之前说过激光和机器人也是通过网线连接，各自有ip地址，所以我是在机器人端启动的激光指令。（先决条件是激光和机器人连接已经设置好，相关两者网络连接看先锋机器人使用手册）
+ 笔记本端启动gmapping程序：
+rosrun gmapping slam_gmapping scan:=scan   前面说过我的激光数据topic是/scan 。
+ 这里通过rviz查看效果：
+rosrun rviz rviz   选择添加/map 查看，topic选择/map ，选好fixed_frame 。
+如果出现状态错误，可能是因为你的激光与世界坐标间没有tf转换，可以添加启动：
+ &amp;lt;launch&amp;gt; &amp;lt;node pkg=&amp;quot;tf&amp;quot; type=&amp;quot;static_transform_publisher&amp;quot; name=&amp;quot;map_nav_broadcaster&amp;quot; args=&amp;quot;0 0 0 0 0 0 /base_link /laser 100&amp;quot; /&amp;gt; &amp;lt;/launch&amp;gt;   这时候我们可以启动让小车运动</description>
+    </item>
+    
+    <item>
+      <title>先锋机器人使用手册</title>
+      <link>https://ottsion.github.io/2017/2017-06-24-pioneer-laser/</link>
+      <pubDate>Sat, 24 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-24-pioneer-laser/</guid>
+      <description>先锋机器人使用手册 前期准备 我们这里说的环境是Ubuntu14.04，ROS-indigo版本，将pioneer机器人装入Ubuntu系统后用笔记本电脑实现控制。详细情况可以参考： ROS和pioneer ROS 。
+软件安装 安装Ubuntu  制作Ubuntu14.04 的U盘启动器后，记得找个含有$F_n$ 的键盘，使用快捷键进入机器人bios系统选择U盘启动。 如果是双系统记得安装过程中选择硬盘时为something else ，自己划分各盘容量。 选择实验室wifi链接，方便后期直接笔记本控制。  安装ROS 这里选用 indigo版本的ROS操作系，下面链接为官方安装地址，按照操作走完就可以了：官方地址
+安装完毕后强烈建议学习初步教程，大概是十几篇简短文章，学完后掌握基本ROS下开发方法，了解ROS构成：Tutorials
+安装ROSARIA ROSARIA 提供了一个移动机器人与ROS平台的接口，通过它你可以实现与机器人的互动，所以第一步学习就是要安装好它。
+ 其中需要在pioneer 官网 安装ARIA 2.9.1-Ubuntu 12.04.2 (precise) or later, amd 64-bit architecture 千万不要忘记了，这是驱动的底层实现，没有这个只安装ROSARIA是不行的。这个选择sudo dpkg -i 安装方式。最终文件安装在/usr/local/下面。  具体安装步骤可以参考：这里
+1) 创建工作空间，如果有了直接走 2). $ . /opt/ros/indigo/setup.bash $ mkdir -p ~/catkin_ws/src $ cd ~/catkin_ws/src $ catkin_init_workspace $ cd ~/catkin_ws $ catkin_make $ cd ~/catkin_ws/src 2) 安装rosaria包: $ git clone https://github.</description>
+    </item>
+    
+    <item>
+      <title> ROS多电脑之间的通信</title>
+      <link>https://ottsion.github.io/2017/2017-06-22-ssh-ubuntu/</link>
+      <pubDate>Thu, 22 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-22-ssh-ubuntu/</guid>
+      <description>最终要实现在 desktop_hostname 电脑上运行roscore，并且运行 Turtlesim 程序，然后在 laptop_hostname 电脑上运行键盘控制程序，控制 Turtlesim 小乌龟移动。
+在pioneer中将机器人端视为desktop_hostname，自己的笔记本为B。
+一. 查看电脑ip  利用ifconfig查看ip地址。 利用hostname指令查看hostname。  二. 修改hosts文件 使用如下指令，分别打开 hosts 文件：
+$ sudo gedit /etc/hosts  在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:
+127.0.0.1　localhost 127.0.1.1 [ desktop_hostname ] [IP_A] [ desktop_hostname ] [IP_B] [ laptop_hostname ]  同理，在电脑laptop_hostname端的 hosts 文件中，加入如下加粗指令：
+127.0.0.1　localhost 127.0.1.1 [ laptop_hostname ] [IP_B] [ laptop_hostname ] [IP_A] [ desktop_hostname ]  三. 电脑之间通信  在两台电脑上装上chrony包，用于实现同步：
+sudo apt-get install chrony  安装ssh</description>
+    </item>
+    
+    <item>
+      <title> 先锋机器人在ROS上的安装</title>
+      <link>https://ottsion.github.io/2017/2017-06-22-pioneer-ros-setup/</link>
+      <pubDate>Thu, 22 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-22-pioneer-ros-setup/</guid>
+      <description>一. 安装Ubuntu 第一步首先需要给先锋机器人配置Ubuntu环境，这里选用Ubuntu14.04版本进行安装，安装步骤一般为：
+ 制作Ubuntu14.04的U盘启动器 进入先锋机器人BIOS界面设置U盘启动，这里我试了F2、Esc、F10、F12。。。。都没起作用，最后找了个带$F_n$ 的键盘，一通$F_n+Esc+shift+ctrl+Del+F12$ 结果进入了。。。具体不清楚哪个起作用了。 按照一般双系统做法进行了系统安装，记得选磁盘一定要选择other那个，别直接默认结果格式化了已有的磁盘。  官方
+二.安装ROS 安装原文：点击进入
+ Setup your sources.list Setup your computer to accept software from packages.ros.org.
+sudo sh -c &#39;echo &amp;quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&amp;quot; &amp;gt; /etc/apt/sources.list.d/ros-latest.list&#39;  Set up your keys
+sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116  Installation
+sudo apt-get update sudo apt-get install ros-indigo-desktop-full apt-cache search ros-indigo sudo rosdep init rosdep update echo &amp;quot;source /opt/ros/indigo/setup.bash&amp;quot; &amp;gt;&amp;gt; ~/.</description>
+    </item>
+    
+    <item>
+      <title>三维刚体运动表示及其运算</title>
+      <link>https://ottsion.github.io/2017/2017-06-22-3d-gangti-yundong/</link>
+      <pubDate>Thu, 22 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-22-3d-gangti-yundong/</guid>
+      <description>三维刚体运动表示及其运算（李群李代数）  三维空间的刚体运动描述方式：旋转矩阵、变换矩阵、四元数和欧拉角。
+编程EIgen、soupha
+  向量加减法  $a \pm b = \sum_{i=0}^{n}{(a_i + b_i)} $
+ 向量内积  $a \bullet b = aTb = \sum{i=1}^{3}{a_i b_i} = |a||b| \cos\langle a,b \rangle$
+ 向量外积
+ $a \times b = \begin{bmatrix} i &amp;amp; j &amp;amp; k \ a_1 &amp;amp; a_2 &amp;amp; a_3 \ b_1 &amp;amp; b_2 &amp;amp; b_3 \end{bmatrix} = \begin{bmatrix} a_2 b_3 -a_3 b_2 \ a_3 b_1 - a_1 b_3 \ a_1 b_2 - a_2 b_1 \end{bmatrix} = \begin{bmatrix} 0 &amp;amp; -a_3 &amp;amp; a_2 \ a_3 &amp;amp; 0 &amp;amp; -a_1 \ -a_2 &amp;amp; a_1 &amp;amp; 0 \end{bmatrix} b \triangleq \hat a b $</description>
+    </item>
+    
+    <item>
+      <title> ROS中Dynamxel舵机控制</title>
+      <link>https://ottsion.github.io/2017/2017-06-20-ros-dynamixel/</link>
+      <pubDate>Tue, 20 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-20-ros-dynamixel/</guid>
+      <description>​
+1 拷贝程序文件  cd ~/joey_ws/src git clone https://github.com/arebgun/dynamixel_motor.git
+ 2 编译文件  cd ~/joey_ws catkin_make
+ 3 设置启动驱动launch文件  vim ~/joey_ws/src/dynamixel_motor/dynamixel_tutorials/launch/controller_manager.launch
+  &amp;lt;!-- -*- mode: XML -*- --&amp;gt; &amp;lt;launch&amp;gt; &amp;lt;node name=&amp;quot;dynamixel_manager&amp;quot; pkg=&amp;quot;dynamixel_controllers&amp;quot; type=&amp;quot;controller_manager.py&amp;quot; required=&amp;quot;true&amp;quot; output=&amp;quot;screen&amp;quot;&amp;gt; &amp;lt;rosparam&amp;gt; namespace: dxl_manager serial_ports: pan_tilt_port: port_name: &amp;quot;/dev/ttyUSB0&amp;quot; baud_rate: 1000000 min_motor_id: 1 max_motor_id: 25 update_rate: 20 &amp;lt;/rosparam&amp;gt; &amp;lt;/node&amp;gt; &amp;lt;/launch&amp;gt;  4 运行驱动检测舵机 连接USB2Dynamixel 运行Dynamixel控制器 USB2Dynamixel连接USB接口，舵机连接USB2DYnamixel接口，舵机外部供电
+ roslaunch dynamixel_tutorials controller_manager.launch
+ ID 搜索默认从1~25 若查找不到，可以更改controller_manager.launch将ID搜索扩大</description>
+    </item>
+    
+    <item>
+      <title> KinectV2&#43;Ubuntu 14.04&#43;Ros 安装教程</title>
+      <link>https://ottsion.github.io/2017/2017-06-17-ros-kinectv2-setup/</link>
+      <pubDate>Sat, 17 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-17-ros-kinectv2-setup/</guid>
+      <description>前言 ​ 个人理解错误的地方还请不吝赐教，转载请标明出处，内容如有改动更新，请看原博：http://www.cnblogs.com/hitcm/
+​ Kinect V2在Ubuntu下的开发问题，首先需要弄清楚的是你的设备是V1还是V2，这两个的驱动是不能通用的。
+如下是V2（上）和V1（下）。看看自己的设备，然后再决定用哪个安装方案。
+​ 本文针对的是V2的情况。
+
+安装 1、首先git下载代码，很快下载好，放到~下面
+git clone https://github.com/OpenKinect/libfreenect2.git
+2、然后安装依赖项如下,最好事先编译安装好OpenCV
+sudo apt-get install build-essential cmake pkg-config libturbojpeg libjpeg-turbo8-dev mesa-common-dev freeglut3-dev libxrandr-dev libxi-dev
+3、然后安装libusb。此处需要添加一个PPA，就是下面的第一行命令，不然绝逼是装不上的。
+sudo apt-add-repository ppa:floe/libusb sudo apt-get update sudo apt-get install libusb-1.0-0-dev  4、接着运行下面的命令，安装GLFW3
+sudo apt-get install libglfw3-dev
+如果没有成功的话，使用下面的命令，来代替上面的
+cd libfreenect2/depends sh install_ubuntu.sh sudo dpkg -i libglfw3*_3.0.4-1_*.deb  5、然后安装OpenCL的支持库（不打算使用GPU，这一步直接跳过没做）
+6、接着编译库
+cd .. mkdir build &amp;amp;&amp;amp; cd build cmake .. make sudo make install  测试 最后可以运行程序.</description>
+    </item>
+    
+    <item>
+      <title> ROS学习之rqt_plot绘图</title>
+      <link>https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/</link>
+      <pubDate>Fri, 16 Jun 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/</guid>
+      <description>ROS学习之rqt_plot绘图  速度加速度、误差等的曲线图
+ 显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。
+后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。
+rostopic echo /joint_states &amp;gt; record2.txt
+1. 背景 因为在为youbot添加FollowJointTrajectory 的client之后，仿真环境中的动作与实际有出入，因此想看看机械臂的实际动作曲线。而在ROS中，内置的rqt_plot是可以提供绘图功能的，而后来发现rqt_plot的功能比较简单，随着数据量的增大，查看起来比较费劲。于是就有了后来的导入matlab中分析的部分。
+2.rqt_plot绘图 照例，我们找到官网的相关部分，有个基础理解：http://wiki.ros.org/rqt_plot
+rqt_plot /turtle1/pose/x:y:z rqt_plot /turtle1/pose/x /turtle1/pose/y /turtle1/pose/z  特别
+注意
+上面的第一句，它就是下面的简写，同一个topic下的直接冒号就好，不用输入那么多的文字。
+在这里我为了避免每次要去动机械臂，将joint_states这个topic的信息已经保存为了bag文件，录的动作是我上一篇文章，actionlib中的动作的一部分，大概是从home到伸直的一部分。使用指令（参看《a gentle introduction to ROS》P135页）
+-O(是字母O, 并非数字0，它表示输出文件（output），后面跟的是你的输出文件的名字，我这里是youbot_action2.bag)，下面是我的bag的一些基本信息： 一共21.1s，包含了861条信息 ![img](http://img.blog.csdn.net/20150506131445167) 我们查看一下数据内容 ![img](http://img.blog.csdn.net/20160118222946817) 然后开启一个terminal，回放数据rosbag play youbot_action2.bag --clock，--clock表示使用simulate time，具体可以参考[http://wiki.ros.org/Clock](http://wiki.ros.org/Clock) 。再打开另外一个，开启rqt_plot，用命令  rqt_plot /joint_states/velocity[0]:velocity[1]:velocity[2]:velocity[3]:velocity[4] ``` 因为，youbot机械臂是五个自由度，这里我们用标号0-4来引用每一个（用QwtPlot画出来的）
+用MatPlot画出来的，可以看出他们刚好是左右颠倒的，我们的这个bag文件，有大概20s。右键按住鼠标上下或左右滑动进行缩放。
+同理，我们也可以找出各个关节的一些信息：
+rqt_plot /joint_states/position[0]:position[1]:position[2]:position[3]:position[4]
+得到的图像
+图像很好看，但是实际分析起来是很头疼的，它只能是看个大概过程，了解基本曲线的动作和大概的规律，比如速度曲线的不平滑，关节位置曲线的大概变动范围（起始位置并不是0，依次是0.11，0.11，-0.11，0.11，0.12 rad）
+3.Matlab绘图 其实，这个地方我也走了点弯路的，当时我用命令 rostopic echo /joint_states
+显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。
+后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。
+rostopic echo /joint_states &amp;gt; record2.txt
+将txt文件拷贝出来到windows上，导入excel文件，然后借助Matlab分析（这里主要是用到了seq，position和velocity）</description>
+    </item>
+    
+    <item>
+      <title>ROS moveit随便看看源码</title>
+      <link>https://ottsion.github.io/2017/2017-01-14-moveit-01/</link>
+      <pubDate>Sat, 14 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-14-moveit-01/</guid>
+      <description>星期六, 14. 一月 2017 10:31上午
+ 主要看看路径规划在moveit里到底咋作的
+  利用moveit进行机械臂路径规划很简单，利用 moveit_commander.move_group.MoveGroupCommander类即可， 类中有go方法和plan、execute两种选择，今天看一下深入plan里面到底怎么写。
+ plan方法 def moveit_commander.move_group.MoveGroupCommander.plan ( self, joints = None )   Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) Definition at line 425 of file move_group.py.  进入代码发现写的是：
+ def plan(self, joints = None): &amp;quot;&amp;quot;&amp;quot; Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) &amp;quot;&amp;quot;&amp;quot; if type(joints) is JointState: self.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2019/%E6%96%B9%E6%B3%95%E8%B6%85%E6%97%B6%E6%94%BE%E5%BC%83%E6%89%A7%E8%A1%8C/" />
+  <link rel="next" href="https://ottsion.github.io/2019/%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AEapi/" />
+  <link rel="canonical" href="https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           js的ajax方式 | 静心明志
+       
+  </title>
+  <meta name="title" content="js的ajax方式 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "js的ajax方式",
+    "headline" : "js的ajax方式",
+    "description" : "JS通过ajax调用接口实现数据传送，第一种方式为设置button的点击onclick方法，第二种通过绑定bind点击事件获得访问\n用onclick方式：\n\x26lt;!DOCTYPE html\x26gt; \x26lt;html\x26gt; \x26lt;head\x26gt; \x26lt;meta http-equiv=\x26quot;content-type\x26quot; content=\x26quot;text\/html; charset=UTF-8\x26quot;\x26gt; \x26lt;meta name=\x26quot;viewport\x26quot; content=\x26quot;width=device-width, initial-scale=1\x26quot;\x26gt; \x26lt;!-- src值为文件位置路径 --\x26gt; \x26lt;script type=\x26quot;text\/javascript\x26quot; charset=\x26quot;UTF-8\x26quot; src=\x26quot;javascript\/jquery-1.12.1.js\x26quot;\x26gt;\x26lt;\/script\x26gt; \x26lt;title\x26gt;测试案例\x26lt;\/title\x26gt; \x26lt;!-- 语法：jQuery.getJSON(url,data,success(data,status,xhr)) --\x26gt; \x26lt;script type=\x26quot;text\/javascript\x26quot; charset=\x26quot;UTF-8\x26quot;\x26gt; function getToken(){ $.getJSON(\x26quot;http:\/\/localhost\/kdapi\/api\/access_token\x26quot;, {\x26quot;id\x26quot;:111,\x26quot;secret\x26quot;:2352532}, function(result){ alert(result.access_token); }); } \x26lt;\/script\x26gt; \x26lt;\/head\x26gt; \x26lt;body\x26gt; \x26lt;button onclick=\x26quot;getToken()\x26quot; style=\x26quot;width: 120px; height: 60px;\x26quot;\x26gt;获取Token\x26lt;\/button\x26gt; \x26lt;\/body\x26gt; \x26lt;\/html\x26gt;  ",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-05-08 14:01:43 \x2b0800 CST",
+    "dateModified" : "2019-05-08 14:01:43 \x2b0800 CST",
+    "url" : "https:\/\/ottsion.github.io\/2019\/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F\/",
+    "wordCount" : "47",
+    "keywords" : [ "html","web","ajax", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">js的ajax方式</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-05-08 itemprop="datePublished">May 8, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/web/"> web </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>JS通过ajax调用接口实现数据传送，第一种方式为设置button的点击<code>onclick</code>方法，第二种通过绑定<code>bind</code>点击事件获得访问</p>
+
+<p>用<code>onclick</code>方式：</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;!-- src值为文件位置路径 --&gt;
+    &lt;script type=&quot;text/javascript&quot; charset=&quot;UTF-8&quot; src=&quot;javascript/jquery-1.12.1.js&quot;&gt;&lt;/script&gt;
+    &lt;title&gt;测试案例&lt;/title&gt;
+    &lt;!-- 语法：jQuery.getJSON(url,data,success(data,status,xhr)) --&gt;
+    &lt;script type=&quot;text/javascript&quot; charset=&quot;UTF-8&quot;&gt;
+        function getToken(){
+            $.getJSON(&quot;http://localhost/kdapi/api/access_token&quot;, {&quot;id&quot;:111,&quot;secret&quot;:2352532}, function(result){
+                alert(result.access_token);
+            });
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;button onclick=&quot;getToken()&quot; style=&quot;width: 120px; height: 60px;&quot;&gt;获取Token&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/>https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/html/">
+                    #html</a></span>
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/web/">
+                    #web</a></span>
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/ajax/">
+                    #ajax</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2019/%E6%96%B9%E6%B3%95%E8%B6%85%E6%97%B6%E6%94%BE%E5%BC%83%E6%89%A7%E8%A1%8C/" class="prev" rel="prev" title="方法超时放弃执行"><i class="iconfont icon-left"></i>&nbsp;方法超时放弃执行</a>
+         
+        
+        <a href="https://ottsion.github.io/2019/%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AEapi/" class="next" rel="next" title="跨域访问api">跨域访问api&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

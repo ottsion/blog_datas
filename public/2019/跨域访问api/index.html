@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/" />
+  <link rel="next" href="https://ottsion.github.io/2019/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/" />
+  <link rel="canonical" href="https://ottsion.github.io/2019/%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AEapi/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           跨域访问api | 静心明志
+       
+  </title>
+  <meta name="title" content="跨域访问api | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "跨域访问api",
+    "headline" : "跨域访问api",
+    "description" : "主程序使用java构建了完整的算法，想快速通过简易前端实现效果可视化的时候产生了跨域访问失败问题，java部分api接口采用springboot快捷提供，前端采用python的flask快速开发。\n前端使用ajax访问其他web服务的后端接口时很容易出现因跨域访问而导致接口调用失败的问题，以下介绍如何使用CORS解决这两个框架的跨域访问问题。\nCORS是一种允许当前域（domain）的资源（比如html\/js\/web service）被其他域（domain）的脚本请求访问的机制，通常由于同域安全策略（the same-origin security policy）浏览器会禁止这种跨域请求。\n我们需要在两者分别修改代码实现跨域访问\nSpringBoot框架解决方案 在Application类(启动类)里增加CorsFilter的Bean的定义：\npackage com.ecm; import org.mybatis.spring.annotation.MapperScan; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.context.annotation.Bean; import org.springframework.web.cors.CorsConfiguration; import org.springframework.web.cors.UrlBasedCorsConfigurationSource; import org.springframework.web.filter.CorsFilter; @SpringBootApplication @MapperScan(\x26quot;com.ecm.dao\x26quot;) public class EcmApplication { public static void main(String[] args) { SpringApplication.run(EcmApplication.class, args); } @Bean public CorsFilter corsFilter() { final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); final CorsConfiguration config = new CorsConfiguration(); config.setAllowCredentials(true); \/\/ 允许cookies跨域 config.addAllowedOrigin(\x26quot;*\x26quot;);\/\/ #允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，会自动转成当前请求头中的Origin config.addAllowedHeader(\x26quot;*\x26quot;);\/\/ #允许访问的头信息,*表示全部 config.setMaxAge(18000L);\/\/ 预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了 config.addAllowedMethod(\x26quot;OPTIONS\x26quot;);\/\/ 允许提交请求的方法，*表示全部允许 config.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-05-08 14:18:53 \x2b0800 CST",
+    "dateModified" : "2019-05-08 14:18:53 \x2b0800 CST",
+    "url" : "https:\/\/ottsion.github.io\/2019\/%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AEapi\/",
+    "wordCount" : "106",
+    "keywords" : [ "api","ajax","java", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">跨域访问api</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2019-05-08 itemprop="datePublished">May 8, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/web/"> web </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>主程序使用java构建了完整的算法，想快速通过简易前端实现效果可视化的时候产生了跨域访问失败问题，java部分api接口采用springboot快捷提供，前端采用python的flask快速开发。</p>
+
+<p>前端使用ajax访问其他web服务的后端接口时很容易出现因跨域访问而导致接口调用失败的问题，以下介绍如何使用CORS解决这两个框架的跨域访问问题。</p>
+
+<p>CORS是一种允许当前域（domain）的资源（比如html/js/web service）被其他域（domain）的脚本请求访问的机制，通常由于同域安全策略（the same-origin security policy）浏览器会禁止这种跨域请求。</p>
+
+<p>我们需要在两者分别修改代码实现跨域访问</p>
+
+<h2 id="springboot框架解决方案">SpringBoot框架解决方案</h2>
+
+<p>在Application类(启动类)里增加CorsFilter的Bean的定义：</p>
+
+<pre><code class="language-java">package com.ecm;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+@SpringBootApplication
+@MapperScan(&quot;com.ecm.dao&quot;)
+public class EcmApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EcmApplication.class, args);
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true); // 允许cookies跨域
+        config.addAllowedOrigin(&quot;*&quot;);// #允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，会自动转成当前请求头中的Origin
+        config.addAllowedHeader(&quot;*&quot;);// #允许访问的头信息,*表示全部
+        config.setMaxAge(18000L);// 预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了
+        config.addAllowedMethod(&quot;OPTIONS&quot;);// 允许提交请求的方法，*表示全部允许
+        config.addAllowedMethod(&quot;HEAD&quot;);
+        config.addAllowedMethod(&quot;GET&quot;);// 允许Get的请求方法
+        config.addAllowedMethod(&quot;PUT&quot;);
+        config.addAllowedMethod(&quot;POST&quot;);
+        config.addAllowedMethod(&quot;DELETE&quot;);
+        config.addAllowedMethod(&quot;PATCH&quot;);
+        source.registerCorsConfiguration(&quot;/**&quot;, config);
+        return new CorsFilter(source);
+    }
+}
+</code></pre>
+
+<h2 id="flask框架解决方案">Flask框架解决方案</h2>
+
+<h3 id="安装flask-cors包">安装flask_cors包</h3>
+
+<p><code>pip install flask-cors</code></p>
+
+<h3 id="使用flask-cors包">使用flask_cors包</h3>
+
+<pre><code class="language-python">-*- coding: utf-8 -*-
+from flask import Flask
+from flask_cors import *
+app = Flask(__name__)
+CORS(app, supports_credentials=True)
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2019/%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AEapi/>https://ottsion.github.io/2019/%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AEapi/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/api/">
+                    #api</a></span>
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/ajax/">
+                    #ajax</a></span>
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/java/">
+                    #java</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/" class="prev" rel="prev" title="js的ajax方式"><i class="iconfont icon-left"></i>&nbsp;js的ajax方式</a>
+         
+        
+        <a href="https://ottsion.github.io/2019/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/" class="next" rel="next" title="11.盛最多水的容器">11.盛最多水的容器&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

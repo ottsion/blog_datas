@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>论文 on 静心明志</title>
+    <link>https://ottsion.github.io/tags/%E8%AE%BA%E6%96%87/</link>
+    <description>Recent content in 论文 on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Jan 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/%E8%AE%BA%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>基于 Kinect 的机器人臂手系统的目标抓取[丁美昆]</title>
+      <link>https://ottsion.github.io/2017/2017-01-05-lunwen1/</link>
+      <pubDate>Thu, 05 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-05-lunwen1/</guid>
+      <description>星期四, 05. 一月 2017 03:13下午
+ 为了实现机器人臂手系统的目标抓取, 采用 Kinect 对目标信息进行实时检测. 首先,采用张正友棋盘标定法完成对 Kinect 内外参数的标定. 其次, 利用深度信息进行深度分割, 滤 除大部分干扰背景, 再通过颜色与形状特征实现目标的识别与定位. 将识别对象的 3 维坐标通过以太网发送至机械臂控制台, 随后机械臂移动至目标位置. 最后采用变积分 PID 算法控制灵巧手接触力, 保证响应的快速性及精密性, 实现灵巧手的精细抓取. 通过设计一套完整的实验系统验证了该方法的有效性.
+ 研究点 需要机器人能够快速准确地完成对环境中物体的定位与识别, 以及实现对目标物体的精细抓取. 然而, 环境的复杂性与物体的多样性给机器人自主实现物体定位与识别带来了很大的挑战, 使得非结构环境下的物体定位与识别成为机器人研究领域的热点之一
+研究情况  文献 [3] 采用双目立体视觉实现目标识别与定位. 该双目立体视觉系统主要包括摄像机标定、图像分割、立体匹配和 3 维测距 4 个模块, 其中立体匹配是双目视觉定位的最关键的一步, 实现目标区域的准确立体匹配较难, 而立体匹配的不准确将直接导致所获取的深度信息产生偏差 [4] , 同时其实时性是双目和多目定位视觉系统面临的最大挑战.  文献 [5] 采用双目立体视觉实现目标的抓取, 即在识别物体时, 采用颜色分割法将 RGB 颜色空间转换至 HSV 颜色空间, 并通过选取阈值来分割图像, 分割后的图像受背景干扰较大且噪点较多. 文献 [6] 利用Kinect 实现目标识别与定位, 其定位前采用张正友棋盘标定法标定摄像头内外参数. 在识别物体时采用基于深度信息的背景相减法, 该方法只适用于物体变动检测.</description>
+    </item>
+    
+    <item>
+      <title>基于 Kinect 视觉系统的西红柿自动识别与定位[董建民]</title>
+      <link>https://ottsion.github.io/2017/2017-01-05-lunwen2/</link>
+      <pubDate>Thu, 05 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-05-lunwen2/</guid>
+      <description>星期四, 05. 一月 2017 07:23下午
+ 传 统 的 西 红 柿 采 摘 机 器 人 的 视 觉 系 统 都 是 采 用 双 目 摄 像 头 , 使 用 时 需 要 进 行 摄 像 头 参 数 标 定 , 使 用 过 程 复 杂 。 本 文 提 出 用Kinect 代 替 传 统 的 双 目 摄 像 头 , 获 得 RGB 彩 色 图 像 和 目 标 深 度 图 像 , 对 彩 色 图 像 分 别 在 HSI 和 Lab 颜 色 空 间 进 行 分 通 道 图 像 分割 , 再 将 两 种 结 果 进 行 融 合 后 去 除 背 景 噪 声 。 对 采 集 的 样 本 图 像 进 行 分 割 实 验 , 结 果 表 明 此 种 方 法 分 割 效 果 良 好 。 对 深 度 图 像 进 行三 维 重 建 获 得 西 红 柿 质 心 的 三 维 立 体 坐 标 值 , 实 验 表 明 目 标 定 位 准 确 度 高 , 该 空 间 坐 标 值 可 用 于 指 导 真 空 吸 盘 机 械 手 进 行 目 标 西红柿的自动采摘 。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-07-cmake-4/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-07-cmake-2/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-07-cmake-3/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+            cmake实践学习 （3） | 静心明志
+       
+  </title>
+  <meta name="title" content=" cmake实践学习 （3） | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : " cmake实践学习 （3）",
+    "headline" : " cmake实践学习 （3）",
+    "description" : "星期六, 07. 一月 2017 06:17下午\n 来源：cmake实践\n 静态库与动态库构建 读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。 本节的任务: 1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc 向终端输出 Hello World 字符串。 2,安装头文件与共享库。\n准备工作 在\/backup\/cmake 目录建立 t3 目录,用于存放本节涉及到的工程\n建立共享库 cd \/backup\/cmake\/t3 mkdir lib  在 t3 目录下建立 CMakeLists.txt,内容如下:\nPROJECT(HELLOLIB) ADD_SUBDIRECTORY(lib)  在 lib 目录下建立两个源文件 hello.c 与 hello.h hello.c 内容如下:\n#include “hello.h” void HelloFunc() { printf(“Hello World\\n”); }  hello.h 内容如下:\n#ifndef HELLO_H #define HELLO_H #include \x26lt;stdio.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-07 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-07 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-07-cmake-3\/",
+    "wordCount" : "312",
+    "keywords" : [ "cmake", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline"> cmake实践学习 （3）</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-07 itemprop="datePublished">January 7, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<hr />
+
+<p>星期六, 07. 一月 2017 06:17下午</p>
+
+<blockquote>
+<p>来源：cmake实践</p>
+</blockquote>
+
+<hr />
+
+<h2 id="静态库与动态库构建">静态库与动态库构建</h2>
+
+<p>读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。
+本节的任务:
+1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc
+向终端输出 Hello World 字符串。
+2,安装头文件与共享库。</p>
+
+<h2 id="准备工作">准备工作</h2>
+
+<p>在/backup/cmake 目录建立 t3 目录,用于存放本节涉及到的工程</p>
+
+<h2 id="建立共享库">建立共享库</h2>
+
+<pre><code>cd /backup/cmake/t3
+mkdir lib
+</code></pre>
+
+<p>在 t3 目录下建立 CMakeLists.txt,内容如下:</p>
+
+<pre><code>PROJECT(HELLOLIB)
+ADD_SUBDIRECTORY(lib)
+</code></pre>
+
+<p>在 lib 目录下建立两个源文件 hello.c 与 hello.h
+hello.c 内容如下:</p>
+
+<pre><code>#include “hello.h”
+void HelloFunc()
+{
+printf(“Hello World\n”);
+}
+</code></pre>
+
+<p>hello.h 内容如下:</p>
+
+<pre><code>#ifndef HELLO_H
+#define HELLO_H
+#include &lt;stdio.h&gt;
+void HelloFunc();
+#endif
+</code></pre>
+
+<p>在 lib 目录下建立 CMakeLists.txt,内容如下:</p>
+
+<pre><code>SET(LIBHELLO_SRC hello.c)
+ADD_LIBRARY(hello SHARED ${LIBHELLO_SRC})
+</code></pre>
+
+<h2 id="编译共享库">编译共享库</h2>
+
+<p>仍然采用 out-of-source 编译的方式,按照习惯,我们建立一个 build 目录,在 build目录中</p>
+
+<pre><code>cmake ..
+make
+</code></pre>
+
+<p>这时,你就可以在 lib 目录得到一个 libhello.so,这就是我们期望的共享库。如果你要指定 libhello.so 生成的位置,可以通过在主工程文件 CMakeLists.txt 中修改 ADD_SUBDIRECTORY(lib)指令来指定一个编译输出位置或者在 lib/CMakeLists.txt 中添加<code>SET(LIBRARY_OUTPUT_PATH &lt;路径&gt;)</code>来指定一个新的位置。
+这两者的区别我们上一节已经提到了,所以,这里不再赘述,下面,我们解释一下一个新的指令<code>ADD_LIBRARY</code></p>
+
+<pre><code>ADD_LIBRARY(libname
+[SHARED|STATIC|MODULE]
+[EXCLUDE_FROM_ALL]
+source1 source2 ... sourceN)
+</code></pre>
+
+<p>你不需要写全 libhello.so,只需要填写 hello 即可,cmake 系统会自动为你生成libhello.X类型有三种:</p>
+
+<ul>
+<li>SHARED,动态库</li>
+<li>STATIC,静态库</li>
+<li>MODULE,在使用 dyld 的系统有效,如果不支持 dyld,则被当作 SHARED 对待。</li>
+</ul>
+
+<p>EXCLUDE_FROM_ALL 参数的意思是这个库不会被默认构建,除非有其他的组件依赖或者手工构建。</p>
+
+<h2 id="添加静态库">添加静态库:</h2>
+
+<p>同样使用上面的指令,我们在支持动态库的基础上再为工程添加一个静态库,按照一般的习惯,静态库名字跟动态库名字应该是一致的,只不过后缀是.a 罢了。
+下面我们用这个指令再来添加静态库:</p>
+
+<pre><code>ADD_LIBRARY(hello STATIC ${LIBHELLO_SRC})
+</code></pre>
+
+<p>然后再在 build 目录进行外部编译,我们会发现,静态库根本没有被构建,仍然只生成了一个动态库。因为 hello 作为一个 target 是不能重名的,所以,静态库构建指令无效。如果我们把上面的 hello 修改为 hello_static:</p>
+
+<pre><code>ADD_LIBRARY(hello_static STATIC ${LIBHELLO_SRC})
+</code></pre>
+
+<p>就可以构建一个 libhello_static.a 的静态库了。
+这种结果显示不是我们想要的,我们需要的是名字相同的静态库和动态库,因为 target 名称是唯一的,所以,我们肯定不能通过 ADD_LIBRARY 指令来实现了。这时候我们需要用到另外一个指令:</p>
+
+<pre><code>SET_TARGET_PROPERTIES,其基本语法是:
+SET_TARGET_PROPERTIES(target1 target2 ...
+PROPERTIES prop1 value1
+prop2 value2 ...)
+</code></pre>
+
+<p>这条指令可以用来设置输出的名称,对于动态库,还可以用来指定动态库版本和 API 版本。
+在本例中,我们需要作的是向 lib/CMakeLists.txt 中添加一条:</p>
+
+<pre><code>SET_TARGET_PROPERTIES(hello_static PROPERTIES OUTPUT_NAME &quot;hello&quot;)
+</code></pre>
+
+<p>这样,我们就可以同时得到 libhello.so/libhello.a 两个库了。与他对应的指令是:</p>
+
+<pre><code>GET_TARGET_PROPERTY(VAR target property)
+</code></pre>
+
+<p>具体用法如下例,我们向 lib/CMakeListst.txt 中添加:</p>
+
+<pre><code>GET_TARGET_PROPERTY(OUTPUT_VALUE hello_static OUTPUT_NAME)
+MESSAGE(STATUS “This is the hello_static
+OUTPUT_NAME:”${OUTPUT_VALUE})
+</code></pre>
+
+<p>如果没有这个属性定义,则返回 NOTFOUND.
+让我们来检查一下最终的构建结果,我们发现,libhello.a 已经构建完成,位于build/lib 目录中,但是 libhello.so 去消失了。这个问题的原因是:cmake 在构建一个新的 target 时,会尝试清理掉其他使用这个名字的库,因为,在构建 libhello.a 时,就会清理掉 libhello.so.为了回避这个问题,比如再次使用 SET_TARGET_PROPERTIES 定义CLEAN_DIRECT_OUTPUT 属性。向 lib/CMakeLists.txt 中添加:</p>
+
+<pre><code>SET_TARGET_PROPERTIES(hello PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+SET_TARGET_PROPERTIES(hello_static PROPERTIES CLEAN_DIRECT_OUTPUT
+1)
+</code></pre>
+
+<p>这时候,我们再次进行构建,会发现 build/lib 目录中同时生成了 libhello.so 和libhello.a</p>
+
+<h2 id="动态库版本号">动态库版本号</h2>
+
+<p>按照规则,动态库是应该包含一个版本号的,我们可以看一下系统的动态库,一般情况是</p>
+
+<pre><code>libhello.so.1.2
+libhello.so -&gt;libhello.so.1
+libhello.so.1-&gt;libhello.so.1.2
+</code></pre>
+
+<p>为了实现动态库版本号,我们仍然需要使用 SET_TARGET_PROPERTIES 指令。
+具体使用方法如下:</p>
+
+<pre><code>SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)
+</code></pre>
+
+<p>VERSION 指代动态库版本,SOVERSION 指代 API 版本。
+将上述指令加入 lib/CMakeLists.txt 中,重新构建看看结果。
+在 build/lib 目录会生成:</p>
+
+<pre><code>libhello.so.1.2
+libhello.so.1-&gt;libhello.so.1.2
+libhello.so -&gt;libhello.so.1
+</code></pre>
+
+<h2 id="安装共享库和头文件">安装共享库和头文件</h2>
+
+<p>以上面的例子,我们需要将 libhello.a, libhello.so.x 以及 hello.h 安装到系统目录,才能真正让其他人开发使用,在本例中我们将 hello 的共享库安装到<prefix>/lib目录,将 hello.h 安装到<prefix>/include/hello 目录。利用上一节了解到的 INSTALL 指令,我们向 lib/CMakeLists.txt 中添加如下指令:</p>
+
+<pre><code>INSTALL(TARGETS hello hello_staticLIBRARY DESTINATION lib
+ARCHIVE DESTINATION lib)
+INSTALL(FILES hello.h DESTINATION include/hello)
+</code></pre>
+
+<p>注意,静态库要使用 ARCHIVE 关键字
+通过:</p>
+
+<pre><code>cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+make
+make install
+</code></pre>
+
+<p>我们就可以将头文件和共享库安装到系统目录/usr/lib 和/usr/include/hello 中了。</p>
+
+<h2 id="小结">小结:</h2>
+
+<p>本小节,我们谈到了:
+如何通过 ADD_LIBRARY 指令构建动态库和静态库。
+如何通过 SET_TARGET_PROPERTIES 同时构建同名的动态库和静态库。
+如何通过 SET_TARGET_PROPERTIES 控制动态库版本
+最终使用上一节谈到的 INSTALL 指令来安装头文件和动态、静态库。
+在下一节,我们需要编写另一个高级一点的 Hello World 来演示怎么使用我们已经构建的构建的共享库 libhello 和外部头文件。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-07-cmake-3/>https://ottsion.github.io/2017/2017-01-07-cmake-3/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/cmake/">
+                    #cmake</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-07-cmake-4/" class="prev" rel="prev" title=" cmake实践学习 （4）"><i class="iconfont icon-left"></i>&nbsp; cmake实践学习 （4）</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-07-cmake-2/" class="next" rel="next" title=" cmake实践学习 （2）"> cmake实践学习 （2）&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

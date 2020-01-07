@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DL, sigmoid on 静心明志</title>
+    <link>https://ottsion.github.io/tags/dl-sigmoid/</link>
+    <description>Recent content in DL, sigmoid on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 May 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/dl-sigmoid/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tensorflow--激活函数</title>
+      <link>https://ottsion.github.io/2017/2017-05-11-tensorflow-sigmoid-function/</link>
+      <pubDate>Thu, 11 May 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-sigmoid-function/</guid>
+      <description>来源：tensorflow学习笔记（四）：激活函数
+tf.nn.relu() tf.nn.sigmoid() tf.nn.tanh() tf.nn.elu() tf.nn.bias_add() tf.nn.crelu() tf.nn.relu6() tf.nn.softplus() tf.nn.softsign() tf.nn.dropout() tf.nn.relu_layer(x, weights, biases,name=None) def relu_layer(x, weights, biases, name=None): &amp;quot;&amp;quot;&amp;quot;Computes Relu(x * weight + biases). Args: x: a 2D tensor. Dimensions typically: batch, in_units weights: a 2D tensor. Dimensions typically: in_units, out_units biases: a 1D tensor. Dimensions: out_units name: A name for the operation (optional). If not specified &amp;quot;nn_relu_layer&amp;quot; is used. Returns: A 2-D Tensor computing relu(matmul(x, weights) + biases). Dimensions typically: batch, out_units.</description>
+    </item>
+    
+  </channel>
+</rss>

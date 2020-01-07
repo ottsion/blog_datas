@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-sigmoid-function/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-tensorflow-saver/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           tensorflow--模型数据保存与打开 | 静心明志
+       
+  </title>
+  <meta name="title" content="tensorflow--模型数据保存与打开 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "tensorflow--模型数据保存与打开",
+    "headline" : "tensorflow--模型数据保存与打开",
+    "description" : "来源：tensorflow学习笔记（五）：变量保存与导入 如何使用tensorflow内置的参数导出和导入方法：基本用法 如果你还在纠结如何保存tensorflow训练好的模型参数，用这个方法就对了 The Saver class adds ops to save and restore variables to and from checkpoints. It also provides convenience methods to run these ops. 来自官网的介绍。\nimport tensorflow as tf \x26quot;\x26quot;\x26quot; 变量声明，运算声明 例：w = tf.get_variable(name=\x26quot;vari_name\x26quot;, shape=[], dtype=tf.float32) 初始化op声明 \x26quot;\x26quot;\x26quot; #创建saver对象，它添加了一些op用来save和restore模型参数 saver = tf.train.Saver() with tf.Session() as sess: sess.run(init_op) #训练模型。。。 #使用saver提供的简便方法去调用 save op saver.save(sess, \x26quot;save_path\/file_name.ckpt\x26quot;) #file_name.ckpt如果不存在的话，会自动创建 #后缀可加可不加  现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数 变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value 来进行的(详见)\nimport tensorflow as tf \x26quot;\x26quot;\x26quot; 变量声明，运算声明 初始化op声明 \x26quot;\x26quot;\x26quot; #创建saver 对象 saver = tf.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-tensorflow-saver\/",
+    "wordCount" : "103",
+    "keywords" : [ "DL, saver", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">tensorflow--模型数据保存与打开</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"> 深度学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>来源：<a href="http://blog.csdn.net/u012436149/article/details/52883747" rel="nofollow noreferrer" target="_blank">tensorflow学习笔记（五）：变量保存与导入</a>
+如何使用tensorflow内置的参数导出和导入方法：基本用法
+如果你还在纠结如何保存tensorflow训练好的模型参数，用这个方法就对了
+The Saver class adds ops to save and restore variables to and from checkpoints. It also provides convenience methods to run these ops.
+来自官网的介绍。</p>
+
+<pre><code>import tensorflow as tf
+&quot;&quot;&quot;
+变量声明，运算声明 例：w = tf.get_variable(name=&quot;vari_name&quot;, shape=[], dtype=tf.float32)
+初始化op声明
+&quot;&quot;&quot;
+#创建saver对象，它添加了一些op用来save和restore模型参数
+saver = tf.train.Saver()
+
+with tf.Session() as sess:
+    sess.run(init_op)
+    #训练模型。。。
+    #使用saver提供的简便方法去调用 save op
+    saver.save(sess, &quot;save_path/file_name.ckpt&quot;) #file_name.ckpt如果不存在的话，会自动创建
+#后缀可加可不加
+</code></pre>
+
+<p><strong>现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数</strong> <strong>变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value
+来进行的(<a href="http://blog.csdn.net/u012436149/article/details/56665612" rel="nofollow noreferrer" target="_blank">详见</a>)</strong></p>
+
+<pre><code>import tensorflow as tf
+&quot;&quot;&quot;
+变量声明，运算声明
+初始化op声明
+&quot;&quot;&quot;
+#创建saver 对象
+saver = tf.train.Saver()
+
+with tf.Session() as sess:
+    sess.run(init_op)#在这里，可以执行这个语句，也可以不执行，即使执行了，初始化的值也会被restore的值给override
+    saver.restore(sess, &quot;save_path/file_name.ckpt-???&quot;) 
+    #会将已经保存的变量值resotre到变量中,自己看好要restore哪步的 
+</code></pre>
+
+<p>如何restore变量的子集,然后使用初始化op初始化其他变量</p>
+
+<pre><code>#想要实现这个功能的话,必须从Saver的构造函数下手
+saver=tf.train.Saver([sub_set])
+init = tf.initialize_all_variables()
+with tf.Session() as sess:
+  #这样你就可以使用restore的变量替换掉初始化的变量的值,而其它初始化的值不受影响
+  sess.run(init)
+  if restor_from_checkpoint:
+      saver.restore(sess,&quot;file.ckpt&quot;)
+  # train
+  saver.save(sess,&quot;file.ckpt&quot;)
+</code></pre>
+
+<p><strong>参考资料</strong> <a href="https://www.tensorflow.org/versions/r0.12/how_tos/variables/index.html#saving-and-restoring" rel="nofollow noreferrer" target="_blank">https://www.tensorflow.org/versions/r0.12/how_tos/variables/index.html#saving-and-restoring</a> <a href="https://www.tensorflow.org/versions/r0.12/api_docs/python/state_ops.html#Saver" rel="nofollow noreferrer" target="_blank">https://www.tensorflow.org/versions/r0.12/api_docs/python/state_ops.html#Saver</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-tensorflow-saver/>https://ottsion.github.io/2017/2017-05-11-tensorflow-saver/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/dl-saver/">
+                    #DL, saver</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-tensorflow-sigmoid-function/" class="prev" rel="prev" title="tensorflow--激活函数"><i class="iconfont icon-left"></i>&nbsp;tensorflow--激活函数</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/" class="next" rel="next" title="tensorflow--各种损失函数">tensorflow--各种损失函数&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

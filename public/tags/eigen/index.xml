@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>eigen on 静心明志</title>
+    <link>https://ottsion.github.io/tags/eigen/</link>
+    <description>Recent content in eigen on 静心明志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Jan 2017 23:59:59 +0000</lastBuildDate>
+    
+	<atom:link href="https://ottsion.github.io/tags/eigen/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Eigen矩阵库——代码演示</title>
+      <link>https://ottsion.github.io/2017/2017-01-05-eigen-code/</link>
+      <pubDate>Thu, 05 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-05-eigen-code/</guid>
+      <description>星期四, 05. 一月 2017 02:13下午
+ 有关eigen库的一些基本使用方法
+ 矩阵、向量初始化 #include &amp;lt;iostream&amp;gt; #include &amp;quot;Eigen/Dense&amp;quot; using namespace Eigen; int main() { MatrixXf m1(3,4); //动态矩阵，建立3行4列。 MatrixXf m2(4,3); //4行3列，依此类推。 MatrixXf m3(3,3); Vector3f v1; //若是静态数组，则不用指定行或者列 /* 初始化 */ Matrix3d m = Matrix3d::Random(); m1 = MatrixXf::Zero(3,4); //用0矩阵初始化,要指定行列数 m2 = MatrixXf::Zero(4,3); m3 = MatrixXf::Identity(3,3); //用单位矩阵初始化 v1 = Vector3f::Zero(); //同理，若是静态的，不用指定行列数 m1 &amp;lt;&amp;lt; 1,0,0,1, //也可以以这种方式初始化 1,5,0,1, 0,0,9,1; m2 &amp;lt;&amp;lt; 1,0,0, 0,4,0, 0,0,7, 1,1,1; //向量初始化，与矩阵类似 Vector3d v3(1,2,3); VectorXf vx(30); }  C++数组和矩阵转换 使用Map函数，可以实现Eigen的矩阵和c++中的数组直接转换,语法如下：</description>
+    </item>
+    
+    <item>
+      <title>Eigen矩阵库——初步用法（三）</title>
+      <link>https://ottsion.github.io/2017/2017-01-05-eigen-use-3/</link>
+      <pubDate>Thu, 05 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-05-eigen-use-3/</guid>
+      <description>星期四, 05. 一月 2017 12:49下午
+ 本节主要涉及Eigen的块操作以及QR分解。Eigen的QR分解非常绕人，搞了很久才搞明白是怎么回事，最后是一个使用Eigen的矩阵操作完成二维高斯拟合求取光点的代码例子，关于二维高斯拟合求取光点的详细内容可参考：链接
+ 矩阵的块操作 矩阵的块表示 矩阵的块操作有两种使用方法，其定义形式为：
+matrix.block(i,j,p,q); (1) matrix.block&amp;lt;p,q&amp;gt;(i,j) (2)   定义（1）表示返回从矩阵的(i, j)开始，每行取p个元素，每列取q个元素所组成的临时新矩阵对象，原矩阵的元素不变。
+ 定义（2）中block&amp;lt;p, q&amp;gt;可理解为一个p行q列的子矩阵，该定义表示从原矩阵中第(i, j)开始，获取一个p行q列的子矩阵，返回该子矩阵组成的临时 矩阵对象，原矩阵的元素不变。
+  演示代码如下：
+#include&amp;lt;iostream&amp;gt; #include&amp;lt;eigen3/Eigen/Dense&amp;gt; using namespace std; int main() { Eigen::MatrixXf m(4,4); m&amp;lt;&amp;lt;1,2,3,4, 5,6,7,8, 9,10,11,12, 13,14,15,16; cout&amp;lt;&amp;lt;&amp;quot;Block in the middle&amp;quot;&amp;lt;&amp;lt;endl; cout&amp;lt;&amp;lt;m.block&amp;lt;2,2&amp;gt;(1,1)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl; for(int i=1;i&amp;lt;=3;i++) { cout&amp;lt;&amp;lt;&amp;quot;block of size &amp;quot;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&amp;quot;x&amp;quot;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;endl; cout&amp;lt;&amp;lt;m.block(0,0,i,i)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl; } }  运行结果：
+Block in the middle 6 7 10 11 block of size 1x1 1 block of size 2x2 1 2 5 6 block of size 3x3 1 2 3 5 6 7 9 10 11  通过上述方式获取的子矩阵即可以作为左值也可以作为右值，也就是即可以用这个子矩阵给其他矩阵赋值，也可以给这个子矩阵对象赋值。</description>
+    </item>
+    
+    <item>
+      <title>Eigen矩阵库——初步用法（二）</title>
+      <link>https://ottsion.github.io/2017/2017-01-05-eigen-use-2/</link>
+      <pubDate>Thu, 05 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-05-eigen-use-2/</guid>
+      <description>星期四, 05. 一月 2017 12:48下午
+ 主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C++的+，-，*，原文链接在后面
+ 矩阵的运算 Eigen提供+、-、一元操作符“-”、+=、-=，例如：
+ 二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；
+ 一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;
+ 组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B
+  矩阵的加减操作代码如下：
+#include&amp;lt;iostream&amp;gt; #include&amp;lt;eigen3/Eigen/Dense&amp;gt; using namespace Eigen; int main() { Matrix2d a; a &amp;lt;&amp;lt; 1,2, 3,4; MatrixXd b(2,2); b &amp;lt;&amp;lt; 2,3, 1,4; std::cout&amp;lt;&amp;lt;&amp;quot;a+b=\n&amp;quot;&amp;lt;&amp;lt;a+b&amp;lt;&amp;lt;std::endl; std::cout&amp;lt;&amp;lt;&amp;quot;a-b=\n&amp;quot;&amp;lt;&amp;lt;a-b&amp;lt;&amp;lt;std::endl; std::cout&amp;lt;&amp;lt;&amp;quot;Doing a += b;\n&amp;quot;&amp;lt;&amp;lt;std::endl; a += b; std::cout&amp;lt;&amp;lt;&amp;quot;Now a =\n&amp;quot;&amp;lt;&amp;lt;a&amp;lt;&amp;lt;std::endl; Vector3d v(1,2,3); Vector3d w(1,0,0); std::cout&amp;lt;&amp;lt;&amp;quot;-v+w-v=\n&amp;quot;&amp;lt;&amp;lt;-v+w-v&amp;lt;&amp;lt;std::endl; }  运行结果：
+a+b= 3 5 4 8 a-b= -1 -1 2 0 Doing a += b; Now a = 3 5 4 8 -v+w-v= -1 -4 -6  另外，矩阵还提供与标量（单一个数字）的乘除操作，表示每个元素都与该标量进行乘除操作。例如： 二元操作符*在：A*a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。 对于aA、A/a、A=a、A /=a也是一样，例如下面的代码：</description>
+    </item>
+    
+    <item>
+      <title>Eigen矩阵库——初步用法（一）</title>
+      <link>https://ottsion.github.io/2017/2017-01-04-eigen-use-1/</link>
+      <pubDate>Wed, 04 Jan 2017 23:59:59 +0000</pubDate>
+      
+      <guid>https://ottsion.github.io/2017/2017-01-04-eigen-use-1/</guid>
+      <description>星期三, 04. 一月 2017 09:05下午
+ 这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。
+ 矩阵的定义 Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：
+ template&amp;lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols&amp;gt; struct traits&amp;lt;Matrix&amp;lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols&amp;gt; &amp;gt; .......  其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：
+typedef Matrix&amp;lt;double,Dynamic, Dynamic&amp;gt; MatrixXd;  在Eigen中也提供了很多常见的简化定义形式，例如：
+typedef Matrix&amp;lt; double , 3 , 1&amp;gt; Vector3d  注意：
+ Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都提供默认构造函数，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。
+ 矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：
+Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.0);   动态矩阵和静态矩阵 动态矩阵是指其大小在运行时确定，静态矩阵是指其大小在编译时确定，在Eigen中并未这样称呼矩阵。</description>
+    </item>
+    
+  </channel>
+</rss>

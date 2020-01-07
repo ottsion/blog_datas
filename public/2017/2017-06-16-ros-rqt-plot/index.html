@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-adaboost/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-06-17-ros-kinectv2-setup/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+            ROS学习之rqt_plot绘图 | 静心明志
+       
+  </title>
+  <meta name="title" content=" ROS学习之rqt_plot绘图 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : " ROS学习之rqt_plot绘图",
+    "headline" : " ROS学习之rqt_plot绘图",
+    "description" : "ROS学习之rqt_plot绘图  速度加速度、误差等的曲线图\n 显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。\n后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。\nrostopic echo \/joint_states \x26gt; record2.txt\n1. 背景 因为在为youbot添加FollowJointTrajectory 的client之后，仿真环境中的动作与实际有出入，因此想看看机械臂的实际动作曲线。而在ROS中，内置的rqt_plot是可以提供绘图功能的，而后来发现rqt_plot的功能比较简单，随着数据量的增大，查看起来比较费劲。于是就有了后来的导入matlab中分析的部分。\n2.rqt_plot绘图 照例，我们找到官网的相关部分，有个基础理解：http:\/\/wiki.ros.org\/rqt_plot\nrqt_plot \/turtle1\/pose\/x:y:z rqt_plot \/turtle1\/pose\/x \/turtle1\/pose\/y \/turtle1\/pose\/z  特别\n注意\n上面的第一句，它就是下面的简写，同一个topic下的直接冒号就好，不用输入那么多的文字。\n在这里我为了避免每次要去动机械臂，将joint_states这个topic的信息已经保存为了bag文件，录的动作是我上一篇文章，actionlib中的动作的一部分，大概是从home到伸直的一部分。使用指令（参看《a gentle introduction to ROS》P135页）\n-O(是字母O, 并非数字0，它表示输出文件（output），后面跟的是你的输出文件的名字，我这里是youbot_action2.bag)，下面是我的bag的一些基本信息： 一共21.1s，包含了861条信息 ![img](http:\/\/img.blog.csdn.net\/20150506131445167) 我们查看一下数据内容 ![img](http:\/\/img.blog.csdn.net\/20160118222946817) 然后开启一个terminal，回放数据rosbag play youbot_action2.bag --clock，--clock表示使用simulate time，具体可以参考[http:\/\/wiki.ros.org\/Clock](http:\/\/wiki.ros.org\/Clock) 。再打开另外一个，开启rqt_plot，用命令  rqt_plot \/joint_states\/velocity[0]:velocity[1]:velocity[2]:velocity[3]:velocity[4] ``` 因为，youbot机械臂是五个自由度，这里我们用标号0-4来引用每一个（用QwtPlot画出来的）\n用MatPlot画出来的，可以看出他们刚好是左右颠倒的，我们的这个bag文件，有大概20s。右键按住鼠标上下或左右滑动进行缩放。\n同理，我们也可以找出各个关节的一些信息：\nrqt_plot \/joint_states\/position[0]:position[1]:position[2]:position[3]:position[4]\n得到的图像\n图像很好看，但是实际分析起来是很头疼的，它只能是看个大概过程，了解基本曲线的动作和大概的规律，比如速度曲线的不平滑，关节位置曲线的大概变动范围（起始位置并不是0，依次是0.11，0.11，-0.11，0.11，0.12 rad）\n3.Matlab绘图 其实，这个地方我也走了点弯路的，当时我用命令 rostopic echo \/joint_states\n显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。\n后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。\nrostopic echo \/joint_states \x26gt; record2.txt\n将txt文件拷贝出来到windows上，导入excel文件，然后借助Matlab分析（这里主要是用到了seq，position和velocity）",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-06-16 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-06-16 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-06-16-ros-rqt-plot\/",
+    "wordCount" : "71",
+    "keywords" : [ "ros", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline"> ROS学习之rqt_plot绘图</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-06-16 itemprop="datePublished">June 16, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/ros/"> ROS </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="ros学习之rqt-plot绘图">ROS学习之rqt_plot绘图</h2>
+
+<blockquote>
+<p>速度加速度、误差等的曲线图</p>
+</blockquote>
+
+<p>显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。</p>
+
+<p>后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。</p>
+
+<p><code>rostopic echo /joint_states &gt; record2.txt</code></p>
+
+<h4 id="1-背景">1. 背景</h4>
+
+<p>因为在为youbot添加FollowJointTrajectory 的client之后，仿真环境中的动作与实际有出入，因此想看看机械臂的实际动作曲线。而在ROS中，内置的rqt_plot是可以提供绘图功能的，而后来发现rqt_plot的功能比较简单，随着数据量的增大，查看起来比较费劲。于是就有了后来的导入matlab中分析的部分。</p>
+
+<h4 id="2-rqt-plot绘图">2.rqt_plot绘图</h4>
+
+<p>照例，我们找到官网的相关部分，有个基础理解：<a href="http://wiki.ros.org/rqt_plot" rel="nofollow noreferrer" target="_blank">http://wiki.ros.org/rqt_plot</a></p>
+
+<pre><code>rqt_plot /turtle1/pose/x:y:z  
+
+rqt_plot /turtle1/pose/x /turtle1/pose/y /turtle1/pose/z  
+</code></pre>
+
+<p>特别</p>
+
+<p>注意</p>
+
+<p>上面的第一句，它就是下面的简写，同一个topic下的直接冒号就好，不用输入那么多的文字。</p>
+
+<p>在这里我为了避免每次要去动机械臂，将joint_states这个topic的信息已经保存为了bag文件，<strong>录的动作是我上一篇文章，actionlib中的动作的一部分，大概是从home到伸直的一部分</strong>。使用指令（参看《a gentle introduction to ROS》P135页）</p>
+
+<pre><code class="language-rosbag">
+-O(是字母O, 并非数字0，它表示输出文件（output），后面跟的是你的输出文件的名字，我这里是youbot_action2.bag)，下面是我的bag的一些基本信息：
+
+一共21.1s，包含了861条信息
+
+![img](http://img.blog.csdn.net/20150506131445167)
+
+我们查看一下数据内容
+
+![img](http://img.blog.csdn.net/20160118222946817)
+
+然后开启一个terminal，回放数据rosbag play youbot_action2.bag --clock，--clock表示使用simulate time，具体可以参考[http://wiki.ros.org/Clock](http://wiki.ros.org/Clock) 。再打开另外一个，开启rqt_plot，用命令
+</code></pre>
+
+<p>rqt_plot /joint_states/velocity[0]:velocity[1]:velocity[2]:velocity[3]:velocity[4]
+```
+因为，youbot机械臂是五个自由度，这里我们用标号0-4来引用每一个（用QwtPlot画出来的）</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506130947581" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure></p>
+
+<p>用MatPlot画出来的，可以看出他们刚好是左右颠倒的，我们的这个bag文件，有大概20s。右键按住鼠标上下或左右滑动进行缩放。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506131200088" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure></p>
+
+<p>同理，我们也可以找出各个关节的一些信息：</p>
+
+<p><code>rqt_plot /joint_states/position[0]:position[1]:position[2]:position[3]:position[4]</code></p>
+
+<p>得到的图像</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506132107345" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506131831617" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure></p>
+
+<p>图像很好看，但是实际分析起来是很头疼的，它只能是看个大概过程，了解基本曲线的动作和大概的规律，比如速度曲线的不平滑，关节位置曲线的大概变动范围（起始位置并不是0，依次是0.11，0.11，-0.11，0.11，0.12 rad）</p>
+
+<h4 id="3-matlab绘图">3.Matlab绘图</h4>
+
+<p>其实，这个地方我也走了点弯路的，当时我用命令
+<code>rostopic echo /joint_states</code></p>
+
+<p>显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。</p>
+
+<p>后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。</p>
+
+<p><code>rostopic echo /joint_states &gt; record2.txt</code></p>
+
+<p>将txt文件拷贝出来到windows上，导入excel文件，然后借助Matlab分析（这里主要是用到了seq，position和velocity）</p>
+
+<p>有同学可能就会问了，明明文件中有时间信息，人家还精确到了ns，干嘛不用呢，这里有个小插曲，当时用matlab读取的时候，由于<a href="http://lib.csdn.net/base/linux" rel="nofollow noreferrer" target="_blank">Linux</a>系统中的时间戳信息是从1970年的秒数开始计算的，数据长度很大，导致Matlab处理的时候直接用科学计数法来统计，后面的几位数都直接给过滤掉了，因而导致画出来的图明显不符合逻辑，一个时间点对应多个关节值。</p>
+
+<p>因此，由于每个数据点都有自己的标号，我就简化为关节信息和点序号的对应信息了。
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506142439714" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506142545182" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506142617574" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://img.blog.csdn.net/20150506142649846" alt="img" class="lazyload"><figcaption class="image-caption">img</figcaption></figure></p>
+
+<h4 id="4-总结">4. 总结</h4>
+
+<p>这里只是把自己的一些过程展示出来，抛砖引玉，具体的数据分析，后面还有待进一步深入。我还没有找其他的机械臂对比一下速度曲线，youbot的跟我预想的不太一样，也可能是由于参数信息的设置导致的，后面我会继续深入下去。</p>
+
+<p>另外，借助于ROS本身的rqt_plot，我们看到数据图像，与matlab基本相同，对于，只是想看看大概规律来说，功能也够用了。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/>https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/ros/">
+                    #ros</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-adaboost/" class="prev" rel="prev" title="adaboost算法"><i class="iconfont icon-left"></i>&nbsp;adaboost算法</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-06-17-ros-kinectv2-setup/" class="next" rel="next" title=" KinectV2&#43;Ubuntu 14.04&#43;Ros 安装教程"> KinectV2&#43;Ubuntu 14.04&#43;Ros 安装教程&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

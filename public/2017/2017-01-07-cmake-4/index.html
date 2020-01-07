@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-01-05-eigen-code/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-01-07-cmake-3/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-07-cmake-4/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+            cmake实践学习 （4） | 静心明志
+       
+  </title>
+  <meta name="title" content=" cmake实践学习 （4） | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : " cmake实践学习 （4）",
+    "headline" : " cmake实践学习 （4）",
+    "description" : "星期六, 07. 一月 2017 06:17下午\n 来源：cmake实践\n 如何使用外部共享库和头文件 抱歉,本节仍然继续折腾 Hello World. 上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。\n准备工作: 请在\/backup\/cmake 目录建立 t4 目录,本节所有资源将存储在 t4 目录。\nsrc及main编写 建立 src 目录,编写源文件 main.c,内容如下:\n#include \x26lt;hello.h\x26gt; int main() { HelloFunc(); return 0; }  编写工程主文件 CMakeLists.txt\nPROJECT(NEWHELLO) ADD_SUBDIRECTORY(src)  编写 src\/CMakeLists.txt\nADD_EXECUTABLE(main main.c)  上述工作已经严格按照我们前面季节提到的内容完成了。\n外部构建 按照习惯,仍然建立 build 目录,使用 cmake ..方式构建。过程:\ncmake .. make  构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建 错误输出为是:\/backup\/cmake\/t4\/src\/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。 hello.h 位于\/usr\/include\/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include ,同志,要这么干,我这一节就没什么可写了,只能选择一个 glib 或者 libX11 来写了,这些代码写出来很多同志是看不懂的)为了让我们的工程能够找到 hello.",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-01-07 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-01-07 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-07-cmake-4\/",
+    "wordCount" : "297",
+    "keywords" : [ "cmake", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline"> cmake实践学习 （4）</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-01-07 itemprop="datePublished">January 7, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E5%B8%B8%E7%94%A8%E5%BA%93/"> 常用库 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<hr />
+
+<p>星期六, 07. 一月 2017 06:17下午</p>
+
+<blockquote>
+<p>来源：cmake实践</p>
+</blockquote>
+
+<hr />
+
+<p>如何使用外部共享库和头文件
+抱歉,本节仍然继续折腾 Hello World.
+上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。</p>
+
+<h2 id="准备工作">准备工作:</h2>
+
+<p>请在/backup/cmake 目录建立 t4 目录,本节所有资源将存储在 t4 目录。</p>
+
+<h2 id="src及main编写">src及main编写</h2>
+
+<p>建立 src 目录,编写源文件 main.c,内容如下:</p>
+
+<pre><code>#include &lt;hello.h&gt;
+int main()
+{
+HelloFunc();
+return 0;
+}
+</code></pre>
+
+<p>编写工程主文件 CMakeLists.txt</p>
+
+<pre><code>PROJECT(NEWHELLO)
+ADD_SUBDIRECTORY(src)
+</code></pre>
+
+<p>编写 src/CMakeLists.txt</p>
+
+<pre><code>ADD_EXECUTABLE(main main.c)
+</code></pre>
+
+<p>上述工作已经严格按照我们前面季节提到的内容完成了。</p>
+
+<h2 id="外部构建">外部构建</h2>
+
+<p>按照习惯,仍然建立 build 目录,使用 cmake ..方式构建。过程:</p>
+
+<pre><code>cmake ..
+make
+</code></pre>
+
+<p>构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建
+错误输出为是:/backup/cmake/t4/src/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。
+hello.h 位于/usr/include/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include <hello/hello.h>,同志,要这么干,我这一节就没什么可写了,只能选择一个 glib 或者 libX11 来写了,这些代码写出来很多同志是看不懂的)为了让我们的工程能够找到 hello.h 头文件,我们需要引入一个新的指令<code>INCLUDE_DIRECTORIES</code>,其完整语法为:</p>
+
+<pre><code>INCLUDE_DIRECTORIES([AFTER|BEFORE] [SYSTEM] dir1 dir2 ...)
+</code></pre>
+
+<p>这条指令可以用来向工程添加多个特定的头文件搜索路径,路径之间用空格分割,如果路径中包含了空格,可以使用双引号将它括起来,默认的行为是追加到当前的头文件搜索路径的后面,你可以通过两种方式来进行控制搜索路径添加的方式:</p>
+
+<p>1,CMAKE_INCLUDE_DIRECTORIES_BEFORE,通过 SET 这个 cmake 变量为 on,可以将添加的头文件搜索路径放在已有路径的前面。
+2,通过 AFTER 或者 BEFORE 参数,也可以控制是追加还是置前。现在我们在 src/CMakeLists.txt 中添加一个头文件搜索路径,方式很简单,加入:</p>
+
+<pre><code>INCLUDE_DIRECTORIES(/usr/include/hello)
+</code></pre>
+
+<p>进入 build 目录,重新进行构建,这是找不到 hello.h 的错误已经消失,但是出现了一个新的错误:</p>
+
+<pre><code>main.c:(.text+0x12): undefined reference to `HelloFunc'
+</code></pre>
+
+<p>因为我们并没有 link 到共享库 libhello 上。</p>
+
+<p>##为 target 添加共享库</p>
+
+<p>我们现在需要完成的任务是将目标文件链接到 libhello,这里我们需要引入两个新的指令<code>LINK_DIRECTORIES</code>和 <code>TARGET_LINK_LIBRARIES</code>
+LINK_DIRECTORIES 的全部语法是:</p>
+
+<pre><code>LINK_DIRECTORIES(directory1 directory2 ...)
+</code></pre>
+
+<p>这个指令非常简单,添加非标准的共享库搜索路径,比如,在工程内部同时存在共享库和可执行二进制,在编译时就需要指定一下这些共享库的路径。这个例子中我们没有用到这个指令。
+TARGET_LINK_LIBRARIES 的全部语法是:</p>
+
+<pre><code>TARGET_LINK_LIBRARIES(target library1
+&lt;debug | optimized&gt; library2
+...)
+</code></pre>
+
+<p>这个指令可以用来为 target 添加需要链接的共享库,本例中是一个可执行文件,但是同样可以用于为自己编写的共享库添加共享库链接。
+为了解决我们前面遇到的 HelloFunc 未定义错误,我们需要作的是向src/CMakeLists.txt 中添加如下指令:</p>
+
+<pre><code>TARGET_LINK_LIBRARIES(main hello)
+</code></pre>
+
+<p>也可以写成<code>TARGET_LINK_LIBRARIES(main libhello.so)</code>这里的 hello 指的是我们上一节构建的共享库 libhello.
+进入 build 目录重新进行构建。</p>
+
+<pre><code>cmake ..
+make
+</code></pre>
+
+<p>这是我们就得到了一个连接到 libhello 的可执行程序 main,位于 build/src 目录,运行 main 的结果是输出:</p>
+
+<pre><code>Hello World
+</code></pre>
+
+<p>让我们来检查一下 main 的链接情况:</p>
+
+<pre><code>ldd src/main
+linux-gate.so.1 =&gt;
+(0xb7ee7000)
+libhello.so.1 =&gt; /usr/lib/libhello.so.1 (0xb7ece000)
+libc.so.6 =&gt; /lib/libc.so.6 (0xb7d77000)
+/lib/ld-linux.so.2 (0xb7ee8000)
+</code></pre>
+
+<p>可以清楚的看到 main 确实链接了共享库 libhello,而且链接的是动态库<code>libhello.so.1</code>那如何链接到静态库呢?
+方法很简单:
+将 TARGET_LINK_LIBRRARIES 指令修改为:</p>
+
+<pre><code>TARGET_LINK_LIBRARIES(main libhello.a)
+</code></pre>
+
+<p>重新构建后再来看一下 main 的链接情况</p>
+
+<pre><code>ldd src/main
+linux-gate.so.1 =&gt;
+(0xb7fa8000)
+libc.so.6 =&gt; /lib/libc.so.6 (0xb7e3a000)
+</code></pre>
+
+<p>/lib/ld-linux.so.2 (0xb7fa9000)说明,main 确实链接到了静态库 libhello.a</p>
+
+<h2 id="特殊的环境变量-cmake-include-path-和-cmake-library-path">特殊的环境变量 CMAKE_INCLUDE_PATH 和 CMAKE_LIBRARY_PATH</h2>
+
+<p>务必注意,这两个是环境变量而不是 cmake 变量。使用方法是要在 bash 中用 export 或者在 csh 中使用 set 命令设置或者CMAKE_INCLUDE_PATH=/home/include cmake ..等方式。这两个变量主要是用来解决以前 autotools 工程中&ndash;extra-include-dir 等参数的支持的。也就是,如果头文件没有存放在常规路径(/usr/include, /usr/local/include 等),则可以通过这些变量就行弥补。我们以本例中的 hello.h 为例,它存放在/usr/include/hello 目录,所以直接查找肯定是找不到的。前面我们直接使用了绝对路径 INCLUDE_DIRECTORIES(/usr/include/hello)告诉工程这个头文件目录。为了将程序更智能一点,我们可以使用 CMAKE_INCLUDE_PATH 来进行,使用 bash 的方法
+如下:</p>
+
+<pre><code>export CMAKE_INCLUDE_PATH=/usr/include/hello
+</code></pre>
+
+<p>然后在头文件中将 INCLUDE_DIRECTORIES(/usr/include/hello)替换为:</p>
+
+<pre><code>FIND_PATH(myHeader hello.h)
+IF(myHeader)
+INCLUDE_DIRECTORIES(${myHeader})
+ENDIF(myHeader)
+</code></pre>
+
+<p>上述的一些指令我们在后面会介绍。
+这里简单说明一下,FIND_PATH 用来在指定路径中搜索文件名,比如:</p>
+
+<pre><code>FIND_PATH(myHeader NAMES hello.h PATHS /usr/include /usr/include/hello)
+</code></pre>
+
+<p>这里我们没有指定路径,但是,cmake 仍然可以帮我们找到 hello.h 存放的路径,就是因为我们设置了环境变量 CMAKE_INCLUDE_PATH。如果你不使用 FIND_PATH,CMAKE_INCLUDE_PATH 变量的设置是没有作用的,你不能指望它会直接为编译器命令添加参数-I<CMAKE_INCLUDE_PATH>。以此为例,CMAKE_LIBRARY_PATH 可以用在 FIND_LIBRARY 中。同样,因为这些变量直接为 FIND_指令所使用,所以所有使用 FIND_指令的 cmake 模块都会受益。</p>
+
+<h2 id="小节">小节:</h2>
+
+<p>本节我们探讨了:
+如何通过 INCLUDE_DIRECTORIES 指令加入非标准的头文件搜索路径。
+如何通过 LINK_DIRECTORIES 指令加入非标准的库文件搜索路径。
+如果通过 TARGET_LINK_LIBRARIES 为库或可执行二进制加入库链接。
+并解释了如果链接到静态库。
+到这里为止,您应该基本可以使用 cmake 工作了,但是还有很多高级的话题没有探讨,比如编译条件检查、编译器定义、平台判断、如何跟 pkgconfig 配合使用等等。
+到这里,或许你可以理解前面讲到的 “ cmake 的使用过程其实就是学习 cmake 语言并编写cmake 程序的过程 ” ,既然是 “ cmake 语言 ” ,自然涉及到变量、语法等.
+下一节,我们将抛开程序的话题,看看常用的 CMAKE 变量以及一些基本的控制语法规则。</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-01-07-cmake-4/>https://ottsion.github.io/2017/2017-01-07-cmake-4/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/cmake/">
+                    #cmake</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-01-05-eigen-code/" class="prev" rel="prev" title="Eigen矩阵库——代码演示"><i class="iconfont icon-left"></i>&nbsp;Eigen矩阵库——代码演示</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-01-07-cmake-3/" class="next" rel="next" title=" cmake实践学习 （3）"> cmake实践学习 （3）&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

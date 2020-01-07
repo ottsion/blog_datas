@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Fengcai.Sun">
+  
+  
+  
+  <link rel="prev" href="https://ottsion.github.io/2017/2017-05-11-regularization/" />
+  <link rel="next" href="https://ottsion.github.io/2017/2017-05-11-rf/" />
+  <link rel="canonical" href="https://ottsion.github.io/2017/2017-05-11-recommendation-algorithm/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           推荐算法 | 静心明志
+       
+  </title>
+  <meta name="title" content="推荐算法 | 静心明志">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ottsion.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "推荐算法",
+    "headline" : "推荐算法",
+    "description" : "推荐算法 目前，主要的推荐方法包括：基于内容的推荐、协同过滤推荐、基于关联规则的推荐、基于效用的推荐、基于知识的推荐和组合推荐。\n基于内容的推荐\n基于内容的推荐（Content-based Recommendation）是信息过滤技术的延续与发展，它是建立在项目的内容信息上作出推荐的，而不需要依据用户对项目的评价意见，更多地需要用机器学习的方法从关于内容的特征描述的事例中得到用户的兴趣资料。在基于内容的推荐系统中，项目或对象是通过相关的特征的属性来定义，系统基于用户评价对象的特征，学习用户的兴趣，考察用户资料与待预测项目的相匹配程度。用户的资料模型取决于所用学习方法，常用的有决策树、神经网络和基于向量的表示方法等。 基于内容的用户资料是需要有用户的历史数据，用户资料模型可能随着用户的偏好改变而发生变化。\n优点\n基于内容推荐方法的优点是： 1）不需要其它用户的数据，没有冷开始问题和稀疏问题。 2）能为具有特殊兴趣爱好的用户进行推荐。 3）能推荐新的或不是很流行的项目，没有新项目问题。 4）通过列出推荐项目的内容特征，可以解释为什么推荐那些项目。 5）已有比较好的技术，如关于分类学习方面的技术已相当成熟。\n缺点\n缺点是要求内容能容易抽取成有意义的特征，要求特征内容有良好的结构性，并且用户的口味必须能够用内容特征形式来表达，不能显式地得到其它用户的判断情况。\n协同过滤推荐\n协同过滤推荐（Collaborative Filtering Recommendation）技术是推荐系统中应用最早和最为成功的技术之一。它一般采用最近邻技术，利用用户的历史喜好信息计算用户之间的距离，然后利用目标用户的最近邻居用户对商品评价的加权评价值来预测目标用户对特定商品的喜好程度，系统从而根据这一喜好程度来对目标用户进行推荐。 协同过滤最大优点是对推荐对象没有特殊的要求，能处理非结构化的复杂对象，如音乐、电影。 协同过滤是基于这样的假设：为一用户找到他真正感兴趣的内容的好方法是首先找到与此用户有相似兴趣的其他用户，然后将他们感兴趣的内容推荐给此用户。其基本思想非常易于理解，在日常生活中，我们往往会利用好朋友的推荐来进行一些选择。协同过滤正是把这一思想运用到电子商务推荐系统中来，基于其他用户对某一内容的评价来向目标用户进行推荐。\n基于协同过滤的推荐系统可以说是从用户的角度来进行相应推荐的，而且是自动的，即用户获得的推荐是系统从购买模式或浏览行为等隐式获得的，不需要用户努力地找到适合自己兴趣的推荐信息，如填写一些调查表格等。\n优点\n和基于内容的过滤方法相比，协同过滤具有如下的优点： 1） 能够过滤难以进行机器自动内容分析的信息，如艺术品，音乐等。 2） 共享其他人的经验，避免了内容分析的不完全和不精确，并且能够基于一些复杂的，难以表述的概念（如信息质量、个人品味）进行过滤。 3） 有推荐新信息的能力。可以发现内容上完全不相似的信息，用户对推荐信息的内容事先是预料不到的。这也是协同过滤和基于内容的过滤一个较大的差别，基于内容的过滤推荐很多都是用户本来就熟悉的内容，而协同过滤可以发现用户潜在的但自己尚未发现的兴趣偏好。 4） 能够有效的使用其他相似用户的反馈信息，较少用户的反馈量，加快个性化学习的速度。\n缺点\n虽然协同过滤作为一种典型的推荐技术有其相当的应用，但协同过滤仍有许多的问题需要解决。最典型的问题有稀疏问题（Sparsity）和可扩展问题（Scalability）。\n基于关联规则的推荐\n基于关联规则的推荐（Association Rule-based Recommendation）是以关联规则为基础，把已购商品作为规则头，规则体为推荐对象。***关联规则挖掘可以发现不同商品在销售过程中的相关性*，在零售业中已经得到了成功的应用。关联规则就是在一个交易数据库中统计购买了商品集X的交易中有多大比例的交易同时购买了商品集Y，其直观的意义就是用户在 买某些商品的时候有多大倾向去购买另外一些商品。比如购买牛奶的同时很多人会同时购买面包。\n商品之间的关联规则可以分为空间关联和时间关联两种，时间关联又可以分为周期关系和顺序关联两种。\n空间关联\n空间关联，也就是在同一个时间（同一次购买）里，对消费者经常一起购买的商品进行分析，这也是所谓“购物篮分析”的主要支撑技术。 最常见的空间关联规则挖掘技术，是所谓的“支持-置信”分析。以消费者在超市购买商品为例，如果把每一个消费者的一次购买看作一个事件，考虑从商品X到商品Y的关联规则，支持度是指在所有事件中同时购买商品X和商品Y的比例，置信度则是在所有购买了商品X的事件中也购买商品Y的比例[1]。如果支持度和置信度都超过了相应的阈值，则从X到Y的规则被认为是有效的。\n时间关联\n顺序关联\n顺序关联是指购买了商品X的消费者，倾向于在一个特定的时间间隔后购买商品Y。 更严格地说，如果商品X和商品Y之间存在很强的时间关联性，则所有购买过X和Y的消费者购买X和Y的间隔时间的分布具有一个比较窄而高的峰值。\n周期关联\n周期关联和空间关联与顺序时间关联不同，不是两个商品之间的关联，而是同一个商品在被同一个消费者购买时在购买时间上的周期性。\n关联规则算法的第一步关联规则的发现最为关键且最耗时，是算法的瓶颈，但可以离线进行。其次，商品名称的同义性问题也是关联规则的一个难点。\n基于效用的推荐\n基于效用的推荐（Utility-based Recommendation）是建立在对用户使用项目的效用情况上计算的，其核心问题是怎么样为每一个用户去创建一个效用函数，因此，用户资料模型很大程度上是由系统所采用的效用函数决定的。基于效用推荐的好处是它能把非产品的属性，如提供商的可靠性（Vendor Reliability）和产品的可得性（Product Availability）等考虑到效用计算中。\n基于知识的推荐\n基于知识的推荐（Knowledge-based Recommendation）在某种程度是可以看成是一种推理（Inference）技术，它不是建立在用户需要和偏好基础上推荐的。基于知识的方法因它们所用的功能知识不同而有明显区别。效用知识（Functional Knowledge）是一种关于一个项目如何满足某一特定用户的知识，因此能解释需要和推荐的关系，所以用户资料可以是任何能支持推理的知识结构，它可以是用户已经规范化的查询，也可以是一个更详细的用户需要的表示。\n组合推荐\n由于各种推荐方法都有优缺点，所以在实际中，组合推荐（Hybrid Recommendation）经常被采用。研究和应用最多的是内容推荐和协同过滤推荐的组合。最简单的做法就是分别用基于内容的方法和协同过滤推荐方法去产生一个推荐预测结果，然后用某方法组合其结果。尽管从理论上有很多种推荐组合方法，但在某一具体问题中并不见得都有效，组合推荐一个最重要原则就是通过组合后要能避免或弥补各自推荐技术的弱点。\n组合方式\n在组合方式上，有研究人员提出了七种组合思路： 1）加权（Weight）：加权多种推荐技术结果。 2）变换（Switch）：根据问题背景和实际情况或要求决定变换采用不同的推荐技术。 3）混合（Mixed）：同时采用多种推荐技术给出多种推荐结果为用户提供参考。 4）特征组合（Feature combination）：组合来自不同推荐数据源的特征被另一种推荐算法所采用。 5）层叠（Cascade）：先用一种推荐技术产生一种粗糙的推荐结果，第二种推荐技术在此推荐结果的基础上进一步作出更精确的推荐。 6）特征扩充（Feature augmentation）：一种技术产生附加的特征信息嵌入到另一种推荐技术的特征输入中。 7）元级别（Meta-level）：用一种推荐方法产生的模型作为另一种推荐方法的输入。",
+    "inLanguage" : "en-us",
+    "author" : "caicai",
+    "creator" : "caicai",
+    "publisher": "caicai",
+    "accountablePerson" : "caicai",
+    "copyrightHolder" : "caicai",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "dateModified" : "2017-05-11 23:59:59 \x2b0000 \x2b0000",
+    "url" : "https:\/\/ottsion.github.io\/2017\/2017-05-11-recommendation-algorithm\/",
+    "wordCount" : "77",
+    "keywords" : [ "ML", "静心明志"]
+}
+</script>
+
+</head>
+
+  
+
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://ottsion.github.io">静心明志</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/about/" title=""></a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">推荐算法</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://ottsion.github.io" rel="author">caicai</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2017-05-11 itemprop="datePublished">May 11, 2017</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://ottsion.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p><a href="http://blog.csdn.net/u012073449/article/details/52047596" rel="nofollow noreferrer" target="_blank">推荐算法</a>
+目前，主要的推荐方法包括：基于内容的推荐、协同过滤推荐、基于关联规则的推荐、基于效用的推荐、基于知识的推荐和组合推荐。</p>
+
+<p>基于内容的推荐</p>
+
+<p>基于内容的推荐（Content-based Recommendation）是信息过滤技术的延续与发展，它是建立在项目的内容信息上作出推荐的，而不需要依据用户对项目的评价意见，更多地需要用机器学习的方法从关于内容的特征描述的事例中得到用户的兴趣资料。<strong>在基于内容的推荐系统中，项目或对象是通过相关的特征的属性来定义，系统基于用户评价对象的特征，学习用户的兴趣，考察用户资料与待预测项目的相匹配程度。用户的资料模型取决于所用学习方法，常用的有决策树、神经网络和基于向量的表示方法等。</strong> 基于内容的用户资料是需要有用户的历史数据，用户资料模型可能随着用户的偏好改变而发生变化。</p>
+
+<p>优点</p>
+
+<p>基于内容推荐方法的优点是：
+ 1）不需要其它用户的数据，没有冷开始问题和稀疏问题。
+ 2）能为具有特殊兴趣爱好的用户进行推荐。
+ 3）能推荐新的或不是很流行的项目，没有新项目问题。
+ 4）通过列出推荐项目的内容特征，可以解释为什么推荐那些项目。
+ 5）已有比较好的技术，如关于分类学习方面的技术已相当成熟。</p>
+
+<p>缺点</p>
+
+<p>缺点是要求内容能容易抽取成有意义的特征，要求特征内容有良好的结构性，并且用户的口味必须能够用内容特征形式来表达，不能显式地得到其它用户的判断情况。</p>
+
+<p>协同过滤推荐</p>
+
+<p>协同过滤推荐（Collaborative Filtering Recommendation）技术是推荐系统中应用最早和最为成功的技术之一。它一般采用最近邻技术，<strong>利用用户的历史喜好信息计算用户之间的距离，然后利用目标用户的最近邻居用户对商品评价的加权评价值来预测目标用户对特定商品的喜好程度，系统从而根据这一喜好程度来对目标用户进行推荐。</strong>
+协同过滤最大优点是对推荐对象没有特殊的要求，能处理非结构化的复杂对象，如音乐、电影。
+协同过滤是基于这样的假设：<strong>为一用户找到他真正感兴趣的内容的好方法是首先找到与此用户有相似兴趣的其他用户，然后将他们感兴趣的内容推荐给此用户。</strong>其基本思想非常易于理解，在日常生活中，我们往往会利用好朋友的推荐来进行一些选择。协同过滤正是把这一思想运用到电子商务推荐系统中来，基于其他用户对某一内容的评价来向目标用户进行推荐。</p>
+
+<p>基于协同过滤的推荐系统可以说是从用户的角度来进行相应推荐的，而且是自动的，即用户获得的推荐是系统从购买模式或浏览行为等隐式获得的，不需要用户努力地找到适合自己兴趣的推荐信息，如填写一些调查表格等。</p>
+
+<p>优点</p>
+
+<p>和基于内容的过滤方法相比，协同过滤具有如下的优点：
+ 1） 能够过滤难以进行机器自动内容分析的信息，如艺术品，音乐等。
+ 2） 共享其他人的经验，避免了内容分析的不完全和不精确，并且能够基于一些复杂的，难以表述的概念（如信息质量、个人品味）进行过滤。
+ 3） 有推荐新信息的能力。可以发现内容上完全不相似的信息，用户对推荐信息的内容事先是预料不到的。这也是协同过滤和基于内容的过滤一个较大的差别，基于内容的过滤推荐很多都是用户本来就熟悉的内容，而协同过滤可以发现用户潜在的但自己尚未发现的兴趣偏好。
+ 4） 能够有效的使用其他相似用户的反馈信息，较少用户的反馈量，加快个性化学习的速度。</p>
+
+<p>缺点</p>
+
+<p>虽然协同过滤作为一种典型的推荐技术有其相当的应用，但协同过滤仍有许多的问题需要解决。最典型的问题有稀疏问题（Sparsity）和可扩展问题（Scalability）。</p>
+
+<p>基于关联规则的推荐</p>
+
+<p>基于关联规则的推荐（Association Rule-based Recommendation）是<strong>以关联规则为基础，把已购商品作为规则头，规则体为推荐对象。</strong>***关联规则挖掘可以发现不同商品在销售过程中的相关性*，在零售业中已经得到了成功的应用。关联规则就是在一个交易数据库中统计购买了商品集X的交易中有多大比例的交易同时购买了商品集Y，其直观的意义就是用户在
+ 买某些商品的时候有多大倾向去购买另外一些商品。比如购买牛奶的同时很多人会同时购买面包。</p>
+
+<p>商品之间的关联规则可以分为空间关联和时间关联两种，时间关联又可以分为周期关系和顺序关联两种。</p>
+
+<p>空间关联</p>
+
+<p>空间关联，也就是在同一个时间（同一次购买）里，对消费者经常一起购买的商品进行分析，这也是所谓“购物篮分析”的主要支撑技术。
+最常见的空间关联规则挖掘技术，是所谓的“支持-置信”分析。以消费者在超市购买商品为例，如果把每一个消费者的一次购买看作一个事件，考虑从商品X到商品Y的关联规则，支持度是指在所有事件中同时购买商品X和商品Y的比例，置信度则是在所有购买了商品X的事件中也购买商品Y的比例[1]。如果支持度和置信度都超过了相应的阈值，则从X到Y的规则被认为是有效的。</p>
+
+<p>时间关联</p>
+
+<p>顺序关联</p>
+
+<p>顺序关联是指购买了商品X的消费者，倾向于在一个特定的时间间隔后购买商品Y。
+更严格地说，如果商品X和商品Y之间存在很强的时间关联性，则所有购买过X和Y的消费者购买X和Y的间隔时间的分布具有一个比较窄而高的峰值。</p>
+
+<p>周期关联</p>
+
+<p>周期关联和空间关联与顺序时间关联不同，不是两个商品之间的关联，而是同一个商品在被同一个消费者购买时在购买时间上的周期性。</p>
+
+<p>关联规则算法的第一步关联规则的发现最为关键且最耗时，是算法的瓶颈，但可以离线进行。其次，商品名称的同义性问题也是关联规则的一个难点。</p>
+
+<p>基于效用的推荐</p>
+
+<p>基于效用的推荐（Utility-based Recommendation）是<strong>建立在对用户使用项目的效用情况上计算的，其核心问题是怎么样为每一个用户去创建一个效用函数，因此，用户资料模型很大程度上是由系统所采用的效用函数决定的。</strong>基于效用推荐的好处是它能把非产品的属性，如提供商的可靠性（Vendor Reliability）和产品的可得性（Product Availability）等考虑到效用计算中。</p>
+
+<p>基于知识的推荐</p>
+
+<p>基于知识的推荐（Knowledge-based Recommendation）在某种程度是可以看成是一种推理（Inference）技术，它不是建立在用户需要和偏好基础上推荐的。基于知识的方法因它们所用的功能知识不同而有明显区别。<strong>效用知识（Functional Knowledge）是一种关于一个项目如何满足某一特定用户的知识，因此能解释需要和推荐的关系，</strong>所以用户资料可以是任何能支持推理的知识结构，它可以是用户已经规范化的查询，也可以是一个更详细的用户需要的表示。</p>
+
+<p>组合推荐</p>
+
+<p>由于各种推荐方法都有优缺点，所以在实际中，组合推荐（Hybrid Recommendation）经常被采用。<strong>研究和应用最多的是内容推荐和协同过滤推荐的组合。最简单的做法就是分别用基于内容的方法和协同过滤推荐方法去产生一个推荐预测结果，然后用某方法组合其结果。</strong>尽管从理论上有很多种推荐组合方法，但在某一具体问题中并不见得都有效，组合推荐一个最重要原则就是通过组合后要能避免或弥补各自推荐技术的弱点。</p>
+
+<p>组合方式</p>
+
+<p>在组合方式上，有研究人员提出了七种组合思路：
+ 1）加权（Weight）：加权多种推荐技术结果。
+ 2）变换（Switch）：根据问题背景和实际情况或要求决定变换采用不同的推荐技术。
+ 3）混合（Mixed）：同时采用多种推荐技术给出多种推荐结果为用户提供参考。
+ 4）特征组合（Feature combination）：组合来自不同推荐数据源的特征被另一种推荐算法所采用。
+ 5）层叠（Cascade）：先用一种推荐技术产生一种粗糙的推荐结果，第二种推荐技术在此推荐结果的基础上进一步作出更精确的推荐。
+ 6）特征扩充（Feature augmentation）：一种技术产生附加的特征信息嵌入到另一种推荐技术的特征输入中。
+ 7）元级别（Meta-level）：用一种推荐方法产生的模型作为另一种推荐方法的输入。</p>
+
+<p>主要推荐方法的对比</p>
+
+<p>各种推荐方法都有其各自的优点和缺点，见表1。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-f41b376fa2f84849?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-7b8a9cec5d0f557b?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-103b3331f942aecc?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-01d21c47086137e9?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure>
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="http://upload-images.jianshu.io/upload_images/1070582-dc711301142bd2d4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>可阅读的参考书：
+《推荐系统实战》<a href="http://max.book118.com/html/2016/0304/36867303.shtm" rel="nofollow noreferrer" target="_blank">http://max.book118.com/html/2016/0304/36867303.shtm</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Fengcai.Sun </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://ottsion.github.io/2017/2017-05-11-recommendation-algorithm/>https://ottsion.github.io/2017/2017-05-11-recommendation-algorithm/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://ottsion.github.io/tags/ml/">
+                    #ML</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://ottsion.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-regularization/" class="prev" rel="prev" title="正则化"><i class="iconfont icon-left"></i>&nbsp;正则化</a>
+         
+        
+        <a href="https://ottsion.github.io/2017/2017-05-11-rf/" class="next" rel="next" title="决策树与随机森林">决策树与随机森林&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://ottsion.github.io">Fengcai.Sun</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>
