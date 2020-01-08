@@ -11,6 +11,41 @@
   
   <link rel="prev" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-5/" />
   <link rel="next" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/" />
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -46,7 +81,7 @@
     "articleSection" : "posts",
     "name" : "opencv视觉编程学习第二部分代码",
     "headline" : "opencv视觉编程学习第二部分代码",
-    "description" : "星期二, 10. 一月 2017 01:44下午\n 这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况\n 代码学习 #include\x26lt;iostream\x26gt; #include\x26lt;string\x26gt; #include\x26lt;opencv2\/core\/core.hpp\x26gt; #include\x26lt;opencv2\/highgui\/highgui.hpp\x26gt; const std::string imageAddr = \x26quot;\/home\/ottsion\/Pictures\/opencvImage\/hua.jpg\x26quot;; \/\/测试函数，创建一个图像 cv::Mat function(){ cv::Mat ima(500, 500, CV_8U, 50); return ima; } int main() { cv::namedWindow(\x26quot;Image 1\x26quot;); cv::namedWindow(\x26quot;Image 2\x26quot;); cv::namedWindow(\x26quot;Image 3\x26quot;); cv::namedWindow(\x26quot;Image 4\x26quot;); cv::namedWindow(\x26quot;Image 5\x26quot;); cv::namedWindow(\x26quot;Image\x26quot;); \/\/创建一个240*320的新图像 cv::Mat image1(240, 320, CV_8U, 100); cv::imshow(\x26quot;Image\x26quot;, image1); cv::waitKey(0); \/\/重新分配一个新的图像 image1.create(200, 200, CV_8U); image1 = 200; cv::imshow(\x26quot;Image\x26quot;, image1); cv::waitKey(0); \/\/创建一个红色的图像，通道依次为BGR cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255)); \/\/或者 \/\/cv::Mat image2(cv::Size(320, 240), CV_8UC3); \/\/image2 = cv::Scalar(0, 0, 255)； cv::imshow(\x26quot;Image\x26quot;, image2); cv::waitKey(0); \/\/读入一个图像 cv::Mat image3 = cv::imread(imageAddr); \/\/所有图像指向同一个数据块 cv::Mat image4(image3); image1 = image3; \/\/这些图像都是原图像的副本 image3.",
+    "description" : "星期二, 10. 一月 2017 01:44下午\n 这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况\n  代码学习 #include\x26lt;iostream\x26gt;\r#include\x26lt;string\x26gt;\r#include\x26lt;opencv2\/core\/core.hpp\x26gt;\r#include\x26lt;opencv2\/highgui\/highgui.hpp\x26gt;\rconst std::string imageAddr = \x26#34;\/home\/ottsion\/Pictures\/opencvImage\/hua.jpg\x26#34;;\r\/\/测试函数，创建一个图像\rcv::Mat function(){\rcv::Mat ima(500, 500, CV_8U, 50);\rreturn ima;\r}\rint main()\r{\rcv::namedWindow(\x26#34;Image 1\x26#34;);\rcv::namedWindow(\x26#34;Image 2\x26#34;);\rcv::namedWindow(\x26#34;Image 3\x26#34;);\rcv::namedWindow(\x26#34;Image 4\x26#34;);\rcv::namedWindow(\x26#34;Image 5\x26#34;);\rcv::namedWindow(\x26#34;Image\x26#34;);\r\/\/创建一个240*320的新图像\r cv::Mat image1(240, 320, CV_8U, 100);\rcv::imshow(\x26#34;Image\x26#34;, image1);\rcv::waitKey(0);\r\/\/重新分配一个新的图像\r image1.create(200, 200, CV_8U);\rimage1 = 200;\rcv::imshow(\x26#34;Image\x26#34;, image1);\rcv::waitKey(0);\r\/\/创建一个红色的图像，通道依次为BGR\r cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255));\r\/\/或者\r \/\/cv::Mat image2(cv::Size(320, 240), CV_8UC3);\r \/\/image2 = cv::Scalar(0, 0, 255)；\r cv::imshow(\x26#34;Image\x26#34;, image2);\rcv::waitKey(0);\r\/\/读入一个图像\r cv::Mat image3 = cv::imread(imageAddr);\r\/\/所有图像指向同一个数据块\r cv::Mat image4(image3);\rimage1 = image3;\r\/\/这些图像都是原图像的副本\r image3.",
     "inLanguage" : "en-us",
     "author" : "caicai",
     "creator" : "caicai",
@@ -152,101 +187,93 @@
           
           
 
-          
-
-<hr />
-
+          <hr>
 <p>星期二, 10. 一月 2017 01:44下午</p>
-
 <blockquote>
 <p>这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况</p>
 </blockquote>
-
-<hr />
-
+<hr>
 <h2 id="代码学习">代码学习</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;opencv2/core/core.hpp&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;opencv2/highgui/highgui.hpp&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> std<span style="color:#f92672">:</span><span style="color:#f92672">:</span>string imageAddr <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/home/ottsion/Pictures/opencvImage/hua.jpg</span><span style="color:#e6db74">&#34;</span>;
 
-<pre><code class="language-C++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-#include&lt;opencv2/core/core.hpp&gt;
-#include&lt;opencv2/highgui/highgui.hpp&gt;
-const std::string imageAddr = &quot;/home/ottsion/Pictures/opencvImage/hua.jpg&quot;;
 
-
-//测试函数，创建一个图像
-cv::Mat function(){
-  cv::Mat ima(500, 500, CV_8U, 50);
-  return ima;
+<span style="color:#75715e">//测试函数，创建一个图像
+</span><span style="color:#75715e"></span>cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat function(){
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat ima(<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">500</span>, CV_8U, <span style="color:#ae81ff">50</span>);
+  <span style="color:#66d9ef">return</span> ima;
 }
 
-int main()
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-  cv::namedWindow(&quot;Image 1&quot;);
-  cv::namedWindow(&quot;Image 2&quot;);
-  cv::namedWindow(&quot;Image 3&quot;);
-  cv::namedWindow(&quot;Image 4&quot;);
-  cv::namedWindow(&quot;Image 5&quot;);
-  cv::namedWindow(&quot;Image&quot;);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>namedWindow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 1</span><span style="color:#e6db74">&#34;</span>);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>namedWindow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 2</span><span style="color:#e6db74">&#34;</span>);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>namedWindow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 3</span><span style="color:#e6db74">&#34;</span>);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>namedWindow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 4</span><span style="color:#e6db74">&#34;</span>);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>namedWindow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 5</span><span style="color:#e6db74">&#34;</span>);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>namedWindow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image</span><span style="color:#e6db74">&#34;</span>);
   
-  //创建一个240*320的新图像
-  cv::Mat image1(240, 320, CV_8U, 100);
-  cv::imshow(&quot;Image&quot;, image1);
-  cv::waitKey(0);
+  <span style="color:#75715e">//创建一个240*320的新图像
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image1(<span style="color:#ae81ff">240</span>, <span style="color:#ae81ff">320</span>, CV_8U, <span style="color:#ae81ff">100</span>);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image</span><span style="color:#e6db74">&#34;</span>, image1);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  //重新分配一个新的图像
-  image1.create(200, 200, CV_8U);
-  image1 = 200;
+  <span style="color:#75715e">//重新分配一个新的图像
+</span><span style="color:#75715e"></span>  image1.create(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>, CV_8U);
+  image1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>;
   
-  cv::imshow(&quot;Image&quot;, image1);
-  cv::waitKey(0);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image</span><span style="color:#e6db74">&#34;</span>, image1);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  //创建一个红色的图像，通道依次为BGR
-  cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255));
-  //或者
-  //cv::Mat image2(cv::Size(320, 240), CV_8UC3);
-  //image2 =  cv::Scalar(0, 0, 255)；
-  cv::imshow(&quot;Image&quot;, image2);
-  cv::waitKey(0);
+  <span style="color:#75715e">//创建一个红色的图像，通道依次为BGR
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image2(<span style="color:#ae81ff">240</span>, <span style="color:#ae81ff">320</span>, CV_8UC3, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Scalar(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">255</span>));
+  <span style="color:#75715e">//或者
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">//cv::Mat image2(cv::Size(320, 240), CV_8UC3);
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">//image2 =  cv::Scalar(0, 0, 255)；
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image</span><span style="color:#e6db74">&#34;</span>, image2);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  //读入一个图像
-  cv::Mat image3 = cv::imread(imageAddr);
+  <span style="color:#75715e">//读入一个图像
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image3 <span style="color:#f92672">=</span> cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imread(imageAddr);
   
-  //所有图像指向同一个数据块
-  cv::Mat image4(image3);
-  image1 = image3;
+  <span style="color:#75715e">//所有图像指向同一个数据块
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image4(image3);
+  image1 <span style="color:#f92672">=</span> image3;
   
-  //这些图像都是原图像的副本
-  image3.copyTo(image2);
-  cv::Mat image5 = image3.clone();
+  <span style="color:#75715e">//这些图像都是原图像的副本
+</span><span style="color:#75715e"></span>  image3.copyTo(image2);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image5 <span style="color:#f92672">=</span> image3.clone();
   
-  //转换图像用来测试
-  cv::flip(image3, image3, 1);
+  <span style="color:#75715e">//转换图像用来测试
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>flip(image3, image3, <span style="color:#ae81ff">1</span>);
   
-  //检查哪些图像在这个过程中受损
-  cv::imshow(&quot;Image 3&quot;, image3);
-  cv::imshow(&quot;Image 1&quot;, image1); 
-  cv::imshow(&quot;Image 2&quot;, image2);
-  cv::imshow(&quot;Image 4&quot;, image4);
-  cv::imshow(&quot;Image 5&quot;, image5);
-  cv::waitKey(0);
+  <span style="color:#75715e">//检查哪些图像在这个过程中受损
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 3</span><span style="color:#e6db74">&#34;</span>, image3);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 1</span><span style="color:#e6db74">&#34;</span>, image1); 
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 2</span><span style="color:#e6db74">&#34;</span>, image2);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 4</span><span style="color:#e6db74">&#34;</span>, image4);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image 5</span><span style="color:#e6db74">&#34;</span>, image5);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  //从函数中获取一个灰度图像
-  cv::Mat gray = function();
-  cv::imshow(&quot;Image&quot;, gray);
-  cv::waitKey(0);
+  <span style="color:#75715e">//从函数中获取一个灰度图像
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat gray <span style="color:#f92672">=</span> function();
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image</span><span style="color:#e6db74">&#34;</span>, gray);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  //作为灰度图像读入
-  image1 = cv::imread(imageAddr, CV_LOAD_IMAGE_GRAYSCALE);
-  image1.convertTo(image2, CV_32F, 1/255.0, 0.0);
-  cv::imshow(&quot;Image&quot; ,image2);
-  cv::waitKey(0);
+  <span style="color:#75715e">//作为灰度图像读入
+</span><span style="color:#75715e"></span>  image1 <span style="color:#f92672">=</span> cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imread(imageAddr, CV_LOAD_IMAGE_GRAYSCALE);
+  image1.convertTo(image2, CV_32F, <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">255.0</span>, <span style="color:#ae81ff">0.0</span>);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Image</span><span style="color:#e6db74">&#34;</span> ,image2);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  return 0;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 
 
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -263,6 +290,9 @@ int main()
                     <a href=https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/</span>
             </p>
             
+            <span id="busuanzi_container_page_pv">
+                本文总阅读量: <span id="busuanzi_value_page_pv"></span>
+            </span>
              
             <p class="copyright-item lincese">
                 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
@@ -296,10 +326,27 @@ int main()
         
     </div>
 
+    
     <div class="post-comment">
-          
-                 
-          
+        
+        
+
+<div id="vcomments"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.7/dist/Valine.min.js'></script>
+
+<script type="text/javascript">
+  new Valine({
+      el: '#vcomments' ,
+      appId: 'aq7KX6LvEUKuYC1FReOy9Rq8-gzGzoHsz',
+      appKey: 'AJWv8xzYkd8tJ23S38zDK3TN',
+      notify: 'false', 
+      verify: 'false', 
+      avatar:'mm', 
+      placeholder: '说点什么吧...',
+      visitor: 'true'
+  });
+</script>
     </div>
 </article>
           </div>
@@ -321,7 +368,7 @@ int main()
 		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
     </div>
 </footer>
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

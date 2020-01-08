@@ -61,6 +61,9 @@
                     <a href={{ . }}>{{ . }}</span>
             </p>
             {{ end }}
+            <span id="busuanzi_container_page_pv">
+                本文总阅读量: <span id="busuanzi_value_page_pv"></span>
+            </span>
             {{ with .Site.Params.license }} 
             <p class="copyright-item lincese">
                 {{ . | safeHTML}}
@@ -94,12 +97,16 @@
         {{ end }}
     </div>
 
-    <div class="post-comment">
+    <!-- <div class="post-comment">
           {{ if ( .Params.showComments | default true ) }}
                  {{ if ne .Site.DisqusShortname "" }}
                      {{ template "_internal/disqus.html" . }}
                  {{ end }}
           {{ end }}
+    </div> -->
+    <div class="post-comment">
+        <!-- 加入评论功能 -->
+        {{ partial "comments.html" . }}
     </div>
 </article>
 {{- end }}

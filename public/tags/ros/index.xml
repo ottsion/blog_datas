@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ros on 静心明志</title>
@@ -22,17 +22,17 @@
 如下是V2（上）和V1（下）。看看自己的设备，然后再决定用哪个安装方案。
 ​ 本文针对的是V2的情况。
 
-安装 1、首先git下载代码，很快下载好，放到~下面
+ 安装 1、首先git下载代码，很快下载好，放到~下面
 git clone https://github.com/OpenKinect/libfreenect2.git
 2、然后安装依赖项如下,最好事先编译安装好OpenCV
 sudo apt-get install build-essential cmake pkg-config libturbojpeg libjpeg-turbo8-dev mesa-common-dev freeglut3-dev libxrandr-dev libxi-dev
 3、然后安装libusb。此处需要添加一个PPA，就是下面的第一行命令，不然绝逼是装不上的。
-sudo apt-add-repository ppa:floe/libusb sudo apt-get update sudo apt-get install libusb-1.0-0-dev  4、接着运行下面的命令，安装GLFW3
+sudo apt-add-repository ppa:floe/libusbsudo apt-get updatesudo apt-get install libusb-1.0-0-dev4、接着运行下面的命令，安装GLFW3
 sudo apt-get install libglfw3-dev
 如果没有成功的话，使用下面的命令，来代替上面的
-cd libfreenect2/depends sh install_ubuntu.sh sudo dpkg -i libglfw3*_3.0.4-1_*.deb  5、然后安装OpenCL的支持库（不打算使用GPU，这一步直接跳过没做）
+cd libfreenect2/dependssh install_ubuntu.shsudo dpkg -i libglfw3*_3.0.4-1_*.deb5、然后安装OpenCL的支持库（不打算使用GPU，这一步直接跳过没做）
 6、接着编译库
-cd .. mkdir build &amp;amp;&amp;amp; cd build cmake .. make sudo make install  测试 最后可以运行程序.</description>
+cd ..mkdir build &amp;amp;&amp;amp; cd buildcmake ..makesudo make install 测试 最后可以运行程序.</description>
     </item>
     
     <item>
@@ -41,17 +41,22 @@ cd .. mkdir build &amp;amp;&amp;amp; cd build cmake .. make sudo make install  �
       <pubDate>Fri, 16 Jun 2017 23:59:59 +0000</pubDate>
       
       <guid>https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/</guid>
-      <description>ROS学习之rqt_plot绘图  速度加速度、误差等的曲线图
+      <description>ROS学习之rqt_plot绘图##  速度加速度、误差等的曲线图
  显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。
 后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。
-rostopic echo /joint_states &amp;gt; record2.txt
+rostopic echo /joint_states &amp;gt; record2.txt 
 1. 背景 因为在为youbot添加FollowJointTrajectory 的client之后，仿真环境中的动作与实际有出入，因此想看看机械臂的实际动作曲线。而在ROS中，内置的rqt_plot是可以提供绘图功能的，而后来发现rqt_plot的功能比较简单，随着数据量的增大，查看起来比较费劲。于是就有了后来的导入matlab中分析的部分。
 2.rqt_plot绘图 照例，我们找到官网的相关部分，有个基础理解：http://wiki.ros.org/rqt_plot
-rqt_plot /turtle1/pose/x:y:z rqt_plot /turtle1/pose/x /turtle1/pose/y /turtle1/pose/z  特别
+rqt_plot /turtle1/pose/x:y:z rqt_plot /turtle1/pose/x /turtle1/pose/y /turtle1/pose/z 特别
 注意
 上面的第一句，它就是下面的简写，同一个topic下的直接冒号就好，不用输入那么多的文字。
 在这里我为了避免每次要去动机械臂，将joint_states这个topic的信息已经保存为了bag文件，录的动作是我上一篇文章，actionlib中的动作的一部分，大概是从home到伸直的一部分。使用指令（参看《a gentle introduction to ROS》P135页）
--O(是字母O, 并非数字0，它表示输出文件（output），后面跟的是你的输出文件的名字，我这里是youbot_action2.bag)，下面是我的bag的一些基本信息： 一共21.1s，包含了861条信息 ![img](http://img.blog.csdn.net/20150506131445167) 我们查看一下数据内容 ![img](http://img.blog.csdn.net/20160118222946817) 然后开启一个terminal，回放数据rosbag play youbot_action2.bag --clock，--clock表示使用simulate time，具体可以参考[http://wiki.ros.org/Clock](http://wiki.ros.org/Clock) 。再打开另外一个，开启rqt_plot，用命令  rqt_plot /joint_states/velocity[0]:velocity[1]:velocity[2]:velocity[3]:velocity[4] ``` 因为，youbot机械臂是五个自由度，这里我们用标号0-4来引用每一个（用QwtPlot画出来的）
+rosbag record -O youbot_action2.bag /joint_states 
+-O(是字母O, 并非数字0，它表示输出文件（output），后面跟的是你的输出文件的名字，我这里是youbot_action2.bag)，下面是我的bag的一些基本信息：
+一共21.1s，包含了861条信息
+我们查看一下数据内容
+然后开启一个terminal，回放数据rosbag play youbot_action2.bag &amp;ndash;clock，&amp;ndash;clock表示使用simulate time，具体可以参考http://wiki.ros.org/Clock 。再打开另外一个，开启rqt_plot，用命令
+rqt_plot /joint_states/velocity[0]:velocity[1]:velocity[2]:velocity[3]:velocity[4]因为，youbot机械臂是五个自由度，这里我们用标号0-4来引用每一个（用QwtPlot画出来的）
 用MatPlot画出来的，可以看出他们刚好是左右颠倒的，我们的这个bag文件，有大概20s。右键按住鼠标上下或左右滑动进行缩放。
 同理，我们也可以找出各个关节的一些信息：
 rqt_plot /joint_states/position[0]:position[1]:position[2]:position[3]:position[4]
@@ -60,8 +65,7 @@ rqt_plot /joint_states/position[0]:position[1]:position[2]:position[3]:position[
 3.Matlab绘图 其实，这个地方我也走了点弯路的，当时我用命令 rostopic echo /joint_states
 显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。
 后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。
-rostopic echo /joint_states &amp;gt; record2.txt
-将txt文件拷贝出来到windows上，导入excel文件，然后借助Matlab分析（这里主要是用到了seq，position和velocity）</description>
+rostopic echo /joint_states &amp;gt; record2.txt</description>
     </item>
     
   </channel>

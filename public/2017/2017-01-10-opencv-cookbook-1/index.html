@@ -11,6 +11,41 @@
   
   <link rel="prev" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/" />
   <link rel="next" href="https://ottsion.github.io/2017/2017-01-11-opencv-cookbook-7/" />
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -46,7 +81,7 @@
     "articleSection" : "posts",
     "name" : "opencv视觉编程学习第一部分代码",
     "headline" : "opencv视觉编程学习第一部分代码",
-    "description" : "星期二, 10. 一月 2017 01:44下午\n 这部分主要是读取并显示图像，并对图像进行基本操作，比如画图和写字，同时添加图片点击事件的操作\n 代码学习 #include\x26lt;iostream\x26gt; #include\x26lt;string\x26gt; #include \x26quot;opencv2\/core\/core.hpp\x26quot; #include \x26quot;opencv2\/highgui\/highgui.hpp\x26quot; #include \x26lt;boost\/concept_check.hpp\x26gt; using namespace std; \/\/图片地址 const string imageAddr0 = \x26quot;\/home\/ottsion\/Documents\/2.jpg\x26quot;; const string imageAddr1 = \x26quot;\/home\/ottsion\/Pictures\/opencvImage\/hua.jpg\x26quot;; \/** * 根据图片信息显示图片 * @param windowName 显示窗口名称 * @param image opcv的图片信息 *\/ void showImage(string windowName, cv::Mat image); \/** * 根据地址，读取图片信息 * @param imageAddr 图片地址 * @param image opcv的图片信息 *\/ void readImage(string imageAddr, cv::Mat\x26amp; image); \/** * 将图片进行水平或者垂直翻转 * @param image opcv的图片信息 *\/ void convertImage(cv::Mat\x26amp; image); \/** * 读取时将图片灰度化或者三通道读取 * @param image opcv的图片信息 *\/ void getImageByTypes(cv::Mat\x26amp; image); \/** * 鼠标点击事件响应 * @param event 整数，表示鼠标触发事件的类型 * @param x 鼠标事件出发时位置（像素坐标显示） * @param y 鼠标事件出发时位置 * @param flags 表示事件发生时按下了鼠标的哪个键 * @param param 执行任意对象的指针，作为附加参数发送给函数 *\/ void onMouse(int event, int x, int y, int flags, void* param); \/** * 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数 * @param windowName 图像窗口名称 * @param image 图像信息 *\/ void callBackFunc(string windowName, cv::Mat\x26amp; image); \/** * 在图像上绘画和写入文本 * @param windowName 图像窗口名称 * @param image 图像信息 *\/ void drawAndWriteOnImage(string windowName, cv::Mat image); void showImage(string windowName, cv::Mat image) { \/\/先定义窗口 cv::namedWindow(windowName); \/\/显示图片 cv::imshow(windowName, image); } void readImage(string imageAddr, cv::Mat\x26amp; image) { \/\/读取图片 image = cv::imread(imageAddr); if(image.",
+    "description" : "星期二, 10. 一月 2017 01:44下午\n 这部分主要是读取并显示图像，并对图像进行基本操作，比如画图和写字，同时添加图片点击事件的操作\n  代码学习 #include\x26lt;iostream\x26gt;\r#include\x26lt;string\x26gt;\r#include \x26#34;opencv2\/core\/core.hpp\x26#34;\r#include \x26#34;opencv2\/highgui\/highgui.hpp\x26#34;\r#include \x26lt;boost\/concept_check.hpp\x26gt;\rusing namespace std;\r\/\/图片地址\rconst string imageAddr0 = \x26#34;\/home\/ottsion\/Documents\/2.jpg\x26#34;;\rconst string imageAddr1 = \x26#34;\/home\/ottsion\/Pictures\/opencvImage\/hua.jpg\x26#34;;\r\/**\r* 根据图片信息显示图片\r* @param windowName 显示窗口名称\r* @param image opcv的图片信息\r*\/\rvoid showImage(string windowName, cv::Mat image);\r\/**\r* 根据地址，读取图片信息\r* @param imageAddr 图片地址\r* @param image opcv的图片信息\r*\/\rvoid readImage(string imageAddr, cv::Mat\x26amp; image);\r\/**\r* 将图片进行水平或者垂直翻转\r* @param image opcv的图片信息\r*\/\rvoid convertImage(cv::Mat\x26amp; image);\r\/**\r* 读取时将图片灰度化或者三通道读取\r* @param image opcv的图片信息\r*\/\rvoid getImageByTypes(cv::Mat\x26amp; image);\r\/**\r* 鼠标点击事件响应\r* @param event 整数，表示鼠标触发事件的类型\r* @param x 鼠标事件出发时位置（像素坐标显示）\r* @param y 鼠标事件出发时位置\r* @param flags 表示事件发生时按下了鼠标的哪个键\r* @param param 执行任意对象的指针，作为附加参数发送给函数\r*\/\rvoid onMouse(int event, int x, int y, int flags, void* param);\r\/**\r* 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数\r* @param windowName 图像窗口名称\r* @param image 图像信息\r*\/\rvoid callBackFunc(string windowName, cv::Mat\x26amp; image);\r\/**\r* 在图像上绘画和写入文本\r* @param windowName 图像窗口名称\r* @param image 图像信息\r*\/\rvoid drawAndWriteOnImage(string windowName, cv::Mat image);\rvoid showImage(string windowName, cv::Mat image)\r{\r\/\/先定义窗口\r cv::namedWindow(windowName);\r\/\/显示图片\r cv::imshow(windowName, image);\r}\rvoid readImage(string imageAddr, cv::Mat\x26amp; image)\r{\r\/\/读取图片\r image = cv::imread(imageAddr);\rif(image.",
     "inLanguage" : "en-us",
     "author" : "caicai",
     "creator" : "caicai",
@@ -57,7 +92,7 @@
     "datePublished": "2017-01-10 23:59:59 \x2b0000 \x2b0000",
     "dateModified" : "2017-01-10 23:59:59 \x2b0000 \x2b0000",
     "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-10-opencv-cookbook-1\/",
-    "wordCount" : "452",
+    "wordCount" : "450",
     "keywords" : [ "opencv,图像处理", "静心明志"]
 }
 </script>
@@ -152,223 +187,215 @@
           
           
 
-          
-
-<hr />
-
+          <hr>
 <p>星期二, 10. 一月 2017 01:44下午</p>
-
 <blockquote>
 <p>这部分主要是读取并显示图像，并对图像进行基本操作，比如画图和写字，同时添加图片点击事件的操作</p>
 </blockquote>
-
-<hr />
-
+<hr>
 <h2 id="代码学习">代码学习</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&#34;opencv2/core/core.hpp&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&#34;opencv2/highgui/highgui.hpp&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;boost/concept_check.hpp&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
-<pre><code class="language-C++">#include&lt;iostream&gt;
-#include&lt;string&gt;
-#include &quot;opencv2/core/core.hpp&quot;
-#include &quot;opencv2/highgui/highgui.hpp&quot;
-#include &lt;boost/concept_check.hpp&gt;
-using namespace std;
+<span style="color:#75715e">//图片地址
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> string imageAddr0 <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/home/ottsion/Documents/2.jpg</span><span style="color:#e6db74">&#34;</span>;
+<span style="color:#66d9ef">const</span> string imageAddr1 <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/home/ottsion/Pictures/opencvImage/hua.jpg</span><span style="color:#e6db74">&#34;</span>;
 
-//图片地址
-const string imageAddr0 = &quot;/home/ottsion/Documents/2.jpg&quot;;
-const string imageAddr1 = &quot;/home/ottsion/Pictures/opencvImage/hua.jpg&quot;;
-
-/**
- * 根据图片信息显示图片
- * @param windowName 显示窗口名称
- * @param image opcv的图片信息
- */
-void showImage(string windowName, cv::Mat image);
-/**
- * 根据地址，读取图片信息
- * @param imageAddr 图片地址
- * @param image opcv的图片信息
- */
-void readImage(string imageAddr, cv::Mat&amp; image);
-/**
- * 将图片进行水平或者垂直翻转
- * @param image opcv的图片信息
- */
-void convertImage(cv::Mat&amp; image);
-/**
- * 读取时将图片灰度化或者三通道读取
- * @param image opcv的图片信息
- */
-void getImageByTypes(cv::Mat&amp; image);
-/**
- * 鼠标点击事件响应
- * @param event 整数，表示鼠标触发事件的类型
- * @param x  鼠标事件出发时位置（像素坐标显示）
- * @param y  鼠标事件出发时位置
- * @param flags  表示事件发生时按下了鼠标的哪个键
- * @param param  执行任意对象的指针，作为附加参数发送给函数
- */
-void onMouse(int event, int x, int y, int flags, void* param);
-/**
- * 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数
- * @param windowName   图像窗口名称
- * @param image  图像信息
- */
-void callBackFunc(string windowName, cv::Mat&amp; image);
-/**
- * 在图像上绘画和写入文本
- * @param windowName 图像窗口名称
- * @param image  图像信息
- */
-void drawAndWriteOnImage(string windowName, cv::Mat image);
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 根据图片信息显示图片
+</span><span style="color:#75715e"> * @param windowName 显示窗口名称
+</span><span style="color:#75715e"> * @param image opcv的图片信息
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showImage</span>(string windowName, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image);
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 根据地址，读取图片信息
+</span><span style="color:#75715e"> * @param imageAddr 图片地址
+</span><span style="color:#75715e"> * @param image opcv的图片信息
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readImage</span>(string imageAddr, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image);
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 将图片进行水平或者垂直翻转
+</span><span style="color:#75715e"> * @param image opcv的图片信息
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">convertImage</span>(cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image);
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 读取时将图片灰度化或者三通道读取
+</span><span style="color:#75715e"> * @param image opcv的图片信息
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getImageByTypes</span>(cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image);
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 鼠标点击事件响应
+</span><span style="color:#75715e"> * @param event 整数，表示鼠标触发事件的类型
+</span><span style="color:#75715e"> * @param x  鼠标事件出发时位置（像素坐标显示）
+</span><span style="color:#75715e"> * @param y  鼠标事件出发时位置
+</span><span style="color:#75715e"> * @param flags  表示事件发生时按下了鼠标的哪个键
+</span><span style="color:#75715e"> * @param param  执行任意对象的指针，作为附加参数发送给函数
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onMouse</span>(<span style="color:#66d9ef">int</span> event, <span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, <span style="color:#66d9ef">int</span> flags, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> param);
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数
+</span><span style="color:#75715e"> * @param windowName   图像窗口名称
+</span><span style="color:#75715e"> * @param image  图像信息
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">callBackFunc</span>(string windowName, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image);
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 在图像上绘画和写入文本
+</span><span style="color:#75715e"> * @param windowName 图像窗口名称
+</span><span style="color:#75715e"> * @param image  图像信息
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drawAndWriteOnImage</span>(string windowName, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image);
 
 
-void showImage(string windowName, cv::Mat image)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showImage</span>(string windowName, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image)
 {
-   //先定义窗口
-  cv::namedWindow(windowName);
-  //显示图片
-  cv::imshow(windowName, image);
+   <span style="color:#75715e">//先定义窗口
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>namedWindow(windowName);
+  <span style="color:#75715e">//显示图片
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imshow(windowName, image);
 }
 
-void readImage(string imageAddr, cv::Mat&amp; image)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">readImage</span>(string imageAddr, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image)
 {
-   //读取图片
-  image = cv::imread(imageAddr);
-  if(image.empty())
+   <span style="color:#75715e">//读取图片
+</span><span style="color:#75715e"></span>  image <span style="color:#f92672">=</span> cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imread(imageAddr);
+  <span style="color:#66d9ef">if</span>(image.empty())
   {
-     std::cout&lt;&lt;&quot;显示没有图片或者读取错误&quot;&lt;&lt; image.rows &lt;&lt;endl;
+     std<span style="color:#f92672">:</span><span style="color:#f92672">:</span>cout<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">显示没有图片或者读取错误</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> image.rows <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>endl;
   }
-  showImage(&quot;origin image&quot;, image);
+  showImage(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">origin image</span><span style="color:#e6db74">&#34;</span>, image);
 }
-void convertImage(cv::Mat&amp; image)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">convertImage</span>(cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image)
 {
-  //翻转图像
-  cv::Mat result;
-  //正数表示水平，0表示垂直，负数表示水平和垂直
-  cv::flip(image, result, 1);
-  //就地处理
-  //cv::flip(image, image, 1);
-  showImage(&quot;convert image&quot;, result);
+  <span style="color:#75715e">//翻转图像
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat result;
+  <span style="color:#75715e">//正数表示水平，0表示垂直，负数表示水平和垂直
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>flip(image, result, <span style="color:#ae81ff">1</span>);
+  <span style="color:#75715e">//就地处理
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">//cv::flip(image, image, 1);
+</span><span style="color:#75715e"></span>  showImage(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">convert image</span><span style="color:#e6db74">&#34;</span>, result);
 
-  //保存图片
-  cv::imwrite(&quot;output.png&quot;, result);
+  <span style="color:#75715e">//保存图片
+</span><span style="color:#75715e"></span>  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imwrite(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">output.png</span><span style="color:#e6db74">&#34;</span>, result);
 }
-void getImageByTypes(cv::Mat&amp; image)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getImageByTypes</span>(cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image)
 {
-  /**
-   * 读入图片将其转为灰度图片
-   * 这样生成的图像由无符号字节构成，opencv中用定义的常量CV_8U表示
-   */
-  image = cv::imread(imageAddr1, CV_LOAD_IMAGE_GRAYSCALE);
-  showImage(&quot;gray image&quot;, image);
+  <span style="color:#75715e">/**
+</span><span style="color:#75715e">   * 读入图片将其转为灰度图片
+</span><span style="color:#75715e">   * 这样生成的图像由无符号字节构成，opencv中用定义的常量CV_8U表示
+</span><span style="color:#75715e">   */</span>
+  image <span style="color:#f92672">=</span> cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imread(imageAddr1, CV_LOAD_IMAGE_GRAYSCALE);
+  showImage(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">gray image</span><span style="color:#e6db74">&#34;</span>, image);
   
-  /**
-   * 读入图片将其转为三通道图片
-   * 这样生成的图像用opencv中用定义的常量CV_8UC3表示
-   * 如果输入图像为灰度图像，三通道数值相同
-   * 如果读入时图像选择本身格式，只需将第二个参数设置为负值\
-   * 如果读入图像由整形（CV_16U,CV_32S）构成，图像每个像素将除以256，以便在256级灰度中显示
-   * 如果读入图像由浮点数构成，图像每个像素将设置为从0.0到1.0，超出范围的部分显示为白色（大于1.0），黑色（小于0.0）
-   */
-  image = cv::imread(imageAddr1, CV_LOAD_IMAGE_COLOR);
-  showImage(&quot;color image&quot;, image); 
+  <span style="color:#75715e">/**
+</span><span style="color:#75715e">   * 读入图片将其转为三通道图片
+</span><span style="color:#75715e">   * 这样生成的图像用opencv中用定义的常量CV_8UC3表示
+</span><span style="color:#75715e">   * 如果输入图像为灰度图像，三通道数值相同
+</span><span style="color:#75715e">   * 如果读入时图像选择本身格式，只需将第二个参数设置为负值\
+</span><span style="color:#75715e">   * 如果读入图像由整形（CV_16U,CV_32S）构成，图像每个像素将除以256，以便在256级灰度中显示
+</span><span style="color:#75715e">   * 如果读入图像由浮点数构成，图像每个像素将设置为从0.0到1.0，超出范围的部分显示为白色（大于1.0），黑色（小于0.0）
+</span><span style="color:#75715e">   */</span>
+  image <span style="color:#f92672">=</span> cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imread(imageAddr1, CV_LOAD_IMAGE_COLOR);
+  showImage(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">color image</span><span style="color:#e6db74">&#34;</span>, image); 
 }
-void onMouse(int event, int x, int y, int flags, void* param)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onMouse</span>(<span style="color:#66d9ef">int</span> event, <span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, <span style="color:#66d9ef">int</span> flags, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> param)
 {
-  cv::Mat *im =reinterpret_cast&lt;cv::Mat*&gt;(param);
-  switch(event)
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat <span style="color:#f92672">*</span>im <span style="color:#f92672">=</span><span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span>cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">*</span><span style="color:#f92672">&gt;</span>(param);
+  <span style="color:#66d9ef">switch</span>(event)
   {
-    /*
-     * CV_EVENT_MOUSEMOVE      =0,
-     * CV_EVENT_LBUTTONDOWN    =1,
-     * CV_EVENT_RBUTTONDOWN    =2,
-     * CV_EVENT_MBUTTONDOWN    =3,
-     * CV_EVENT_LBUTTONUP      =4,
-     * CV_EVENT_RBUTTONUP      =5,
-     * CV_EVENT_MBUTTONUP      =6,
-     * CV_EVENT_LBUTTONDBLCLK  =7,
-     * CV_EVENT_RBUTTONDBLCLK  =8,
-     * CV_EVENT_MBUTTONDBLCLK  =9
-     */
-    case CV_EVENT_LBUTTONDOWN:
-      //第五部分
-      cout&lt;&lt;&quot;at (&quot;&lt;&lt; x &lt;&lt;&quot;, &quot;&lt;&lt; y &lt;&lt; &quot;) value is : &quot;&lt;&lt; static_cast&lt;int&gt;(im-&gt;at&lt;uchar&gt;(cv::Point(x,y))) &lt;&lt;endl;
-      //第六部分
-      //drawAndWriteOnImage(&quot;color image&quot;, *im);
-  }
+    <span style="color:#75715e">/*
+</span><span style="color:#75715e">     * CV_EVENT_MOUSEMOVE      =0,
+</span><span style="color:#75715e">     * CV_EVENT_LBUTTONDOWN    =1,
+</span><span style="color:#75715e">     * CV_EVENT_RBUTTONDOWN    =2,
+</span><span style="color:#75715e">     * CV_EVENT_MBUTTONDOWN    =3,
+</span><span style="color:#75715e">     * CV_EVENT_LBUTTONUP      =4,
+</span><span style="color:#75715e">     * CV_EVENT_RBUTTONUP      =5,
+</span><span style="color:#75715e">     * CV_EVENT_MBUTTONUP      =6,
+</span><span style="color:#75715e">     * CV_EVENT_LBUTTONDBLCLK  =7,
+</span><span style="color:#75715e">     * CV_EVENT_RBUTTONDBLCLK  =8,
+</span><span style="color:#75715e">     * CV_EVENT_MBUTTONDBLCLK  =9
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#66d9ef">case</span> CV_EVENT_LBUTTONDOWN:
+      <span style="color:#75715e">//第五部分
+</span><span style="color:#75715e"></span>      cout<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">at (</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> x <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> y <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">) value is : </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(im<span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span>at<span style="color:#f92672">&lt;</span>uchar<span style="color:#f92672">&gt;</span>(cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Point(x,y))) <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>endl;
+      <span style="color:#75715e">//第六部分
+</span><span style="color:#75715e"></span>      <span style="color:#75715e">//drawAndWriteOnImage(&#34;color image&#34;, *im);
+</span><span style="color:#75715e"></span>  }
 }
-void callBackFunc(string windowName, cv::Mat&amp; image)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">callBackFunc</span>(string windowName, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat<span style="color:#f92672">&amp;</span> image)
 {
-  image = cv::imread(imageAddr1, CV_LOAD_IMAGE_GRAYSCALE);
+  image <span style="color:#f92672">=</span> cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imread(imageAddr1, CV_LOAD_IMAGE_GRAYSCALE);
   showImage(windowName, image);
-  cv::setMouseCallback(windowName, onMouse, reinterpret_cast&lt;void*&gt;(&amp;image));
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>setMouseCallback(windowName, onMouse, <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">*</span><span style="color:#f92672">&gt;</span>(<span style="color:#f92672">&amp;</span>image));
 }
-void drawAndWriteOnImage(string windowName, cv::Mat image)
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drawAndWriteOnImage</span>(string windowName, cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image)
 {
-    image = cv::imread(imageAddr1, CV_LOAD_IMAGE_GRAYSCALE);
+    image <span style="color:#f92672">=</span> cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>imread(imageAddr1, CV_LOAD_IMAGE_GRAYSCALE);
     
-    /* 基本绘图形状函数有circle、ellipse、line、rectangle等等
-     * CV_EXPORTS_W void circle(CV_IN_OUT Mat&amp; img, Point center, int radius,
-     *                 const Scalar&amp; color, int thickness=1,
-     *                 int lineType=8, int shift=0);
-     */
-    cv::circle(
-      image,                //目标图像
-      cv::Point(155,110),   //中心点坐标
-      65,		    //半径
-      255,		    //颜色
-      3   		    //厚度
-    );
+    <span style="color:#75715e">/* 基本绘图形状函数有circle、ellipse、line、rectangle等等
+</span><span style="color:#75715e">     * CV_EXPORTS_W void circle(CV_IN_OUT Mat&amp; img, Point center, int radius,
+</span><span style="color:#75715e">     *                 const Scalar&amp; color, int thickness=1,
+</span><span style="color:#75715e">     *                 int lineType=8, int shift=0);
+</span><span style="color:#75715e">     */</span>
+    cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>circle(
+      image,                <span style="color:#75715e">//目标图像
+</span><span style="color:#75715e"></span>      cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Point(<span style="color:#ae81ff">155</span>,<span style="color:#ae81ff">110</span>),   <span style="color:#75715e">//中心点坐标
+</span><span style="color:#75715e"></span>      <span style="color:#ae81ff">65</span>,		    <span style="color:#75715e">//半径
+</span><span style="color:#75715e"></span>      <span style="color:#ae81ff">255</span>,		    <span style="color:#75715e">//颜色
+</span><span style="color:#75715e"></span>      <span style="color:#ae81ff">3</span>   		    <span style="color:#75715e">//厚度
+</span><span style="color:#75715e"></span>    );
     
-    //写入文本信息
-    cv::putText(
-      image,                   //目标图像
-      &quot;This is a text test&quot;,   //文本内容
-      cv::Point(40,200),       //文本位置
-      cv::FONT_HERSHEY_PLAIN,  //字体类型
-      2.0,                     //字体大小
-      255,                     //字体颜色
-      2                        //文本厚度
-    );
+    <span style="color:#75715e">//写入文本信息
+</span><span style="color:#75715e"></span>    cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>putText(
+      image,                   <span style="color:#75715e">//目标图像
+</span><span style="color:#75715e"></span>      <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">This is a text test</span><span style="color:#e6db74">&#34;</span>,   <span style="color:#75715e">//文本内容
+</span><span style="color:#75715e"></span>      cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Point(<span style="color:#ae81ff">40</span>,<span style="color:#ae81ff">200</span>),       <span style="color:#75715e">//文本位置
+</span><span style="color:#75715e"></span>      cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>FONT_HERSHEY_PLAIN,  <span style="color:#75715e">//字体类型
+</span><span style="color:#75715e"></span>      <span style="color:#ae81ff">2.0</span>,                     <span style="color:#75715e">//字体大小
+</span><span style="color:#75715e"></span>      <span style="color:#ae81ff">255</span>,                     <span style="color:#75715e">//字体颜色
+</span><span style="color:#75715e"></span>      <span style="color:#ae81ff">2</span>                        <span style="color:#75715e">//文本厚度
+</span><span style="color:#75715e"></span>    );
     showImage(windowName, image);
 }
 
 
 
-int main(int argc, char **argv)
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span><span style="color:#f92672">*</span>argv)
 {
-  cv::Mat image;
-  cout&lt;&lt;&quot;this image is &quot;&lt;&lt;image.size&lt;&lt;endl;
-  cout&lt;&lt;&quot;this image is &quot;&lt;&lt;image.rows&lt;&lt;&quot; x &quot;&lt;&lt;image.cols&lt;&lt;endl;
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Mat image;
+  cout<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">this image is </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>image.size<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>endl;
+  cout<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">this image is </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>image.rows<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> x </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>image.cols<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>endl;
  
-  //第一部分，显示图片
-  readImage(imageAddr1,image);
-  cv::waitKey(0);      //0表示永远等待，正数表示秒
+  <span style="color:#75715e">//第一部分，显示图片
+</span><span style="color:#75715e"></span>  readImage(imageAddr1,image);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);      <span style="color:#75715e">//0表示永远等待，正数表示秒
+</span><span style="color:#75715e"></span>  
+  <span style="color:#75715e">//第二部分，翻转图像
+</span><span style="color:#75715e"></span>  convertImage(image);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  //第二部分，翻转图像
-  convertImage(image);
-  cv::waitKey(0);
+  <span style="color:#75715e">//第三部分，读入读出三色变换
+</span><span style="color:#75715e"></span>  getImageByTypes(image);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey(<span style="color:#ae81ff">0</span>);
   
-  //第三部分，读入读出三色变换
-  getImageByTypes(image);
-  cv::waitKey(0);
+  <span style="color:#75715e">//第四部分，查看图像通道数
+</span><span style="color:#75715e"></span>  std<span style="color:#f92672">:</span><span style="color:#f92672">:</span>cout<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">this image has </span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>image.channels()<span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74"> channels.</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>endl;
   
-  //第四部分，查看图像通道数
-  std::cout&lt;&lt;&quot;this image has &quot;&lt;&lt;image.channels()&lt;&lt;&quot; channels.&quot;&lt;&lt;endl;
+  <span style="color:#75715e">//第五部分，回调函数
+</span><span style="color:#75715e"></span>  callBackFunc(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">origin image</span><span style="color:#e6db74">&#34;</span>, image);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey();
   
-  //第五部分，回调函数
-  callBackFunc(&quot;origin image&quot;, image);
-  cv::waitKey();
+  <span style="color:#75715e">//第六部分，图像上绘图和写文字
+</span><span style="color:#75715e"></span>  drawAndWriteOnImage(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">draw image</span><span style="color:#e6db74">&#34;</span>, image);
+  cv<span style="color:#f92672">:</span><span style="color:#f92672">:</span>waitKey();
   
-  //第六部分，图像上绘图和写文字
-  drawAndWriteOnImage(&quot;draw image&quot;, image);
-  cv::waitKey();
-  
-  return 0;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 
-</code></pre>
-
+</code></pre></div>
     </div>
 
     <div class="post-copyright">
@@ -385,6 +412,9 @@ int main(int argc, char **argv)
                     <a href=https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/</span>
             </p>
             
+            <span id="busuanzi_container_page_pv">
+                本文总阅读量: <span id="busuanzi_value_page_pv"></span>
+            </span>
              
             <p class="copyright-item lincese">
                 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
@@ -418,10 +448,27 @@ int main(int argc, char **argv)
         
     </div>
 
+    
     <div class="post-comment">
-          
-                 
-          
+        
+        
+
+<div id="vcomments"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.7/dist/Valine.min.js'></script>
+
+<script type="text/javascript">
+  new Valine({
+      el: '#vcomments' ,
+      appId: 'aq7KX6LvEUKuYC1FReOy9Rq8-gzGzoHsz',
+      appKey: 'AJWv8xzYkd8tJ23S38zDK3TN',
+      notify: 'false', 
+      verify: 'false', 
+      avatar:'mm', 
+      placeholder: '说点什么吧...',
+      visitor: 'true'
+  });
+</script>
     </div>
 </article>
           </div>
@@ -443,7 +490,7 @@ int main(int argc, char **argv)
 		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
     </div>
 </footer>
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

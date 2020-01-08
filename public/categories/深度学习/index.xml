@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>深度学习 on 静心明志</title>
@@ -28,8 +28,8 @@ from tensorflow.examples.tutorials.mnist import input_data mnist = input_data.re
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-dropout/</guid>
       <description>来源：tensorflow学习笔记（八）：dropout tensorflow:dropout 我们都知道dropout对于防止过拟合效果不错 dropout一般用在全连接的部分，卷积部分不会用到dropout,输出曾也不会使用dropout，适用范围[输入，输出) 1.tf.nn.dropout(x, keep_prob, noise_shape=None, seed=None, name=None) 2.tf.nn.rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0) 普通dropout
-def dropout(x, keep_prob, noise_shape=None, seed=None, name=None) #x: 输入 #keep_prob: 名字代表的意思 #return：包装了dropout的x。训练的时候用，test的时候就不需要dropout了 #例： w = tf.get_variable(&amp;quot;w1&amp;quot;,shape=[size, out_size]) x = tf.placeholder(tf.float32, shape=[batch_size, size]) x = tf.nn.dropout(x, keep_prob=0.5) y = tf.matmul(x,w)  rnn中的dropout
-def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0): #例 lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(size, forget_bias=0.0, state_is_tuple=True) lstm_cell = tf.nn.rnn_cell.DropoutWrapper(lstm_cell, output_keep_prob=0.5) #经过dropout包装的lstm_cell就出来了  </description>
+def dropout(x, keep_prob, noise_shape=None, seed=None, name=None)#x: 输入#keep_prob: 名字代表的意思#return：包装了dropout的x。训练的时候用，test的时候就不需要dropout了#例：w = tf.get_variable(&amp;quot;w1&amp;quot;,shape=[size, out_size])x = tf.placeholder(tf.float32, shape=[batch_size, size])x = tf.nn.dropout(x, keep_prob=0.5)y = tf.matmul(x,w)rnn中的dropout
+def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0):#例lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(size, forget_bias=0.0, state_is_tuple=True)lstm_cell = tf.nn.rnn_cell.DropoutWrapper(lstm_cell, output_keep_prob=0.5)#经过dropout包装的lstm_cell就出来了</description>
     </item>
     
     <item>
@@ -39,8 +39,8 @@ def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0)
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/</guid>
       <description>来源：tensorflow学习笔记（二）：tensor 变换 矩阵操作
-#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算 tf.reduce_sum(a, 1） #对axis1 tf.reduce_mean(a,0) #每列均值  第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）
-#关于concat，可以用来进行降维 3D-&amp;gt;2D , 2D-&amp;gt;1D tf.concat(concat_dim, data) #arr = np.zeros([2,3,4,5,6]) In [6]: arr2.shape Out[6]: (2, 3, 4, 5) In [7]: np.concatenate(arr2, 0).shape Out[7]: (6, 4, 5) :(2*3, 4, 5) In [9]: np.concatenate(arr2, 1).shape Out[9]: (3, 8, 5) :(3, 2*4, 5) #tf.concat() t1 = [[1, 2, 3], [4, 5, 6]] t2 = [[7, 8, 9], [10, 11, 12]] # 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成 #shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1 #tensor[2:,:]是之前的t2 tf.</description>
+#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算tf.reduce_sum(a, 1） #对axis1tf.reduce_mean(a,0) #每列均值第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）
+#关于concat，可以用来进行降维 3D-&amp;gt;2D , 2D-&amp;gt;1Dtf.concat(concat_dim, data)#arr = np.zeros([2,3,4,5,6])In [6]: arr2.shapeOut[6]: (2, 3, 4, 5)In [7]: np.concatenate(arr2, 0).shapeOut[7]: (6, 4, 5) :(2*3, 4, 5)In [9]: np.concatenate(arr2, 1).shapeOut[9]: (3, 8, 5) :(3, 2*4, 5)#tf.concat()t1 = [[1, 2, 3], [4, 5, 6]]t2 = [[7, 8, 9], [10, 11, 12]]# 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成#shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1#tensor[2:,:]是之前的t2tf.</description>
     </item>
     
     <item>
@@ -50,11 +50,11 @@ def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0)
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/</guid>
       <description>来源：Tensorflow 自带可视化Tensorboard使用方法 附项目代码 Tensorboard： 如何更直观的观察数据在神经网络中的变化，或是已经构建的神经网络的结构。上一篇文章说到，可以使用matplotlib第三方可视化，来进行一定程度上的可视化。然而Tensorflow也自带了可视化模块Tensorboard，并且能更直观的看见整个神经网络的结构。 上面的结构图甚至可以展开，变成： 使用： 结构图：
- with tensorflow .name_scope(layer_name):  直接使用以上代码生成一个带可展开符号的一个域，并且支持嵌套操作：
+ with tensorflow .name_scope(layer_name): 直接使用以上代码生成一个带可展开符号的一个域，并且支持嵌套操作：
 with tf.name_scope(layer_name): with tf.name_scope(&#39;weights&#39;):  节点一般是变量或常量，需要加一个“name=‘’”参数，才会展示和命名，如：
 with tf.name_scope(&amp;lsquo;weights&amp;rsquo;):
 Weights = tf.Variable(tf.random_normal([in_size,out_size]))
-结构图符号及意义： 变量： 变量则可使用Tensorflow.histogram_summary()方法：
+结构图符号及意义：  变量： 变量则可使用Tensorflow.histogram_summary()方法：
 tf.histogram_summary(layer_name+&amp;quot;/weights&amp;quot;,Weights) #name命名，Weights赋值  常量： 常量则可使用Tensorflow.scalar_summary()方法：
 tf.scalar_summary(&#39;loss&#39;,loss) #命名和赋值  展示： 最后需要整合和存储SummaryWriter：
 #合并到Summary中 merged = tf.merge_all_summaries() #选定可视化存储目录 writer = tf.train.SummaryWriter(&amp;quot;/目录&amp;quot;,sess.graph)  merged也是需要run的，因此还需要：
@@ -73,8 +73,8 @@ import tensorflow as tf import numpy as np def add_layer(inputs,in_size,out_size
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/</guid>
       <description>来源：tensorflow学习笔记（三）：损失函数
 sparse_softmax_cross_entropy_with_logits tf.python.ops.nn_ops.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)
-def sparse_softmax_cross_entropy_with_logits(logits, labels, name=None): #logits是最后一层的z（输入） #A common use case is to have logits of shape `[batch_size, num_classes]` and #labels of shape `[batch_size]`. But higher dimensions are supported. #Each entry in `labels` must be an index in `[0, num_classes)` #输出：loss [batch_size]  softmax_cross_entropy_with_logits tf.python.ops.nn_ops.softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None)
-def softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None): #`logits` and `labels` must have the same shape `[batch_size, num_classes]` #return loss:[batch_size], 里面保存是batch中每个样本的cross entropy  sigmoid_cross_entropy_with_logits tf.</description>
+def sparse_softmax_cross_entropy_with_logits(logits, labels, name=None):#logits是最后一层的z（输入）#A common use case is to have logits of shape `[batch_size, num_classes]` and#labels of shape `[batch_size]`. But higher dimensions are supported.#Each entry in `labels` must be an index in `[0, num_classes)`#输出：loss [batch_size]softmax_cross_entropy_with_logits tf.python.ops.nn_ops.softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None)
+def softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None):#`logits` and `labels` must have the same shape `[batch_size, num_classes]`#return loss:[batch_size], 里面保存是batch中每个样本的cross entropysigmoid_cross_entropy_with_logits tf.</description>
     </item>
     
     <item>
@@ -84,8 +84,8 @@ def softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None): #`log
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-saver/</guid>
       <description>来源：tensorflow学习笔记（五）：变量保存与导入 如何使用tensorflow内置的参数导出和导入方法：基本用法 如果你还在纠结如何保存tensorflow训练好的模型参数，用这个方法就对了 The Saver class adds ops to save and restore variables to and from checkpoints. It also provides convenience methods to run these ops. 来自官网的介绍。
-import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声明 例：w = tf.get_variable(name=&amp;quot;vari_name&amp;quot;, shape=[], dtype=tf.float32) 初始化op声明 &amp;quot;&amp;quot;&amp;quot; #创建saver对象，它添加了一些op用来save和restore模型参数 saver = tf.train.Saver() with tf.Session() as sess: sess.run(init_op) #训练模型。。。 #使用saver提供的简便方法去调用 save op saver.save(sess, &amp;quot;save_path/file_name.ckpt&amp;quot;) #file_name.ckpt如果不存在的话，会自动创建 #后缀可加可不加  现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数 变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value 来进行的(详见)
-import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声明 初始化op声明 &amp;quot;&amp;quot;&amp;quot; #创建saver 对象 saver = tf.</description>
+import tensorflow as tf&amp;quot;&amp;quot;&amp;quot;变量声明，运算声明 例：w = tf.get_variable(name=&amp;quot;vari_name&amp;quot;, shape=[], dtype=tf.float32)初始化op声明&amp;quot;&amp;quot;&amp;quot;#创建saver对象，它添加了一些op用来save和restore模型参数saver = tf.train.Saver()with tf.Session() as sess:sess.run(init_op)#训练模型。。。#使用saver提供的简便方法去调用 save opsaver.save(sess, &amp;quot;save_path/file_name.ckpt&amp;quot;) #file_name.ckpt如果不存在的话，会自动创建#后缀可加可不加现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数 变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value 来进行的(详见)
+import tensorflow as tf&amp;quot;&amp;quot;&amp;quot;变量声明，运算声明初始化op声明&amp;quot;&amp;quot;&amp;quot;#创建saver 对象saver = tf.</description>
     </item>
     
     <item>
@@ -95,7 +95,7 @@ import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声�
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-sigmoid-function/</guid>
       <description>来源：tensorflow学习笔记（四）：激活函数
-tf.nn.relu() tf.nn.sigmoid() tf.nn.tanh() tf.nn.elu() tf.nn.bias_add() tf.nn.crelu() tf.nn.relu6() tf.nn.softplus() tf.nn.softsign() tf.nn.dropout() tf.nn.relu_layer(x, weights, biases,name=None) def relu_layer(x, weights, biases, name=None): &amp;quot;&amp;quot;&amp;quot;Computes Relu(x * weight + biases). Args: x: a 2D tensor. Dimensions typically: batch, in_units weights: a 2D tensor. Dimensions typically: in_units, out_units biases: a 1D tensor. Dimensions: out_units name: A name for the operation (optional). If not specified &amp;quot;nn_relu_layer&amp;quot; is used. Returns: A 2-D Tensor computing relu(matmul(x, weights) + biases). Dimensions typically: batch, out_units.</description>
+tf.nn.relu()tf.nn.sigmoid()tf.nn.tanh()tf.nn.elu()tf.nn.bias_add()tf.nn.crelu()tf.nn.relu6()tf.nn.softplus()tf.nn.softsign()tf.nn.dropout()tf.nn.relu_layer(x, weights, biases,name=None)def relu_layer(x, weights, biases, name=None):&amp;quot;&amp;quot;&amp;quot;Computes Relu(x * weight + biases).Args:x: a 2D tensor. Dimensions typically: batch, in_unitsweights: a 2D tensor. Dimensions typically: in_units, out_unitsbiases: a 1D tensor. Dimensions: out_unitsname: A name for the operation (optional). If not specified&amp;quot;nn_relu_layer&amp;quot; is used.Returns:A 2-D Tensor computing relu(matmul(x, weights) + biases).Dimensions typically: batch, out_units.</description>
     </item>
     
   </channel>

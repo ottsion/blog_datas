@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 静心明志</title>
@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 静心明志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2019 17:37:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2020 13:36:39 +0800</lastBuildDate>
     
 	<atom:link href="https://ottsion.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2020 新的一年愿望</title>
+      <link>https://ottsion.github.io/2020/2020_tag/</link>
+      <pubDate>Tue, 07 Jan 2020 13:36:39 +0800</pubDate>
+      
+      <guid>https://ottsion.github.io/2020/2020_tag/</guid>
+      <description>完整的读一本专业书 完整的写一个Github项目 跑够10次10KM 少花钱多存钱 做自己喜欢的工作 </description>
+    </item>
     
     <item>
       <title>组合总和</title>
@@ -21,8 +30,8 @@
 candidates 中的数字可以无限制重复被选取。
 说明：
  所有数字（包括 target）都是正整数。 解集不能包含重复的组合。  示例 1:
-输入: candidates = [2,3,6,7], target = 7, 所求解集为: [ [7], [2,2,3] ]  示例 2:
-输入: candidates = [2,3,5], target = 8, 所求解集为: [ [2,2,2,2], [2,3,3], [3,5] ]  代码 class Solution { List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;();; public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; combinationSum(int[] candidates, int target) { List&amp;lt;Integer&amp;gt; temp = new ArrayList&amp;lt;Integer&amp;gt;(); getAns(candidates, target, 0, 0, temp); return ans; } private void getAns(int[] candidates, int target, int pos, int sum, List&amp;lt;Integer&amp;gt; temp) { if(sum==target) ans.</description>
+输入: candidates = [2,3,6,7], target = 7,所求解集为:[[7],[2,2,3]]示例 2:
+输入: candidates = [2,3,5], target = 8,所求解集为:[[2,2,2,2],[2,3,3],[3,5]]代码 class Solution {List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;();;public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; combinationSum(int[] candidates, int target) {List&amp;lt;Integer&amp;gt; temp = new ArrayList&amp;lt;Integer&amp;gt;();getAns(candidates, target, 0, 0, temp);return ans;}private void getAns(int[] candidates, int target, int pos, int sum, List&amp;lt;Integer&amp;gt; temp) {if(sum==target)ans.</description>
     </item>
     
     <item>
@@ -32,10 +41,10 @@ candidates 中的数字可以无限制重复被选取。
       
       <guid>https://ottsion.github.io/2019/%E8%BF%9E%E7%BB%AD%E6%95%B4%E6%95%B0%E6%B1%82%E5%92%8C/</guid>
       <description>题目 给定一个正整数 N，试求有多少组连续正整数满足所有数字之和为 N?
-示例 1:
-输入: 5 输出: 2 解释: 5 = 5 = 2 + 3，共有两组连续整数([5],[2,3])求和后为 5。  示例 2:
-输入: 9 输出: 3 解释: 9 = 9 = 4 + 5 = 2 + 3 + 4  示例 3:
-输入: 15 输出: 4 解释: 15 = 15 = 8 + 7 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5  说明: 1 &amp;lt;= N &amp;lt;= 10 ^ 9</description>
+示****例 1:
+输入: 5输出: 2解释: 5 = 5 = 2 + 3，共有两组连续整数([5],[2,3])求和后为 5。示例 2:
+输入: 9输出: 3解释: 9 = 9 = 4 + 5 = 2 + 3 + 4示例 3:
+输入: 15输出: 4解释: 15 = 15 = 8 + 7 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5说明: 1 &amp;lt;= N &amp;lt;= 10 ^ 9</description>
     </item>
     
     <item>
@@ -45,7 +54,7 @@ candidates 中的数字可以无限制重复被选取。
       
       <guid>https://ottsion.github.io/2019/%E6%95%B0%E5%AD%97%E8%BD%AC%E7%BD%97%E9%A9%AC/</guid>
       <description>题目 罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。
-字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000  例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。
+字符 数值I 1V 5X 10L 50C 100D 500M 1000例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。
 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：
  I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。  给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。</description>
     </item>
@@ -57,11 +66,11 @@ candidates 中的数字可以无限制重复被选取。
       
       <guid>https://ottsion.github.io/2019/%E6%89%93%E5%AE%B6%E5%8A%AB%E8%88%8D/</guid>
       <description>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
-给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。
+给定一个代表每个房屋存放金额的非负整数数组，计算你**在不触动警报装置的情况下，**能够偷窃到的最高金额。
 示例 1:
-输入: [1,2,3,1] 输出: 4 解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。 偷窃到的最高金额 = 1 + 3 = 4 。  示例 2:
-输入: [2,7,9,3,1] 输出: 12 解释: 偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。 偷窃到的最高金额 = 2 + 9 + 1 = 12 。  代码：
-public static int rob(int[] nums) { int length = nums.</description>
+输入: [1,2,3,1]输出: 4解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。偷窃到的最高金额 = 1 + 3 = 4 。示例 2:
+输入: [2,7,9,3,1]输出: 12解释: 偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。偷窃到的最高金额 = 2 + 9 + 1 = 12 。代码：
+public static int rob(int[] nums) {int length = nums.</description>
     </item>
     
     <item>
@@ -70,12 +79,12 @@ public static int rob(int[] nums) { int length = nums.</description>
       <pubDate>Thu, 09 May 2019 16:57:00 +0800</pubDate>
       
       <guid>https://ottsion.github.io/2019/%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</guid>
-      <description>给定 n 个非负整数 *a*1，*a*2，&amp;hellip;，*a*n，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
-说明：你不能倾斜容器，且 n 的值至少为 2。
+      <description>给定 n 个非负整数 a1，a2，&amp;hellip;，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+**说明：**你不能倾斜容器，且 n 的值至少为 2。
 图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。
 示例:
-输入: [1,8,6,2,5,4,8,3,7] 输出: 49  代码：
-class Solution { public int maxArea(int[] height) { int maxeara = 0; int i=0, j=height.length-1; while(i&amp;lt;j){ maxeara = Math.max(maxeara, Math.min(height[i], height[j])*(j-i)); if(height[i]&amp;gt;height[j]) j--; else i++; } return maxeara; } }  </description>
+输入: [1,8,6,2,5,4,8,3,7]输出: 49代码：
+class Solution {public int maxArea(int[] height) {int maxeara = 0;int i=0, j=height.length-1;while(i&amp;lt;j){maxeara = Math.max(maxeara, Math.min(height[i], height[j])*(j-i));if(height[i]&amp;gt;height[j]) j--;else i++;}return maxeara;}}</description>
     </item>
     
     <item>
@@ -89,7 +98,7 @@ class Solution { public int maxArea(int[] height) { int maxeara = 0; int i=0, j=
 CORS是一种允许当前域（domain）的资源（比如html/js/web service）被其他域（domain）的脚本请求访问的机制，通常由于同域安全策略（the same-origin security policy）浏览器会禁止这种跨域请求。
 我们需要在两者分别修改代码实现跨域访问
 SpringBoot框架解决方案 在Application类(启动类)里增加CorsFilter的Bean的定义：
-package com.ecm; import org.mybatis.spring.annotation.MapperScan; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; import org.springframework.context.annotation.Bean; import org.springframework.web.cors.CorsConfiguration; import org.springframework.web.cors.UrlBasedCorsConfigurationSource; import org.springframework.web.filter.CorsFilter; @SpringBootApplication @MapperScan(&amp;quot;com.ecm.dao&amp;quot;) public class EcmApplication { public static void main(String[] args) { SpringApplication.run(EcmApplication.class, args); } @Bean public CorsFilter corsFilter() { final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(); final CorsConfiguration config = new CorsConfiguration(); config.setAllowCredentials(true); // 允许cookies跨域 config.addAllowedOrigin(&amp;quot;*&amp;quot;);// #允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，会自动转成当前请求头中的Origin config.addAllowedHeader(&amp;quot;*&amp;quot;);// #允许访问的头信息,*表示全部 config.setMaxAge(18000L);// 预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了 config.addAllowedMethod(&amp;quot;OPTIONS&amp;quot;);// 允许提交请求的方法，*表示全部允许 config.</description>
+package com.ecm;import org.mybatis.spring.annotation.MapperScan;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.context.annotation.Bean;import org.springframework.web.cors.CorsConfiguration;import org.springframework.web.cors.UrlBasedCorsConfigurationSource;import org.springframework.web.filter.CorsFilter;@SpringBootApplication@MapperScan(&amp;#34;com.ecm.dao&amp;#34;)public class EcmApplication {public static void main(String[] args) {SpringApplication.run(EcmApplication.class, args);}@Beanpublic CorsFilter corsFilter() {final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();final CorsConfiguration config = new CorsConfiguration();config.setAllowCredentials(true); // 允许cookies跨域 config.addAllowedOrigin(&amp;#34;*&amp;#34;);// #允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，会自动转成当前请求头中的Origin config.addAllowedHeader(&amp;#34;*&amp;#34;);// #允许访问的头信息,*表示全部 config.setMaxAge(18000L);// 预检请求的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了 config.</description>
     </item>
     
     <item>
@@ -100,7 +109,7 @@ package com.ecm; import org.mybatis.spring.annotation.MapperScan; import org.spr
       <guid>https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/</guid>
       <description>JS通过ajax调用接口实现数据传送，第一种方式为设置button的点击onclick方法，第二种通过绑定bind点击事件获得访问
 用onclick方式：
-&amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta http-equiv=&amp;quot;content-type&amp;quot; content=&amp;quot;text/html; charset=UTF-8&amp;quot;&amp;gt; &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1&amp;quot;&amp;gt; &amp;lt;!-- src值为文件位置路径 --&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot; charset=&amp;quot;UTF-8&amp;quot; src=&amp;quot;javascript/jquery-1.12.1.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;title&amp;gt;测试案例&amp;lt;/title&amp;gt; &amp;lt;!-- 语法：jQuery.getJSON(url,data,success(data,status,xhr)) --&amp;gt; &amp;lt;script type=&amp;quot;text/javascript&amp;quot; charset=&amp;quot;UTF-8&amp;quot;&amp;gt; function getToken(){ $.getJSON(&amp;quot;http://localhost/kdapi/api/access_token&amp;quot;, {&amp;quot;id&amp;quot;:111,&amp;quot;secret&amp;quot;:2352532}, function(result){ alert(result.access_token); }); } &amp;lt;/script&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;button onclick=&amp;quot;getToken()&amp;quot; style=&amp;quot;width: 120px; height: 60px;&amp;quot;&amp;gt;获取Token&amp;lt;/button&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;  </description>
+&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta http-equiv=&amp;#34;content-type&amp;#34; content=&amp;#34;text/html; charset=UTF-8&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;&amp;lt;!--src值为文件位置路径 --&amp;gt;&amp;lt;script type=&amp;#34;text/javascript&amp;#34; charset=&amp;#34;UTF-8&amp;#34; src=&amp;#34;javascript/jquery-1.12.1.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;title&amp;gt;测试案例&amp;lt;/title&amp;gt;&amp;lt;!--语法：jQuery.getJSON(url,data,success(data,status,xhr)) --&amp;gt;&amp;lt;script type=&amp;#34;text/javascript&amp;#34; charset=&amp;#34;UTF-8&amp;#34;&amp;gt;function getToken(){$.getJSON(&amp;#34;http://localhost/kdapi/api/access_token&amp;#34;, {&amp;#34;id&amp;#34;:111,&amp;#34;secret&amp;#34;:2352532}, function(result){alert(result.access_token);});}&amp;lt;/script&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;button onclick=&amp;#34;getToken()&amp;#34; style=&amp;#34;width: 120px; height: 60px;&amp;#34;&amp;gt;获取Token&amp;lt;/button&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</description>
     </item>
     
     <item>
@@ -111,7 +120,7 @@ package com.ecm; import org.mybatis.spring.annotation.MapperScan; import org.spr
       <guid>https://ottsion.github.io/2019/%E6%96%B9%E6%B3%95%E8%B6%85%E6%97%B6%E6%94%BE%E5%BC%83%E6%89%A7%E8%A1%8C/</guid>
       <description>遇到一个比较不常见的情况，我在流水线式执行一个方法，方法中涉及到数据的获取，有时候获取很快，有时候十几分钟都没结果，因为我这个任务要追求时间效率，可以牺牲小部分异常，所以想到方法超时放弃这个想法：如果这个方法执行超过60秒，就直接pass继续执行下一次。
 具体其实是应用线程去实现这个想法：
-import java.util.concurrent.Callable; import java.util.concurrent.ExecutionException; import java.util.concurrent.ExecutorService; import java.util.concurrent.Executors; import java.util.concurrent.TimeUnit; import com.sun.corba.se.impl.orbutil.closure.Future; import com.sun.corba.se.impl.orbutil.threadpool.TimeoutException; public class ThreadTest { public static void main(String[] args) throws InterruptedException, ExecutionException { final ExecutorService exec = Executors.newFixedThreadPool(1); Callable&amp;lt;String&amp;gt; task = new Callable&amp;lt;String&amp;gt;() { public String call() throws Exception { //开始执行耗时操作 Thread.sleep(1000 * 5); return &amp;quot;线程执行完成.&amp;quot;; } }; try { Future&amp;lt;String&amp;gt; future = exec.submit(task); String obj = future.get(1, TimeUnit.SECOND); //任务处理超时时间设为 1 秒 System.out.println(&amp;quot;任务成功返回:&amp;quot; + obj); } catch (TimeoutException ex) { System.</description>
+import java.util.concurrent.Callable;import java.util.concurrent.ExecutionException;import java.util.concurrent.ExecutorService;import java.util.concurrent.Executors;import java.util.concurrent.TimeUnit;import com.sun.corba.se.impl.orbutil.closure.Future;import com.sun.corba.se.impl.orbutil.threadpool.TimeoutException;public class ThreadTest { public static void main(String[] args) throws InterruptedException, ExecutionException { final ExecutorService exec = Executors.newFixedThreadPool(1); Callable&amp;lt;String&amp;gt; task = new Callable&amp;lt;String&amp;gt;() { public String call() throws Exception { //开始执行耗时操作  Thread.sleep(1000 * 5); return &amp;#34;线程执行完成.&amp;#34;; } }; try { Future&amp;lt;String&amp;gt; future = exec.submit(task); String obj = future.get(1, TimeUnit.SECOND); //任务处理超时时间设为 1 秒  System.</description>
     </item>
     
     <item>
@@ -123,14 +132,10 @@ import java.util.concurrent.Callable; import java.util.concurrent.ExecutionExcep
       <description>一、下载 OpenCV 3.2：
 ​ 网址：http://opencv.org/releases.html
 二、安装常用依赖项：
-sudo apt-get install build-essential libgtk2.0-dev libvtk5-dev libjpeg-dev libtiff4-dev libjasper-dev libopenexr-dev libtbb-dev  三、安装 opencv 3.2：
- 建立编译文件目录,并切换到该目录下：
-mkdir build cd build  开始编译(.. 为上层目录，不可缺少)：
-cmake .. make   ​ 如果遇到这样的错误：&amp;ndash; ICV: Downloading ippicv_linux_20151201.tgz&amp;hellip; CMake Error at 3rdparty/ippicv/downloader.cmake:73 (file): file DOWNLOAD HASH mismatch
+sudo apt-get install build-essential libgtk2.0-dev libvtk5-dev libjpeg-dev libtiff4-dev libjasper-dev libopenexr-dev libtbb-dev 三、安装 opencv 3.2：
+ 建立编译文件目录,并切换到该目录下：  mkdir build cd build 开始编译(.. 为上层目录，不可缺少)：  cmake ..make​ 如果遇到这样的错误：&amp;ndash; ICV: Downloading ippicv_linux_20151201.tgz&amp;hellip; CMake Error at 3rdparty/ippicv/downloader.cmake:73 (file): file DOWNLOAD HASH mismatch
 ​ 去这里（点击打开链接）下载ippicv_linux_20151201.tgz 并粘贴（替换）到目录opencv-3.2.0/3rdparty/ippicv/downloads/Linux-808b791a6eac9ed78d32a7666804320e/
- make -j4 (-j4表示开启4个线程编译，取决于CPU的速度，比如我make -j7)
-make j4  安装：默认安装到 /usr/local 下
-sudo make install   </description>
+make -j4 (-j4表示开启4个线程编译，取决于CPU的速度，比如我make -j7)  make j4安装：默认安装到 /usr/local 下  sudo make install </description>
     </item>
     
     <item>
@@ -140,17 +145,17 @@ sudo make install   </description>
       
       <guid>https://ottsion.github.io/2017/2017-06-25-ros-gmapping-slam-with-laser/</guid>
       <description>配置前期 这里是我的机器人和电脑环境安装步骤，以下激光slam测试前提是进行了先锋机器人使用手册 的所有包安装及运行测试
-下载gmapping包  sudo apt-get install ros-indigo-slam-gmapping  运行步骤  笔记本端启动
-roscore  远程ssh连接到机器人，启动机器人：
-ssh robot@pioneer rosrun rosaria ROSAria _port:=/dev/ttyS0   如果遇到权限问题参考上一篇：sudo chmod a+rw /dev/ttyS0
- 启动激光数据，发送topic为/scan :
-rosrun lms1xx LMS1xx_node _host:=192.168.0.1   这里注意之前说过激光和机器人也是通过网线连接，各自有ip地址，所以我是在机器人端启动的激光指令。（先决条件是激光和机器人连接已经设置好，相关两者网络连接看先锋机器人使用手册）
- 笔记本端启动gmapping程序：
-rosrun gmapping slam_gmapping scan:=scan   前面说过我的激光数据topic是/scan 。
- 这里通过rviz查看效果：
-rosrun rviz rviz   选择添加/map 查看，topic选择/map ，选好fixed_frame 。
+下载gmapping包  sudo apt-get install ros-indigo-slam-gmapping运行步骤   笔记本端启动
+roscore  远程ssh连接到机器人，启动机器人：
+ssh robot@pioneerrosrun rosaria ROSAria _port:=/dev/ttyS0如果遇到权限问题参考上一篇：sudo chmod a+rw /dev/ttyS0
+  启动激光数据，发送topic为/scan :
+rosrun lms1xx LMS1xx_node _host:=192.168.0.1这里注意之前说过激光和机器人也是通过网线连接，各自有ip地址，所以我是在机器人端启动的激光指令。（先决条件是激光和机器人连接已经设置好，相关两者网络连接看先锋机器人使用手册）
+  笔记本端启动gmapping程序：
+rosrun gmapping slam_gmapping scan:=scan 前面说过我的激光数据topic是/scan 。
+  这里通过rviz查看效果：
+rosrun rviz rviz 选择添加/map 查看，topic选择/map ，选好fixed_frame 。
 如果出现状态错误，可能是因为你的激光与世界坐标间没有tf转换，可以添加启动：
- &amp;lt;launch&amp;gt; &amp;lt;node pkg=&amp;quot;tf&amp;quot; type=&amp;quot;static_transform_publisher&amp;quot; name=&amp;quot;map_nav_broadcaster&amp;quot; args=&amp;quot;0 0 0 0 0 0 /base_link /laser 100&amp;quot; /&amp;gt; &amp;lt;/launch&amp;gt;   这时候我们可以启动让小车运动</description>
+&amp;lt;launch&amp;gt;&amp;lt;node pkg=&amp;quot;tf&amp;quot; type=&amp;quot;static_transform_publisher&amp;quot; name=&amp;quot;map_nav_broadcaster&amp;quot; args=&amp;quot;0 0 0 0 0 0 /base_link /laser 100&amp;quot; /&amp;gt;&amp;lt;/launch&amp;gt;  这时候我们可以启动让小车运动</description>
     </item>
     
     <item>
@@ -164,8 +169,9 @@ rosrun rviz rviz   选择添加/map 查看，topic选择/map ，选好fixed_fram
 安装ROS 这里选用 indigo版本的ROS操作系，下面链接为官方安装地址，按照操作走完就可以了：官方地址
 安装完毕后强烈建议学习初步教程，大概是十几篇简短文章，学完后掌握基本ROS下开发方法，了解ROS构成：Tutorials
 安装ROSARIA ROSARIA 提供了一个移动机器人与ROS平台的接口，通过它你可以实现与机器人的互动，所以第一步学习就是要安装好它。
- 其中需要在pioneer 官网 安装ARIA 2.9.1-Ubuntu 12.04.2 (precise) or later, amd 64-bit architecture 千万不要忘记了，这是驱动的底层实现，没有这个只安装ROSARIA是不行的。这个选择sudo dpkg -i 安装方式。最终文件安装在/usr/local/下面。  具体安装步骤可以参考：这里
-1) 创建工作空间，如果有了直接走 2). $./opt/ros/indigo/setup.bash $mkdir-p~/catkin_ws/src $cd~/catkin_ws/src $catkin_init_workspace $cd~/catkin_ws $catkin_make $cd~/catkin_ws/src 2) 安装rosaria包: $gitclonehttps://github.com/amor-ros-pkg/rosaria.git $source~/catkin_ws/devel/setup.bash $echo&amp;quot;source~/catkin_ws/devel/setup.bash&amp;quot;&amp;gt;&amp;gt;~/.bashrc $source~/.bashrc %rosdep可以安装额外需要的工具包 $rosdepupdate $rosdepinstallrosaria $cd~/catkin_ws/ $catkin_make  到此为止你应该安装好了两样东西： 1) Aria library 应该在/usr/local/ 目录下。 2) /catkin_ws/src/rosaria 已经编译到位。</description>
+ 其中需要在pioneer 官网 安装 ARIA 2.9.1-Ubuntu 12.04.2 (precise) or later, amd 64-bit architecture 千万不要忘记了，这是驱动的底层实现，没有这个只安装ROSARIA是不行的。这个选择sudo dpkg -i  安装方式。最终文件安装在/usr/local/下面。  具体安装步骤可以参考：这里
+1) 创建工作空间，如果有了直接走 2).$./opt/ros/indigo/setup.bash$mkdir-p~/catkin_ws/src$cd~/catkin_ws/src$catkin_init_workspace$cd~/catkin_ws$catkin_make$cd~/catkin_ws/src2) 安装rosaria包:$gitclonehttps://github.com/amor-ros-pkg/rosaria.git$source~/catkin_ws/devel/setup.bash$echo&amp;quot;source~/catkin_ws/devel/setup.bash&amp;quot;&amp;gt;&amp;gt;~/.bashrc$source~/.bashrc%rosdep可以安装额外需要的工具包$rosdepupdate$rosdepinstallrosaria$cd~/catkin_ws/$catkin_make到此为止你应该安装好了两样东西：
+ Aria library 应该在 /usr/local/ 目录下。 /catkin_ws/src/rosaria 已经编译到位。  电脑间通信 这里以我的电脑为例：</description>
     </item>
     
     <item>
@@ -176,11 +182,10 @@ rosrun rviz rviz   选择添加/map 查看，topic选择/map ，选好fixed_fram
       <guid>https://ottsion.github.io/2017/2017-06-22-ssh-ubuntu/</guid>
       <description>最终要实现在 desktop_hostname 电脑上运行roscore，并且运行 Turtlesim 程序，然后在 laptop_hostname 电脑上运行键盘控制程序，控制 Turtlesim 小乌龟移动。
 在pioneer中将机器人端视为desktop_hostname，自己的笔记本为B。
-一. 查看电脑ip  利用ifconfig查看ip地址。 利用hostname指令查看hostname。  二. 修改hosts文件 使用如下指令，分别打开 hosts 文件：
-$sudogedit/etc/hosts  在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:
-127.0.0.1　localhost 127.0.1.1 [ desktop_hostname ] [IP_A] [ desktop_hostname ] [IP_B] [ laptop_hostname ]  同理，在电脑laptop_hostname端的 hosts 文件中，加入如下加粗指令：
-127.0.0.1　localhost 127.0.1.1 [ laptop_hostname ] [IP_B] [ laptop_hostname ] [IP_A] [ desktop_hostname ]  三. 电脑之间通信  在两台电脑上装上chrony包，用于实现同步：
-sudo apt-get install chrony  安装ssh</description>
+一. 查看电脑ip###  利用ifconfig查看ip地址。 利用hostname指令查看hostname。  二. 修改hosts文件 使用如下指令，分别打开 hosts 文件：
+$sudogedit/etc/hosts在电脑desktop_hostname端的 hosts文件 中添加如下加粗指令:
+127.0.0.1　localhost127.0.1.1 [ desktop_hostname ][IP_A] [ desktop_hostname ][IP_B] [ laptop_hostname ]同理，在电脑laptop_hostname端的 hosts 文件中，加入如下加粗指令：
+127.0.0.1　localhost127.0.1.1 [ laptop_hostname ][IP_B] [ laptop_hostname ][IP_A] [ desktop_hostname ]三. 电脑之间通信  在两台电脑上装上chrony包，用于实现同步：  sudo apt-get install chrony 安装ssh  sudo apt-get install openssh-server 确认启用  ps -e|grep ssh 如果只有ssh-agent，那ssh-server还没有启动，需要/etc/init.</description>
     </item>
     
     <item>
@@ -189,15 +194,12 @@ sudo apt-get install chrony  安装ssh</description>
       <pubDate>Thu, 22 Jun 2017 23:59:59 +0000</pubDate>
       
       <guid>https://ottsion.github.io/2017/2017-06-22-pioneer-ros-setup/</guid>
-      <description>一. 安装Ubuntu 第一步首先需要给先锋机器人配置Ubuntu环境，这里选用Ubuntu14.04版本进行安装，安装步骤一般为：
+      <description>一. 安装Ubuntu### 第一步首先需要给先锋机器人配置Ubuntu环境，这里选用Ubuntu14.04版本进行安装，安装步骤一般为：
  制作Ubuntu14.04的U盘启动器 2.进入先锋机器人BIOS界面设置U盘启动，这里我试了F2、Esc、F10、F12。。。。都没起作用，最后找了个带$F_n$的键盘，一通$F_n+Esc+shift+ctrl+Del+F12$结果进入了。。。具体不清楚哪个起作用了。 按照一般双系统做法进行了系统安装，记得选磁盘一定要选择other那个，别直接默认结果格式化了已有的磁盘。  官方
-二.安装ROS 安装原文：点击进入
- Setup your sources.list Setup your computer to accept software from packages.ros.org.
-sudosh-c&#39;echo&amp;quot;debhttp://packages.ros.org/ros/ubuntu$(lsb_release-sc)main&amp;quot;&amp;gt;/etc/apt/sources.list.d/ros-latest.list&#39;  Set up your keys
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116  Installation
-sudo apt-get update sudo apt-get install ros-indigo-desktop-full apt-cache search ros-indigo sudo rosdep init rosdep update echo &amp;quot;source /opt/ros/indigo/setup.bash&amp;quot; &amp;gt;&amp;gt; ~/.bashrc source ~/.bashrc sudo apt-get install python-rosinstall   ###三.安装ROSARIA###
+二.安装ROS### 安装原文：点击进入
+ Setup your sources.list Setup your computer to accept software from packages.ros.org.  sudosh-c&#39;echo&amp;quot;debhttp://packages.ros.org/ros/ubuntu$(lsb_release-sc)main&amp;quot;&amp;gt;/etc/apt/sources.list.d/ros-latest.list&#39;Set up your keys  sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116Installation  sudo apt-get updatesudo apt-get install ros-indigo-desktop-fullapt-cache search ros-indigosudo rosdep initrosdep updateecho &amp;quot;source /opt/ros/indigo/setup.bash&amp;quot; &amp;gt;&amp;gt; ~/.bashrcsource ~/.bashrcsudo apt-get install python-rosinstall###三.安装ROSARIA###
 安装原文：官方信息
-cd ~/catkin_ws/src git clone https://github.</description>
+cd ~/catkin_ws/srcgit clone https://github.</description>
     </item>
     
     <item>
@@ -209,14 +211,14 @@ cd ~/catkin_ws/src git clone https://github.</description>
       <description>三维刚体运动表示及其运算（李群李代数）  三维空间的刚体运动描述方式：旋转矩阵、变换矩阵、四元数和欧拉角。
 编程EIgen、soupha
   向量加减法  $a\pmb=\sum_{i=0}^{n}{(a_i+b_i)}$
- 向量内积  $a\bullet b=aTb=\sum{i=1}^{3}{a_ib_i}=|a||b|\cos\langle a,b\rangle​$
+ 向量内积  $a\bullet b=a_Tb=\sum_{i=1}^{3}{a_ib_i}=|a||b|\cos\langle a,b\rangle​$
  向量外积  -$a\times b=\begin{bmatrix}i&amp;amp;j&amp;amp;k\a_1&amp;amp;a_2&amp;amp;a_3\b_1&amp;amp;b_2&amp;amp;b_3\end{bmatrix}=\begin{bmatrix}a_2b_3-a_3b_2\a_3b_1-a_1b_3\a_1b_2-a_2b_1\end{bmatrix}=\begin{bmatrix}0&amp;amp;-a_3&amp;amp;a_2\a_3&amp;amp;0&amp;amp;-a_1\-a_2&amp;amp;a_1&amp;amp;0\end{bmatrix}b\triangleq\hat ab$
 一. 旋转矩阵 设某坐标系$[e_1,e_2,e_3]$发生了一次旋转，变成了$[e_1^,e_2^,e_3^`]$,对于某个固定的向量a（向量不随坐标系旋转），它的坐标变换：
 $[e_1,e_2,e_3]\begin{bmatrix}a_1\a_2\a_3\end{bmatrix}=[e_1^,e_2^,e_3^]\begin{bmatrix}a_1^\a_2^\\a_3^\end{bmatrix}$
 左乘$\begin{bmatrix}e_1^T\e_2^T\e_3^T\end{bmatrix}$得到：
 $\begin{bmatrix}a_1\a_2\a_3\end{bmatrix}=\begin{bmatrix}e_1^Te_1^&amp;amp;e_1^Te_2^&amp;amp;e_1^Te_3^\\e_2^Te_1^&amp;amp;e_2^Te_2^&amp;amp;e_2^Te_3^\e_3^Te_1^&amp;amp;e_3^Te_2^&amp;amp;e_3^Te_3^\end{bmatrix}\begin{bmatrix}a_1^\a_2^\\a_3^\end{bmatrix}$
 其中上式中中间矩阵即为旋转矩阵(为特殊正交群)：
-$SO(n)=\left{R\in R^{n\times n}|RR_T=I,det&amp;reg;=1\right}​$
+$SO(n)=\left{R\in R^{n\times n}|RR_T=I,det(R)=1\right}​$
 二. 变换矩阵 对旋转加上平移：$a^`=Ra+t$ 这个表达式不适应于连乘，于是改写成下式：
 $\begin{bmatrix}a^`\1\end{bmatrix}=\begin{bmatrix}R&amp;amp;t\0^T&amp;amp;1\end{bmatrix}\triangleq{T}\begin{bmatrix}a\1\end{bmatrix}$
 这种结构的好处是可以连乘：$\tilde{b}=T_1\tilde{a}$,$\tilde{c}=T_2\tilde{b}$ ==&amp;gt;$\tilde{c}=T_2T_1\tilde{a}$
@@ -228,8 +230,8 @@ $T^{-1}=\begin{bmatrix}R^T&amp;amp;-R^Tt\0^T&amp;amp;1\end{bmatrix}$
 方向为旋转轴、长度为转过的角度：$w=\theta n$
 角轴与旋转矩阵的不同:
  旋转矩阵：九个量，有正交性约束和行列式值约束 角轴：三个量，没有约束 注意它们只是表达方式的不同，但表达的东西可以是同一个 角轴也就是第四章要介绍的李代数  转换关系：
- 轴角转旋转矩阵：罗德里格斯公式（Rodrigues&amp;rsquo;s Formula ）：  $R=\cos\theta I+(1-\cos\theta)nn^T+\sin\theta\hat{n}$
- 旋转矩阵转轴角：  角度：$\theta=\arccos(\frac{tr&amp;reg;-1}{2})$</description>
+ 轴角转旋转矩阵：罗德里格斯公式（Rodrigues&#39;s Formula ）：  $R=\cos\theta I+(1-\cos\theta)nn^T+\sin\theta\hat{n}$
+旋转矩阵转轴角：  角度：$\theta=\arccos(\frac{tr(R)-1}{2})$</description>
     </item>
     
     <item>
@@ -242,9 +244,10 @@ $T^{-1}=\begin{bmatrix}R^T&amp;amp;-R^Tt\0^T&amp;amp;1\end{bmatrix}$
 1 拷贝程序文件  cd ~/joey_ws/src git clone https://github.com/arebgun/dynamixel_motor.git
  2 编译文件  cd ~/joey_ws catkin_make
  3 设置启动驱动launch文件  vim ~/joey_ws/src/dynamixel_motor/dynamixel_tutorials/launch/controller_manager.launch
-  &amp;lt;!-- -*- mode: XML -*- --&amp;gt; &amp;lt;launch&amp;gt; &amp;lt;node name=&amp;quot;dynamixel_manager&amp;quot; pkg=&amp;quot;dynamixel_controllers&amp;quot; type=&amp;quot;controller_manager.py&amp;quot; required=&amp;quot;true&amp;quot; output=&amp;quot;screen&amp;quot;&amp;gt; &amp;lt;rosparam&amp;gt; namespace: dxl_manager serial_ports: pan_tilt_port: port_name: &amp;quot;/dev/ttyUSB0&amp;quot; baud_rate: 1000000 min_motor_id: 1 max_motor_id: 25 update_rate: 20 &amp;lt;/rosparam&amp;gt; &amp;lt;/node&amp;gt; &amp;lt;/launch&amp;gt;  4 运行驱动检测舵机 连接USB2Dynamixel 运行Dynamixel控制器 USB2Dynamixel连接USB接口，舵机连接USB2DYnamixel接口，舵机外部供电
+  &amp;lt;!-- -*- mode: XML -*- --&amp;gt;&amp;lt;launch&amp;gt;&amp;lt;node name=&amp;quot;dynamixel_manager&amp;quot; pkg=&amp;quot;dynamixel_controllers&amp;quot; type=&amp;quot;controller_manager.py&amp;quot; required=&amp;quot;true&amp;quot; output=&amp;quot;screen&amp;quot;&amp;gt;&amp;lt;rosparam&amp;gt;namespace: dxl_managerserial_ports:pan_tilt_port:port_name: &amp;quot;/dev/ttyUSB0&amp;quot;baud_rate: 1000000min_motor_id: 1max_motor_id: 25update_rate: 20&amp;lt;/rosparam&amp;gt;&amp;lt;/node&amp;gt;&amp;lt;/launch&amp;gt;4 运行驱动检测舵机 连接USB2Dynamixel 运行Dynamixel控制器 USB2Dynamixel连接USB接口，舵机连接USB2DYnamixel接口，舵机外部供电
  roslaunch dynamixel_tutorials controller_manager.launch
- ID 搜索默认从1~25 若查找不到，可以更改controller_manager.launch将ID搜索扩大</description>
+ ID 搜索默认从1~25 若查找不到，可以更改controller_manager.launch将ID搜索扩大
+ rostopic list</description>
     </item>
     
     <item>
@@ -258,17 +261,17 @@ $T^{-1}=\begin{bmatrix}R^T&amp;amp;-R^Tt\0^T&amp;amp;1\end{bmatrix}$
 如下是V2（上）和V1（下）。看看自己的设备，然后再决定用哪个安装方案。
 ​ 本文针对的是V2的情况。
 
-安装 1、首先git下载代码，很快下载好，放到~下面
+ 安装 1、首先git下载代码，很快下载好，放到~下面
 git clone https://github.com/OpenKinect/libfreenect2.git
 2、然后安装依赖项如下,最好事先编译安装好OpenCV
 sudo apt-get install build-essential cmake pkg-config libturbojpeg libjpeg-turbo8-dev mesa-common-dev freeglut3-dev libxrandr-dev libxi-dev
 3、然后安装libusb。此处需要添加一个PPA，就是下面的第一行命令，不然绝逼是装不上的。
-sudo apt-add-repository ppa:floe/libusb sudo apt-get update sudo apt-get install libusb-1.0-0-dev  4、接着运行下面的命令，安装GLFW3
+sudo apt-add-repository ppa:floe/libusbsudo apt-get updatesudo apt-get install libusb-1.0-0-dev4、接着运行下面的命令，安装GLFW3
 sudo apt-get install libglfw3-dev
 如果没有成功的话，使用下面的命令，来代替上面的
-cd libfreenect2/depends sh install_ubuntu.sh sudo dpkg -i libglfw3*_3.0.4-1_*.deb  5、然后安装OpenCL的支持库（不打算使用GPU，这一步直接跳过没做）
+cd libfreenect2/dependssh install_ubuntu.shsudo dpkg -i libglfw3*_3.0.4-1_*.deb5、然后安装OpenCL的支持库（不打算使用GPU，这一步直接跳过没做）
 6、接着编译库
-cd .. mkdir build &amp;amp;&amp;amp; cd build cmake .. make sudo make install  测试 最后可以运行程序.</description>
+cd ..mkdir build &amp;amp;&amp;amp; cd buildcmake ..makesudo make install 测试 最后可以运行程序.</description>
     </item>
     
     <item>
@@ -277,17 +280,22 @@ cd .. mkdir build &amp;amp;&amp;amp; cd build cmake .. make sudo make install  �
       <pubDate>Fri, 16 Jun 2017 23:59:59 +0000</pubDate>
       
       <guid>https://ottsion.github.io/2017/2017-06-16-ros-rqt-plot/</guid>
-      <description>ROS学习之rqt_plot绘图  速度加速度、误差等的曲线图
+      <description>ROS学习之rqt_plot绘图##  速度加速度、误差等的曲线图
  显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。
 后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。
-rostopic echo /joint_states &amp;gt; record2.txt
+rostopic echo /joint_states &amp;gt; record2.txt 
 1. 背景 因为在为youbot添加FollowJointTrajectory 的client之后，仿真环境中的动作与实际有出入，因此想看看机械臂的实际动作曲线。而在ROS中，内置的rqt_plot是可以提供绘图功能的，而后来发现rqt_plot的功能比较简单，随着数据量的增大，查看起来比较费劲。于是就有了后来的导入matlab中分析的部分。
 2.rqt_plot绘图 照例，我们找到官网的相关部分，有个基础理解：http://wiki.ros.org/rqt_plot
-rqt_plot /turtle1/pose/x:y:z rqt_plot /turtle1/pose/x /turtle1/pose/y /turtle1/pose/z  特别
+rqt_plot /turtle1/pose/x:y:z rqt_plot /turtle1/pose/x /turtle1/pose/y /turtle1/pose/z 特别
 注意
 上面的第一句，它就是下面的简写，同一个topic下的直接冒号就好，不用输入那么多的文字。
 在这里我为了避免每次要去动机械臂，将joint_states这个topic的信息已经保存为了bag文件，录的动作是我上一篇文章，actionlib中的动作的一部分，大概是从home到伸直的一部分。使用指令（参看《a gentle introduction to ROS》P135页）
--O(是字母O, 并非数字0，它表示输出文件（output），后面跟的是你的输出文件的名字，我这里是youbot_action2.bag)，下面是我的bag的一些基本信息： 一共21.1s，包含了861条信息 ![img](http://img.blog.csdn.net/20150506131445167) 我们查看一下数据内容 ![img](http://img.blog.csdn.net/20160118222946817) 然后开启一个terminal，回放数据rosbag play youbot_action2.bag --clock，--clock表示使用simulate time，具体可以参考[http://wiki.ros.org/Clock](http://wiki.ros.org/Clock) 。再打开另外一个，开启rqt_plot，用命令  rqt_plot /joint_states/velocity[0]:velocity[1]:velocity[2]:velocity[3]:velocity[4] ``` 因为，youbot机械臂是五个自由度，这里我们用标号0-4来引用每一个（用QwtPlot画出来的）
+rosbag record -O youbot_action2.bag /joint_states 
+-O(是字母O, 并非数字0，它表示输出文件（output），后面跟的是你的输出文件的名字，我这里是youbot_action2.bag)，下面是我的bag的一些基本信息：
+一共21.1s，包含了861条信息
+我们查看一下数据内容
+然后开启一个terminal，回放数据rosbag play youbot_action2.bag &amp;ndash;clock，&amp;ndash;clock表示使用simulate time，具体可以参考http://wiki.ros.org/Clock 。再打开另外一个，开启rqt_plot，用命令
+rqt_plot /joint_states/velocity[0]:velocity[1]:velocity[2]:velocity[3]:velocity[4]因为，youbot机械臂是五个自由度，这里我们用标号0-4来引用每一个（用QwtPlot画出来的）
 用MatPlot画出来的，可以看出他们刚好是左右颠倒的，我们的这个bag文件，有大概20s。右键按住鼠标上下或左右滑动进行缩放。
 同理，我们也可以找出各个关节的一些信息：
 rqt_plot /joint_states/position[0]:position[1]:position[2]:position[3]:position[4]
@@ -296,8 +304,7 @@ rqt_plot /joint_states/position[0]:position[1]:position[2]:position[3]:position[
 3.Matlab绘图 其实，这个地方我也走了点弯路的，当时我用命令 rostopic echo /joint_states
 显示命令到terminal中，然后等到动作结束，用鼠标拷贝出来到txt文件，而且，最重要的问题是，由于滚屏，你只能拷贝部分运动信息，很快就舍弃这种做法了。
 后来，就想起以前用命令行重定向将信息保存到了文本中，于是就很好的解决了数据保存问题。
-rostopic echo /joint_states &amp;gt; record2.txt
-将txt文件拷贝出来到windows上，导入excel文件，然后借助Matlab分析（这里主要是用到了seq，position和velocity）</description>
+rostopic echo /joint_states &amp;gt; record2.txt</description>
     </item>
     
     <item>
@@ -308,10 +315,10 @@ rostopic echo /joint_states &amp;gt; record2.txt
       <guid>https://ottsion.github.io/2017/2017-05-11-adaboost/</guid>
       <description>链接:
 1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法
-转自：原地址 提升方法（boosting）是一种常用的统计学习方法，应用广泛且有效。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。 本章首先介绍提升方法的思路和代表性的提升算法AdaBoost，然后通过训练误差分析探讨AdaBoost为什么能够提高学习精度，并且从前向分布加法模型的角度解释AdaBoost，最后叙述提升方法更具体的事例——提升术（boosting tree）。AdaBoost算法是1995年由Freund和Schapire提出的，提升树是2000年由Friedman等人提出的。（开头几段内容来自《统计学习方法》） Adaboost算法基本原理
+ 转自：原地址 提升方法（boosting）是一种常用的统计学习方法，应用广泛且有效。在分类问题中，它通过改变训练样本的权重，学习多个分类器，并将这些分类器进行线性组合，提高分类的性能。 本章首先介绍提升方法的思路和代表性的提升算法AdaBoost，然后通过训练误差分析探讨AdaBoost为什么能够提高学习精度，并且从前向分布加法模型的角度解释AdaBoost，最后叙述提升方法更具体的事例——提升术（boosting tree）。AdaBoost算法是1995年由Freund和Schapire提出的，提升树是2000年由Friedman等人提出的。（开头几段内容来自《统计学习方法》） Adaboost算法基本原理
 提升方法的基本思路 提升方法是基于这样一种思想：对于一个复杂任务来说，将多个专家的判断进行适当的综合所得出的判断，要比其中任何一个专家单独的判断好。通俗点说，就是”三个臭皮匠顶个诸葛亮”。 Leslie Valiant首先提出了“强可学习（strongly learnable）”和”弱可学习（weakly learnable）”的概念，并且指出：在概率近似正确（probably approximately correct, PAC）学习的框架中，一个概念（一个类），如果存在一个多项式的学习算法能够学习它，并且正确率很高，那么就称这个概念是强可学习的，如果正确率不高，仅仅比随即猜测略好，那么就称这个概念是弱可学习的。2010年的图灵奖给了L. Valiant，以表彰他的PAC理论 。非常有趣的是Schapire后来证明强可学习与弱可学习是等价的，也就是说，在PAC学习的框架下，一个概念是强可学习的充要条件是这个概念是可学习的。 这样一来，问题便成为，在学习中，如果已经发现了“弱学习算法”，那么能否将它提升（boost）为”强学习算法”。大家知道，发现弱学习算法通常比发现强学习算法容易得多。那么如何具体实施提升，便成为开发提升方法时所要解决的问题。关于提升方法的研究很多，有很多算法被提出。最具代表性的是AdaBoost算法（Adaptive Boosting Algorithm），可以说，AdaBoost实现了PAC的理想。 对于分类问题而言，给定一个训练数据，求一个比较粗糙的分类器（即弱分类器）要比求一个精确的分类器（即强分类器）容易得多。提升方法就是从弱学习算法出发，反复学习，得到一系列弱分类器，然后组合这些弱分类器，构成一个强分类器。大多数的提升方法都是改变训练数据的概率分布（训练数据中的各个数据点的权值分布），调用弱学习算法得到一个弱分类器，再改变训练数据的概率分布，再调用弱学习算法得到一个弱分类器，如此反复，得到一系列弱分类器。 这样，对于提升方法来说，有两个问题需要回答：一是在每一轮如何如何改变训练数据的概率分布；而是如何将多个弱分类器组合成一个强分类器。 关于第一个问题，AdaBoost的做法是，提高那些被前几轮弱分类器线性组成的分类器错误分类的的样本的权值。这样一来，那些没有得到正确分类的数据，由于权值加大而受到后一轮的弱分类器的更大关注。于是，分类问题被一系列的弱分类器”分而治之”。至于第二个问题，AdaBoost采取加权多数表决的方法。具体地，加大分类误差率小的弱分类器的权值，使其在表决中起较大的作用，减小分类误差率大的弱分类器的权值，使其在表决中起较小的作用。 AdaBoost的巧妙之处就在于它将这些想法自然而然且有效地实现在一种算法里。
 AdaBoost算法 输入：训练数据集T={(x1,y1),(x2,y2),…,(xN,yN)}，其中xi∈X⊆Rn，表示输入数据，yi∈Y={-1,+1}，表示类别标签；弱学习算法。 输出：最终分类器G(x)。 流程： 初始化训练数据的概率分布，刚开始为均匀分布
-D1=(w11,w12,…,w1N), 其中w1i= , i=1,2,..,N . Dm表示在第m轮迭代开始前，训练数据的概率分布（或权值分布），wmi表示在第i个样本的权值， 。对m=1,2,…,M，使用具有权值分布Dm的训练数据集进行学习（任意选一种模型都可以，例如朴素贝叶斯，决策树，SVM等，并且每一轮迭代都可以用不同的模型），得到一个弱分类器 计算Gm(x)在训练数据集上的分类误差率 计算弱分类器Gm(x)的系数 更新训练数据的权值分布 这里，Zm是规范化因子 这样 ，它使Dm+1称为一个概率分布。将M个基本分类器进行线性组合 得到最终分类器 对AdaBoost算法作如下说明： 步骤(1) 初始时假设训练数据集具有均匀分布，即每个训练样本在弱分类器的学习中作用相同。 步骤(2) &amp;copy; αm表示Gm(x)在最终分类器中的重要性。由式(公式 2)可知，当em ≤1/2时，αm≥0，并且αm随着em的减小而增大，即意味着误差率越小的基本分类器在最终分类器中的作用越大。 (d) 式可以写成： 由此可知，被弱分类器Gm(x)误分类的样本的权值得以扩大，而被正确分类的样本的权值得以缩小。因此误分类样本在下一轮学习中起到更大的作用。不改变所给的训练数据，而不断改变训练数据权值的分布，使得训练数据在基本分类器的学习中起不同的作用，这是AdaBoost的一个特点。 步骤(3) 这里，αm之和并不等于1。f(x)的符号决定实例x的类别，f(x)的绝对值表示分类的确信度。利用基本分类器进行线性组合得到最终分类器是AdaBoost的另一个特点。
+D1=(w11,w12,…,w1N), 其中w1i= , i=1,2,..,N . Dm表示在第m轮迭代开始前，训练数据的概率分布（或权值分布），wmi表示在第i个样本的权值， 。对m=1,2,…,M，使用具有权值分布Dm的训练数据集进行学习（任意选一种模型都可以，例如朴素贝叶斯，决策树，SVM等，并且每一轮迭代都可以用不同的模型），得到一个弱分类器 计算Gm(x)在训练数据集上的分类误差率 计算弱分类器Gm(x)的系数 更新训练数据的权值分布 这里，Zm是规范化因子 这样 ，它使Dm+1称为一个概率分布。将M个基本分类器进行线性组合 得到最终分类器 对AdaBoost算法作如下说明： 步骤(1) 初始时假设训练数据集具有均匀分布，即每个训练样本在弱分类器的学习中作用相同。 步骤(2) (c) αm表示Gm(x)在最终分类器中的重要性。由式(公式 2)可知，当em ≤1/2时，αm≥0，并且αm随着em的减小而增大，即意味着误差率越小的基本分类器在最终分类器中的作用越大。 (d) 式可以写成： 由此可知，被弱分类器Gm(x)误分类的样本的权值得以扩大，而被正确分类的样本的权值得以缩小。因此误分类样本在下一轮学习中起到更大的作用。不改变所给的训练数据，而不断改变训练数据权值的分布，使得训练数据在基本分类器的学习中起不同的作用，这是AdaBoost的一个特点。 步骤(3) 这里，αm之和并不等于1。f(x)的符号决定实例x的类别，f(x)的绝对值表示分类的确信度。利用基本分类器进行线性组合得到最终分类器是AdaBoost的另一个特点。
 AdaBoost的例子 例 1 给定如表 1所示训练数据。假设弱分类器由G(x)=sign(x-v)产生，其中v为常量，表示阀值。试用AdaBoost算法学习一个强分类器。 表 1 训练数据样本</description>
     </item>
     
@@ -322,12 +329,12 @@ AdaBoost的例子 例 1 给定如表 1所示训练数据。假设弱分类器由
       
       <guid>https://ottsion.github.io/2017/2017-05-11-boosting/</guid>
       <description>链接: 1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法
-模型来源 提升算法是常用的有效的统计学习算法，属于迭代算法，它通过不断地使用一个弱学习器弥补前一个弱学习器的“不足”的过程，来串行地构造一个较强的学习器，这个强学习器能够使目标函数值足够小。从优化的角度分析，与一般的在参数空间搜索最优解的学习算法（如神经网络）类似，Boosting也是一个迭代搜索，且最优的算法，不同的是，它的搜索空间是学习器空间，或说函数空间（Function space），它的搜索方向是构造不断完善的强学习器，以达到目标函数（或说误差函数）足够小的目的。 Bagging也是一种常用的统计学习方法，两者经常放在一起对比，它们不同的是，Bagging将在Bootstrap采样得到的不同训练子集上的弱学习器的结果综合考虑，各个弱学习器的构建过程是并行的。而Boosting是通过串行地不断迭加弱学习器形成一个强学习器，是学习模型的提升过程。此外，Boosting迭代在降低训练误差的同时，使模型预测的确信度（margin）不断提高，是它获得较好泛化能力的主要原因，而Bagging主要是通过平均来降低模型的方差(variation).
-example 为说明Boosting的主要过程，下面举一个简化的例子。 假设训练数据集为(x1,y1),(x2,y2),&amp;hellip;,(xn,yn)我们的任务是寻找使这个回归问题的均方误差最小的模型F(x). 如果已经有一个初始的模型f,且f(x1)=0.8,但y1=0.9 ,f(x2)=1.4,但y2=1.3 …显然f是不完美的，我们可以采用不断完善f的方式,如不断在f的基础上增加模型（如决策树）h,即：f(x)←f(x)+h(x),使f 趋于F. 我们希望： f(x1)+h(x1)=y1 ====&amp;gt; h(x1)=y1−f(x1) f(x2)+h(x2)=y2 ====&amp;gt; h(x2)=y2−f(x2) ... ====&amp;gt; ... f(xn)+h(xn)=yn ====&amp;gt; h(xn)=yn−f(xn)  然而恰好满足上式的h可能不存在，但我们总可以找到使残差yi−f(xi)变小的h. 上述过程等价于拟合如下数据集：
-(x1,y1−f(x1)) (x2,y2−f(x2)) ... (xn,yn−f(xn))  上述一次叠加h的过程就是Boosting的一次迭代。要使f足够接近F一般需要多次迭代。
+ 模型来源 提升算法是常用的有效的统计学习算法，属于迭代算法，它通过不断地使用一个弱学习器弥补前一个弱学习器的“不足”的过程，来串行地构造一个较强的学习器，这个强学习器能够使目标函数值足够小。从优化的角度分析，与一般的在参数空间搜索最优解的学习算法（如神经网络）类似，Boosting也是一个迭代搜索，且最优的算法，不同的是，它的搜索空间是学习器空间，或说函数空间（Function space），它的搜索方向是构造不断完善的强学习器，以达到目标函数（或说误差函数）足够小的目的。 Bagging也是一种常用的统计学习方法，两者经常放在一起对比，它们不同的是，Bagging将在Bootstrap采样得到的不同训练子集上的弱学习器的结果综合考虑，各个弱学习器的构建过程是并行的。而Boosting是通过串行地不断迭加弱学习器形成一个强学习器，是学习模型的提升过程。此外，Boosting迭代在降低训练误差的同时，使模型预测的确信度（margin）不断提高，是它获得较好泛化能力的主要原因，而Bagging主要是通过平均来降低模型的方差(variation).
+example 为说明Boosting的主要过程，下面举一个简化的例子。 假设训练数据集为(x1,y1),(x2,y2),&amp;hellip;,(xn,yn)我们的任务是寻找使这个回归问题的均方误差最小的模型F(x). 如果已经有一个初始的模型f,且f(x1)=0.8,但y1=0.9 ,f(x2)=1.4,但y2=1.3 …显然f是不完美的，我们可以采用不断完善f的方式,如不断在f的基础上增加模型（如决策树）h,即：f(x)←f(x)+h(x),使f 趋于F. 我们希望： f(x1)+h(x1)=y1 ====&amp;gt; h(x1)=y1−f(x1)f(x2)+h(x2)=y2 ====&amp;gt; h(x2)=y2−f(x2)... ====&amp;gt; ...f(xn)+h(xn)=yn ====&amp;gt; h(xn)=yn−f(xn)然而恰好满足上式的h可能不存在，但我们总可以找到使残差yi−f(xi)变小的h. 上述过程等价于拟合如下数据集：
+(x1,y1−f(x1))(x2,y2−f(x2))...(xn,yn−f(xn))上述一次叠加h的过程就是Boosting的一次迭代。要使f足够接近F一般需要多次迭代。
 依据损失函数的不同具体分类有：
 链接:关于AdaBoost的算法推导
-Gradient Boosting 和Adaboost不同，Gradient Boosting 在迭代的时候选择梯度下降的方向来保证最后的结果最好。 损失函数用来描述模型的“靠谱”程度，假设模型没有过拟合，损失函数越大，模型的错误率越高 如果我们的模型能够让损失函数持续的下降，则说明我们的模型在不停的改进，而最好的方式就是让损失函数在其梯度方向上下降。 import numpy as np import matplotlib.pyplot as plt from sklearn import ensemble from sklearn import datasets from sklearn.</description>
+Gradient Boosting 和Adaboost不同，Gradient Boosting 在迭代的时候选择梯度下降的方向来保证最后的结果最好。 损失函数用来描述模型的“靠谱”程度，假设模型没有过拟合，损失函数越大，模型的错误率越高 如果我们的模型能够让损失函数持续的下降，则说明我们的模型在不停的改进，而最好的方式就是让损失函数在其梯度方向上下降。 import numpy as npimport matplotlib.pyplot as pltfrom sklearn import ensemblefrom sklearn import datasetsfrom sklearn.utils import shufflefrom sklearn.</description>
     </item>
     
     <item>
@@ -346,7 +353,7 @@ from tensorflow.examples.tutorials.mnist import input_data mnist = input_data.re
       <pubDate>Thu, 11 May 2017 23:59:59 +0000</pubDate>
       
       <guid>https://ottsion.github.io/2017/2017-05-11-python-plot-bar/</guid>
-      <description>#!/usr/bin/env python # coding: utf-8 import matplotlib as mpl mpl.use(&#39;Agg&#39;) import matplotlib.pyplot as plt import numpy as np # 必须配置中文字体，否则会显示成方块 # 注意所有希望图表显示的中文必须为unicode格式 custom_font = mpl.font_manager.FontProperties(fname=&#39;/Library/Fonts/华文细黑.ttf&#39;) font_size = 10 # 字体大小 fig_size = (8, 6) # 图表大小 names = (u&#39;小明&#39;, u&#39;小红&#39;) # 姓名 subjects = (u&#39;语文&#39;, u&#39;数学&#39;, u&#39;英语&#39;) # 科目 scores = ((65, 90, 75), (85, 80, 90)) # 成绩 # 更新字体大小 mpl.rcParams[&#39;font.size&#39;] = font_size # 更新图表大小 mpl.rcParams[&#39;figure.figsize&#39;] = fig_size # 设置柱形图宽度 bar_width = 0.</description>
+      <description>#!/usr/bin/env python# coding: utf-8import matplotlib as mplmpl.use(&#39;Agg&#39;)import matplotlib.pyplot as pltimport numpy as np# 必须配置中文字体，否则会显示成方块# 注意所有希望图表显示的中文必须为unicode格式custom_font = mpl.font_manager.FontProperties(fname=&#39;/Library/Fonts/华文细黑.ttf&#39;)font_size = 10 # 字体大小fig_size = (8, 6) # 图表大小names = (u&#39;小明&#39;, u&#39;小红&#39;) # 姓名subjects = (u&#39;语文&#39;, u&#39;数学&#39;, u&#39;英语&#39;) # 科目scores = ((65, 90, 75), (85, 80, 90)) # 成绩# 更新字体大小mpl.rcParams[&#39;font.size&#39;] = font_size# 更新图表大小mpl.rcParams[&#39;figure.figsize&#39;] = fig_size# 设置柱形图宽度bar_width = 0.</description>
     </item>
     
     <item>
@@ -356,8 +363,8 @@ from tensorflow.examples.tutorials.mnist import input_data mnist = input_data.re
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-dropout/</guid>
       <description>来源：tensorflow学习笔记（八）：dropout tensorflow:dropout 我们都知道dropout对于防止过拟合效果不错 dropout一般用在全连接的部分，卷积部分不会用到dropout,输出曾也不会使用dropout，适用范围[输入，输出) 1.tf.nn.dropout(x, keep_prob, noise_shape=None, seed=None, name=None) 2.tf.nn.rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0) 普通dropout
-def dropout(x, keep_prob, noise_shape=None, seed=None, name=None) #x: 输入 #keep_prob: 名字代表的意思 #return：包装了dropout的x。训练的时候用，test的时候就不需要dropout了 #例： w = tf.get_variable(&amp;quot;w1&amp;quot;,shape=[size, out_size]) x = tf.placeholder(tf.float32, shape=[batch_size, size]) x = tf.nn.dropout(x, keep_prob=0.5) y = tf.matmul(x,w)  rnn中的dropout
-def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0): #例 lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(size, forget_bias=0.0, state_is_tuple=True) lstm_cell = tf.nn.rnn_cell.DropoutWrapper(lstm_cell, output_keep_prob=0.5) #经过dropout包装的lstm_cell就出来了  </description>
+def dropout(x, keep_prob, noise_shape=None, seed=None, name=None)#x: 输入#keep_prob: 名字代表的意思#return：包装了dropout的x。训练的时候用，test的时候就不需要dropout了#例：w = tf.get_variable(&amp;quot;w1&amp;quot;,shape=[size, out_size])x = tf.placeholder(tf.float32, shape=[batch_size, size])x = tf.nn.dropout(x, keep_prob=0.5)y = tf.matmul(x,w)rnn中的dropout
+def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0):#例lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(size, forget_bias=0.0, state_is_tuple=True)lstm_cell = tf.nn.rnn_cell.DropoutWrapper(lstm_cell, output_keep_prob=0.5)#经过dropout包装的lstm_cell就出来了</description>
     </item>
     
     <item>
@@ -367,8 +374,8 @@ def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0)
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/</guid>
       <description>来源：tensorflow学习笔记（二）：tensor 变换 矩阵操作
-#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算 tf.reduce_sum(a, 1） #对axis1 tf.reduce_mean(a,0) #每列均值  第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）
-#关于concat，可以用来进行降维 3D-&amp;gt;2D , 2D-&amp;gt;1D tf.concat(concat_dim, data) #arr = np.zeros([2,3,4,5,6]) In [6]: arr2.shape Out[6]: (2, 3, 4, 5) In [7]: np.concatenate(arr2, 0).shape Out[7]: (6, 4, 5) :(2*3, 4, 5) In [9]: np.concatenate(arr2, 1).shape Out[9]: (3, 8, 5) :(3, 2*4, 5) #tf.concat() t1 = [[1, 2, 3], [4, 5, 6]] t2 = [[7, 8, 9], [10, 11, 12]] # 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成 #shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1 #tensor[2:,:]是之前的t2 tf.</description>
+#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算tf.reduce_sum(a, 1） #对axis1tf.reduce_mean(a,0) #每列均值第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）
+#关于concat，可以用来进行降维 3D-&amp;gt;2D , 2D-&amp;gt;1Dtf.concat(concat_dim, data)#arr = np.zeros([2,3,4,5,6])In [6]: arr2.shapeOut[6]: (2, 3, 4, 5)In [7]: np.concatenate(arr2, 0).shapeOut[7]: (6, 4, 5) :(2*3, 4, 5)In [9]: np.concatenate(arr2, 1).shapeOut[9]: (3, 8, 5) :(3, 2*4, 5)#tf.concat()t1 = [[1, 2, 3], [4, 5, 6]]t2 = [[7, 8, 9], [10, 11, 12]]# 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成#shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1#tensor[2:,:]是之前的t2tf.</description>
     </item>
     
     <item>
@@ -378,11 +385,11 @@ def rnn_cell.DropoutWrapper(rnn_cell, input_keep_prob=1.0, output_keep_prob=1.0)
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensorboard/</guid>
       <description>来源：Tensorflow 自带可视化Tensorboard使用方法 附项目代码 Tensorboard： 如何更直观的观察数据在神经网络中的变化，或是已经构建的神经网络的结构。上一篇文章说到，可以使用matplotlib第三方可视化，来进行一定程度上的可视化。然而Tensorflow也自带了可视化模块Tensorboard，并且能更直观的看见整个神经网络的结构。 上面的结构图甚至可以展开，变成： 使用： 结构图：
- with tensorflow .name_scope(layer_name):  直接使用以上代码生成一个带可展开符号的一个域，并且支持嵌套操作：
+ with tensorflow .name_scope(layer_name): 直接使用以上代码生成一个带可展开符号的一个域，并且支持嵌套操作：
 with tf.name_scope(layer_name): with tf.name_scope(&#39;weights&#39;):  节点一般是变量或常量，需要加一个“name=‘’”参数，才会展示和命名，如：
 with tf.name_scope(&amp;lsquo;weights&amp;rsquo;):
 Weights = tf.Variable(tf.random_normal([in_size,out_size]))
-结构图符号及意义： 变量： 变量则可使用Tensorflow.histogram_summary()方法：
+结构图符号及意义：  变量： 变量则可使用Tensorflow.histogram_summary()方法：
 tf.histogram_summary(layer_name+&amp;quot;/weights&amp;quot;,Weights) #name命名，Weights赋值  常量： 常量则可使用Tensorflow.scalar_summary()方法：
 tf.scalar_summary(&#39;loss&#39;,loss) #命名和赋值  展示： 最后需要整合和存储SummaryWriter：
 #合并到Summary中 merged = tf.merge_all_summaries() #选定可视化存储目录 writer = tf.train.SummaryWriter(&amp;quot;/目录&amp;quot;,sess.graph)  merged也是需要run的，因此还需要：
@@ -401,8 +408,8 @@ import tensorflow as tf import numpy as np def add_layer(inputs,in_size,out_size
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-lost-function/</guid>
       <description>来源：tensorflow学习笔记（三）：损失函数
 sparse_softmax_cross_entropy_with_logits tf.python.ops.nn_ops.sparse_softmax_cross_entropy_with_logits(logits, labels, name=None)
-def sparse_softmax_cross_entropy_with_logits(logits, labels, name=None): #logits是最后一层的z（输入） #A common use case is to have logits of shape `[batch_size, num_classes]` and #labels of shape `[batch_size]`. But higher dimensions are supported. #Each entry in `labels` must be an index in `[0, num_classes)` #输出：loss [batch_size]  softmax_cross_entropy_with_logits tf.python.ops.nn_ops.softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None)
-def softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None): #`logits` and `labels` must have the same shape `[batch_size, num_classes]` #return loss:[batch_size], 里面保存是batch中每个样本的cross entropy  sigmoid_cross_entropy_with_logits tf.</description>
+def sparse_softmax_cross_entropy_with_logits(logits, labels, name=None):#logits是最后一层的z（输入）#A common use case is to have logits of shape `[batch_size, num_classes]` and#labels of shape `[batch_size]`. But higher dimensions are supported.#Each entry in `labels` must be an index in `[0, num_classes)`#输出：loss [batch_size]softmax_cross_entropy_with_logits tf.python.ops.nn_ops.softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None)
+def softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None):#`logits` and `labels` must have the same shape `[batch_size, num_classes]`#return loss:[batch_size], 里面保存是batch中每个样本的cross entropysigmoid_cross_entropy_with_logits tf.</description>
     </item>
     
     <item>
@@ -412,8 +419,8 @@ def softmax_cross_entropy_with_logits(logits, targets, dim=-1, name=None): #`log
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-saver/</guid>
       <description>来源：tensorflow学习笔记（五）：变量保存与导入 如何使用tensorflow内置的参数导出和导入方法：基本用法 如果你还在纠结如何保存tensorflow训练好的模型参数，用这个方法就对了 The Saver class adds ops to save and restore variables to and from checkpoints. It also provides convenience methods to run these ops. 来自官网的介绍。
-import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声明 例：w = tf.get_variable(name=&amp;quot;vari_name&amp;quot;, shape=[], dtype=tf.float32) 初始化op声明 &amp;quot;&amp;quot;&amp;quot; #创建saver对象，它添加了一些op用来save和restore模型参数 saver = tf.train.Saver() with tf.Session() as sess: sess.run(init_op) #训练模型。。。 #使用saver提供的简便方法去调用 save op saver.save(sess, &amp;quot;save_path/file_name.ckpt&amp;quot;) #file_name.ckpt如果不存在的话，会自动创建 #后缀可加可不加  现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数 变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value 来进行的(详见)
-import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声明 初始化op声明 &amp;quot;&amp;quot;&amp;quot; #创建saver 对象 saver = tf.</description>
+import tensorflow as tf&amp;quot;&amp;quot;&amp;quot;变量声明，运算声明 例：w = tf.get_variable(name=&amp;quot;vari_name&amp;quot;, shape=[], dtype=tf.float32)初始化op声明&amp;quot;&amp;quot;&amp;quot;#创建saver对象，它添加了一些op用来save和restore模型参数saver = tf.train.Saver()with tf.Session() as sess:sess.run(init_op)#训练模型。。。#使用saver提供的简便方法去调用 save opsaver.save(sess, &amp;quot;save_path/file_name.ckpt&amp;quot;) #file_name.ckpt如果不存在的话，会自动创建#后缀可加可不加现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数 变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value 来进行的(详见)
+import tensorflow as tf&amp;quot;&amp;quot;&amp;quot;变量声明，运算声明初始化op声明&amp;quot;&amp;quot;&amp;quot;#创建saver 对象saver = tf.</description>
     </item>
     
     <item>
@@ -423,7 +430,7 @@ import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声�
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-sigmoid-function/</guid>
       <description>来源：tensorflow学习笔记（四）：激活函数
-tf.nn.relu() tf.nn.sigmoid() tf.nn.tanh() tf.nn.elu() tf.nn.bias_add() tf.nn.crelu() tf.nn.relu6() tf.nn.softplus() tf.nn.softsign() tf.nn.dropout() tf.nn.relu_layer(x, weights, biases,name=None) def relu_layer(x, weights, biases, name=None): &amp;quot;&amp;quot;&amp;quot;Computes Relu(x * weight + biases). Args: x: a 2D tensor. Dimensions typically: batch, in_units weights: a 2D tensor. Dimensions typically: in_units, out_units biases: a 1D tensor. Dimensions: out_units name: A name for the operation (optional). If not specified &amp;quot;nn_relu_layer&amp;quot; is used. Returns: A 2-D Tensor computing relu(matmul(x, weights) + biases). Dimensions typically: batch, out_units.</description>
+tf.nn.relu()tf.nn.sigmoid()tf.nn.tanh()tf.nn.elu()tf.nn.bias_add()tf.nn.crelu()tf.nn.relu6()tf.nn.softplus()tf.nn.softsign()tf.nn.dropout()tf.nn.relu_layer(x, weights, biases,name=None)def relu_layer(x, weights, biases, name=None):&amp;quot;&amp;quot;&amp;quot;Computes Relu(x * weight + biases).Args:x: a 2D tensor. Dimensions typically: batch, in_unitsweights: a 2D tensor. Dimensions typically: in_units, out_unitsbiases: a 1D tensor. Dimensions: out_unitsname: A name for the operation (optional). If not specified&amp;quot;nn_relu_layer&amp;quot; is used.Returns:A 2-D Tensor computing relu(matmul(x, weights) + biases).Dimensions typically: batch, out_units.</description>
     </item>
     
     <item>
@@ -434,7 +441,7 @@ tf.nn.relu() tf.nn.sigmoid() tf.nn.tanh() tf.nn.elu() tf.nn.bias_add() tf.nn.cre
       <guid>https://ottsion.github.io/2017/2017-05-11-rf/</guid>
       <description>原文 决策树是一种树形结构，其中每一个内部节点表示在一个特征（属性）上的测试，每个分支代表一个测试输出，每个叶子节点代表一种类别。 决策树学习是一种归纳学习，从一堆数据中归纳出一个学习模型出来。决策树学习采用的是自顶向下的递归学习，其基本思想是以信息熵为度量构造一棵熵值下降最快的树，树不断构建的过程也就是熵不断下降的过程。而其中节点的具体特征选择取决于哪个特征在当前节点的熵下降最快（如在构建根节点的时候，比较了年龄、长相、收入、是否公务员这些特征，发现选择年龄这一特征会导致熵下降最快，于是选择年龄作为根节点）。以此类推，到了叶子节点处的熵值即为零。至于说具体如何比较及计算熵下降的程度，稍后会给出。
 决策树的优缺点 决策树算法的最大优点是：它可以自学习。在学习的过程中，不需要使用者了解过多背景知识，只需要对训练实例进行较好的标注，就能够进行学习。像之前的”是否出去玩”例子，只要给定一个表格，并且每一列（最后一列是标注列）都给定（并不需要知道每一列表示的含义），那么决策树就会自己构造出一种基于规则的决策算法。 决策树缺点：可以看出，决策树的决策过程实质上是贪心法，在每一步的时候都选择当前状态下的最优解，一直走下去。我们知道贪心法并不能保证得到的最终结果是全局最优的，这也是决策树的缺陷之一，有可能会导致过拟合的问题.
-知识点补充： ## 经验熵与经验条件熵 只要给定一个随机变量P，我们就可以求得该随机变量的熵。但是实践中，我们得到的并不是真正的随机变量p，得到的只是p的若干采样，那么我们实践中得到的熵就不一定是真正的随机变量p的熵，于是，我们称实践中得到的熵为经验熵，类似地也就有了经验条件熵的概念。教科书上的表述：当熵和条件熵中的概率是由数据估计得到时，所对应的熵和条件熵分别称为经验熵和经验条件熵。
+知识点补充： 经验熵与经验条件熵 只要给定一个随机变量P，我们就可以求得该随机变量的熵。但是实践中，我们得到的并不是真正的随机变量p，得到的只是p的若干采样，那么我们实践中得到的熵就不一定是真正的随机变量p的熵，于是，我们称实践中得到的熵为经验熵，类似地也就有了经验条件熵的概念。教科书上的表述：当熵和条件熵中的概率是由数据估计得到时，所对应的熵和条件熵分别称为经验熵和经验条件熵。
 决策树的生成算法&amp;ndash;ID3、C4.5、CART 建立决策树的关键，是在当前状态下选择哪个特征（即属性）作为节点。之前已经讲过，选择节点的依据取决于哪个特征在当前节点的熵下降最快。那么给出了一堆数据，那么如何求每个特征的熵（或熵下降的程度）呢？根据不同的目标函数，决策树算法主要有三种算法：ID3、C4.5、CART。</description>
     </item>
     
@@ -452,14 +459,14 @@ tf.nn.relu() tf.nn.sigmoid() tf.nn.tanh() tf.nn.elu() tf.nn.bias_add() tf.nn.cre
 缺点
 缺点是要求内容能容易抽取成有意义的特征，要求特征内容有良好的结构性，并且用户的口味必须能够用内容特征形式来表达，不能显式地得到其它用户的判断情况。
 协同过滤推荐
-协同过滤推荐（Collaborative Filtering Recommendation）技术是推荐系统中应用最早和最为成功的技术之一。它一般采用最近邻技术，利用用户的历史喜好信息计算用户之间的距离，然后利用目标用户的最近邻居用户对商品评价的加权评价值来预测目标用户对特定商品的喜好程度，系统从而根据这一喜好程度来对目标用户进行推荐。 协同过滤最大优点是对推荐对象没有特殊的要求，能处理非结构化的复杂对象，如音乐、电影。 协同过滤是基于这样的假设：为一用户找到他真正感兴趣的内容的好方法是首先找到与此用户有相似兴趣的其他用户，然后将他们感兴趣的内容推荐给此用户。其基本思想非常易于理解，在日常生活中，我们往往会利用好朋友的推荐来进行一些选择。协同过滤正是把这一思想运用到电子商务推荐系统中来，基于其他用户对某一内容的评价来向目标用户进行推荐。
+协同过滤推荐（Collaborative Filtering Recommendation）技术是推荐系统中应用最早和最为成功的技术之一。它一般采用最近邻技术，利用用户的历史喜好信息计算用户之间的距离，然后利用目标用户的最近邻居用户对商品评价的加权评价值来预测目标用户对特定商品的喜好程度，系统从而根据这一喜好程度来对目标用户进行推荐。 协同过滤最大优点是对推荐对象没有特殊的要求，能处理非结构化的复杂对象，如音乐、电影。 协同过滤是基于这样的假设：**为一用户找到他真正感兴趣的内容的好方法是首先找到与此用户有相似兴趣的其他用户，然后将他们感兴趣的内容推荐给此用户。**其基本思想非常易于理解，在日常生活中，我们往往会利用好朋友的推荐来进行一些选择。协同过滤正是把这一思想运用到电子商务推荐系统中来，基于其他用户对某一内容的评价来向目标用户进行推荐。
 基于协同过滤的推荐系统可以说是从用户的角度来进行相应推荐的，而且是自动的，即用户获得的推荐是系统从购买模式或浏览行为等隐式获得的，不需要用户努力地找到适合自己兴趣的推荐信息，如填写一些调查表格等。
 优点
 和基于内容的过滤方法相比，协同过滤具有如下的优点： 1） 能够过滤难以进行机器自动内容分析的信息，如艺术品，音乐等。 2） 共享其他人的经验，避免了内容分析的不完全和不精确，并且能够基于一些复杂的，难以表述的概念（如信息质量、个人品味）进行过滤。 3） 有推荐新信息的能力。可以发现内容上完全不相似的信息，用户对推荐信息的内容事先是预料不到的。这也是协同过滤和基于内容的过滤一个较大的差别，基于内容的过滤推荐很多都是用户本来就熟悉的内容，而协同过滤可以发现用户潜在的但自己尚未发现的兴趣偏好。 4） 能够有效的使用其他相似用户的反馈信息，较少用户的反馈量，加快个性化学习的速度。
 缺点
 虽然协同过滤作为一种典型的推荐技术有其相当的应用，但协同过滤仍有许多的问题需要解决。最典型的问题有稀疏问题（Sparsity）和可扩展问题（Scalability）。
 基于关联规则的推荐
-基于关联规则的推荐（Association Rule-based Recommendation）是以关联规则为基础，把已购商品作为规则头，规则体为推荐对象。***关联规则挖掘可以发现不同商品在销售过程中的相关性*，在零售业中已经得到了成功的应用。关联规则就是在一个交易数据库中统计购买了商品集X的交易中有多大比例的交易同时购买了商品集Y，其直观的意义就是用户在 买某些商品的时候有多大倾向去购买另外一些商品。比如购买牛奶的同时很多人会同时购买面包。
+基于关联规则的推荐（Association Rule-based Recommendation）是**以关联规则为基础，把已购商品作为规则头，规则体为推荐对象。****关联规则挖掘可以发现不同商品在销售过程中的相关性，在零售业中已经得到了成功的应用。关联规则就是在一个交易数据库中统计购买了商品集X的交易中有多大比例的交易同时购买了商品集Y，其直观的意义就是用户在 买某些商品的时候有多大倾向去购买另外一些商品。比如购买牛奶的同时很多人会同时购买面包。
 商品之间的关联规则可以分为空间关联和时间关联两种，时间关联又可以分为周期关系和顺序关联两种。
 空间关联
 空间关联，也就是在同一个时间（同一次购买）里，对消费者经常一起购买的商品进行分析，这也是所谓“购物篮分析”的主要支撑技术。 最常见的空间关联规则挖掘技术，是所谓的“支持-置信”分析。以消费者在超市购买商品为例，如果把每一个消费者的一次购买看作一个事件，考虑从商品X到商品Y的关联规则，支持度是指在所有事件中同时购买商品X和商品Y的比例，置信度则是在所有购买了商品X的事件中也购买商品Y的比例[1]。如果支持度和置信度都超过了相应的阈值，则从X到Y的规则被认为是有效的。
@@ -470,11 +477,11 @@ tf.nn.relu() tf.nn.sigmoid() tf.nn.tanh() tf.nn.elu() tf.nn.bias_add() tf.nn.cre
 周期关联和空间关联与顺序时间关联不同，不是两个商品之间的关联，而是同一个商品在被同一个消费者购买时在购买时间上的周期性。
 关联规则算法的第一步关联规则的发现最为关键且最耗时，是算法的瓶颈，但可以离线进行。其次，商品名称的同义性问题也是关联规则的一个难点。
 基于效用的推荐
-基于效用的推荐（Utility-based Recommendation）是建立在对用户使用项目的效用情况上计算的，其核心问题是怎么样为每一个用户去创建一个效用函数，因此，用户资料模型很大程度上是由系统所采用的效用函数决定的。基于效用推荐的好处是它能把非产品的属性，如提供商的可靠性（Vendor Reliability）和产品的可得性（Product Availability）等考虑到效用计算中。
+基于效用的推荐（Utility-based Recommendation）是**建立在对用户使用项目的效用情况上计算的，其核心问题是怎么样为每一个用户去创建一个效用函数，因此，用户资料模型很大程度上是由系统所采用的效用函数决定的。**基于效用推荐的好处是它能把非产品的属性，如提供商的可靠性（Vendor Reliability）和产品的可得性（Product Availability）等考虑到效用计算中。
 基于知识的推荐
-基于知识的推荐（Knowledge-based Recommendation）在某种程度是可以看成是一种推理（Inference）技术，它不是建立在用户需要和偏好基础上推荐的。基于知识的方法因它们所用的功能知识不同而有明显区别。效用知识（Functional Knowledge）是一种关于一个项目如何满足某一特定用户的知识，因此能解释需要和推荐的关系，所以用户资料可以是任何能支持推理的知识结构，它可以是用户已经规范化的查询，也可以是一个更详细的用户需要的表示。
+基于知识的推荐（Knowledge-based Recommendation）在某种程度是可以看成是一种推理（Inference）技术，它不是建立在用户需要和偏好基础上推荐的。基于知识的方法因它们所用的功能知识不同而有明显区别。**效用知识（Functional Knowledge）是一种关于一个项目如何满足某一特定用户的知识，因此能解释需要和推荐的关系，**所以用户资料可以是任何能支持推理的知识结构，它可以是用户已经规范化的查询，也可以是一个更详细的用户需要的表示。
 组合推荐
-由于各种推荐方法都有优缺点，所以在实际中，组合推荐（Hybrid Recommendation）经常被采用。研究和应用最多的是内容推荐和协同过滤推荐的组合。最简单的做法就是分别用基于内容的方法和协同过滤推荐方法去产生一个推荐预测结果，然后用某方法组合其结果。尽管从理论上有很多种推荐组合方法，但在某一具体问题中并不见得都有效，组合推荐一个最重要原则就是通过组合后要能避免或弥补各自推荐技术的弱点。
+由于各种推荐方法都有优缺点，所以在实际中，组合推荐（Hybrid Recommendation）经常被采用。**研究和应用最多的是内容推荐和协同过滤推荐的组合。最简单的做法就是分别用基于内容的方法和协同过滤推荐方法去产生一个推荐预测结果，然后用某方法组合其结果。**尽管从理论上有很多种推荐组合方法，但在某一具体问题中并不见得都有效，组合推荐一个最重要原则就是通过组合后要能避免或弥补各自推荐技术的弱点。
 组合方式
 在组合方式上，有研究人员提出了七种组合思路： 1）加权（Weight）：加权多种推荐技术结果。 2）变换（Switch）：根据问题背景和实际情况或要求决定变换采用不同的推荐技术。 3）混合（Mixed）：同时采用多种推荐技术给出多种推荐结果为用户提供参考。 4）特征组合（Feature combination）：组合来自不同推荐数据源的特征被另一种推荐算法所采用。 5）层叠（Cascade）：先用一种推荐技术产生一种粗糙的推荐结果，第二种推荐技术在此推荐结果的基础上进一步作出更精确的推荐。 6）特征扩充（Feature augmentation）：一种技术产生附加的特征信息嵌入到另一种推荐技术的特征输入中。 7）元级别（Meta-level）：用一种推荐方法产生的模型作为另一种推荐方法的输入。</description>
     </item>
@@ -486,12 +493,12 @@ tf.nn.relu() tf.nn.sigmoid() tf.nn.tanh() tf.nn.elu() tf.nn.bias_add() tf.nn.cre
       
       <guid>https://ottsion.github.io/2017/2017-05-11-regularization/</guid>
       <description>链接: 1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法
-一. 过拟合 从下图中可以看出在这三种拟合线条中一般线性拟合效果最差，只是描绘出了一种趋势，四次多项式拟合效果很完美，完全覆盖了训练集中的点。但是从实际来说数据时存在各种偏差的，肯定存在一些杂质或者误差，它在完美的拟合数据的同时意味着将这种误差也拟合在内，这种的结果是在测试集中会存在明显的差别，可能效果很差，我们需要拟合的不是误差，而是数据中的共性，存在的规律。 此时存在两种问题： 1. 如一般线回归合下发生的欠拟合：并没有很好地找到数据的规律 2. 如四次多项式回归下发生的过拟合：过多的将不需要的性质加入回归。如果我们拟合一个高阶多项式，那么这个函数能很好的拟合训练集（能拟合几乎所有的训练数据），但这也就面临函数可能太过庞大的问题，变量太多。同时如果我们没有足够的数据集（训练集）去约束这个变量过多的模型，那么就会发生过拟合。
-过度拟合的问题通常发生在变量（特征）过多的时候。这种情况下训练出的方程总是能很好的拟合训练数据，也就是说，我们的代价函数可能非常接近于 0 或者就为 0。但是，这样的曲线千方百计的去拟合训练数据，这样会导致它无法泛化到新的数据样本中， 二. 处理方式 那么，如果发生了过拟合问题，我们应该如何处理？ 过多的变量（特征），同时只有非常少的训练数据，会导致出现过度拟合的问题。因此为了解决过度拟合，有以下两个办法。 1. 人工选择减少特征数目 2. 通过机器学习算法之类的算法去选取主要特征，放弃次要特征 3. 正则化：不去减少特征，而是通过优化配置参数θ去实现消除过拟合
-正则化 正则化中我们将保留所有的特征变量，但是会减小特征变量的数量级（参数数值的大小θ(j)）。这个方法非常有效，当我们有很多特征变量时，其中每一个变量都能对预测产生一点影响比如我们有很多特征变量，其中每一个变量都是有用的，因此我们不希望把它们删掉，这就导致了正则化概念的发生。 在论文中常见的都聚集在：零范数、一范数、二范数、迹范数、Frobenius范数和核范数等等
+ 一. 过拟合 从下图中可以看出在这三种拟合线条中一般线性拟合效果最差，只是描绘出了一种趋势，四次多项式拟合效果很完美，完全覆盖了训练集中的点。但是从实际来说数据时存在各种偏差的，肯定存在一些杂质或者误差，它在完美的拟合数据的同时意味着将这种误差也拟合在内，这种的结果是在测试集中会存在明显的差别，可能效果很差，我们需要拟合的不是误差，而是数据中的共性，存在的规律。 此时存在两种问题：
+ 如一般线回归合下发生的欠拟合：并没有很好地找到数据的规律 如四次多项式回归下发生的过拟合：过多的将不需要的性质加入回归。如果我们拟合一个高阶多项式，那么这个函数能很好的拟合训练集（能拟合几乎所有的训练数据），但这也就面临函数可能太过庞大的问题，变量太多。同时如果我们没有足够的数据集（训练集）去约束这个变量过多的模型，那么就会发生过拟合。  过度拟合的问题通常发生在变量（特征）过多的时候。这种情况下训练出的方程总是能很好的拟合训练数据，也就是说，我们的代价函数可能非常接近于 0 或者就为 0。但是，这样的曲线千方百计的去拟合训练数据，这样会导致它无法泛化到新的数据样本中， 二. 处理方式 那么，如果发生了过拟合问题，我们应该如何处理？ 过多的变量（特征），同时只有非常少的训练数据，会导致出现过度拟合的问题。因此为了解决过度拟合，有以下两个办法。
+ 人工选择减少特征数目 通过机器学习算法之类的算法去选取主要特征，放弃次要特征 正则化：不去减少特征，而是通过优化配置参数θ去实现消除过拟合  正则化 正则化中我们将保留所有的特征变量，但是会减小特征变量的数量级（参数数值的大小θ(j)）。这个方法非常有效，当我们有很多特征变量时，其中每一个变量都能对预测产生一点影响比如我们有很多特征变量，其中每一个变量都是有用的，因此我们不希望把它们删掉，这就导致了正则化概念的发生。 在论文中常见的都聚集在：零范数、一范数、二范数、迹范数、Frobenius范数和核范数等等
 L0范数与L1范数 L0范数是指向量中非0的元素的个数。如果我们用L0范数来规则化一个参数矩阵W的话，就是希望W的大部分元素都是0 L1范数是指向量中各个元素绝对值之和，也有个美称叫“稀疏规则算子”（Lasso regularization）。为什么L1范数会使权值稀疏？有人可能会这样给你回答“它是L0范数的最优凸近似”。实际上，还存在一个更美的回答：任何的规则化算子，如果他在Wi=0的地方不可微，并且可以分解为一个“求和”的形式，那么这个规则化算子就可以实现稀疏。这说是这么说，W的L1范数是绝对值，|w|在w=0处是不可微，但这还是不够直观。这里因为我们需要和L2范数进行对比分析。 既然L0可以实现稀疏，为什么不用L0，而要用L1呢？因为L0范数很难优化求解（NP难问题），二是L1范数是L0范数的最优凸近似，而且它比L0范数要容易优化求解。所以大家才把目光和万千宠爱转于L1范数。 OK，来个一句话总结：L1范数和L0范数可以实现稀疏，L1因具有比L0更好的优化求解特性而被广泛应用。它能实现特征的自动选择和有很好的可解释性。
 L2范数 L2范数是指向量各元素的平方和然后求平方根。我们让L2范数的规则项||W||2最小，可以使得W的每个元素都很小，都接近于0，但与L1范数不同，它不会让它等于0，而是接近于0，这里是有很大的区别的哦。而越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象。为什么越小的参数说明模型越简单？我也不懂，我的理解是：限制了参数很小，实际上就限制了多项式某些分量的影响很小（看上面线性回归的模型的那个拟合的图），这样就相当于减少参数个数。其实我也不太懂，希望大家可以指点下。
-这里也一句话总结下：通过L2范数，我们可以实现了对模型空间的限制，从而在一定程度上避免了过拟合。 当然，采用正则化以后之前的矩阵求系数W就可以解决： lasso回归效果（一范数）： ![lasso回归] ](http://upload-images.jianshu.io/upload_images/1070582-fc992c96c6abb03a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) Ridge回归效果（二范数）： # -*- coding: utf-8 -*- &amp;quot;&amp;quot;&amp;quot; Created on Thu May 04 20:08:49 2017 @author: SUNFC &amp;quot;&amp;quot;&amp;quot; import numpy as np import matplotlib.</description>
+这里也一句话总结下：通过L2范数，我们可以实现了对模型空间的限制，从而在一定程度上避免了过拟合。 当然，采用正则化以后之前的矩阵求系数W就可以解决： lasso回归效果（一范数）： ![lasso回归] ](http://upload-images.jianshu.io/upload_images/1070582-fc992c96c6abb03a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) Ridge回归效果（二范数）： # -*- coding: utf-8 -*-&amp;quot;&amp;quot;&amp;quot;Created on Thu May 04 20:08:49 2017@author: SUNFC&amp;quot;&amp;quot;&amp;quot;import numpy as npimport matplotlib.</description>
     </item>
     
     <item>
@@ -503,22 +510,22 @@ L2范数 L2范数是指向量各元素的平方和然后求平方根。我们让
       <description>来源： 生成模型与判别模型
 一、决策函数Y=f(X)或者条件概率分布P(Y|X)
  监督学习的任务就是从数据中学习一个模型（也叫分类器），应用这一模型，对给定的输入X预测相应的输出Y。这个模型的一般形式为决策函数Y=f(X)或者条件概率分布P(Y|X)。
- 决策函数Y=f(X)：你输入一个X，它就输出一个Y，这个Y与一个阈值比较，根据比较结果判定X属于哪个类别。例如两类（w1和w2）分类问题，如果Y大于阈值，X就属于类w1，如果小于阈值就属于类w2。这样就得到了该X对应的类别了。
- 条件概率分布P(Y|X)：你输入一个X，它通过比较它属于所有类的概率，然后输出概率最大的那个作为该X对应的类别。例如：如果P(w1|X)大于P(w2|X)，那么我们就认为X是属于w1类的。
+** 决策函数Y=f(X)：**你输入一个X，它就输出一个Y，这个Y与一个阈值比较，根据比较结果判定X属于哪个类别。例如两类（w1和w2）分类问题，如果Y大于阈值，X就属于类w1，如果小于阈值就属于类w2。这样就得到了该X对应的类别了。
+** 条件概率分布P(Y|X)：**你输入一个X，它通过比较它属于所有类的概率，然后输出概率最大的那个作为该X对应的类别。例如：如果P(w1|X)大于P(w2|X)，那么我们就认为X是属于w1类的。
  所以上面两个模型都可以实现对给定的输入X预测相应的输出Y的功能。实际上通过条件概率分布P(Y|X)进行预测也是隐含着表达成决策函数Y=f(X)的形式的。例如也是两类w1和w2，那么我们求得了P(w1|X)和P(w2|X)，那么实际上判别函数就可以表示为Y= P(w1|X)/P(w2|X)，如果Y大于1或者某个阈值，那么X就属于类w1，如果小于阈值就属于类w2。而同样，很神奇的一件事是，实际上决策函数Y=f(X)也是隐含着使用P(Y|X)的。因为一般决策函数Y=f(X)是通过学习算法使你的预测和训练数据之间的误差平方最小化，而贝叶斯告诉我们，虽然它没有显式的运用贝叶斯或者以某种形式计算概率，但它实际上也是在隐含的输出极大似然假设（MAP假设）。也就是说学习器的任务是在所有假设模型有相等的先验概率条件下，输出极大似然假设。
  所以呢，分类器的设计就是在给定训练数据的基础上估计其概率模型P(Y|X)。如果可以估计出来，那么就可以分类了。但是一般来说，概率模型是比较难估计的。给一堆数给你，特别是数不多的时候，你一般很难找到这些数满足什么规律吧。那能否不依赖概率模型直接设计分类器呢？事实上，分类器就是一个决策函数（或决策面），如果能够从要解决的问题和训练样本出发直接求出判别函数，就不用估计概率模型了，这就是决策函数Y=f(X)的伟大使命了。例如支持向量机，我已经知道它的决策函数（分类面）是线性的了，也就是可以表示成Y=f(X)=WX+b的形式，那么我们通过训练样本来学习得到W和b的值就可以得到Y=f(X)了。还有一种更直接的分类方法，它不用事先设计分类器，而是只确定分类原则，根据已知样本（训练样本）直接对未知样本进行分类。包括近邻法，它不会在进行具体的预测之前求出概率模型P(Y|X)或者决策函数Y=f(X)，而是在真正预测的时候，将X与训练数据的各类的Xi比较，和哪些比较相似，就判断它X也属于Xi对应的类。
  实际上，说了那么多，也不知道自己表达清楚了没有。那我们是谈生成模型和判别模型，上面到底啰嗦了那么多到底有啥阴谋啊？呵呵，往下说就知道了。
  二、生成方法和判别方法
  监督学习方法又分生成方法（Generative approach）和判别方法（Discriminative approach），所学到的模型分别称为生成模型（Generative Model）和判别模型（Discriminative Model）。咱们先谈判别方法，因为它和前面说的都差不多，比较容易明白。
- 判别方法：由数据直接学习决策函数Y=f(X)或者条件概率分布P(Y|X)作为预测的模型，即判别模型。基本思想是有限样本条件下建立判别函数，不考虑样本的产生模型，直接研究预测模型。典型的判别模型包括k近邻，感知级，决策树，支持向量机等。
- 生成方法：由数据学习联合概率密度分布P(X,Y)，然后求出条件概率分布P(Y|X)作为预测的模型，即生成模型：P(Y|X)= P(X,Y)/ P(X)。基本思想是首先建立样本的联合概率概率密度模型P(X,Y)，然后再得到后验概率P(Y|X)，再利用它进行分类，就像上面说的那样。注意了哦，这里是先求出P(X,Y)才得到P(Y|X)的，然后这个过程还得先求出P(X)。P(X)就是你的训练数据的概率分布。哎，刚才说了，需要你的数据样本非常多的时候，你得到的P(X)才能很好的描述你数据真正的分布。例如你投硬币，你试了100次，得到正面的次数和你的试验次数的比可能是3/10，然后你直觉告诉你，可能不对，然后你再试了500次，哎，这次正面的次数和你的试验次数的比可能就变成4/10，这时候你半信半疑，不相信上帝还有一个手，所以你再试200000次，这时候正面的次数和你的试验次数的比（就可以当成是正面的概率了）就变成5/10了。这时候，你就觉得很靠谱了，觉得自己就是那个上帝了。呵呵，真啰嗦，还差点离题了。
+** 判别方法：**由数据直接学习决策函数Y=f(X)或者条件概率分布P(Y|X)作为预测的模型，即判别模型。基本思想是有限样本条件下建立判别函数，不考虑样本的产生模型，直接研究预测模型。典型的判别模型包括k近邻，感知级，决策树，支持向量机等。
+** 生成方法：**由数据学习联合概率密度分布P(X,Y)，然后求出条件概率分布P(Y|X)作为预测的模型，即生成模型：P(Y|X)= P(X,Y)/ P(X)。基本思想是首先建立样本的联合概率概率密度模型P(X,Y)，然后再得到后验概率P(Y|X)，再利用它进行分类，就像上面说的那样。注意了哦，这里是先求出P(X,Y)才得到P(Y|X)的，然后这个过程还得先求出P(X)。P(X)就是你的训练数据的概率分布。哎，刚才说了，需要你的数据样本非常多的时候，你得到的P(X)才能很好的描述你数据真正的分布。例如你投硬币，你试了100次，得到正面的次数和你的试验次数的比可能是3/10，然后你直觉告诉你，可能不对，然后你再试了500次，哎，这次正面的次数和你的试验次数的比可能就变成4/10，这时候你半信半疑，不相信上帝还有一个手，所以你再试200000次，这时候正面的次数和你的试验次数的比（就可以当成是正面的概率了）就变成5/10了。这时候，你就觉得很靠谱了，觉得自己就是那个上帝了。呵呵，真啰嗦，还差点离题了。
  还有一个问题就是，在机器学习领域有个约定俗成的说法是：不要去学那些对这个任务没用的东西。例如，对于一个分类任务：对一个给定的输入x，将它划分到一个类y中。那么，如果我们用生成模型：p(x,y)=p(y|x).p(x)
  那么，我们就需要去对p(x)建模，但这增加了我们的工作量，这让我们很不爽（除了上面说的那个估计得到P(X)可能不太准确外）。实际上，因为数据的稀疏性，导致我们都是被强迫地使用弱独立性假设去对p(x)建模的，所以就产生了局限性。所以我们更趋向于直观的使用判别模型去分类。
  这样的方法之所以称为生成方法，是因为模型表示了给定输入X产生输出Y的生成关系。用于随机生成的观察值建模，特别是在给定某些隐藏参数情况下。典型的生成模型有：朴素贝叶斯和隐马尔科夫模型等。
  三、生成模型和判别模型的优缺点
  在监督学习中，两种方法各有优缺点，适合于不同条件的学习问题。
- 生成方法的特点：上面说到，生成方法学习联合概率密度分布P(X,Y)，所以就可以从统计的角度表示数据的分布情况，能够反映同类数据本身的相似度。但它不关心到底划分各类的那个分类边界在哪。生成方法可以还原出联合概率分布P(Y|X)，而判别方法不能。生成方法的学习收敛速度更快，即当样本容量增加的时候，学到的模型可以更快的收敛于真实模型，当存在隐变量时，仍可以用生成方法学习。此时判别方法就不能用。
- 判别方法的特点：判别方法直接学习的是决策函数Y=f(X)或者条件概率分布P(Y|X)。不能反映训练数据本身的特性。但它寻找不同类别之间的最优分类面，反映的是异类数据之间的差异。直接面对预测，往往学习的准确率更高。由于直接学习P(Y|X)或P(X)，可以对数据进行各种程度上的抽象、定义特征并使用特征，因此可以简化学习问题。
+** 生成方法的特点：**上面说到，生成方法学习联合概率密度分布P(X,Y)，所以就可以从统计的角度表示数据的分布情况，能够反映同类数据本身的相似度。但它不关心到底划分各类的那个分类边界在哪。生成方法可以还原出联合概率分布P(Y|X)，而判别方法不能。生成方法的学习收敛速度更快，即当样本容量增加的时候，学到的模型可以更快的收敛于真实模型，当存在隐变量时，仍可以用生成方法学习。此时判别方法就不能用。
+** 判别方法的特点：**判别方法直接学习的是决策函数Y=f(X)或者条件概率分布P(Y|X)。不能反映训练数据本身的特性。但它寻找不同类别之间的最优分类面，反映的是异类数据之间的差异。直接面对预测，往往学习的准确率更高。由于直接学习P(Y|X)或P(X)，可以对数据进行各种程度上的抽象、定义特征并使用特征，因此可以简化学习问题。
  四、生成模型和判别模型的联系
  由生成模型可以得到判别模型，但由判别模型得不到生成模型。
  五、再形象点可以吗
@@ -539,8 +546,9 @@ L2范数 L2范数是指向量各元素的平方和然后求平方根。我们让
       
       <guid>https://ottsion.github.io/2017/2017-05-11-linear-regression/</guid>
       <description>链接: 1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法
-一. 模型介绍 线性回归简而言之就是在平面中用一条直线去拟合一些点数据,在三维空间中就是用一个平面去拟合三维中的数据,而我们要做的就是寻找出一条最佳的线段或者平面去拟合数据,当然高维情况类似去寻找超平面。 初中的时候我们就学习过一元一次方程,那就是一个简单的拟合过程,只不过那个是完全可以拟合在一条线上,现在要做的是在有误差或者数据非线性排列的情况下,我们只能去尽力找出一条最佳的拟合线路:
-import numpy as np import matplotlib.pyplot as plt x = np.arange(1,10,2).reshape(-1,1) y = a*2 plt.plot(x,y,&#39;r-&#39;,linewidth=2, label=u&amp;quot;线性拟合&amp;quot;) plt.plot(x,y, &#39;bo&#39;) plt.show()  import numpy as np import matplotlib.pyplot as plt from sklearn.linear_model import LinearRegression x = np.arange(1,10,2).reshape(-1,1) y = a*2 + np.random.randn(5) linear_model = LinearRegression() linear_model.fit(x.reshape(-1, 1),y) y_pre = linear_model.predict(x) plt.plot(x,y_pre,&#39;r-&#39;,linewidth=2, label=u&amp;quot;线性拟合&amp;quot;) plt.plot(x,y, &#39;bo&#39;) plt.show()  定义一下一些符号表达，我们通常习惯用X=(x1,x2,&amp;hellip;,xn)T∈ℝn×p表示数据矩阵，其中xi∈ℝp表示一个p维度长的数据样本；y=(y1,y2,&amp;hellip;,yn)T∈ℝn表示数据的label，这里只考虑每个样本一类的情况。</description>
+ 一. 模型介绍 线性回归简而言之就是在平面中用一条直线去拟合一些点数据,在三维空间中就是用一个平面去拟合三维中的数据,而我们要做的就是寻找出一条最佳的线段或者平面去拟合数据,当然高维情况类似去寻找超平面。 初中的时候我们就学习过一元一次方程,那就是一个简单的拟合过程,只不过那个是完全可以拟合在一条线上,现在要做的是在有误差或者数据非线性排列的情况下,我们只能去尽力找出一条最佳的拟合线路:
+import numpy as npimport matplotlib.pyplot as pltx = np.arange(1,10,2).reshape(-1,1)y = a*2 plt.plot(x,y,&#39;r-&#39;,linewidth=2, label=u&amp;quot;线性拟合&amp;quot;)plt.plot(x,y, &#39;bo&#39;)plt.show()import numpy as npimport matplotlib.pyplot as pltfrom sklearn.linear_model import LinearRegressionx = np.arange(1,10,2).reshape(-1,1)y = a*2 + np.random.randn(5)linear_model = LinearRegression()linear_model.fit(x.reshape(-1, 1),y)y_pre = linear_model.predict(x)plt.plot(x,y_pre,&#39;r-&#39;,linewidth=2, label=u&amp;quot;线性拟合&amp;quot;)plt.plot(x,y, &#39;bo&#39;)plt.show()定义一下一些符号表达，我们通常习惯用X=(x1,x2,&amp;hellip;,xn)T∈ℝn×p表示数据矩阵，其中xi∈ℝp表示一个p维度长的数据样本；y=(y1,y2,&amp;hellip;,yn)T∈ℝn表示数据的label，这里只考虑每个样本一类的情况。
+线性回归的模型是这样的，对于一个样本xi，它的输出值是其特征的线性组合：</description>
     </item>
     
     <item>
@@ -550,10 +558,10 @@ import numpy as np import matplotlib.pyplot as plt x = np.arange(1,10,2).reshape
       
       <guid>https://ottsion.github.io/2017/2017-05-11-logistic-regression/</guid>
       <description>链接: 1. 线性回归总结 2. 正则化 3. 逻辑回归 4. Boosting 5. Adaboost算法
-线性回归是通过拟合来达到目的，而逻辑回归呢侧重的是探寻概率，它不去寻找拟合的超平面，而是去寻找某个数据的类别归属问题。
+ 线性回归是通过拟合来达到目的，而逻辑回归呢侧重的是探寻概率，它不去寻找拟合的超平面，而是去寻找某个数据的类别归属问题。
 一. 预测函数 怎么去预测？我们知道Sigmoid函数是如上这样的，它的表现是：将数据归纳在0-1之间，那么我们能不能通过去计算出的结果去拟合这样一个概率，使之成为一种分类的依据？答案是肯定的。凡事的概率都在0和1之间，拟合了概率，就是拟合了判定条件。 二. 具体做法 我们知道线性回归是这样子的： 将Sigmoid函数加载到这个结果上，不就是将结果0-1概率化了么： 所以是这样子的：
 三. 损失函数 这样一来针对已有数据那就是0/1问题，要么概率为1的数据，要么概率为0的数据：
-对于我们来说概率可以简写合并成： 取其似然函数： 我们要做的是在最大似然估计就是求使 L(θ )取最大值时的θ 这里可以自己做主，我选用下面作为损失函数，要是最大似然估计最大，就要使J(θ)函数最小，通过不断的优化θ使得J函数最小，进而L函数概率最大，完成任务。 四. 求解过程 1. 梯度下降法： 2. 矩阵法： 通过依次求解A，E, θ得到最终解。（A为线性回归的θ*X）
+对于我们来说概率可以简写合并成： 取其似然函数： 我们要做的是在最大似然估计就是求使 L(θ )取最大值时的θ 这里可以自己做主，我选用下面作为损失函数，要是最大似然估计最大，就要使J(θ)函数最小，通过不断的优化θ使得J函数最小，进而L函数概率最大，完成任务。 四. 求解过程 1. 梯度下降法：### 2. 矩阵法：### 通过依次求解A，E, θ得到最终解。（A为线性回归的θ*X）
 参考： 逻辑回归 逻辑回归模型(Logistic Regression, LR)基础 - 文赛平 机器学习—逻辑回归理论简介</description>
     </item>
     
@@ -565,9 +573,9 @@ import numpy as np import matplotlib.pyplot as plt x = np.arange(1,10,2).reshape
       <guid>https://ottsion.github.io/2017/2017-01-14-moveit-01/</guid>
       <description>星期六, 14. 一月 2017 10:31上午
  主要看看路径规划在moveit里到底咋作的
-  利用moveit进行机械臂路径规划很简单，利用 moveit_commander.move_group.MoveGroupCommander类即可， 类中有go方法和plan、execute两种选择，今天看一下深入plan里面到底怎么写。
- plan方法 def moveit_commander.move_group.MoveGroupCommander.plan ( self, joints = None )   Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) Definition at line 425 of file move_group.py.  进入代码发现写的是：
- def plan(self, joints = None): &amp;quot;&amp;quot;&amp;quot; Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) &amp;quot;&amp;quot;&amp;quot; if type(joints) is JointState: self.</description>
+   利用moveit进行机械臂路径规划很简单，利用 moveit_commander.move_group.MoveGroupCommander类即可， 类中有go方法和plan、execute两种选择，今天看一下深入plan里面到底怎么写。
+ plan方法 def moveit_commander.move_group.MoveGroupCommander.plan ( self,joints = None ) Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) Definition at line 425 of file move_group.py.  进入代码发现写的是：
+ def plan(self, joints = None):&amp;quot;&amp;quot;&amp;quot; Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) &amp;quot;&amp;quot;&amp;quot;if type(joints) is JointState:self.</description>
     </item>
     
     <item>
@@ -578,10 +586,11 @@ import numpy as np import matplotlib.pyplot as plt x = np.arange(1,10,2).reshape
       <guid>https://ottsion.github.io/2017/2017-01-11-opencv-cookbook-7/</guid>
       <description>星期三, 11. 一月 2017 11:47上午
  这部分主要是用类处理彩色图像
- 像素与标量之间的差 #include &amp;quot;ColorDetector.h&amp;quot; cv::Mat ColorDetector::process(const cv::Mat &amp;amp;image){ cv::Mat output; cv::absdiff(image, cv::Scalar(target), output); std::vector&amp;lt;cv::Mat&amp;gt; images; cv::split(output, images); output=image[0]+images[1]+images[2]; cv::threshold( output, output, maxDist, 255, cv::THRESH_BINARY_INV ); return output; }  运行：
-int main() { ColorDetector cdetect ; cv::Mat image = cv::imread(&amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;); if(image.empty()) return 0; cdetect.setTargetColor(20,100,130); cv::namedWindow(&amp;quot;image&amp;quot;); cv::imshow(&amp;quot;image&amp;quot;,cdetect.process(image)); cv::waitKey(0); return 0; }  得出结果是：
-转换颜色空间 CIE L*a*b色彩空间 L表示每个像素的亮度，ab表示颜色信息。
-cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){ result.create(image.rows, image.cols, CV_8U); cv::cvtColor(image, converted, CV_BRG2LAB); cv::Mat_&amp;lt;cv::Vec3b&amp;gt;::iterator it = converted.</description>
+  像素与标量之间的差 #include &amp;quot;ColorDetector.h&amp;quot;cv::Mat ColorDetector::process(const cv::Mat &amp;amp;image){cv::Mat output;cv::absdiff(image, cv::Scalar(target), output);std::vector&amp;lt;cv::Mat&amp;gt; images;cv::split(output, images);output=image[0]+images[1]+images[2];cv::threshold(output,output,maxDist,255,cv::THRESH_BINARY_INV);return output;}运行：
+int main(){ColorDetector cdetect ;cv::Mat image = cv::imread(&amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;);if(image.empty())return 0;cdetect.setTargetColor(20,100,130);cv::namedWindow(&amp;quot;image&amp;quot;);cv::imshow(&amp;quot;image&amp;quot;,cdetect.process(image));cv::waitKey(0);return 0;}得出结果是：
+![](../../../pic/mybolg_pic/opencv/2017-01-11 11:50:39屏幕截图.png)
+转换颜色空间 CIE Lab色彩空间 L表示每个像素的亮度，ab表示颜色信息。
+cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){result.create(image.rows, image.</description>
     </item>
     
     <item>
@@ -592,7 +601,7 @@ cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){ result.create(ima
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/</guid>
       <description>星期二, 10. 一月 2017 01:44下午
  这部分主要是读取并显示图像，并对图像进行基本操作，比如画图和写字，同时添加图片点击事件的操作
- 代码学习 #include&amp;lt;iostream&amp;gt; #include&amp;lt;string&amp;gt; #include &amp;quot;opencv2/core/core.hpp&amp;quot; #include &amp;quot;opencv2/highgui/highgui.hpp&amp;quot; #include &amp;lt;boost/concept_check.hpp&amp;gt; using namespace std; //图片地址 const string imageAddr0 = &amp;quot;/home/ottsion/Documents/2.jpg&amp;quot;; const string imageAddr1 = &amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;; /** * 根据图片信息显示图片 * @param windowName 显示窗口名称 * @param image opcv的图片信息 */ void showImage(string windowName, cv::Mat image); /** * 根据地址，读取图片信息 * @param imageAddr 图片地址 * @param image opcv的图片信息 */ void readImage(string imageAddr, cv::Mat&amp;amp; image); /** * 将图片进行水平或者垂直翻转 * @param image opcv的图片信息 */ void convertImage(cv::Mat&amp;amp; image); /** * 读取时将图片灰度化或者三通道读取 * @param image opcv的图片信息 */ void getImageByTypes(cv::Mat&amp;amp; image); /** * 鼠标点击事件响应 * @param event 整数，表示鼠标触发事件的类型 * @param x 鼠标事件出发时位置（像素坐标显示） * @param y 鼠标事件出发时位置 * @param flags 表示事件发生时按下了鼠标的哪个键 * @param param 执行任意对象的指针，作为附加参数发送给函数 */ void onMouse(int event, int x, int y, int flags, void* param); /** * 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数 * @param windowName 图像窗口名称 * @param image 图像信息 */ void callBackFunc(string windowName, cv::Mat&amp;amp; image); /** * 在图像上绘画和写入文本 * @param windowName 图像窗口名称 * @param image 图像信息 */ void drawAndWriteOnImage(string windowName, cv::Mat image); void showImage(string windowName, cv::Mat image) { //先定义窗口 cv::namedWindow(windowName); //显示图片 cv::imshow(windowName, image); } void readImage(string imageAddr, cv::Mat&amp;amp; image) { //读取图片 image = cv::imread(imageAddr); if(image.</description>
+  代码学习 #include&amp;lt;iostream&amp;gt;#include&amp;lt;string&amp;gt;#include &amp;#34;opencv2/core/core.hpp&amp;#34;#include &amp;#34;opencv2/highgui/highgui.hpp&amp;#34;#include &amp;lt;boost/concept_check.hpp&amp;gt;using namespace std;//图片地址const string imageAddr0 = &amp;#34;/home/ottsion/Documents/2.jpg&amp;#34;;const string imageAddr1 = &amp;#34;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;#34;;/*** 根据图片信息显示图片* @param windowName 显示窗口名称* @param image opcv的图片信息*/void showImage(string windowName, cv::Mat image);/*** 根据地址，读取图片信息* @param imageAddr 图片地址* @param image opcv的图片信息*/void readImage(string imageAddr, cv::Mat&amp;amp; image);/*** 将图片进行水平或者垂直翻转* @param image opcv的图片信息*/void convertImage(cv::Mat&amp;amp; image);/*** 读取时将图片灰度化或者三通道读取* @param image opcv的图片信息*/void getImageByTypes(cv::Mat&amp;amp; image);/*** 鼠标点击事件响应* @param event 整数，表示鼠标触发事件的类型* @param x 鼠标事件出发时位置（像素坐标显示）* @param y 鼠标事件出发时位置* @param flags 表示事件发生时按下了鼠标的哪个键* @param param 执行任意对象的指针，作为附加参数发送给函数*/void onMouse(int event, int x, int y, int flags, void* param);/*** 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数* @param windowName 图像窗口名称* @param image 图像信息*/void callBackFunc(string windowName, cv::Mat&amp;amp; image);/*** 在图像上绘画和写入文本* @param windowName 图像窗口名称* @param image 图像信息*/void drawAndWriteOnImage(string windowName, cv::Mat image);void showImage(string windowName, cv::Mat image){//先定义窗口 cv::namedWindow(windowName);//显示图片 cv::imshow(windowName, image);}void readImage(string imageAddr, cv::Mat&amp;amp; image){//读取图片 image = cv::imread(imageAddr);if(image.</description>
     </item>
     
     <item>
@@ -603,12 +612,12 @@ cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){ result.create(ima
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/</guid>
       <description>星期二, 10. 一月 2017 03:12下午
  这部分主要是对兴趣区域的介绍,以及对Ma_的模板类介绍
- 如何实现 第一步便是定义ROI，定以后可以把ROI当做普通Mat实例进行操作，关键在于ROI本身就是Mat对象，它与它的父图指向同一个数据缓冲区，并且有一个头部信息表示ROI的坐标，可用下面的方法插入小标志：
-cv::Mat imageROI( image, cv:;Rect( image.cols-logo.cols, image.rows-logo.rows, //ROI的坐标 logo.cols, logo.rows //ROI的大小 ) ); logo.copyTo(imageROI);  同样的可以用以下方法:
-imageROI = image( cv::Range(image.rows-logo.rows, image.rows), cv::Range(image.cols-logo.cols, image.cols) );  要定义图像中一些行组成的ROI：
-cv::Mat imageRIO = image.rowRange(start, end);  要定义图像中一些列组成的ROI：
-cv::Mat imageRIO = image.colRange(start, end);  图像掩码  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows)); cv::Mat mask(logo); //把标志作为掩码，必须是灰度图像 logo.copyTo(imageROI,mask); //插入标志，只复制掩码不为0的位置  Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
-cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100列的值  Mat与Mat_相互转换也是很简单的。</description>
+  如何实现 第一步便是定义ROI，定以后可以把ROI当做普通Mat实例进行操作，关键在于ROI本身就是Mat对象，它与它的父图指向同一个数据缓冲区，并且有一个头部信息表示ROI的坐标，可用下面的方法插入小标志：
+cv::Mat imageROI(image,cv:;Rect(image.cols-logo.cols, image.rows-logo.rows, //ROI的坐标logo.cols, logo.rows //ROI的大小));logo.copyTo(imageROI);同样的可以用以下方法:
+imageROI = image(cv::Range(image.rows-logo.rows, image.rows),cv::Range(image.cols-logo.cols, image.cols));要定义图像中一些行组成的ROI：
+cv::Mat imageRIO = image.rowRange(start, end); 要定义图像中一些列组成的ROI：
+cv::Mat imageRIO = image.colRange(start, end); 图像掩码  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows));cv::Mat mask(logo); //把标志作为掩码，必须是灰度图像logo.copyTo(imageROI,mask); //插入标志，只复制掩码不为0的位置Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
+cv::Mat_&amp;lt;uchar&amp;gt; im2(image);im2(50, 100) = 0; //访问第50行100列的值 Mat与Mat_相互转换也是很简单的。</description>
     </item>
     
     <item>
@@ -619,7 +628,7 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/</guid>
       <description>星期二, 10. 一月 2017 01:44下午
  这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况
- 代码学习 #include&amp;lt;iostream&amp;gt; #include&amp;lt;string&amp;gt; #include&amp;lt;opencv2/core/core.hpp&amp;gt; #include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt; const std::string imageAddr = &amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;; //测试函数，创建一个图像 cv::Mat function(){ cv::Mat ima(500, 500, CV_8U, 50); return ima; } int main() { cv::namedWindow(&amp;quot;Image 1&amp;quot;); cv::namedWindow(&amp;quot;Image 2&amp;quot;); cv::namedWindow(&amp;quot;Image 3&amp;quot;); cv::namedWindow(&amp;quot;Image 4&amp;quot;); cv::namedWindow(&amp;quot;Image 5&amp;quot;); cv::namedWindow(&amp;quot;Image&amp;quot;); //创建一个240*320的新图像 cv::Mat image1(240, 320, CV_8U, 100); cv::imshow(&amp;quot;Image&amp;quot;, image1); cv::waitKey(0); //重新分配一个新的图像 image1.create(200, 200, CV_8U); image1 = 200; cv::imshow(&amp;quot;Image&amp;quot;, image1); cv::waitKey(0); //创建一个红色的图像，通道依次为BGR cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255)); //或者 //cv::Mat image2(cv::Size(320, 240), CV_8UC3); //image2 = cv::Scalar(0, 0, 255)； cv::imshow(&amp;quot;Image&amp;quot;, image2); cv::waitKey(0); //读入一个图像 cv::Mat image3 = cv::imread(imageAddr); //所有图像指向同一个数据块 cv::Mat image4(image3); image1 = image3; //这些图像都是原图像的副本 image3.</description>
+  代码学习 #include&amp;lt;iostream&amp;gt;#include&amp;lt;string&amp;gt;#include&amp;lt;opencv2/core/core.hpp&amp;gt;#include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt;const std::string imageAddr = &amp;#34;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;#34;;//测试函数，创建一个图像cv::Mat function(){cv::Mat ima(500, 500, CV_8U, 50);return ima;}int main(){cv::namedWindow(&amp;#34;Image 1&amp;#34;);cv::namedWindow(&amp;#34;Image 2&amp;#34;);cv::namedWindow(&amp;#34;Image 3&amp;#34;);cv::namedWindow(&amp;#34;Image 4&amp;#34;);cv::namedWindow(&amp;#34;Image 5&amp;#34;);cv::namedWindow(&amp;#34;Image&amp;#34;);//创建一个240*320的新图像 cv::Mat image1(240, 320, CV_8U, 100);cv::imshow(&amp;#34;Image&amp;#34;, image1);cv::waitKey(0);//重新分配一个新的图像 image1.create(200, 200, CV_8U);image1 = 200;cv::imshow(&amp;#34;Image&amp;#34;, image1);cv::waitKey(0);//创建一个红色的图像，通道依次为BGR cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255));//或者 //cv::Mat image2(cv::Size(320, 240), CV_8UC3); //image2 = cv::Scalar(0, 0, 255)； cv::imshow(&amp;#34;Image&amp;#34;, image2);cv::waitKey(0);//读入一个图像 cv::Mat image3 = cv::imread(imageAddr);//所有图像指向同一个数据块 cv::Mat image4(image3);image1 = image3;//这些图像都是原图像的副本 image3.</description>
     </item>
     
     <item>
@@ -630,12 +639,12 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-5/</guid>
       <description>星期二, 10. 一月 2017 07:57下午
  这部分主要是图像加减及各种运算
- 两图相加 主要有以下方法：
- //c[i] = a[i]+b[i] cv::add(imageA, imageB, resultC); //c[i] = a[i]+k cv::add(imageA, cv::Scalar(k), resultC); //c[i] = k1*a[i]+k2*b[i]+k3 cv::addWeighted(imageA, k1, imageB, k2, k3, resultC); //c[i] = k*a[i]+b[i] cv::scaleAdd(imageA, k, imageB, resultC);  甚至于掩码：
- //if (mask[i]) c[i] = a[i] + b[i] cv::add(imageA, imageB, resultC, mask);  但有一点，所有这种处理必须进行cv::Saturate_cast&amp;lt;&amp;gt;()函数转换结果，以确保结果在0-256之间，避免溢出。
+  两图相加 主要有以下方法：
+ //c[i] = a[i]+b[i]cv::add(imageA, imageB, resultC);//c[i] = a[i]+kcv::add(imageA, cv::Scalar(k), resultC);//c[i] = k1*a[i]+k2*b[i]+k3cv::addWeighted(imageA, k1, imageB, k2, k3, resultC);//c[i] = k*a[i]+b[i]cv::scaleAdd(imageA, k, imageB, resultC);甚至于掩码：
+ //if (mask[i]) c[i] = a[i] + b[i]cv::add(imageA, imageB, resultC, mask);但有一点，所有这种处理必须进行cv::Saturate_cast&amp;lt;&amp;gt;()函数转换结果，以确保结果在0-256之间，避免溢出。
 其他运算 以下括号内省略
 ###加减乘除
- cv::subtract(); cv::absdiff(); cv::multiply(); cv::divide();  位运算符  cv::bitwise_and(); cv::bitwise_or(); cv::bitwise_xor(); cv::bitwise_not();  单输入运算 cv::sqrt(); cv::pow(); cv::abs(); cv::cuberoot(); cv::exp(); cv::log();  代码演示 #include &amp;lt;vector&amp;gt; #include &amp;lt;opencv2/core/core.</description>
+ cv::subtract();cv::absdiff();cv::multiply();cv::divide();位运算符  cv::bitwise_and();cv::bitwise_or();cv::bitwise_xor();cv::bitwise_not();单输入运算 cv::sqrt();cv::pow();cv::abs();cv::cuberoot();cv::exp();cv::log();代码演示 #include &amp;lt;vector&amp;gt;#include &amp;lt;opencv2/core/core.</description>
     </item>
     
     <item>
@@ -646,7 +655,7 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-6/</guid>
       <description>星期二, 10. 一月 2017 07:57下午
  这部分主要是图像加减及各种运算
- 图像波浪化 #include &amp;lt;opencv2/core/core.hpp&amp;gt; #include &amp;lt;opencv2/highgui/highgui.hpp&amp;gt; #include &amp;lt;opencv2/imgproc/imgproc.hpp&amp;gt; #include &amp;lt;math.h&amp;gt; // remapping an image by creating wave effects void wave(const cv::Mat &amp;amp;image, cv::Mat &amp;amp;result) { // the map functions cv::Mat srcX(image.rows,image.cols,CV_32F); // x-map cv::Mat srcY(image.rows,image.cols,CV_32F); // y-map // creating the mapping for (int i=0; i&amp;lt;image.rows; i++) { for (int j=0; j&amp;lt;image.cols; j++) { srcX.at&amp;lt;float&amp;gt;(i,j)= j; srcY.at&amp;lt;float&amp;gt;(i,j)= i+3*sin(j/6.0); // horizontal flipping // srcX.at&amp;lt;float&amp;gt;(i,j)= image.</description>
+  图像波浪化 #include &amp;lt;opencv2/core/core.hpp&amp;gt;#include &amp;lt;opencv2/highgui/highgui.hpp&amp;gt;#include &amp;lt;opencv2/imgproc/imgproc.hpp&amp;gt;#include &amp;lt;math.h&amp;gt;// remapping an image by creating wave effectsvoid wave(const cv::Mat &amp;amp;image, cv::Mat &amp;amp;result) {// the map functionscv::Mat srcX(image.rows,image.cols,CV_32F); // x-mapcv::Mat srcY(image.rows,image.cols,CV_32F); // y-map// creating the mappingfor (int i=0; i&amp;lt;image.rows; i++) {for (int j=0; j&amp;lt;image.cols; j++) {srcX.at&amp;lt;float&amp;gt;(i,j)= j;srcY.at&amp;lt;float&amp;gt;(i,j)= i+3*sin(j/6.0);// horizontal flipping// srcX.</description>
     </item>
     
     <item>
@@ -657,12 +666,12 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/</guid>
       <description>星期二, 10. 一月 2017 05:48下午
  这部分主要是操作像素
- Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
-cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100列的值  Mat与Mat_相互转换也是很简单的。
+  Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
+cv::Mat_&amp;lt;uchar&amp;gt; im2(image);im2(50, 100) = 0; //访问第50行100列的值 Mat与Mat_相互转换也是很简单的。
 一般情况下Mat类读取像素：
-image.at&amp;lt;uchar&amp;gt;(i,j) = 255;  指针读取 除了一般的
- uchar* data = image.ptr&amp;lt;uchar&amp;gt;(i); for(int j=0;j&amp;lt;nc;j++) { data[j] = data[j]/div*div+div/2; }  我们还可以用以下语句执行：
-*data = *data/div*div + div/2 ; data++  代码演示(salt) #include&amp;lt;iostream&amp;gt; #include&amp;lt;opencv2/core/core.hpp&amp;gt; #include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt; void salt(cv::Mat image, int n) { int i,j; for(int k=0;k&amp;lt;n;k++) { i = std::rand()%image.rows; j = std::rand()%image.cols; if(image.</description>
+image.at&amp;lt;uchar&amp;gt;(i,j) = 255; 指针读取 除了一般的
+ uchar* data = image.ptr&amp;lt;uchar&amp;gt;(i);for(int j=0;j&amp;lt;nc;j++){data[j] = data[j]/div*div+div/2;}我们还可以用以下语句执行：
+*data = *data/div*div + div/2 ; data++代码演示(salt) #include&amp;lt;iostream&amp;gt;#include&amp;lt;opencv2/core/core.hpp&amp;gt;#include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt;void salt(cv::Mat image, int n){int i,j;for(int k=0;k&amp;lt;n;k++){i = std::rand()%image.rows;j = std::rand()%image.cols;if(image.type()==CV_8UC1)image.</description>
     </item>
     
     <item>
@@ -673,10 +682,10 @@ image.at&amp;lt;uchar&amp;gt;(i,j) = 255;  指针读取 除了一般的
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-2/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 更好一点的 Hello World 从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。 本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:
- 为工程添加一个子目录 src,用来放置工程源代码; 添加一个子目录 doc,用来放置这个工程的文档 hello.txt 在工程目录添加文本文件 COPYRIGHT, README; 在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制 将构建后的目标文件放入构建目录的 bin 子目录; 最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/usr/bin,将 doc 目录的内容以及 COPYRIGHT/README 安装到/usr/share/doc/cmake/t2,将  新建代码目录  准备工作: 在/backup/cmake/目录下建立 t2 目录。 将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。
- 添加子目录 src:
-	mkdir src mv main.</description>
+  更好一点的 Hello World 从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。 本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:
+ 为工程添加一个子目录 src,用来放置工程源代码; 添加一个子目录 doc,用来放置这个工程的文档 hello.txt 在工程目录添加文本文件 COPYRIGHT, README; 在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制 将构建后的目标文件放入构建目录的 bin 子目录; 最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/usr/bin,将 doc 目录的内容以及 COPYRIGHT/README 安装到/usr/share/doc/cmake/t2,将  新建代码目录   准备工作: 在/backup/cmake/目录下建立 t2 目录。 将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。
+  添加子目录 src:
+  	mkdir srcmv main.</description>
     </item>
     
     <item>
@@ -687,12 +696,12 @@ image.at&amp;lt;uchar&amp;gt;(i,j) = 255;  指针读取 除了一般的
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-3/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 静态库与动态库构建 读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。 本节的任务: 1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc 向终端输出 Hello World 字符串。 2,安装头文件与共享库。
+  静态库与动态库构建 读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。 本节的任务: 1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc 向终端输出 Hello World 字符串。 2,安装头文件与共享库。
 准备工作 在/backup/cmake 目录建立 t3 目录,用于存放本节涉及到的工程
-建立共享库 cd /backup/cmake/t3 mkdir lib  在 t3 目录下建立 CMakeLists.txt,内容如下:
-PROJECT(HELLOLIB) ADD_SUBDIRECTORY(lib)  在 lib 目录下建立两个源文件 hello.c 与 hello.h hello.c 内容如下:
-#include “hello.h” void HelloFunc() { printf(“Hello World\n”); }  hello.h 内容如下:
-#ifndef HELLO_H #define HELLO_H #include &amp;lt;stdio.</description>
+建立共享库 cd /backup/cmake/t3mkdir lib 在 t3 目录下建立 CMakeLists.txt,内容如下:
+PROJECT(HELLOLIB)ADD_SUBDIRECTORY(lib) 在 lib 目录下建立两个源文件 hello.c 与 hello.h hello.c 内容如下:
+#include “hello.h”void HelloFunc(){printf(“Hello World\n”);}hello.h 内容如下:
+#ifndef HELLO_H#define HELLO_H#include &amp;lt;stdio.</description>
     </item>
     
     <item>
@@ -703,14 +712,14 @@ PROJECT(HELLOLIB) ADD_SUBDIRECTORY(lib)  在 lib 目录下建立两个源文件 
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-4/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 如何使用外部共享库和头文件 抱歉,本节仍然继续折腾 Hello World. 上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。
+  如何使用外部共享库和头文件 抱歉,本节仍然继续折腾 Hello World. 上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。
 准备工作: 请在/backup/cmake 目录建立 t4 目录,本节所有资源将存储在 t4 目录。
 src及main编写 建立 src 目录,编写源文件 main.c,内容如下:
-#include &amp;lt;hello.h&amp;gt; int main() { HelloFunc(); return 0; }  编写工程主文件 CMakeLists.txt
-PROJECT(NEWHELLO) ADD_SUBDIRECTORY(src)  编写 src/CMakeLists.txt
-ADD_EXECUTABLE(main main.c)  上述工作已经严格按照我们前面季节提到的内容完成了。
+#include &amp;lt;hello.h&amp;gt;int main(){HelloFunc();return 0;} 编写工程主文件 CMakeLists.txt
+PROJECT(NEWHELLO)ADD_SUBDIRECTORY(src) 编写 src/CMakeLists.txt
+ADD_EXECUTABLE(main main.c) 上述工作已经严格按照我们前面季节提到的内容完成了。
 外部构建 按照习惯,仍然建立 build 目录,使用 cmake ..方式构建。过程:
-cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建 错误输出为是:/backup/cmake/t4/src/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。 hello.h 位于/usr/include/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include ,同志,要这么干,我这一节就没什么可写了,只能选择一个 glib 或者 libX11 来写了,这些代码写出来很多同志是看不懂的)为了让我们的工程能够找到 hello.</description>
+cmake ..make 构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建 错误输出为是:/backup/cmake/t4/src/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。 hello.h 位于/usr/include/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include &amp;lt;hello/hello.</description>
     </item>
     
     <item>
@@ -720,8 +729,8 @@ cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到
       
       <guid>https://ottsion.github.io/2017/2017-01-05-eigen-code/</guid>
       <description>星期四, 05. 一月 2017 02:13下午
- 有关eigen库的一些基本使用方法
- 矩阵、向量初始化 #include &amp;lt;iostream&amp;gt; #include &amp;quot;Eigen/Dense&amp;quot; using namespace Eigen; int main() { MatrixXf m1(3,4); //动态矩阵，建立3行4列。 MatrixXf m2(4,3); //4行3列，依此类推。 MatrixXf m3(3,3); Vector3f v1; //若是静态数组，则不用指定行或者列 /* 初始化 */ Matrix3d m = Matrix3d::Random(); m1 = MatrixXf::Zero(3,4); //用0矩阵初始化,要指定行列数 m2 = MatrixXf::Zero(4,3); m3 = MatrixXf::Identity(3,3); //用单位矩阵初始化 v1 = Vector3f::Zero(); //同理，若是静态的，不用指定行列数 m1 &amp;lt;&amp;lt; 1,0,0,1, //也可以以这种方式初始化 1,5,0,1, 0,0,9,1; m2 &amp;lt;&amp;lt; 1,0,0, 0,4,0, 0,0,7, 1,1,1; //向量初始化，与矩阵类似 Vector3d v3(1,2,3); VectorXf vx(30); }  C++数组和矩阵转换 使用Map函数，可以实现Eigen的矩阵和c++中的数组直接转换,语法如下：</description>
+  有关eigen库的一些基本使用方法
+  矩阵、向量初始化 #include &amp;lt;iostream&amp;gt;#include &amp;quot;Eigen/Dense&amp;quot;using namespace Eigen;int main(){MatrixXf m1(3,4); //动态矩阵，建立3行4列。MatrixXf m2(4,3); //4行3列，依此类推。MatrixXf m3(3,3);Vector3f v1; //若是静态数组，则不用指定行或者列/* 初始化 */Matrix3d m = Matrix3d::Random();m1 = MatrixXf::Zero(3,4); //用0矩阵初始化,要指定行列数m2 = MatrixXf::Zero(4,3);m3 = MatrixXf::Identity(3,3); //用单位矩阵初始化v1 = Vector3f::Zero(); //同理，若是静态的，不用指定行列数m1 &amp;lt;&amp;lt; 1,0,0,1, //也可以以这种方式初始化1,5,0,1,0,0,9,1;m2 &amp;lt;&amp;lt; 1,0,0,0,4,0,0,0,7,1,1,1;//向量初始化，与矩阵类似Vector3d v3(1,2,3);VectorXf vx(30);}C++数组和矩阵转换 使用Map函数，可以实现Eigen的矩阵和c++中的数组直接转换,语法如下：</description>
     </item>
     
     <item>
@@ -731,13 +740,13 @@ cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到
       
       <guid>https://ottsion.github.io/2017/2017-01-05-eigen-use-3/</guid>
       <description>星期四, 05. 一月 2017 12:49下午
- 本节主要涉及Eigen的块操作以及QR分解。Eigen的QR分解非常绕人，搞了很久才搞明白是怎么回事，最后是一个使用Eigen的矩阵操作完成二维高斯拟合求取光点的代码例子，关于二维高斯拟合求取光点的详细内容可参考：链接
- 矩阵的块操作 矩阵的块表示 矩阵的块操作有两种使用方法，其定义形式为：
-matrix.block(i,j,p,q); (1) matrix.block&amp;lt;p,q&amp;gt;(i,j) (2)   定义（1）表示返回从矩阵的(i, j)开始，每行取p个元素，每列取q个元素所组成的临时新矩阵对象，原矩阵的元素不变。
- 定义（2）中block&amp;lt;p, q&amp;gt;可理解为一个p行q列的子矩阵，该定义表示从原矩阵中第(i, j)开始，获取一个p行q列的子矩阵，返回该子矩阵组成的临时 矩阵对象，原矩阵的元素不变。
+  本节主要涉及Eigen的块操作以及QR分解。Eigen的QR分解非常绕人，搞了很久才搞明白是怎么回事，最后是一个使用Eigen的矩阵操作完成二维高斯拟合求取光点的代码例子，关于二维高斯拟合求取光点的详细内容可参考：链接
+  矩阵的块操作 矩阵的块表示 矩阵的块操作有两种使用方法，其定义形式为：
+matrix.block(i,j,p,q); (1)matrix.block&amp;lt;p,q&amp;gt;(i,j) (2)  定义（1）表示返回从矩阵的(i, j)开始，每行取p个元素，每列取q个元素所组成的临时新矩阵对象，原矩阵的元素不变。
+  定义（2）中block&amp;lt;p, q&amp;gt;可理解为一个p行q列的子矩阵，该定义表示从原矩阵中第(i, j)开始，获取一个p行q列的子矩阵，返回该子矩阵组成的临时 矩阵对象，原矩阵的元素不变。
   演示代码如下：
-#include&amp;lt;iostream&amp;gt; #include&amp;lt;eigen3/Eigen/Dense&amp;gt; using namespace std; int main() { Eigen::MatrixXf m(4,4); m&amp;lt;&amp;lt;1,2,3,4, 5,6,7,8, 9,10,11,12, 13,14,15,16; cout&amp;lt;&amp;lt;&amp;quot;Block in the middle&amp;quot;&amp;lt;&amp;lt;endl; cout&amp;lt;&amp;lt;m.block&amp;lt;2,2&amp;gt;(1,1)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl; for(int i=1;i&amp;lt;=3;i++) { cout&amp;lt;&amp;lt;&amp;quot;block of size &amp;quot;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&amp;quot;x&amp;quot;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;endl; cout&amp;lt;&amp;lt;m.block(0,0,i,i)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl; } }  运行结果：
-Block in the middle 6 7 10 11 block of size 1x1 1 block of size 2x2 1 2 5 6 block of size 3x3 1 2 3 5 6 7 9 10 11  通过上述方式获取的子矩阵即可以作为左值也可以作为右值，也就是即可以用这个子矩阵给其他矩阵赋值，也可以给这个子矩阵对象赋值。</description>
+#include&amp;lt;iostream&amp;gt;#include&amp;lt;eigen3/Eigen/Dense&amp;gt;using namespace std;int main(){Eigen::MatrixXf m(4,4);m&amp;lt;&amp;lt;1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16;cout&amp;lt;&amp;lt;&amp;#34;Block in the middle&amp;#34;&amp;lt;&amp;lt;endl;cout&amp;lt;&amp;lt;m.block&amp;lt;2,2&amp;gt;(1,1)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl;for(int i=1;i&amp;lt;=3;i++){cout&amp;lt;&amp;lt;&amp;#34;block of size &amp;#34;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&amp;#34;x&amp;#34;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;endl;cout&amp;lt;&amp;lt;m.block(0,0,i,i)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl;}}运行结果：
+Block in the middle6 710 11block of size 1x11block of size 2x21 25 6block of size 3x31 2 35 6 79 10 11 通过上述方式获取的子矩阵即可以作为左值也可以作为右值，也就是即可以用这个子矩阵给其他矩阵赋值，也可以给这个子矩阵对象赋值。</description>
     </item>
     
     <item>
@@ -747,14 +756,13 @@ Block in the middle 6 7 10 11 block of size 1x1 1 block of size 2x2 1 2 5 6 bloc
       
       <guid>https://ottsion.github.io/2017/2017-01-05-eigen-use-2/</guid>
       <description>星期四, 05. 一月 2017 12:48下午
- 主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C++的+，-，*，原文链接在后面
- 矩阵的运算 Eigen提供+、-、一元操作符“-”、+=、-=，例如：
- 二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；
- 一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;
- 组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B
+  主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C++的+，-，*，原文链接在后面
+  矩阵的运算 Eigen提供+、-、一元操作符“-”、+=、-=，例如：
+  二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；
+  一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;
+  组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B
   矩阵的加减操作代码如下：
-#include&amp;lt;iostream&amp;gt; #include&amp;lt;eigen3/Eigen/Dense&amp;gt; using namespace Eigen; int main() { Matrix2d a; a &amp;lt;&amp;lt; 1,2, 3,4; MatrixXd b(2,2); b &amp;lt;&amp;lt; 2,3, 1,4; std::cout&amp;lt;&amp;lt;&amp;quot;a+b=\n&amp;quot;&amp;lt;&amp;lt;a+b&amp;lt;&amp;lt;std::endl; std::cout&amp;lt;&amp;lt;&amp;quot;a-b=\n&amp;quot;&amp;lt;&amp;lt;a-b&amp;lt;&amp;lt;std::endl; std::cout&amp;lt;&amp;lt;&amp;quot;Doing a += b;\n&amp;quot;&amp;lt;&amp;lt;std::endl; a += b; std::cout&amp;lt;&amp;lt;&amp;quot;Now a =\n&amp;quot;&amp;lt;&amp;lt;a&amp;lt;&amp;lt;std::endl; Vector3d v(1,2,3); Vector3d w(1,0,0); std::cout&amp;lt;&amp;lt;&amp;quot;-v+w-v=\n&amp;quot;&amp;lt;&amp;lt;-v+w-v&amp;lt;&amp;lt;std::endl; }  运行结果：
-a+b= 3 5 4 8 a-b= -1 -1 2 0 Doing a += b; Now a = 3 5 4 8 -v+w-v= -1 -4 -6  另外，矩阵还提供与标量（单一个数字）的乘除操作，表示每个元素都与该标量进行乘除操作。例如： 二元操作符*在：A*a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。 对于aA、A/a、A=a、A /=a也是一样，例如下面的代码：</description>
+#include&amp;lt;iostream&amp;gt;#include&amp;lt;eigen3/Eigen/Dense&amp;gt;using namespace Eigen;int main(){Matrix2d a;a &amp;lt;&amp;lt; 1,2,3,4;MatrixXd b(2,2);b &amp;lt;&amp;lt; 2,3,1,4;std::cout&amp;lt;&amp;lt;&amp;quot;a+b=\n&amp;quot;&amp;lt;&amp;lt;a+b&amp;lt;&amp;lt;std::endl;std::cout&amp;lt;&amp;lt;&amp;quot;a-b=\n&amp;quot;&amp;lt;&amp;lt;a-b&amp;lt;&amp;lt;std::endl;std::cout&amp;lt;&amp;lt;&amp;quot;Doing a += b;\n&amp;quot;&amp;lt;&amp;lt;std::endl;a += b;std::cout&amp;lt;&amp;lt;&amp;quot;Now a =\n&amp;quot;&amp;lt;&amp;lt;a&amp;lt;&amp;lt;std::endl;Vector3d v(1,2,3);Vector3d w(1,0,0);std::cout&amp;lt;&amp;lt;&amp;quot;-v+w-v=\n&amp;quot;&amp;lt;&amp;lt;-v+w-v&amp;lt;&amp;lt;std::endl;}运行结果：</description>
     </item>
     
     <item>
@@ -764,9 +772,9 @@ a+b= 3 5 4 8 a-b= -1 -1 2 0 Doing a += b; Now a = 3 5 4 8 -v+w-v= -1 -4 -6  另�
       
       <guid>https://ottsion.github.io/2017/2017-01-05-lunwen1/</guid>
       <description>星期四, 05. 一月 2017 03:13下午
- 为了实现机器人臂手系统的目标抓取, 采用 Kinect 对目标信息进行实时检测. 首先,采用张正友棋盘标定法完成对 Kinect 内外参数的标定. 其次, 利用深度信息进行深度分割, 滤 除大部分干扰背景, 再通过颜色与形状特征实现目标的识别与定位. 将识别对象的 3 维坐标通过以太网发送至机械臂控制台, 随后机械臂移动至目标位置. 最后采用变积分 PID 算法控制灵巧手接触力, 保证响应的快速性及精密性, 实现灵巧手的精细抓取. 通过设计一套完整的实验系统验证了该方法的有效性.
- 研究点 需要机器人能够快速准确地完成对环境中物体的定位与识别, 以及实现对目标物体的精细抓取. 然而, 环境的复杂性与物体的多样性给机器人自主实现物体定位与识别带来了很大的挑战, 使得非结构环境下的物体定位与识别成为机器人研究领域的热点之一
-研究情况  文献 [3] 采用双目立体视觉实现目标识别与定位. 该双目立体视觉系统主要包括摄像机标定、图像分割、立体匹配和 3 维测距 4 个模块, 其中立体匹配是双目视觉定位的最关键的一步, 实现目标区域的准确立体匹配较难, 而立体匹配的不准确将直接导致所获取的深度信息产生偏差 [4] , 同时其实时性是双目和多目定位视觉系统面临的最大挑战.  文献 [5] 采用双目立体视觉实现目标的抓取, 即在识别物体时, 采用颜色分割法将 RGB 颜色空间转换至 HSV 颜色空间, 并通过选取阈值来分割图像, 分割后的图像受背景干扰较大且噪点较多. 文献 [6] 利用Kinect 实现目标识别与定位, 其定位前采用张正友棋盘标定法标定摄像头内外参数. 在识别物体时采用基于深度信息的背景相减法, 该方法只适用于物体变动检测.</description>
+  为了实现机器人臂手系统的目标抓取, 采用 Kinect 对目标信息进行实时检测. 首先,采用张正友棋盘标定法完成对 Kinect 内外参数的标定. 其次, 利用深度信息进行深度分割, 滤 除大部分干扰背景, 再通过颜色与形状特征实现目标的识别与定位. 将识别对象的 3 维坐标通过以太网发送至机械臂控制台, 随后机械臂移动至目标位置. 最后采用变积分 PID 算法控制灵巧手接触力, 保证响应的快速性及精密性, 实现灵巧手的精细抓取. 通过设计一套完整的实验系统验证了该方法的有效性.
+  研究点 需要机器人能够快速准确地完成对环境中物体的定位与识别, 以及实现对目标物体的精细抓取. 然而, 环境的复杂性与物体的多样性给机器人自主实现物体定位与识别带来了很大的挑战, 使得非结构环境下的物体定位与识别成为机器人研究领域的热点之一
+研究情况  文献 [3] 采用双目立体视觉实现目标识别与定位. 该双目立体视觉系统主要包括摄像机标定、图像分割、立体匹配和 3 维测距 4 个模块, 其中立体匹配是双目视觉定位的最关键的一步, 实现目标区域的准确立体匹配较难, 而立体匹配的不准确将直接导致所获取的深度信息产生偏差 [4] , 同时其实时性是双目和多目定位视觉系统面临的最大挑战. 文献 [5] 采用双目立体视觉实现目标的抓取, 即在识别物体时, 采用颜色分割法将 RGB 颜色空间转换至 HSV 颜色空间, 并通过选取阈值来分割图像, 分割后的图像受背景干扰较大且噪点较多. 文献 [6] 利用Kinect 实现目标识别与定位, 其定位前采用张正友棋盘标定法标定摄像头内外参数. 在识别物体时采用基于深度信息的背景相减法, 该方法只适用于物体变动检测.</description>
     </item>
     
     <item>
@@ -776,7 +784,7 @@ a+b= 3 5 4 8 a-b= -1 -1 2 0 Doing a += b; Now a = 3 5 4 8 -v+w-v= -1 -4 -6  另�
       
       <guid>https://ottsion.github.io/2017/2017-01-05-lunwen2/</guid>
       <description>星期四, 05. 一月 2017 07:23下午
- 传 统 的 西 红 柿 采 摘 机 器 人 的 视 觉 系 统 都 是 采 用 双 目 摄 像 头 , 使 用 时 需 要 进 行 摄 像 头 参 数 标 定 , 使 用 过 程 复 杂 。 本 文 提 出 用Kinect 代 替 传 统 的 双 目 摄 像 头 , 获 得 RGB 彩 色 图 像 和 目 标 深 度 图 像 , 对 彩 色 图 像 分 别 在 HSI 和 Lab 颜 色 空 间 进 行 分 通 道 图 像 分割 , 再 将 两 种 结 果 进 行 融 合 后 去 除 背 景 噪 声 。 对 采 集 的 样 本 图 像 进 行 分 割 实 验 , 结 果 表 明 此 种 方 法 分 割 效 果 良 好 。 对 深 度 图 像 进 行三 维 重 建 获 得 西 红 柿 质 心 的 三 维 立 体 坐 标 值 , 实 验 表 明 目 标 定 位 准 确 度 高 , 该 空 间 坐 标 值 可 用 于 指 导 真 空 吸 盘 机 械 手 进 行 目 标 西红柿的自动采摘 。</description>
+  传 统 的 西 红 柿 采 摘 机 器 人 的 视 觉 系 统 都 是 采 用 双 目 摄 像 头 , 使 用 时 需 要 进 行 摄 像 头 参 数 标 定 , 使 用 过 程 复 杂 。 本 文 提 出 用Kinect 代 替 传 统 的 双 目 摄 像 头 , 获 得 RGB 彩 色 图 像 和 目 标 深 度 图 像 , 对 彩 色 图 像 分 别 在 HSI 和 Lab 颜 色 空 间 进 行 分 通 道 图 像 分割 , 再 将 两 种 结 果 进 行 融 合 后 去 除 背 景 噪 声 。 对 采 集 的 样 本 图 像 进 行 分 割 实 验 , 结 果 表 明 此 种 方 法 分 割 效 果 良 好 。 对 深 度 图 像 进 行三 维 重 建 获 得 西 红 柿 质 心 的 三 维 立 体 坐 标 值 , 实 验 表 明 目 标 定 位 准 确 度 高 , 该 空 间 坐 标 值 可 用 于 指 导 真 空 吸 盘 机 械 手 进 行 目 标 西红柿的自动采摘 。</description>
     </item>
     
     <item>
@@ -786,14 +794,14 @@ a+b= 3 5 4 8 a-b= -1 -1 2 0 Doing a += b; Now a = 3 5 4 8 -v+w-v= -1 -4 -6  另�
       
       <guid>https://ottsion.github.io/2017/2017-01-04-eigen-use-1/</guid>
       <description>星期三, 04. 一月 2017 09:05下午
- 这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。
- 矩阵的定义 Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：
- template&amp;lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols&amp;gt; struct traits&amp;lt;Matrix&amp;lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols&amp;gt; &amp;gt; .......  其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：
-typedef Matrix&amp;lt;double,Dynamic, Dynamic&amp;gt; MatrixXd;  在Eigen中也提供了很多常见的简化定义形式，例如：
-typedef Matrix&amp;lt; double , 3 , 1&amp;gt; Vector3d  注意：
- Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都提供默认构造函数，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。
- 矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：
-Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.0);   动态矩阵和静态矩阵 动态矩阵是指其大小在运行时确定，静态矩阵是指其大小在编译时确定，在Eigen中并未这样称呼矩阵。</description>
+  这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。
+  矩阵的定义 Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：
+ template&amp;lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols&amp;gt; struct traits&amp;lt;Matrix&amp;lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols&amp;gt; &amp;gt; ....... 其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：
+typedef Matrix&amp;lt;double,Dynamic, Dynamic&amp;gt; MatrixXd;在Eigen中也提供了很多常见的简化定义形式，例如：
+typedef Matrix&amp;lt; double , 3 , 1&amp;gt; Vector3d注意：
+  Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都提供默认构造函数，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。
+  矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：
+  Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.</description>
     </item>
     
     <item>
@@ -804,13 +812,13 @@ Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.0);
       <guid>https://ottsion.github.io/2016/2016-12-26-cmake-1/</guid>
       <description>星期六, 07. 一月 2017 05:16下午
  学习笔记，来源： cmake实践
- 准备工作 首先确定自己的编程目录，这里选用：
-cd Documents/study/cmake/ mkdir t1 &amp;amp;&amp;amp; cd t1  建立main.cpp和CMakeLists.txt
+  准备工作 首先确定自己的编程目录，这里选用：
+cd Documents/study/cmake/mkdir t1 &amp;amp;&amp;amp; cd t1建立main.cpp和CMakeLists.txt
 编写程序 main.cpp
-#include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;quot;Hello World from t1 main!\n&amp;quot;); return 0; }  CMakeLists.txt
-PROJECT (HELLO) SET (SRC_LIST main.cpp) MESSAGE(STATUS&amp;quot;THISISBINARYdir&amp;quot;${HELLO_BINARY_DIR}) MESSAGE(STATUS&amp;quot;THISISSOURCEdir&amp;quot;${HELLO_SOURCE_DIR}) ADD_EXECUTABLE (hello SRC_LIST)  编译过程 运行：
-cmake . (注意命令后面的点号,代表本目录)。  输出大概是这个样子:
--- Check for working C compiler: /usr/bin/gcc -- Check for working C compiler: /usr/bin/gcc -- works -- Check size of void* -- Check size of void* - done -- Check for working CXX compiler: /usr/bin/c++ -- Check for working CXX compiler: /usr/bin/c++ -- works -- This is BINARY dir /backup/cmake/t1 -- This is SOURCE dir /backup/cmake/t1 -- Configuring done -- Generating done -- Build files have been written to: /backup/cmake/t1  运行（当前目录）：</description>
+#include&amp;lt;stdio.h&amp;gt;int main(){printf(&amp;#34;Hello World from t1 main!\n&amp;#34;);return 0;}CMakeLists.txt
+PROJECT (HELLO)SET (SRC_LIST main.cpp)MESSAGE(STATUS&amp;quot;THISISBINARYdir&amp;quot;${HELLO_BINARY_DIR})MESSAGE(STATUS&amp;quot;THISISSOURCEdir&amp;quot;${HELLO_SOURCE_DIR})ADD_EXECUTABLE (hello SRC_LIST)编译过程 运行：
+cmake . (注意命令后面的点号,代表本目录)。输出大概是这个样子:
+-- Check for working C compiler: /usr/bin/gcc-- Check for working C compiler: /usr/bin/gcc -- works-- Check size of void*-- Check size of void* - done-- Check for working CXX compiler: /usr/bin/c++-- Check for working CXX compiler: /usr/bin/c++ -- works-- This is BINARY dir /backup/cmake/t1-- This is SOURCE dir /backup/cmake/t1-- Configuring done-- Generating done-- Build files have been written to: /backup/cmake/t1运行（当前目录）：</description>
     </item>
     
     <item>
@@ -821,12 +829,12 @@ cmake . (注意命令后面的点号,代表本目录)。  输出大概是这个�
       <guid>https://ottsion.github.io/2016/2016-12-21-how-to-use-git/</guid>
       <description>本篇主要说明git基础用法，随着我用，不断加吧
  登陆账户 首先最好登陆账户，之后用来上传下载很方便了
-git config --global user.name &amp;quot;your_username&amp;quot; git config --global user.email your_email@domain.com  创建一个本地代码库 转到需要的地址，然后初始化环境，Git会在saveFile文件夹内创建一个名为.git的隐藏文件夹，那就是你的本地代码库。
-cd d:\saveFile\ git init  加载修改文件 在仓库目录或者当前目录下，有全部加载和部分加载
-git add . //全部加载 git add my_file, my_other_file //部分加载  提交文件 提交之前先写注释，修改文档的说明，然后查看当前状态，最后提交
-git commit -m &amp;quot;initial commit&amp;quot; git status git push origin master  回滚到之前的提交状态 查看版本信息，然后选择ID迁出
-git log  显示：
-commit ca82a6dff817ec66f44342007202690a93763949Author: your_username your_email@domain.comDate: Mon Nov 4 12:52:11 2013 -0700 changes the frontpage layout commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7Author: your_username your_email@domain.</description>
+git config --global user.name &amp;quot;your_username&amp;quot;git config --global user.email your_email@domain.com创建一个本地代码库 转到需要的地址，然后初始化环境，Git会在saveFile文件夹内创建一个名为.git的隐藏文件夹，那就是你的本地代码库。
+cd d:\saveFile\git init加载修改文件 在仓库目录或者当前目录下，有全部加载和部分加载
+git add . //全部加载git add my_file, my_other_file //部分加载提交文件 提交之前先写注释，修改文档的说明，然后查看当前状态，最后提交
+git commit -m &amp;quot;initial commit&amp;quot;git statusgit push origin master回滚到之前的提交状态 查看版本信息，然后选择ID迁出
+git log显示：
+commit ca82a6dff817ec66f44342007202690a93763949Author: your_username your_email@domain.comDate: Mon Nov 4 12:52:11 2013 -0700 changes the frontpage layoutcommit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7Author: your_username your_email@domain.comDate: Mon Nov 4 11:40:33 2013 -0700 adds my new featurecommit a11bef06a3f659402fe7563abf99ad00de2209e6Author: your_username your_email@domain.</description>
     </item>
     
     <item>
@@ -845,7 +853,8 @@ commit ca82a6dff817ec66f44342007202690a93763949Author: your_username your_email@
  w(x,y) is the window at position (x,y) I(x,y) is the intensity at (x,y) I(x+u,y+v) is the intensity at the moved window (x+u,y+v)  为了寻找带角点的窗口，我们搜索像素灰度变化较大的窗口。于是, 我们期望最大化以下式子:
 使用 泰勒(Taylor)展开式:
 式子可以展开为:
-一个举证表达式可以写为:</description>
+一个举证表达式可以写为:
+表示为:</description>
     </item>
     
     <item>
@@ -856,9 +865,9 @@ commit ca82a6dff817ec66f44342007202690a93763949Author: your_username your_email@
       <guid>https://ottsion.github.io/2016/2016-12-21-kalman-filter/</guid>
       <description>星期三, 21. 十二月 2016 07:57下午
  卡尔曼滤波是一种高效率的递归滤波器（自回归滤波器），它能够从一系列的不完全及包含噪声的测量中，估计动态系统的状态。
- 卡尔曼滤波简介 &amp;emsp;&amp;emsp;卡尔曼滤波的一个典型实例是从一组有限的，包含噪声的，通过对物体位置的观察序列（可能有偏差）预测出物体的位置的坐标及速度。在很多工程应用（如雷达、计算机视觉）中都可以找到它的身影。同时，卡尔曼滤波也是控制理论以及控制系统工程中的一个重要课题。例如，对于雷达来说，人们感兴趣的是其能够跟踪目标。但目标的位置、速度、加速度的测量值往往在任何时候都有噪声。卡尔曼滤波利用目标的动态信息，设法去掉噪声的影响，得到一个关于目标位置的好的估计。这个估计可以是对当前目标位置的估计（滤波），也可以是对于将来位置的估计（预测），也可以是对过去位置的估计（插值或平滑）。这种滤波方法以它的发明者鲁道夫.E.卡尔曼（Rudolph E. Kalman）命名，原文地址 。
-&amp;emsp;&amp;emsp;卡尔曼滤波是一种递归的估计，即只要获知上一时刻状态的估计值以及当前状态的观测值就可以计算出当前状态的估计值，因此不需要记录观测或者估计的历史信息。卡尔曼滤波器与大多数滤波器不同之處，在於它是一种纯粹的时域滤波器，它不需要像低通滤波器等频域滤波器那样，需要在频域设计再转换到时域实现。
-初识卡尔曼滤波 &amp;emsp;&amp;emsp;先举个简单例子说明卡尔曼滤波干嘛的，下面有三幅图，第一幅是原图，小车匀速前行，第二幅的时候可以预测出当前位置，但是越往后随着各种误差会很难判断出小车的位置了，假如我们有一个新加入的量，比如一个雷达用来探测小车位置，也就是有两种方法，误差小的时候没啥，误差大了的时候该怎么去判断小车在哪里，哪个的测量值更可靠，如何求得那个比例值，使其能够得出目前的位置。
+ 卡尔曼滤波简介  卡尔曼滤波的一个典型实例是从一组有限的，包含噪声的，通过对物体位置的观察序列（可能有偏差）预测出物体的位置的坐标及速度。在很多工程应用（如雷达、计算机视觉）中都可以找到它的身影。同时，卡尔曼滤波也是控制理论以及控制系统工程中的一个重要课题。例如，对于雷达来说，人们感兴趣的是其能够跟踪目标。但目标的位置、速度、加速度的测量值往往在任何时候都有噪声。卡尔曼滤波利用目标的动态信息，设法去掉噪声的影响，得到一个关于目标位置的好的估计。这个估计可以是对当前目标位置的估计（滤波），也可以是对于将来位置的估计（预测），也可以是对过去位置的估计（插值或平滑）。这种滤波方法以它的发明者鲁道夫.E.卡尔曼（Rudolph E. Kalman）命名，原文地址 。
+ 卡尔曼滤波是一种递归的估计，即只要获知上一时刻状态的估计值以及当前状态的观测值就可以计算出当前状态的估计值，因此不需要记录观测或者估计的历史信息。卡尔曼滤波器与大多数滤波器不同之處，在於它是一种纯粹的时域滤波器，它不需要像低通滤波器等频域滤波器那样，需要在频域设计再转换到时域实现。
+初识卡尔曼滤波  先举个简单例子说明卡尔曼滤波干嘛的，下面有三幅图，第一幅是原图，小车匀速前行，第二幅的时候可以预测出当前位置，但是越往后随着各种误差会很难判断出小车的位置了，假如我们有一个新加入的量，比如一个雷达用来探测小车位置，也就是有两种方法，误差小的时候没啥，误差大了的时候该怎么去判断小车在哪里，哪个的测量值更可靠，如何求得那个比例值，使其能够得出目前的位置。
 初始小车行驶：
 前进一段时间：
 加入了另一种方式：
@@ -869,7 +878,7 @@ kalmanfilter方式：
 演化过程 1.首先假定我们只有一个线性方程求取下一时刻的位置信息
 2.不考虑测量噪声取出能测量的状态，也很简单：
 3.用测量仪器测量出来的状态值（大家可以考虑到：测量的值就是被各种噪声干扰后的真实值）减去上面不考虑噪声得到的测量值：
-这个值在数学上是一个定义值，叫做新息，有很多有趣的性质，感兴趣的可以自己谷歌。 我们对步骤暂且停一停。这个叫新息的值有什么用？由上面的过程我们可以明显看到，它反映了过程噪声和测量噪声综合对测量状态值的影响，也就是它包含了w和v的情况。 一个数值c由两部分内容a和b组成，那么怎样用数学表达式来表达？ 一般有两种做法： I.直接相加：c=a+b; II. 用比例的方法：a=n*c,b=(1-n)*c 卡尔曼采用了方法II，用比例的方法来做（其实这也是为什么叫做滤波的原因，因为滤波就是给权值之类的操作）。也就是说，过程噪声w=新息*一个比例。这样得到的过程噪声加上原来（第一步）不考虑过程噪声的状态值不就是优化值了吗？ 也就是：
+这个值在数学上是一个定义值，叫做新息，有很多有趣的性质，感兴趣的可以自己谷歌。 我们对步骤暂且停一停。这个叫新息的值有什么用？由上面的过程我们可以明显看到，它反映了过程噪声和测量噪声综合对测量状态值的影响，也就是它包含了w和v的情况。 一个数值c由两部分内容a和b组成，那么怎样用数学表达式来表达？ 一般有两种做法： I.直接相加：c=a+b; II. 用比例的方法：a=n*c,b=(1-n)c 卡尔曼采用了方法II，用比例的方法来做（其实这也是为什么叫做滤波的原因，因为滤波就是给权值之类的操作）。也就是说，过程噪声w=新息一个比例。这样得到的过程噪声加上原来（第一步）不考虑过程噪声的状态值不就是优化值了吗？ 也就是：
 Okay，都写到这里了，有必要做一下前提假设： a. 什么高斯噪声，均值为零一堆； b.Ak,Ck,wk的协方差Q,vk的协方差R，系统协方差初始值P0,状态初始值X0，都已知。 那么到目前为止我们的思路就是清楚了，找到一个合适的Hk值（卡尔曼增益），那么我们就能得到状态的最优值。
 这是误差协方差矩阵。 思路：使得误差协方差矩阵Pk最小的Hk。 为什么？这里我从感观的角度说明自己的理解，欢迎讨论。 协方差表示什么，协方差表示两者之间的联系或者关系，关系越大，协方差越大。误差协方差越小说明过程噪声和量测噪声的关系越小。关系越小能做什么，这要回到我们第3步讨论的我们用比例的方法分开了w和v。用比例分开，到底多少属于w，多少是v，如果关系越小，分开的越精确，比如一堆白砂糖和盐，如果两种混合的很均匀，我们说它关系很大，也就越难用比例的方法将其分开。 4.求的误差协方差矩阵Pk
 自然是把里面的Xk先得到，然后公式运算，通过上面的步骤我们也容易得到：
@@ -889,9 +898,10 @@ Python下代码如下所示：
  标题正文 正常显示部分，会显示正文
 编写代码 正常显示部分，会显示正文
 小标题 文章正文，一下为代码格式
-#include&amp;lt;stdio.h&amp;gt; int main() { print(&amp;quot;hello&amp;quot;); }  小标题 sudo apt-get insatll libdev
+#include&amp;lt;stdio.h&amp;gt;int main(){print(&amp;#34;hello&amp;#34;);}小标题 sudo apt-get insatll libdev
 小标题 我们直接看下onLayout的代码：
-X = np.array([ [0,0,1],[0,1,1],[1,0,1],[1,1,1] ]) y = np.array([[0,1,1,0]]).T syn0 = 2*np.random.random((3,4)) - 1 syn1 = 2*np.random.random((4,1)) - 1 for j in xrange(60000): l1 = 1/(1+np.exp(-(np.dot(X,syn0)))) l2 = 1/(1+np.exp(-(np.dot(l1,syn1)))) l2_delta = (y - l2)*(l2*(1-l2)) l1_delta = l2_delta.dot(syn1.T) * (l1 * (1-l1)) syn1 += l1.T.dot(l2_delta) syn0 += X.T.dot(l1_delta)  再有：</description>
+X = np.array([ [0,0,1],[0,1,1],[1,0,1],[1,1,1] ])y = np.array([[0,1,1,0]]).Tsyn0 = 2*np.random.random((3,4)) - 1syn1 = 2*np.random.random((4,1)) - 1for j in xrange(60000):l1 = 1/(1+np.exp(-(np.dot(X,syn0))))l2 = 1/(1+np.exp(-(np.dot(l1,syn1))))l2_delta = (y - l2)*(l2*(1-l2))l1_delta = l2_delta.dot(syn1.T) * (l1 * (1-l1))syn1 += l1.T.dot(l2_delta)syn0 += X.T.dot(l1_delta)再有：
+public class HelloWorld {/*** 输出一行字符串“Hello World!</description>
     </item>
     
   </channel>

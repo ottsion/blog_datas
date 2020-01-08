@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>moveit on 静心明志</title>
@@ -19,9 +19,9 @@
       <guid>https://ottsion.github.io/2017/2017-01-14-moveit-01/</guid>
       <description>星期六, 14. 一月 2017 10:31上午
  主要看看路径规划在moveit里到底咋作的
-  利用moveit进行机械臂路径规划很简单，利用 moveit_commander.move_group.MoveGroupCommander类即可， 类中有go方法和plan、execute两种选择，今天看一下深入plan里面到底怎么写。
- plan方法 def moveit_commander.move_group.MoveGroupCommander.plan ( self, joints = None )   Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) Definition at line 425 of file move_group.py.  进入代码发现写的是：
- def plan(self, joints = None): &amp;quot;&amp;quot;&amp;quot; Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) &amp;quot;&amp;quot;&amp;quot; if type(joints) is JointState: self.</description>
+   利用moveit进行机械臂路径规划很简单，利用 moveit_commander.move_group.MoveGroupCommander类即可， 类中有go方法和plan、execute两种选择，今天看一下深入plan里面到底怎么写。
+ plan方法 def moveit_commander.move_group.MoveGroupCommander.plan ( self,joints = None ) Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) Definition at line 425 of file move_group.py.  进入代码发现写的是：
+ def plan(self, joints = None):&amp;quot;&amp;quot;&amp;quot; Return a motion plan (a RobotTrajectory) to the set goal state (or specified by the joints argument) &amp;quot;&amp;quot;&amp;quot;if type(joints) is JointState:self.</description>
     </item>
     
   </channel>

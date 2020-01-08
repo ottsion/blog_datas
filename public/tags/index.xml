@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 静心明志</title>
@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 静心明志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2019 17:37:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2020 13:36:39 +0800</lastBuildDate>
     
 	<atom:link href="https://ottsion.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>杂记</title>
+      <link>https://ottsion.github.io/tags/%E6%9D%82%E8%AE%B0/</link>
+      <pubDate>Tue, 07 Jan 2020 13:36:39 +0800</pubDate>
+      
+      <guid>https://ottsion.github.io/tags/%E6%9D%82%E8%AE%B0/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>algorithm</title>
@@ -84,7 +93,7 @@
     </item>
     
     <item>
-      <title>ROS, pioneer</title>
+      <title>ros, pioneer</title>
       <link>https://ottsion.github.io/tags/ros-pioneer/</link>
       <pubDate>Sun, 25 Jun 2017 23:59:59 +0000</pubDate>
       

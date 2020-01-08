@@ -11,6 +11,41 @@
   
   
   
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   <link rel="canonical" href="https://ottsion.github.io/about/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -123,19 +158,12 @@
 <div class="post-warp archive">
     <h2 class="post-title" style="text-align:right;padding-bottom:2em"></h2>
     <div class="post-content">
-        
-
-<p>Continue&hellip;</p>
-
+        <p>Continue&hellip;</p>
 <h3 id="github">Github</h3>
-
-<p>[1] <a href="https://github.com/ottsion/pioneer_need.git" rel="nofollow noreferrer" target="_blank">pioneer_need</a>: 先锋机器人pioneer运行所需的一些配置</p>
-
-<p>[2] <a href="https://github.com/ottsion/deeplite.git" rel="nofollow noreferrer" target="_blank">deeplite</a>: 我的深度学习库，里面包含NLP, CTR, CV方面的模型，可以直接通过配置文件配置dataloader运行</p>
-
-<p>[3] <a href="https://github.com/ottsion/ImageClassification.git" rel="nofollow noreferrer" target="_blank">ImageClassification</a>: 针对样本量太少，通过相似任务迁移的图片分类代码</p>
-
-<p>[4] <a href="https://github.com/ottsion/JData.git" rel="nofollow noreferrer" target="_blank">JData</a>: 京东JData算法大赛-高潜用户购买意向预测</p>
+<p>[1] <a href="https://github.com/ottsion/pioneer_need.git">pioneer_need</a>: 先锋机器人pioneer运行所需的一些配置</p>
+<p>[2] <a href="https://github.com/ottsion/deeplite.git">deeplite</a>: 我的深度学习库，里面包含NLP, CTR, CV方面的模型，可以直接通过配置文件配置dataloader运行</p>
+<p>[3] <a href="https://github.com/ottsion/ImageClassification.git">ImageClassification</a>: 针对样本量太少，通过相似任务迁移的图片分类代码</p>
+<p>[4] <a href="https://github.com/ottsion/JData.git">JData</a>: 京东JData算法大赛-高潜用户购买意向预测</p>
 
     </div>
 </div>
@@ -159,7 +187,7 @@
 		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
     </div>
 </footer>
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

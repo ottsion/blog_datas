@@ -2,6 +2,76 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://ottsion.github.io/2020/2020_tag/</loc>
+      
+      <lastmod>2020-01-07T13:36:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ottsion.github.io/categories/</loc>
+      
+      <lastmod>2020-01-07T13:36:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ottsion.github.io/posts/</loc>
+      
+      <lastmod>2020-01-07T13:36:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ottsion.github.io/tags/</loc>
+      
+      <lastmod>2020-01-07T13:36:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ottsion.github.io/categories/%E6%9D%82%E8%AE%B0/</loc>
+      
+      <lastmod>2020-01-07T13:36:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ottsion.github.io/tags/%E6%9D%82%E8%AE%B0/</loc>
+      
+      <lastmod>2020-01-07T13:36:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://ottsion.github.io/</loc>
+      
+      <lastmod>2020-01-07T13:36:39+08:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
       <loc>https://ottsion.github.io/categories/algorithm/</loc>
       
       <lastmod>2019-05-24T17:37:20+08:00</lastmod>
@@ -13,16 +83,6 @@
   
     <url>
       <loc>https://ottsion.github.io/tags/algorithm/</loc>
-      
-      <lastmod>2019-05-24T17:37:20+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://ottsion.github.io/categories/</loc>
       
       <lastmod>2019-05-24T17:37:20+08:00</lastmod>
       
@@ -52,37 +112,7 @@
     </url>
   
     <url>
-      <loc>https://ottsion.github.io/posts/</loc>
-      
-      <lastmod>2019-05-24T17:37:20+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://ottsion.github.io/tags/</loc>
-      
-      <lastmod>2019-05-24T17:37:20+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>https://ottsion.github.io/2019/%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</loc>
-      
-      <lastmod>2019-05-24T17:37:20+08:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://ottsion.github.io/</loc>
       
       <lastmod>2019-05-24T17:37:20+08:00</lastmod>
       
@@ -572,7 +602,7 @@
     </url>
   
     <url>
-      <loc>https://ottsion.github.io/tags/python/</loc>
+      <loc>https://ottsion.github.io/categories/python/</loc>
       
       <lastmod>2017-05-11T23:59:59+00:00</lastmod>
       
@@ -582,7 +612,7 @@
     </url>
   
     <url>
-      <loc>https://ottsion.github.io/categories/python/</loc>
+      <loc>https://ottsion.github.io/tags/python/</loc>
       
       <lastmod>2017-05-11T23:59:59+00:00</lastmod>
       
@@ -1023,16 +1053,6 @@
   
     <url>
       <loc>https://ottsion.github.io/2016/2016-12-21-kalman-filter/</loc>
-      
-      <lastmod>2016-12-21T23:59:59+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://ottsion.github.io/categories/%E6%9D%82%E8%AE%B0/</loc>
       
       <lastmod>2016-12-21T23:59:59+00:00</lastmod>
       

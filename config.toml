@@ -75,3 +75,15 @@ linkToMarkDown = false
     # Dribbble = "xxoo"
     # Medium = "xxoo"
 
+  # Valine.
+  # You can get your appid and appkey from https://leancloud.cn
+  # more info please open https://valine.js.org
+  [params.valine]
+    enable = true
+    appId = 'aq7KX6LvEUKuYC1FReOy9Rq8-gzGzoHsz'
+    appKey = 'AJWv8xzYkd8tJ23S38zDK3TN'
+    notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
+    verify = false # Verification code
+    avatar = 'mm'
+    placeholder = '说点什么吧...'
+    visitor = true

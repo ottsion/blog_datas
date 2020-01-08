@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>cmake on 静心明志</title>
@@ -19,10 +19,10 @@
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-2/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 更好一点的 Hello World 从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。 本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:
- 为工程添加一个子目录 src,用来放置工程源代码; 添加一个子目录 doc,用来放置这个工程的文档 hello.txt 在工程目录添加文本文件 COPYRIGHT, README; 在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制 将构建后的目标文件放入构建目录的 bin 子目录; 最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/usr/bin,将 doc 目录的内容以及 COPYRIGHT/README 安装到/usr/share/doc/cmake/t2,将  新建代码目录  准备工作: 在/backup/cmake/目录下建立 t2 目录。 将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。
- 添加子目录 src:
-	mkdir src mv main.</description>
+  更好一点的 Hello World 从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。 本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:
+ 为工程添加一个子目录 src,用来放置工程源代码; 添加一个子目录 doc,用来放置这个工程的文档 hello.txt 在工程目录添加文本文件 COPYRIGHT, README; 在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制 将构建后的目标文件放入构建目录的 bin 子目录; 最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/usr/bin,将 doc 目录的内容以及 COPYRIGHT/README 安装到/usr/share/doc/cmake/t2,将  新建代码目录   准备工作: 在/backup/cmake/目录下建立 t2 目录。 将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。
+  添加子目录 src:
+  	mkdir srcmv main.</description>
     </item>
     
     <item>
@@ -33,12 +33,12 @@
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-3/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 静态库与动态库构建 读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。 本节的任务: 1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc 向终端输出 Hello World 字符串。 2,安装头文件与共享库。
+  静态库与动态库构建 读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。 本节的任务: 1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc 向终端输出 Hello World 字符串。 2,安装头文件与共享库。
 准备工作 在/backup/cmake 目录建立 t3 目录,用于存放本节涉及到的工程
-建立共享库 cd /backup/cmake/t3 mkdir lib  在 t3 目录下建立 CMakeLists.txt,内容如下:
-PROJECT(HELLOLIB) ADD_SUBDIRECTORY(lib)  在 lib 目录下建立两个源文件 hello.c 与 hello.h hello.c 内容如下:
-#include “hello.h” void HelloFunc() { printf(“Hello World\n”); }  hello.h 内容如下:
-#ifndef HELLO_H #define HELLO_H #include &amp;lt;stdio.</description>
+建立共享库 cd /backup/cmake/t3mkdir lib 在 t3 目录下建立 CMakeLists.txt,内容如下:
+PROJECT(HELLOLIB)ADD_SUBDIRECTORY(lib) 在 lib 目录下建立两个源文件 hello.c 与 hello.h hello.c 内容如下:
+#include “hello.h”void HelloFunc(){printf(“Hello World\n”);}hello.h 内容如下:
+#ifndef HELLO_H#define HELLO_H#include &amp;lt;stdio.</description>
     </item>
     
     <item>
@@ -49,14 +49,14 @@ PROJECT(HELLOLIB) ADD_SUBDIRECTORY(lib)  在 lib 目录下建立两个源文件 
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-4/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 如何使用外部共享库和头文件 抱歉,本节仍然继续折腾 Hello World. 上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。
+  如何使用外部共享库和头文件 抱歉,本节仍然继续折腾 Hello World. 上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。
 准备工作: 请在/backup/cmake 目录建立 t4 目录,本节所有资源将存储在 t4 目录。
 src及main编写 建立 src 目录,编写源文件 main.c,内容如下:
-#include &amp;lt;hello.h&amp;gt; int main() { HelloFunc(); return 0; }  编写工程主文件 CMakeLists.txt
-PROJECT(NEWHELLO) ADD_SUBDIRECTORY(src)  编写 src/CMakeLists.txt
-ADD_EXECUTABLE(main main.c)  上述工作已经严格按照我们前面季节提到的内容完成了。
+#include &amp;lt;hello.h&amp;gt;int main(){HelloFunc();return 0;} 编写工程主文件 CMakeLists.txt
+PROJECT(NEWHELLO)ADD_SUBDIRECTORY(src) 编写 src/CMakeLists.txt
+ADD_EXECUTABLE(main main.c) 上述工作已经严格按照我们前面季节提到的内容完成了。
 外部构建 按照习惯,仍然建立 build 目录,使用 cmake ..方式构建。过程:
-cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建 错误输出为是:/backup/cmake/t4/src/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。 hello.h 位于/usr/include/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include ,同志,要这么干,我这一节就没什么可写了,只能选择一个 glib 或者 libX11 来写了,这些代码写出来很多同志是看不懂的)为了让我们的工程能够找到 hello.</description>
+cmake ..make 构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建 错误输出为是:/backup/cmake/t4/src/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。 hello.h 位于/usr/include/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include &amp;lt;hello/hello.</description>
     </item>
     
     <item>
@@ -67,13 +67,13 @@ cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到
       <guid>https://ottsion.github.io/2016/2016-12-26-cmake-1/</guid>
       <description>星期六, 07. 一月 2017 05:16下午
  学习笔记，来源： cmake实践
- 准备工作 首先确定自己的编程目录，这里选用：
-cd Documents/study/cmake/ mkdir t1 &amp;amp;&amp;amp; cd t1  建立main.cpp和CMakeLists.txt
+  准备工作 首先确定自己的编程目录，这里选用：
+cd Documents/study/cmake/mkdir t1 &amp;amp;&amp;amp; cd t1建立main.cpp和CMakeLists.txt
 编写程序 main.cpp
-#include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;quot;Hello World from t1 main!\n&amp;quot;); return 0; }  CMakeLists.txt
-PROJECT (HELLO) SET (SRC_LIST main.cpp) MESSAGE(STATUS&amp;quot;THISISBINARYdir&amp;quot;${HELLO_BINARY_DIR}) MESSAGE(STATUS&amp;quot;THISISSOURCEdir&amp;quot;${HELLO_SOURCE_DIR}) ADD_EXECUTABLE (hello SRC_LIST)  编译过程 运行：
-cmake . (注意命令后面的点号,代表本目录)。  输出大概是这个样子:
--- Check for working C compiler: /usr/bin/gcc -- Check for working C compiler: /usr/bin/gcc -- works -- Check size of void* -- Check size of void* - done -- Check for working CXX compiler: /usr/bin/c++ -- Check for working CXX compiler: /usr/bin/c++ -- works -- This is BINARY dir /backup/cmake/t1 -- This is SOURCE dir /backup/cmake/t1 -- Configuring done -- Generating done -- Build files have been written to: /backup/cmake/t1  运行（当前目录）：</description>
+#include&amp;lt;stdio.h&amp;gt;int main(){printf(&amp;#34;Hello World from t1 main!\n&amp;#34;);return 0;}CMakeLists.txt
+PROJECT (HELLO)SET (SRC_LIST main.cpp)MESSAGE(STATUS&amp;quot;THISISBINARYdir&amp;quot;${HELLO_BINARY_DIR})MESSAGE(STATUS&amp;quot;THISISSOURCEdir&amp;quot;${HELLO_SOURCE_DIR})ADD_EXECUTABLE (hello SRC_LIST)编译过程 运行：
+cmake . (注意命令后面的点号,代表本目录)。输出大概是这个样子:
+-- Check for working C compiler: /usr/bin/gcc-- Check for working C compiler: /usr/bin/gcc -- works-- Check size of void*-- Check size of void* - done-- Check for working CXX compiler: /usr/bin/c++-- Check for working CXX compiler: /usr/bin/c++ -- works-- This is BINARY dir /backup/cmake/t1-- This is SOURCE dir /backup/cmake/t1-- Configuring done-- Generating done-- Build files have been written to: /backup/cmake/t1运行（当前目录）：</description>
     </item>
     
   </channel>

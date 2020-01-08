@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ros, Dynamxel on 静心明志</title>
@@ -21,9 +21,10 @@
 1 拷贝程序文件  cd ~/joey_ws/src git clone https://github.com/arebgun/dynamixel_motor.git
  2 编译文件  cd ~/joey_ws catkin_make
  3 设置启动驱动launch文件  vim ~/joey_ws/src/dynamixel_motor/dynamixel_tutorials/launch/controller_manager.launch
-  &amp;lt;!-- -*- mode: XML -*- --&amp;gt; &amp;lt;launch&amp;gt; &amp;lt;node name=&amp;quot;dynamixel_manager&amp;quot; pkg=&amp;quot;dynamixel_controllers&amp;quot; type=&amp;quot;controller_manager.py&amp;quot; required=&amp;quot;true&amp;quot; output=&amp;quot;screen&amp;quot;&amp;gt; &amp;lt;rosparam&amp;gt; namespace: dxl_manager serial_ports: pan_tilt_port: port_name: &amp;quot;/dev/ttyUSB0&amp;quot; baud_rate: 1000000 min_motor_id: 1 max_motor_id: 25 update_rate: 20 &amp;lt;/rosparam&amp;gt; &amp;lt;/node&amp;gt; &amp;lt;/launch&amp;gt;  4 运行驱动检测舵机 连接USB2Dynamixel 运行Dynamixel控制器 USB2Dynamixel连接USB接口，舵机连接USB2DYnamixel接口，舵机外部供电
+  &amp;lt;!-- -*- mode: XML -*- --&amp;gt;&amp;lt;launch&amp;gt;&amp;lt;node name=&amp;quot;dynamixel_manager&amp;quot; pkg=&amp;quot;dynamixel_controllers&amp;quot; type=&amp;quot;controller_manager.py&amp;quot; required=&amp;quot;true&amp;quot; output=&amp;quot;screen&amp;quot;&amp;gt;&amp;lt;rosparam&amp;gt;namespace: dxl_managerserial_ports:pan_tilt_port:port_name: &amp;quot;/dev/ttyUSB0&amp;quot;baud_rate: 1000000min_motor_id: 1max_motor_id: 25update_rate: 20&amp;lt;/rosparam&amp;gt;&amp;lt;/node&amp;gt;&amp;lt;/launch&amp;gt;4 运行驱动检测舵机 连接USB2Dynamixel 运行Dynamixel控制器 USB2Dynamixel连接USB接口，舵机连接USB2DYnamixel接口，舵机外部供电
  roslaunch dynamixel_tutorials controller_manager.launch
- ID 搜索默认从1~25 若查找不到，可以更改controller_manager.launch将ID搜索扩大</description>
+ ID 搜索默认从1~25 若查找不到，可以更改controller_manager.launch将ID搜索扩大
+ rostopic list</description>
     </item>
     
   </channel>

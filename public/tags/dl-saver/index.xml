@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DL, saver on 静心明志</title>
@@ -18,8 +18,8 @@
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-saver/</guid>
       <description>来源：tensorflow学习笔记（五）：变量保存与导入 如何使用tensorflow内置的参数导出和导入方法：基本用法 如果你还在纠结如何保存tensorflow训练好的模型参数，用这个方法就对了 The Saver class adds ops to save and restore variables to and from checkpoints. It also provides convenience methods to run these ops. 来自官网的介绍。
-import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声明 例：w = tf.get_variable(name=&amp;quot;vari_name&amp;quot;, shape=[], dtype=tf.float32) 初始化op声明 &amp;quot;&amp;quot;&amp;quot; #创建saver对象，它添加了一些op用来save和restore模型参数 saver = tf.train.Saver() with tf.Session() as sess: sess.run(init_op) #训练模型。。。 #使用saver提供的简便方法去调用 save op saver.save(sess, &amp;quot;save_path/file_name.ckpt&amp;quot;) #file_name.ckpt如果不存在的话，会自动创建 #后缀可加可不加  现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数 变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value 来进行的(详见)
-import tensorflow as tf &amp;quot;&amp;quot;&amp;quot; 变量声明，运算声明 初始化op声明 &amp;quot;&amp;quot;&amp;quot; #创建saver 对象 saver = tf.</description>
+import tensorflow as tf&amp;quot;&amp;quot;&amp;quot;变量声明，运算声明 例：w = tf.get_variable(name=&amp;quot;vari_name&amp;quot;, shape=[], dtype=tf.float32)初始化op声明&amp;quot;&amp;quot;&amp;quot;#创建saver对象，它添加了一些op用来save和restore模型参数saver = tf.train.Saver()with tf.Session() as sess:sess.run(init_op)#训练模型。。。#使用saver提供的简便方法去调用 save opsaver.save(sess, &amp;quot;save_path/file_name.ckpt&amp;quot;) #file_name.ckpt如果不存在的话，会自动创建#后缀可加可不加现在，训练好的模型参数已经存储好了，我们来看一下怎么调用训练好的参数 变量保存的时候，保存的是 变量名：value，键值对。restore的时候，也是根据key-value 来进行的(详见)
+import tensorflow as tf&amp;quot;&amp;quot;&amp;quot;变量声明，运算声明初始化op声明&amp;quot;&amp;quot;&amp;quot;#创建saver 对象saver = tf.</description>
     </item>
     
   </channel>

@@ -11,6 +11,41 @@
   
   <link rel="prev" href="https://ottsion.github.io/2017/2017-01-05-lunwen1/" />
   <link rel="next" href="https://ottsion.github.io/2017/2017-01-05-eigen-use-3/" />
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-05-eigen-use-2/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -46,7 +81,7 @@
     "articleSection" : "posts",
     "name" : "Eigen矩阵库——初步用法（二）",
     "headline" : "Eigen矩阵库——初步用法（二）",
-    "description" : "星期四, 05. 一月 2017 12:48下午\n 主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C\x2b\x2b的\x2b，-，*，原文链接在后面\n 矩阵的运算 Eigen提供\x2b、-、一元操作符“-”、\x2b=、-=，例如：\n 二元操作符\x2b\/-表示两矩阵相加（矩阵中对应元素相加\/减，返回一个临时矩阵）： B\x2bC 或 B-C；\n 一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;\n 组合操作法\x2b=或者-=表示（对应每隔元素都做相应操作）：A \x2b= B 或者 A-=B\n  矩阵的加减操作代码如下：\n#include\x26lt;iostream\x26gt; #include\x26lt;eigen3\/Eigen\/Dense\x26gt; using namespace Eigen; int main() { Matrix2d a; a \x26lt;\x26lt; 1,2, 3,4; MatrixXd b(2,2); b \x26lt;\x26lt; 2,3, 1,4; std::cout\x26lt;\x26lt;\x26quot;a\x2bb=\\n\x26quot;\x26lt;\x26lt;a\x2bb\x26lt;\x26lt;std::endl; std::cout\x26lt;\x26lt;\x26quot;a-b=\\n\x26quot;\x26lt;\x26lt;a-b\x26lt;\x26lt;std::endl; std::cout\x26lt;\x26lt;\x26quot;Doing a \x2b= b;\\n\x26quot;\x26lt;\x26lt;std::endl; a \x2b= b; std::cout\x26lt;\x26lt;\x26quot;Now a =\\n\x26quot;\x26lt;\x26lt;a\x26lt;\x26lt;std::endl; Vector3d v(1,2,3); Vector3d w(1,0,0); std::cout\x26lt;\x26lt;\x26quot;-v\x2bw-v=\\n\x26quot;\x26lt;\x26lt;-v\x2bw-v\x26lt;\x26lt;std::endl; }  运行结果：\na\x2bb= 3 5 4 8 a-b= -1 -1 2 0 Doing a \x2b= b; Now a = 3 5 4 8 -v\x2bw-v= -1 -4 -6  另外，矩阵还提供与标量（单一个数字）的乘除操作，表示每个元素都与该标量进行乘除操作。例如： 二元操作符*在：A*a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。 对于aA、A\/a、A=a、A \/=a也是一样，例如下面的代码：",
+    "description" : "星期四, 05. 一月 2017 12:48下午\n  主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C\x2b\x2b的\x2b，-，*，原文链接在后面\n  矩阵的运算 Eigen提供\x2b、-、一元操作符“-”、\x2b=、-=，例如：\n  二元操作符\x2b\/-表示两矩阵相加（矩阵中对应元素相加\/减，返回一个临时矩阵）： B\x2bC 或 B-C；\n  一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;\n  组合操作法\x2b=或者-=表示（对应每隔元素都做相应操作）：A \x2b= B 或者 A-=B\n  矩阵的加减操作代码如下：\n#include\x26lt;iostream\x26gt;\r#include\x26lt;eigen3\/Eigen\/Dense\x26gt;\rusing namespace Eigen;\rint main()\r{\rMatrix2d a;\ra \x26lt;\x26lt; 1,2,\r3,4;\rMatrixXd b(2,2);\rb \x26lt;\x26lt; 2,3,\r1,4;\rstd::cout\x26lt;\x26lt;\x26quot;a\x2bb=\\n\x26quot;\x26lt;\x26lt;a\x2bb\x26lt;\x26lt;std::endl;\rstd::cout\x26lt;\x26lt;\x26quot;a-b=\\n\x26quot;\x26lt;\x26lt;a-b\x26lt;\x26lt;std::endl;\rstd::cout\x26lt;\x26lt;\x26quot;Doing a \x2b= b;\\n\x26quot;\x26lt;\x26lt;std::endl;\ra \x2b= b;\rstd::cout\x26lt;\x26lt;\x26quot;Now a =\\n\x26quot;\x26lt;\x26lt;a\x26lt;\x26lt;std::endl;\rVector3d v(1,2,3);\rVector3d w(1,0,0);\rstd::cout\x26lt;\x26lt;\x26quot;-v\x2bw-v=\\n\x26quot;\x26lt;\x26lt;-v\x2bw-v\x26lt;\x26lt;std::endl;\r}\r运行结果：",
     "inLanguage" : "en-us",
     "author" : "caicai",
     "creator" : "caicai",
@@ -152,32 +187,26 @@
           
           
 
-          
-
-<p>星期四, 05. 一月 2017 12:48下午</p>
-
-<hr />
-
+          <p>星期四, 05. 一月 2017 12:48下午</p>
+<hr>
 <blockquote>
 <p>主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C++的+，-，*，原文链接在后面</p>
 </blockquote>
-
-<hr />
-
+<hr>
 <h2 id="矩阵的运算">矩阵的运算</h2>
-
 <p>Eigen提供+、-、一元操作符“-”、+=、-=，例如：</p>
-
 <ul>
-<li><p>二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；</p></li>
-
-<li><p>一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;</p></li>
-
-<li><p>组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B</p></li>
+<li>
+<p>二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；</p>
+</li>
+<li>
+<p>一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;</p>
+</li>
+<li>
+<p>组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B</p>
+</li>
 </ul>
-
 <p>矩阵的加减操作代码如下：</p>
-
 <pre><code>#include&lt;iostream&gt;
 #include&lt;eigen3/Eigen/Dense&gt;
 using namespace Eigen;
@@ -200,10 +229,7 @@ int main()
   std::cout&lt;&lt;&quot;-v+w-v=\n&quot;&lt;&lt;-v+w-v&lt;&lt;std::endl;
   
 }
-</code></pre>
-
-<p>运行结果：</p>
-
+</code></pre><p>运行结果：</p>
 <pre><code>a+b=
 3 5
 4 8
@@ -219,11 +245,9 @@ Now a =
 -4
 -6
 </code></pre>
-
 <p>另外，矩阵还提供与标量（单一个数字）的乘除操作，表示每个元素都与该标量进行乘除操作。例如：
-二元操作符*在：A*a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。
+二元操作符<em>在：A</em>a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。
 对于a<em>A、A/a、A</em>=a、A /=a也是一样，例如下面的代码：</p>
-
 <pre><code>#include &lt;iostream&gt;  
 #include &lt;eigen3/Eigen/Dense&gt;  
 using namespace Eigen; 
@@ -239,10 +263,7 @@ std::cout &lt;&lt; &quot;Doing v *= 2;&quot; &lt;&lt; std::endl;
 v *= 2; 
 std::cout &lt;&lt; &quot;Now v =\n&quot; &lt;&lt; v &lt;&lt; std::endl; 
 } 
-</code></pre>
-
-<p>输出结果为：</p>
-
+</code></pre><p>输出结果为：</p>
 <pre><code>a * 2.5 =
 2.5  5
 7.5 10
@@ -256,24 +277,17 @@ Now v =
 4
 6
 </code></pre>
-
 <p><strong>需要注意</strong>：
 在Eigen中，算术操作例如 “操作符+”并不会自己执行计算操作，他们只是返回一个“算术表达式对象”，而实际的计算则会延迟到后面的赋值时才进行。这些不影响你的使用，它只是为了方便Eigen的优化。</p>
-
-<h2 id="求矩阵的转置-共轭矩阵-伴随矩阵">求矩阵的转置、共轭矩阵、伴随矩阵。</h2>
-
+<h2 id="求矩阵的转置共轭矩阵伴随矩阵">求矩阵的转置、共轭矩阵、伴随矩阵。</h2>
 <p>可以通过 成员函数<code>transpose()</code>, <code>conjugate()</code>,和 <code>adjoint()</code>来完成，注意这些函数返回操作后的结果，而不会对原矩阵的元素进行直接操作，如果要让原矩阵的进行转换，则需要使用响应的<code>InPlace</code>函数，例如：<code>transposeInPlace()</code> 、<code>adjointInPlace()</code>之类。
 演示代码如下：</p>
-
 <pre><code>  MatrixXcf m = MatrixXcf::Random(2,2);
   std::cout &lt;&lt; &quot;Here is the matrix m\n&quot; &lt;&lt; m &lt;&lt; std::endl; 
   std::cout &lt;&lt; &quot;Here is the matrix m^T\n&quot; &lt;&lt; m.transpose() &lt;&lt; std::endl; 
   std::cout &lt;&lt; &quot;Here is the conjugate of m\n&quot; &lt;&lt; m.conjugate() &lt;&lt; std::endl; 
   std::cout &lt;&lt; &quot;Here is the matrix m^*\n&quot; &lt;&lt; m.adjoint() &lt;&lt; std::endl; 
-</code></pre>
-
-<p>结果如下：</p>
-
+</code></pre><p>结果如下：</p>
 <pre><code>Here is the matrix m
 (-0.211234,0.680375) (-0.604897,0.823295)
   (0.59688,0.566198) (0.536459,-0.329554)
@@ -287,11 +301,8 @@ Here is the matrix m^*
 (-0.211234,-0.680375) (0.59688,-0.566198)
 (-0.604897,-0.823295) (0.536459,0.329554)
 </code></pre>
-
-<h2 id="矩阵相乘-矩阵向量相乘">矩阵相乘、矩阵向量相乘</h2>
-
-<p>矩阵的相乘，矩阵与向量的相乘也是使用操作符*，共有<em>和</em>=两种操作符，其用法可以参考如下代码：</p>
-
+<h2 id="矩阵相乘矩阵向量相乘">矩阵相乘、矩阵向量相乘</h2>
+<p>矩阵的相乘，矩阵与向量的相乘也是使用操作符*，共有*和*=两种操作符，其用法可以参考如下代码：</p>
 <pre><code>#include&lt;iostream&gt;
 #include&lt;eigen3/Eigen/Dense&gt;
 using namespace Eigen;
@@ -312,9 +323,7 @@ int main()
   mat = mat*mat; 
   std::cout &lt;&lt; &quot;Now mat is mat:\n&quot; &lt;&lt; mat &lt;&lt; std::endl; 
 }
-</code></pre>
-
-<pre><code>Here is mat*mat:
+</code></pre><pre><code>Here is mat*mat:
  7 10
 15 22
 Here is mat*u:
@@ -332,10 +341,8 @@ Now mat is mat:
  7 10
 15 22
 </code></pre>
-
 <h2 id="文章来源">文章来源</h2>
-
-<p><a href="http://blog.csdn.net/houjixin/article/details/8492841" title="点击跳转" rel="nofollow noreferrer" target="_blank">C++开源矩阵计算工具——Eigen的简单用法（二）  逍遥子_</a></p>
+<p><a href="http://blog.csdn.net/houjixin/article/details/8492841" title="点击跳转">C++开源矩阵计算工具——Eigen的简单用法（二）  逍遥子_</a></p>
 
     </div>
 
@@ -353,6 +360,9 @@ Now mat is mat:
                     <a href=https://ottsion.github.io/2017/2017-01-05-eigen-use-2/>https://ottsion.github.io/2017/2017-01-05-eigen-use-2/</span>
             </p>
             
+            <span id="busuanzi_container_page_pv">
+                本文总阅读量: <span id="busuanzi_value_page_pv"></span>
+            </span>
              
             <p class="copyright-item lincese">
                 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
@@ -386,10 +396,27 @@ Now mat is mat:
         
     </div>
 
+    
     <div class="post-comment">
-          
-                 
-          
+        
+        
+
+<div id="vcomments"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.7/dist/Valine.min.js'></script>
+
+<script type="text/javascript">
+  new Valine({
+      el: '#vcomments' ,
+      appId: 'aq7KX6LvEUKuYC1FReOy9Rq8-gzGzoHsz',
+      appKey: 'AJWv8xzYkd8tJ23S38zDK3TN',
+      notify: 'false', 
+      verify: 'false', 
+      avatar:'mm', 
+      placeholder: '说点什么吧...',
+      visitor: 'true'
+  });
+</script>
     </div>
 </article>
           </div>
@@ -411,7 +438,7 @@ Now mat is mat:
 		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
     </div>
 </footer>
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

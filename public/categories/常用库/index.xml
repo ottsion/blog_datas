@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>常用库 on 静心明志</title>
@@ -20,14 +20,10 @@
       <description>一、下载 OpenCV 3.2：
 ​ 网址：http://opencv.org/releases.html
 二、安装常用依赖项：
-sudo apt-get install build-essential libgtk2.0-dev libvtk5-dev libjpeg-dev libtiff4-dev libjasper-dev libopenexr-dev libtbb-dev  三、安装 opencv 3.2：
- 建立编译文件目录,并切换到该目录下：
-mkdir build cd build  开始编译(.. 为上层目录，不可缺少)：
-cmake .. make   ​ 如果遇到这样的错误：&amp;ndash; ICV: Downloading ippicv_linux_20151201.tgz&amp;hellip; CMake Error at 3rdparty/ippicv/downloader.cmake:73 (file): file DOWNLOAD HASH mismatch
+sudo apt-get install build-essential libgtk2.0-dev libvtk5-dev libjpeg-dev libtiff4-dev libjasper-dev libopenexr-dev libtbb-dev 三、安装 opencv 3.2：
+ 建立编译文件目录,并切换到该目录下：  mkdir build cd build 开始编译(.. 为上层目录，不可缺少)：  cmake ..make​ 如果遇到这样的错误：&amp;ndash; ICV: Downloading ippicv_linux_20151201.tgz&amp;hellip; CMake Error at 3rdparty/ippicv/downloader.cmake:73 (file): file DOWNLOAD HASH mismatch
 ​ 去这里（点击打开链接）下载ippicv_linux_20151201.tgz 并粘贴（替换）到目录opencv-3.2.0/3rdparty/ippicv/downloads/Linux-808b791a6eac9ed78d32a7666804320e/
- make -j4 (-j4表示开启4个线程编译，取决于CPU的速度，比如我make -j7)
-make j4  安装：默认安装到 /usr/local 下
-sudo make install   </description>
+make -j4 (-j4表示开启4个线程编译，取决于CPU的速度，比如我make -j7)  make j4安装：默认安装到 /usr/local 下  sudo make install </description>
     </item>
     
     <item>
@@ -38,10 +34,11 @@ sudo make install   </description>
       <guid>https://ottsion.github.io/2017/2017-01-11-opencv-cookbook-7/</guid>
       <description>星期三, 11. 一月 2017 11:47上午
  这部分主要是用类处理彩色图像
- 像素与标量之间的差 #include &amp;quot;ColorDetector.h&amp;quot; cv::Mat ColorDetector::process(const cv::Mat &amp;amp;image){ cv::Mat output; cv::absdiff(image, cv::Scalar(target), output); std::vector&amp;lt;cv::Mat&amp;gt; images; cv::split(output, images); output=image[0]+images[1]+images[2]; cv::threshold( output, output, maxDist, 255, cv::THRESH_BINARY_INV ); return output; }  运行：
-int main() { ColorDetector cdetect ; cv::Mat image = cv::imread(&amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;); if(image.empty()) return 0; cdetect.setTargetColor(20,100,130); cv::namedWindow(&amp;quot;image&amp;quot;); cv::imshow(&amp;quot;image&amp;quot;,cdetect.process(image)); cv::waitKey(0); return 0; }  得出结果是：
-转换颜色空间 CIE L*a*b色彩空间 L表示每个像素的亮度，ab表示颜色信息。
-cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){ result.create(image.rows, image.cols, CV_8U); cv::cvtColor(image, converted, CV_BRG2LAB); cv::Mat_&amp;lt;cv::Vec3b&amp;gt;::iterator it = converted.</description>
+  像素与标量之间的差 #include &amp;quot;ColorDetector.h&amp;quot;cv::Mat ColorDetector::process(const cv::Mat &amp;amp;image){cv::Mat output;cv::absdiff(image, cv::Scalar(target), output);std::vector&amp;lt;cv::Mat&amp;gt; images;cv::split(output, images);output=image[0]+images[1]+images[2];cv::threshold(output,output,maxDist,255,cv::THRESH_BINARY_INV);return output;}运行：
+int main(){ColorDetector cdetect ;cv::Mat image = cv::imread(&amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;);if(image.empty())return 0;cdetect.setTargetColor(20,100,130);cv::namedWindow(&amp;quot;image&amp;quot;);cv::imshow(&amp;quot;image&amp;quot;,cdetect.process(image));cv::waitKey(0);return 0;}得出结果是：
+![](../../../pic/mybolg_pic/opencv/2017-01-11 11:50:39屏幕截图.png)
+转换颜色空间 CIE Lab色彩空间 L表示每个像素的亮度，ab表示颜色信息。
+cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){result.create(image.rows, image.</description>
     </item>
     
     <item>
@@ -52,7 +49,7 @@ cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){ result.create(ima
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-1/</guid>
       <description>星期二, 10. 一月 2017 01:44下午
  这部分主要是读取并显示图像，并对图像进行基本操作，比如画图和写字，同时添加图片点击事件的操作
- 代码学习 #include&amp;lt;iostream&amp;gt; #include&amp;lt;string&amp;gt; #include &amp;quot;opencv2/core/core.hpp&amp;quot; #include &amp;quot;opencv2/highgui/highgui.hpp&amp;quot; #include &amp;lt;boost/concept_check.hpp&amp;gt; using namespace std; //图片地址 const string imageAddr0 = &amp;quot;/home/ottsion/Documents/2.jpg&amp;quot;; const string imageAddr1 = &amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;; /** * 根据图片信息显示图片 * @param windowName 显示窗口名称 * @param image opcv的图片信息 */ void showImage(string windowName, cv::Mat image); /** * 根据地址，读取图片信息 * @param imageAddr 图片地址 * @param image opcv的图片信息 */ void readImage(string imageAddr, cv::Mat&amp;amp; image); /** * 将图片进行水平或者垂直翻转 * @param image opcv的图片信息 */ void convertImage(cv::Mat&amp;amp; image); /** * 读取时将图片灰度化或者三通道读取 * @param image opcv的图片信息 */ void getImageByTypes(cv::Mat&amp;amp; image); /** * 鼠标点击事件响应 * @param event 整数，表示鼠标触发事件的类型 * @param x 鼠标事件出发时位置（像素坐标显示） * @param y 鼠标事件出发时位置 * @param flags 表示事件发生时按下了鼠标的哪个键 * @param param 执行任意对象的指针，作为附加参数发送给函数 */ void onMouse(int event, int x, int y, int flags, void* param); /** * 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数 * @param windowName 图像窗口名称 * @param image 图像信息 */ void callBackFunc(string windowName, cv::Mat&amp;amp; image); /** * 在图像上绘画和写入文本 * @param windowName 图像窗口名称 * @param image 图像信息 */ void drawAndWriteOnImage(string windowName, cv::Mat image); void showImage(string windowName, cv::Mat image) { //先定义窗口 cv::namedWindow(windowName); //显示图片 cv::imshow(windowName, image); } void readImage(string imageAddr, cv::Mat&amp;amp; image) { //读取图片 image = cv::imread(imageAddr); if(image.</description>
+  代码学习 #include&amp;lt;iostream&amp;gt;#include&amp;lt;string&amp;gt;#include &amp;#34;opencv2/core/core.hpp&amp;#34;#include &amp;#34;opencv2/highgui/highgui.hpp&amp;#34;#include &amp;lt;boost/concept_check.hpp&amp;gt;using namespace std;//图片地址const string imageAddr0 = &amp;#34;/home/ottsion/Documents/2.jpg&amp;#34;;const string imageAddr1 = &amp;#34;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;#34;;/*** 根据图片信息显示图片* @param windowName 显示窗口名称* @param image opcv的图片信息*/void showImage(string windowName, cv::Mat image);/*** 根据地址，读取图片信息* @param imageAddr 图片地址* @param image opcv的图片信息*/void readImage(string imageAddr, cv::Mat&amp;amp; image);/*** 将图片进行水平或者垂直翻转* @param image opcv的图片信息*/void convertImage(cv::Mat&amp;amp; image);/*** 读取时将图片灰度化或者三通道读取* @param image opcv的图片信息*/void getImageByTypes(cv::Mat&amp;amp; image);/*** 鼠标点击事件响应* @param event 整数，表示鼠标触发事件的类型* @param x 鼠标事件出发时位置（像素坐标显示）* @param y 鼠标事件出发时位置* @param flags 表示事件发生时按下了鼠标的哪个键* @param param 执行任意对象的指针，作为附加参数发送给函数*/void onMouse(int event, int x, int y, int flags, void* param);/*** 注册回调函数，本函数中将名为windowName的图像窗口与函数onMouse建立关联，同时把显示图像的地址作为附加参数传给函数* @param windowName 图像窗口名称* @param image 图像信息*/void callBackFunc(string windowName, cv::Mat&amp;amp; image);/*** 在图像上绘画和写入文本* @param windowName 图像窗口名称* @param image 图像信息*/void drawAndWriteOnImage(string windowName, cv::Mat image);void showImage(string windowName, cv::Mat image){//先定义窗口 cv::namedWindow(windowName);//显示图片 cv::imshow(windowName, image);}void readImage(string imageAddr, cv::Mat&amp;amp; image){//读取图片 image = cv::imread(imageAddr);if(image.</description>
     </item>
     
     <item>
@@ -63,12 +60,12 @@ cv::Mat ColorDetector::process1(const cv::Mat &amp;amp;image){ result.create(ima
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-3/</guid>
       <description>星期二, 10. 一月 2017 03:12下午
  这部分主要是对兴趣区域的介绍,以及对Ma_的模板类介绍
- 如何实现 第一步便是定义ROI，定以后可以把ROI当做普通Mat实例进行操作，关键在于ROI本身就是Mat对象，它与它的父图指向同一个数据缓冲区，并且有一个头部信息表示ROI的坐标，可用下面的方法插入小标志：
-cv::Mat imageROI( image, cv:;Rect( image.cols-logo.cols, image.rows-logo.rows, //ROI的坐标 logo.cols, logo.rows //ROI的大小 ) ); logo.copyTo(imageROI);  同样的可以用以下方法:
-imageROI = image( cv::Range(image.rows-logo.rows, image.rows), cv::Range(image.cols-logo.cols, image.cols) );  要定义图像中一些行组成的ROI：
-cv::Mat imageRIO = image.rowRange(start, end);  要定义图像中一些列组成的ROI：
-cv::Mat imageRIO = image.colRange(start, end);  图像掩码  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows)); cv::Mat mask(logo); //把标志作为掩码，必须是灰度图像 logo.copyTo(imageROI,mask); //插入标志，只复制掩码不为0的位置  Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
-cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100列的值  Mat与Mat_相互转换也是很简单的。</description>
+  如何实现 第一步便是定义ROI，定以后可以把ROI当做普通Mat实例进行操作，关键在于ROI本身就是Mat对象，它与它的父图指向同一个数据缓冲区，并且有一个头部信息表示ROI的坐标，可用下面的方法插入小标志：
+cv::Mat imageROI(image,cv:;Rect(image.cols-logo.cols, image.rows-logo.rows, //ROI的坐标logo.cols, logo.rows //ROI的大小));logo.copyTo(imageROI);同样的可以用以下方法:
+imageROI = image(cv::Range(image.rows-logo.rows, image.rows),cv::Range(image.cols-logo.cols, image.cols));要定义图像中一些行组成的ROI：
+cv::Mat imageRIO = image.rowRange(start, end); 要定义图像中一些列组成的ROI：
+cv::Mat imageRIO = image.colRange(start, end); 图像掩码  cv::Mat imageROI = image(cv::Rect(0,0,logo.cols, logo.rows));cv::Mat mask(logo); //把标志作为掩码，必须是灰度图像logo.copyTo(imageROI,mask); //插入标志，只复制掩码不为0的位置Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
+cv::Mat_&amp;lt;uchar&amp;gt; im2(image);im2(50, 100) = 0; //访问第50行100列的值 Mat与Mat_相互转换也是很简单的。</description>
     </item>
     
     <item>
@@ -79,7 +76,7 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-2/</guid>
       <description>星期二, 10. 一月 2017 01:44下午
  这部分主要是对Mat的介绍，以及各种用法，包括读取和拷贝，注意深浅拷贝情况
- 代码学习 #include&amp;lt;iostream&amp;gt; #include&amp;lt;string&amp;gt; #include&amp;lt;opencv2/core/core.hpp&amp;gt; #include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt; const std::string imageAddr = &amp;quot;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;quot;; //测试函数，创建一个图像 cv::Mat function(){ cv::Mat ima(500, 500, CV_8U, 50); return ima; } int main() { cv::namedWindow(&amp;quot;Image 1&amp;quot;); cv::namedWindow(&amp;quot;Image 2&amp;quot;); cv::namedWindow(&amp;quot;Image 3&amp;quot;); cv::namedWindow(&amp;quot;Image 4&amp;quot;); cv::namedWindow(&amp;quot;Image 5&amp;quot;); cv::namedWindow(&amp;quot;Image&amp;quot;); //创建一个240*320的新图像 cv::Mat image1(240, 320, CV_8U, 100); cv::imshow(&amp;quot;Image&amp;quot;, image1); cv::waitKey(0); //重新分配一个新的图像 image1.create(200, 200, CV_8U); image1 = 200; cv::imshow(&amp;quot;Image&amp;quot;, image1); cv::waitKey(0); //创建一个红色的图像，通道依次为BGR cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255)); //或者 //cv::Mat image2(cv::Size(320, 240), CV_8UC3); //image2 = cv::Scalar(0, 0, 255)； cv::imshow(&amp;quot;Image&amp;quot;, image2); cv::waitKey(0); //读入一个图像 cv::Mat image3 = cv::imread(imageAddr); //所有图像指向同一个数据块 cv::Mat image4(image3); image1 = image3; //这些图像都是原图像的副本 image3.</description>
+  代码学习 #include&amp;lt;iostream&amp;gt;#include&amp;lt;string&amp;gt;#include&amp;lt;opencv2/core/core.hpp&amp;gt;#include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt;const std::string imageAddr = &amp;#34;/home/ottsion/Pictures/opencvImage/hua.jpg&amp;#34;;//测试函数，创建一个图像cv::Mat function(){cv::Mat ima(500, 500, CV_8U, 50);return ima;}int main(){cv::namedWindow(&amp;#34;Image 1&amp;#34;);cv::namedWindow(&amp;#34;Image 2&amp;#34;);cv::namedWindow(&amp;#34;Image 3&amp;#34;);cv::namedWindow(&amp;#34;Image 4&amp;#34;);cv::namedWindow(&amp;#34;Image 5&amp;#34;);cv::namedWindow(&amp;#34;Image&amp;#34;);//创建一个240*320的新图像 cv::Mat image1(240, 320, CV_8U, 100);cv::imshow(&amp;#34;Image&amp;#34;, image1);cv::waitKey(0);//重新分配一个新的图像 image1.create(200, 200, CV_8U);image1 = 200;cv::imshow(&amp;#34;Image&amp;#34;, image1);cv::waitKey(0);//创建一个红色的图像，通道依次为BGR cv::Mat image2(240, 320, CV_8UC3, cv::Scalar(0, 0, 255));//或者 //cv::Mat image2(cv::Size(320, 240), CV_8UC3); //image2 = cv::Scalar(0, 0, 255)； cv::imshow(&amp;#34;Image&amp;#34;, image2);cv::waitKey(0);//读入一个图像 cv::Mat image3 = cv::imread(imageAddr);//所有图像指向同一个数据块 cv::Mat image4(image3);image1 = image3;//这些图像都是原图像的副本 image3.</description>
     </item>
     
     <item>
@@ -90,12 +87,12 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-5/</guid>
       <description>星期二, 10. 一月 2017 07:57下午
  这部分主要是图像加减及各种运算
- 两图相加 主要有以下方法：
- //c[i] = a[i]+b[i] cv::add(imageA, imageB, resultC); //c[i] = a[i]+k cv::add(imageA, cv::Scalar(k), resultC); //c[i] = k1*a[i]+k2*b[i]+k3 cv::addWeighted(imageA, k1, imageB, k2, k3, resultC); //c[i] = k*a[i]+b[i] cv::scaleAdd(imageA, k, imageB, resultC);  甚至于掩码：
- //if (mask[i]) c[i] = a[i] + b[i] cv::add(imageA, imageB, resultC, mask);  但有一点，所有这种处理必须进行cv::Saturate_cast&amp;lt;&amp;gt;()函数转换结果，以确保结果在0-256之间，避免溢出。
+  两图相加 主要有以下方法：
+ //c[i] = a[i]+b[i]cv::add(imageA, imageB, resultC);//c[i] = a[i]+kcv::add(imageA, cv::Scalar(k), resultC);//c[i] = k1*a[i]+k2*b[i]+k3cv::addWeighted(imageA, k1, imageB, k2, k3, resultC);//c[i] = k*a[i]+b[i]cv::scaleAdd(imageA, k, imageB, resultC);甚至于掩码：
+ //if (mask[i]) c[i] = a[i] + b[i]cv::add(imageA, imageB, resultC, mask);但有一点，所有这种处理必须进行cv::Saturate_cast&amp;lt;&amp;gt;()函数转换结果，以确保结果在0-256之间，避免溢出。
 其他运算 以下括号内省略
 ###加减乘除
- cv::subtract(); cv::absdiff(); cv::multiply(); cv::divide();  位运算符  cv::bitwise_and(); cv::bitwise_or(); cv::bitwise_xor(); cv::bitwise_not();  单输入运算 cv::sqrt(); cv::pow(); cv::abs(); cv::cuberoot(); cv::exp(); cv::log();  代码演示 #include &amp;lt;vector&amp;gt; #include &amp;lt;opencv2/core/core.</description>
+ cv::subtract();cv::absdiff();cv::multiply();cv::divide();位运算符  cv::bitwise_and();cv::bitwise_or();cv::bitwise_xor();cv::bitwise_not();单输入运算 cv::sqrt();cv::pow();cv::abs();cv::cuberoot();cv::exp();cv::log();代码演示 #include &amp;lt;vector&amp;gt;#include &amp;lt;opencv2/core/core.</description>
     </item>
     
     <item>
@@ -106,7 +103,7 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-6/</guid>
       <description>星期二, 10. 一月 2017 07:57下午
  这部分主要是图像加减及各种运算
- 图像波浪化 #include &amp;lt;opencv2/core/core.hpp&amp;gt; #include &amp;lt;opencv2/highgui/highgui.hpp&amp;gt; #include &amp;lt;opencv2/imgproc/imgproc.hpp&amp;gt; #include &amp;lt;math.h&amp;gt; // remapping an image by creating wave effects void wave(const cv::Mat &amp;amp;image, cv::Mat &amp;amp;result) { // the map functions cv::Mat srcX(image.rows,image.cols,CV_32F); // x-map cv::Mat srcY(image.rows,image.cols,CV_32F); // y-map // creating the mapping for (int i=0; i&amp;lt;image.rows; i++) { for (int j=0; j&amp;lt;image.cols; j++) { srcX.at&amp;lt;float&amp;gt;(i,j)= j; srcY.at&amp;lt;float&amp;gt;(i,j)= i+3*sin(j/6.0); // horizontal flipping // srcX.at&amp;lt;float&amp;gt;(i,j)= image.</description>
+  图像波浪化 #include &amp;lt;opencv2/core/core.hpp&amp;gt;#include &amp;lt;opencv2/highgui/highgui.hpp&amp;gt;#include &amp;lt;opencv2/imgproc/imgproc.hpp&amp;gt;#include &amp;lt;math.h&amp;gt;// remapping an image by creating wave effectsvoid wave(const cv::Mat &amp;amp;image, cv::Mat &amp;amp;result) {// the map functionscv::Mat srcX(image.rows,image.cols,CV_32F); // x-mapcv::Mat srcY(image.rows,image.cols,CV_32F); // y-map// creating the mappingfor (int i=0; i&amp;lt;image.rows; i++) {for (int j=0; j&amp;lt;image.cols; j++) {srcX.at&amp;lt;float&amp;gt;(i,j)= j;srcY.at&amp;lt;float&amp;gt;(i,j)= i+3*sin(j/6.0);// horizontal flipping// srcX.</description>
     </item>
     
     <item>
@@ -117,12 +114,12 @@ cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100�
       <guid>https://ottsion.github.io/2017/2017-01-10-opencv-cookbook-4/</guid>
       <description>星期二, 10. 一月 2017 05:48下午
  这部分主要是操作像素
- Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
-cv::Mat_&amp;lt;uchar&amp;gt; im2(image); im2(50, 100) = 0; //访问第50行100列的值  Mat与Mat_相互转换也是很简单的。
+  Ma_的模板类 模板类可以直接申明类型，会多了一些使用方法，更加的简便，比如：
+cv::Mat_&amp;lt;uchar&amp;gt; im2(image);im2(50, 100) = 0; //访问第50行100列的值 Mat与Mat_相互转换也是很简单的。
 一般情况下Mat类读取像素：
-image.at&amp;lt;uchar&amp;gt;(i,j) = 255;  指针读取 除了一般的
- uchar* data = image.ptr&amp;lt;uchar&amp;gt;(i); for(int j=0;j&amp;lt;nc;j++) { data[j] = data[j]/div*div+div/2; }  我们还可以用以下语句执行：
-*data = *data/div*div + div/2 ; data++  代码演示(salt) #include&amp;lt;iostream&amp;gt; #include&amp;lt;opencv2/core/core.hpp&amp;gt; #include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt; void salt(cv::Mat image, int n) { int i,j; for(int k=0;k&amp;lt;n;k++) { i = std::rand()%image.rows; j = std::rand()%image.cols; if(image.</description>
+image.at&amp;lt;uchar&amp;gt;(i,j) = 255; 指针读取 除了一般的
+ uchar* data = image.ptr&amp;lt;uchar&amp;gt;(i);for(int j=0;j&amp;lt;nc;j++){data[j] = data[j]/div*div+div/2;}我们还可以用以下语句执行：
+*data = *data/div*div + div/2 ; data++代码演示(salt) #include&amp;lt;iostream&amp;gt;#include&amp;lt;opencv2/core/core.hpp&amp;gt;#include&amp;lt;opencv2/highgui/highgui.hpp&amp;gt;void salt(cv::Mat image, int n){int i,j;for(int k=0;k&amp;lt;n;k++){i = std::rand()%image.rows;j = std::rand()%image.cols;if(image.type()==CV_8UC1)image.</description>
     </item>
     
     <item>
@@ -133,10 +130,10 @@ image.at&amp;lt;uchar&amp;gt;(i,j) = 255;  指针读取 除了一般的
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-2/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 更好一点的 Hello World 从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。 本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:
- 为工程添加一个子目录 src,用来放置工程源代码; 添加一个子目录 doc,用来放置这个工程的文档 hello.txt 在工程目录添加文本文件 COPYRIGHT, README; 在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制 将构建后的目标文件放入构建目录的 bin 子目录; 最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/usr/bin,将 doc 目录的内容以及 COPYRIGHT/README 安装到/usr/share/doc/cmake/t2,将  新建代码目录  准备工作: 在/backup/cmake/目录下建立 t2 目录。 将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。
- 添加子目录 src:
-	mkdir src mv main.</description>
+  更好一点的 Hello World 从本小节开始,后面所有的构建我们都将采用 out-of-source 外部构建,约定的构建目录是工程目录下的 build 自录。 本小节的任务是让前面的 Hello World 更像一个工程,我们需要作的是:
+ 为工程添加一个子目录 src,用来放置工程源代码; 添加一个子目录 doc,用来放置这个工程的文档 hello.txt 在工程目录添加文本文件 COPYRIGHT, README; 在工程目录添加一个 runhello.sh 脚本,用来调用 hello 二进制 将构建后的目标文件放入构建目录的 bin 子目录; 最终安装这些文件:将 hello 二进制与 runhello.sh 安装至/usr/bin,将 doc 目录的内容以及 COPYRIGHT/README 安装到/usr/share/doc/cmake/t2,将  新建代码目录   准备工作: 在/backup/cmake/目录下建立 t2 目录。 将 t1 工程的 main.c 和 CMakeLists.txt 拷贝到 t2 目录中。
+  添加子目录 src:
+  	mkdir srcmv main.</description>
     </item>
     
     <item>
@@ -147,12 +144,12 @@ image.at&amp;lt;uchar&amp;gt;(i,j) = 255;  指针读取 除了一般的
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-3/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 静态库与动态库构建 读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。 本节的任务: 1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc 向终端输出 Hello World 字符串。 2,安装头文件与共享库。
+  静态库与动态库构建 读者云,太能罗唆了,一个 Hello World 就折腾了两个大节。OK,从本节开始,我们不再折腾 Hello World 了,我们来折腾 Hello World 的共享库。 本节的任务: 1,建立一个静态库和动态库,提供 HelloFunc 函数供其他程序编程使用,HelloFunc 向终端输出 Hello World 字符串。 2,安装头文件与共享库。
 准备工作 在/backup/cmake 目录建立 t3 目录,用于存放本节涉及到的工程
-建立共享库 cd /backup/cmake/t3 mkdir lib  在 t3 目录下建立 CMakeLists.txt,内容如下:
-PROJECT(HELLOLIB) ADD_SUBDIRECTORY(lib)  在 lib 目录下建立两个源文件 hello.c 与 hello.h hello.c 内容如下:
-#include “hello.h” void HelloFunc() { printf(“Hello World\n”); }  hello.h 内容如下:
-#ifndef HELLO_H #define HELLO_H #include &amp;lt;stdio.</description>
+建立共享库 cd /backup/cmake/t3mkdir lib 在 t3 目录下建立 CMakeLists.txt,内容如下:
+PROJECT(HELLOLIB)ADD_SUBDIRECTORY(lib) 在 lib 目录下建立两个源文件 hello.c 与 hello.h hello.c 内容如下:
+#include “hello.h”void HelloFunc(){printf(“Hello World\n”);}hello.h 内容如下:
+#ifndef HELLO_H#define HELLO_H#include &amp;lt;stdio.</description>
     </item>
     
     <item>
@@ -163,14 +160,14 @@ PROJECT(HELLOLIB) ADD_SUBDIRECTORY(lib)  在 lib 目录下建立两个源文件 
       <guid>https://ottsion.github.io/2017/2017-01-07-cmake-4/</guid>
       <description>星期六, 07. 一月 2017 06:17下午
  来源：cmake实践
- 如何使用外部共享库和头文件 抱歉,本节仍然继续折腾 Hello World. 上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。
+  如何使用外部共享库和头文件 抱歉,本节仍然继续折腾 Hello World. 上一节我们已经完成了 libhello 动态库的构建以及安装,本节我们的任务很简单:编写一个程序使用我们上一节构建的共享库。
 准备工作: 请在/backup/cmake 目录建立 t4 目录,本节所有资源将存储在 t4 目录。
 src及main编写 建立 src 目录,编写源文件 main.c,内容如下:
-#include &amp;lt;hello.h&amp;gt; int main() { HelloFunc(); return 0; }  编写工程主文件 CMakeLists.txt
-PROJECT(NEWHELLO) ADD_SUBDIRECTORY(src)  编写 src/CMakeLists.txt
-ADD_EXECUTABLE(main main.c)  上述工作已经严格按照我们前面季节提到的内容完成了。
+#include &amp;lt;hello.h&amp;gt;int main(){HelloFunc();return 0;} 编写工程主文件 CMakeLists.txt
+PROJECT(NEWHELLO)ADD_SUBDIRECTORY(src) 编写 src/CMakeLists.txt
+ADD_EXECUTABLE(main main.c) 上述工作已经严格按照我们前面季节提到的内容完成了。
 外部构建 按照习惯,仍然建立 build 目录,使用 cmake ..方式构建。过程:
-cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建 错误输出为是:/backup/cmake/t4/src/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。 hello.h 位于/usr/include/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include ,同志,要这么干,我这一节就没什么可写了,只能选择一个 glib 或者 libX11 来写了,这些代码写出来很多同志是看不懂的)为了让我们的工程能够找到 hello.</description>
+cmake ..make 构建失败,如果需要查看细节,可以使用第一节提到的方法make VERBOSE=1 来构建 错误输出为是:/backup/cmake/t4/src/main.c:1:19: error: hello.h: 没有那个文件或目录4,引入头文件搜索路径。 hello.h 位于/usr/include/hello 目录中,并没有位于系统标准的头文件路径,(有人会说了,白痴啊,你就不会 include &amp;lt;hello/hello.</description>
     </item>
     
     <item>
@@ -180,8 +177,8 @@ cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到
       
       <guid>https://ottsion.github.io/2017/2017-01-05-eigen-code/</guid>
       <description>星期四, 05. 一月 2017 02:13下午
- 有关eigen库的一些基本使用方法
- 矩阵、向量初始化 #include &amp;lt;iostream&amp;gt; #include &amp;quot;Eigen/Dense&amp;quot; using namespace Eigen; int main() { MatrixXf m1(3,4); //动态矩阵，建立3行4列。 MatrixXf m2(4,3); //4行3列，依此类推。 MatrixXf m3(3,3); Vector3f v1; //若是静态数组，则不用指定行或者列 /* 初始化 */ Matrix3d m = Matrix3d::Random(); m1 = MatrixXf::Zero(3,4); //用0矩阵初始化,要指定行列数 m2 = MatrixXf::Zero(4,3); m3 = MatrixXf::Identity(3,3); //用单位矩阵初始化 v1 = Vector3f::Zero(); //同理，若是静态的，不用指定行列数 m1 &amp;lt;&amp;lt; 1,0,0,1, //也可以以这种方式初始化 1,5,0,1, 0,0,9,1; m2 &amp;lt;&amp;lt; 1,0,0, 0,4,0, 0,0,7, 1,1,1; //向量初始化，与矩阵类似 Vector3d v3(1,2,3); VectorXf vx(30); }  C++数组和矩阵转换 使用Map函数，可以实现Eigen的矩阵和c++中的数组直接转换,语法如下：</description>
+  有关eigen库的一些基本使用方法
+  矩阵、向量初始化 #include &amp;lt;iostream&amp;gt;#include &amp;quot;Eigen/Dense&amp;quot;using namespace Eigen;int main(){MatrixXf m1(3,4); //动态矩阵，建立3行4列。MatrixXf m2(4,3); //4行3列，依此类推。MatrixXf m3(3,3);Vector3f v1; //若是静态数组，则不用指定行或者列/* 初始化 */Matrix3d m = Matrix3d::Random();m1 = MatrixXf::Zero(3,4); //用0矩阵初始化,要指定行列数m2 = MatrixXf::Zero(4,3);m3 = MatrixXf::Identity(3,3); //用单位矩阵初始化v1 = Vector3f::Zero(); //同理，若是静态的，不用指定行列数m1 &amp;lt;&amp;lt; 1,0,0,1, //也可以以这种方式初始化1,5,0,1,0,0,9,1;m2 &amp;lt;&amp;lt; 1,0,0,0,4,0,0,0,7,1,1,1;//向量初始化，与矩阵类似Vector3d v3(1,2,3);VectorXf vx(30);}C++数组和矩阵转换 使用Map函数，可以实现Eigen的矩阵和c++中的数组直接转换,语法如下：</description>
     </item>
     
     <item>
@@ -191,13 +188,13 @@ cmake .. make  构建失败,如果需要查看细节,可以使用第一节提到
       
       <guid>https://ottsion.github.io/2017/2017-01-05-eigen-use-3/</guid>
       <description>星期四, 05. 一月 2017 12:49下午
- 本节主要涉及Eigen的块操作以及QR分解。Eigen的QR分解非常绕人，搞了很久才搞明白是怎么回事，最后是一个使用Eigen的矩阵操作完成二维高斯拟合求取光点的代码例子，关于二维高斯拟合求取光点的详细内容可参考：链接
- 矩阵的块操作 矩阵的块表示 矩阵的块操作有两种使用方法，其定义形式为：
-matrix.block(i,j,p,q); (1) matrix.block&amp;lt;p,q&amp;gt;(i,j) (2)   定义（1）表示返回从矩阵的(i, j)开始，每行取p个元素，每列取q个元素所组成的临时新矩阵对象，原矩阵的元素不变。
- 定义（2）中block&amp;lt;p, q&amp;gt;可理解为一个p行q列的子矩阵，该定义表示从原矩阵中第(i, j)开始，获取一个p行q列的子矩阵，返回该子矩阵组成的临时 矩阵对象，原矩阵的元素不变。
+  本节主要涉及Eigen的块操作以及QR分解。Eigen的QR分解非常绕人，搞了很久才搞明白是怎么回事，最后是一个使用Eigen的矩阵操作完成二维高斯拟合求取光点的代码例子，关于二维高斯拟合求取光点的详细内容可参考：链接
+  矩阵的块操作 矩阵的块表示 矩阵的块操作有两种使用方法，其定义形式为：
+matrix.block(i,j,p,q); (1)matrix.block&amp;lt;p,q&amp;gt;(i,j) (2)  定义（1）表示返回从矩阵的(i, j)开始，每行取p个元素，每列取q个元素所组成的临时新矩阵对象，原矩阵的元素不变。
+  定义（2）中block&amp;lt;p, q&amp;gt;可理解为一个p行q列的子矩阵，该定义表示从原矩阵中第(i, j)开始，获取一个p行q列的子矩阵，返回该子矩阵组成的临时 矩阵对象，原矩阵的元素不变。
   演示代码如下：
-#include&amp;lt;iostream&amp;gt; #include&amp;lt;eigen3/Eigen/Dense&amp;gt; using namespace std; int main() { Eigen::MatrixXf m(4,4); m&amp;lt;&amp;lt;1,2,3,4, 5,6,7,8, 9,10,11,12, 13,14,15,16; cout&amp;lt;&amp;lt;&amp;quot;Block in the middle&amp;quot;&amp;lt;&amp;lt;endl; cout&amp;lt;&amp;lt;m.block&amp;lt;2,2&amp;gt;(1,1)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl; for(int i=1;i&amp;lt;=3;i++) { cout&amp;lt;&amp;lt;&amp;quot;block of size &amp;quot;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&amp;quot;x&amp;quot;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;endl; cout&amp;lt;&amp;lt;m.block(0,0,i,i)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl; } }  运行结果：
-Block in the middle 6 7 10 11 block of size 1x1 1 block of size 2x2 1 2 5 6 block of size 3x3 1 2 3 5 6 7 9 10 11  通过上述方式获取的子矩阵即可以作为左值也可以作为右值，也就是即可以用这个子矩阵给其他矩阵赋值，也可以给这个子矩阵对象赋值。</description>
+#include&amp;lt;iostream&amp;gt;#include&amp;lt;eigen3/Eigen/Dense&amp;gt;using namespace std;int main(){Eigen::MatrixXf m(4,4);m&amp;lt;&amp;lt;1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16;cout&amp;lt;&amp;lt;&amp;#34;Block in the middle&amp;#34;&amp;lt;&amp;lt;endl;cout&amp;lt;&amp;lt;m.block&amp;lt;2,2&amp;gt;(1,1)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl;for(int i=1;i&amp;lt;=3;i++){cout&amp;lt;&amp;lt;&amp;#34;block of size &amp;#34;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;&amp;#34;x&amp;#34;&amp;lt;&amp;lt;i&amp;lt;&amp;lt;endl;cout&amp;lt;&amp;lt;m.block(0,0,i,i)&amp;lt;&amp;lt;endl&amp;lt;&amp;lt;endl;}}运行结果：
+Block in the middle6 710 11block of size 1x11block of size 2x21 25 6block of size 3x31 2 35 6 79 10 11 通过上述方式获取的子矩阵即可以作为左值也可以作为右值，也就是即可以用这个子矩阵给其他矩阵赋值，也可以给这个子矩阵对象赋值。</description>
     </item>
     
     <item>
@@ -207,14 +204,13 @@ Block in the middle 6 7 10 11 block of size 1x1 1 block of size 2x2 1 2 5 6 bloc
       
       <guid>https://ottsion.github.io/2017/2017-01-05-eigen-use-2/</guid>
       <description>星期四, 05. 一月 2017 12:48下午
- 主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C++的+，-，*，原文链接在后面
- 矩阵的运算 Eigen提供+、-、一元操作符“-”、+=、-=，例如：
- 二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；
- 一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;
- 组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B
+  主要是Eigen中矩阵和向量的算术运算，在Eigen中的这些算术运算重载了C++的+，-，*，原文链接在后面
+  矩阵的运算 Eigen提供+、-、一元操作符“-”、+=、-=，例如：
+  二元操作符+/-表示两矩阵相加（矩阵中对应元素相加/减，返回一个临时矩阵）： B+C 或 B-C；
+  一元操作符-表示对矩阵取负（矩阵中对应元素取负，返回一个临时矩阵）： -C;
+  组合操作法+=或者-=表示（对应每隔元素都做相应操作）：A += B 或者 A-=B
   矩阵的加减操作代码如下：
-#include&amp;lt;iostream&amp;gt; #include&amp;lt;eigen3/Eigen/Dense&amp;gt; using namespace Eigen; int main() { Matrix2d a; a &amp;lt;&amp;lt; 1,2, 3,4; MatrixXd b(2,2); b &amp;lt;&amp;lt; 2,3, 1,4; std::cout&amp;lt;&amp;lt;&amp;quot;a+b=\n&amp;quot;&amp;lt;&amp;lt;a+b&amp;lt;&amp;lt;std::endl; std::cout&amp;lt;&amp;lt;&amp;quot;a-b=\n&amp;quot;&amp;lt;&amp;lt;a-b&amp;lt;&amp;lt;std::endl; std::cout&amp;lt;&amp;lt;&amp;quot;Doing a += b;\n&amp;quot;&amp;lt;&amp;lt;std::endl; a += b; std::cout&amp;lt;&amp;lt;&amp;quot;Now a =\n&amp;quot;&amp;lt;&amp;lt;a&amp;lt;&amp;lt;std::endl; Vector3d v(1,2,3); Vector3d w(1,0,0); std::cout&amp;lt;&amp;lt;&amp;quot;-v+w-v=\n&amp;quot;&amp;lt;&amp;lt;-v+w-v&amp;lt;&amp;lt;std::endl; }  运行结果：
-a+b= 3 5 4 8 a-b= -1 -1 2 0 Doing a += b; Now a = 3 5 4 8 -v+w-v= -1 -4 -6  另外，矩阵还提供与标量（单一个数字）的乘除操作，表示每个元素都与该标量进行乘除操作。例如： 二元操作符*在：A*a中表示矩阵A中的每隔元素都与数字a相乘，结果放在一个临时矩阵中，矩阵的值不会改变。 对于aA、A/a、A=a、A /=a也是一样，例如下面的代码：</description>
+#include&amp;lt;iostream&amp;gt;#include&amp;lt;eigen3/Eigen/Dense&amp;gt;using namespace Eigen;int main(){Matrix2d a;a &amp;lt;&amp;lt; 1,2,3,4;MatrixXd b(2,2);b &amp;lt;&amp;lt; 2,3,1,4;std::cout&amp;lt;&amp;lt;&amp;quot;a+b=\n&amp;quot;&amp;lt;&amp;lt;a+b&amp;lt;&amp;lt;std::endl;std::cout&amp;lt;&amp;lt;&amp;quot;a-b=\n&amp;quot;&amp;lt;&amp;lt;a-b&amp;lt;&amp;lt;std::endl;std::cout&amp;lt;&amp;lt;&amp;quot;Doing a += b;\n&amp;quot;&amp;lt;&amp;lt;std::endl;a += b;std::cout&amp;lt;&amp;lt;&amp;quot;Now a =\n&amp;quot;&amp;lt;&amp;lt;a&amp;lt;&amp;lt;std::endl;Vector3d v(1,2,3);Vector3d w(1,0,0);std::cout&amp;lt;&amp;lt;&amp;quot;-v+w-v=\n&amp;quot;&amp;lt;&amp;lt;-v+w-v&amp;lt;&amp;lt;std::endl;}运行结果：</description>
     </item>
     
     <item>
@@ -224,14 +220,14 @@ a+b= 3 5 4 8 a-b= -1 -1 2 0 Doing a += b; Now a = 3 5 4 8 -v+w-v= -1 -4 -6  另�
       
       <guid>https://ottsion.github.io/2017/2017-01-04-eigen-use-1/</guid>
       <description>星期三, 04. 一月 2017 09:05下午
- 这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。
- 矩阵的定义 Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：
- template&amp;lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols&amp;gt; struct traits&amp;lt;Matrix&amp;lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols&amp;gt; &amp;gt; .......  其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：
-typedef Matrix&amp;lt;double,Dynamic, Dynamic&amp;gt; MatrixXd;  在Eigen中也提供了很多常见的简化定义形式，例如：
-typedef Matrix&amp;lt; double , 3 , 1&amp;gt; Vector3d  注意：
- Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都提供默认构造函数，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。
- 矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：
-Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.0);   动态矩阵和静态矩阵 动态矩阵是指其大小在运行时确定，静态矩阵是指其大小在编译时确定，在Eigen中并未这样称呼矩阵。</description>
+  这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。
+  矩阵的定义 Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：
+ template&amp;lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols&amp;gt; struct traits&amp;lt;Matrix&amp;lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols&amp;gt; &amp;gt; ....... 其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：
+typedef Matrix&amp;lt;double,Dynamic, Dynamic&amp;gt; MatrixXd;在Eigen中也提供了很多常见的简化定义形式，例如：
+typedef Matrix&amp;lt; double , 3 , 1&amp;gt; Vector3d注意：
+  Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都提供默认构造函数，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。
+  矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：
+  Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.</description>
     </item>
     
     <item>
@@ -242,13 +238,13 @@ Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.0);
       <guid>https://ottsion.github.io/2016/2016-12-26-cmake-1/</guid>
       <description>星期六, 07. 一月 2017 05:16下午
  学习笔记，来源： cmake实践
- 准备工作 首先确定自己的编程目录，这里选用：
-cd Documents/study/cmake/ mkdir t1 &amp;amp;&amp;amp; cd t1  建立main.cpp和CMakeLists.txt
+  准备工作 首先确定自己的编程目录，这里选用：
+cd Documents/study/cmake/mkdir t1 &amp;amp;&amp;amp; cd t1建立main.cpp和CMakeLists.txt
 编写程序 main.cpp
-#include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;quot;Hello World from t1 main!\n&amp;quot;); return 0; }  CMakeLists.txt
-PROJECT (HELLO) SET (SRC_LIST main.cpp) MESSAGE(STATUS&amp;quot;THISISBINARYdir&amp;quot;${HELLO_BINARY_DIR}) MESSAGE(STATUS&amp;quot;THISISSOURCEdir&amp;quot;${HELLO_SOURCE_DIR}) ADD_EXECUTABLE (hello SRC_LIST)  编译过程 运行：
-cmake . (注意命令后面的点号,代表本目录)。  输出大概是这个样子:
--- Check for working C compiler: /usr/bin/gcc -- Check for working C compiler: /usr/bin/gcc -- works -- Check size of void* -- Check size of void* - done -- Check for working CXX compiler: /usr/bin/c++ -- Check for working CXX compiler: /usr/bin/c++ -- works -- This is BINARY dir /backup/cmake/t1 -- This is SOURCE dir /backup/cmake/t1 -- Configuring done -- Generating done -- Build files have been written to: /backup/cmake/t1  运行（当前目录）：</description>
+#include&amp;lt;stdio.h&amp;gt;int main(){printf(&amp;#34;Hello World from t1 main!\n&amp;#34;);return 0;}CMakeLists.txt
+PROJECT (HELLO)SET (SRC_LIST main.cpp)MESSAGE(STATUS&amp;quot;THISISBINARYdir&amp;quot;${HELLO_BINARY_DIR})MESSAGE(STATUS&amp;quot;THISISSOURCEdir&amp;quot;${HELLO_SOURCE_DIR})ADD_EXECUTABLE (hello SRC_LIST)编译过程 运行：
+cmake . (注意命令后面的点号,代表本目录)。输出大概是这个样子:
+-- Check for working C compiler: /usr/bin/gcc-- Check for working C compiler: /usr/bin/gcc -- works-- Check size of void*-- Check size of void* - done-- Check for working CXX compiler: /usr/bin/c++-- Check for working CXX compiler: /usr/bin/c++ -- works-- This is BINARY dir /backup/cmake/t1-- This is SOURCE dir /backup/cmake/t1-- Configuring done-- Generating done-- Build files have been written to: /backup/cmake/t1运行（当前目录）：</description>
     </item>
     
     <item>
@@ -267,7 +263,8 @@ cmake . (注意命令后面的点号,代表本目录)。  输出大概是这个�
  w(x,y) is the window at position (x,y) I(x,y) is the intensity at (x,y) I(x+u,y+v) is the intensity at the moved window (x+u,y+v)  为了寻找带角点的窗口，我们搜索像素灰度变化较大的窗口。于是, 我们期望最大化以下式子:
 使用 泰勒(Taylor)展开式:
 式子可以展开为:
-一个举证表达式可以写为:</description>
+一个举证表达式可以写为:
+表示为:</description>
     </item>
     
   </channel>

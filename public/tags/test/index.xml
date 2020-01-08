@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>test on 静心明志</title>
@@ -21,9 +21,10 @@
  标题正文 正常显示部分，会显示正文
 编写代码 正常显示部分，会显示正文
 小标题 文章正文，一下为代码格式
-#include&amp;lt;stdio.h&amp;gt; int main() { print(&amp;quot;hello&amp;quot;); }  小标题 sudo apt-get insatll libdev
+#include&amp;lt;stdio.h&amp;gt;int main(){print(&amp;#34;hello&amp;#34;);}小标题 sudo apt-get insatll libdev
 小标题 我们直接看下onLayout的代码：
-X = np.array([ [0,0,1],[0,1,1],[1,0,1],[1,1,1] ]) y = np.array([[0,1,1,0]]).T syn0 = 2*np.random.random((3,4)) - 1 syn1 = 2*np.random.random((4,1)) - 1 for j in xrange(60000): l1 = 1/(1+np.exp(-(np.dot(X,syn0)))) l2 = 1/(1+np.exp(-(np.dot(l1,syn1)))) l2_delta = (y - l2)*(l2*(1-l2)) l1_delta = l2_delta.dot(syn1.T) * (l1 * (1-l1)) syn1 += l1.T.dot(l2_delta) syn0 += X.T.dot(l1_delta)  再有：</description>
+X = np.array([ [0,0,1],[0,1,1],[1,0,1],[1,1,1] ])y = np.array([[0,1,1,0]]).Tsyn0 = 2*np.random.random((3,4)) - 1syn1 = 2*np.random.random((4,1)) - 1for j in xrange(60000):l1 = 1/(1+np.exp(-(np.dot(X,syn0))))l2 = 1/(1+np.exp(-(np.dot(l1,syn1))))l2_delta = (y - l2)*(l2*(1-l2))l1_delta = l2_delta.dot(syn1.T) * (l1 * (1-l1))syn1 += l1.T.dot(l2_delta)syn0 += X.T.dot(l1_delta)再有：
+public class HelloWorld {/*** 输出一行字符串“Hello World!</description>
     </item>
     
   </channel>

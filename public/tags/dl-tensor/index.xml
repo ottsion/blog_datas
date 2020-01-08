@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DL, tensor on 静心明志</title>
@@ -18,8 +18,8 @@
       
       <guid>https://ottsion.github.io/2017/2017-05-11-tensorflow-tensor/</guid>
       <description>来源：tensorflow学习笔记（二）：tensor 变换 矩阵操作
-#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算 tf.reduce_sum(a, 1） #对axis1 tf.reduce_mean(a,0) #每列均值  第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）
-#关于concat，可以用来进行降维 3D-&amp;gt;2D , 2D-&amp;gt;1D tf.concat(concat_dim, data) #arr = np.zeros([2,3,4,5,6]) In [6]: arr2.shape Out[6]: (2, 3, 4, 5) In [7]: np.concatenate(arr2, 0).shape Out[7]: (6, 4, 5) :(2*3, 4, 5) In [9]: np.concatenate(arr2, 1).shape Out[9]: (3, 8, 5) :(3, 2*4, 5) #tf.concat() t1 = [[1, 2, 3], [4, 5, 6]] t2 = [[7, 8, 9], [10, 11, 12]] # 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成 #shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1 #tensor[2:,:]是之前的t2 tf.</description>
+#所有的reduce_...，如果不加axis的话，都是对整个矩阵进行运算tf.reduce_sum(a, 1） #对axis1tf.reduce_mean(a,0) #每列均值第二个参数是axis，如果为0的话，res[i]=∑ja[j,i]即（res[i]=∑a[:,i]）， 如果是1的话，res[i]=∑ja[i,j] NOTE:返回的都是行向量,（axis等于几，就是对那维操作,i.e.:沿着那维操作）
+#关于concat，可以用来进行降维 3D-&amp;gt;2D , 2D-&amp;gt;1Dtf.concat(concat_dim, data)#arr = np.zeros([2,3,4,5,6])In [6]: arr2.shapeOut[6]: (2, 3, 4, 5)In [7]: np.concatenate(arr2, 0).shapeOut[7]: (6, 4, 5) :(2*3, 4, 5)In [9]: np.concatenate(arr2, 1).shapeOut[9]: (3, 8, 5) :(3, 2*4, 5)#tf.concat()t1 = [[1, 2, 3], [4, 5, 6]]t2 = [[7, 8, 9], [10, 11, 12]]# 将t1, t2进行concat，axis为0，等价于将shape=[2, 2, 3]的Tensor concat成#shape=[4, 3]的tensor。在新生成的Tensor中tensor[:2,:]代表之前的t1#tensor[2:,:]是之前的t2tf.</description>
     </item>
     
   </channel>

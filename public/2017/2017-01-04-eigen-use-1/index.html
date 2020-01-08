@@ -11,6 +11,41 @@
   
   <link rel="prev" href="https://ottsion.github.io/2016/2016-12-26-cmake-1/" />
   <link rel="next" href="https://ottsion.github.io/2017/2017-01-05-lunwen2/" />
+  <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
   <link rel="canonical" href="https://ottsion.github.io/2017/2017-01-04-eigen-use-1/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -46,7 +81,7 @@
     "articleSection" : "posts",
     "name" : "Eigen矩阵库——初步用法（一）",
     "headline" : "Eigen矩阵库——初步用法（一）",
-    "description" : "星期三, 04. 一月 2017 09:05下午\n 这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。\n 矩阵的定义 Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：\n template\x26lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols\x26gt; struct traits\x26lt;Matrix\x26lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols\x26gt; \x26gt; .......  其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：\ntypedef Matrix\x26lt;double,Dynamic, Dynamic\x26gt; MatrixXd;  在Eigen中也提供了很多常见的简化定义形式，例如：\ntypedef Matrix\x26lt; double , 3 , 1\x26gt; Vector3d  注意：\n Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都提供默认构造函数，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。\n 矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：\nVector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.0);   动态矩阵和静态矩阵 动态矩阵是指其大小在运行时确定，静态矩阵是指其大小在编译时确定，在Eigen中并未这样称呼矩阵。",
+    "description" : "星期三, 04. 一月 2017 09:05下午\n  这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。\n  矩阵的定义 Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：\n template\x26lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols\x26gt; struct traits\x26lt;Matrix\x26lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols\x26gt; \x26gt; ....... 其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：\ntypedef Matrix\x26lt;double,Dynamic, Dynamic\x26gt; MatrixXd;\r在Eigen中也提供了很多常见的简化定义形式，例如：\ntypedef Matrix\x26lt; double , 3 , 1\x26gt; Vector3d\r注意：\n  Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都提供默认构造函数，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。\n  矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：\n  Vector2d a(5.0, 6.0); Vector3d b(5.0, 6.0, 7.0); Vector4d c(5.0, 6.0, 7.0, 8.",
     "inLanguage" : "en-us",
     "author" : "caicai",
     "creator" : "caicai",
@@ -57,7 +92,7 @@
     "datePublished": "2017-01-04 23:59:59 \x2b0000 \x2b0000",
     "dateModified" : "2017-01-04 23:59:59 \x2b0000 \x2b0000",
     "url" : "https:\/\/ottsion.github.io\/2017\/2017-01-04-eigen-use-1\/",
-    "wordCount" : "444",
+    "wordCount" : "446",
     "keywords" : [ "eigen", "静心明志"]
 }
 </script>
@@ -152,90 +187,64 @@
           
           
 
-          
-
-<p>星期三, 04. 一月 2017 09:05下午</p>
-
-<hr />
-
+          <p>星期三, 04. 一月 2017 09:05下午</p>
+<hr>
 <blockquote>
 <p>这部分估计会是三篇，摘取自别人的博客，最后附有链接，简单解释了Eigen矩阵库的使用方法。</p>
 </blockquote>
-
-<hr />
-
+<hr>
 <h2 id="矩阵的定义">矩阵的定义</h2>
-
 <p>Eigen中关于矩阵类的模板函数中，共有6个模板参数，但是目前常用的只有前三个，如下所示：</p>
-
 <pre><code> template&lt;typename _Scalar, int _Rows, int _Cols, int _Options, int _MaxRows, int _MaxCols&gt;  
  struct traits&lt;Matrix&lt;_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols&gt; &gt;  
 ....... 
-</code></pre>
-
-<p>其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。
+</code></pre><p>其前三个参数分别表示矩阵元素的类型（_Scalar），行数（_Rows）和列数（ _Cols）。
 矩阵定义时可以使用Dynamic来表示矩阵的行列数为未知，例如：</p>
-
 <pre><code>typedef Matrix&lt;double,Dynamic, Dynamic&gt; MatrixXd;
-</code></pre>
-
-<p>在Eigen中也提供了很多常见的简化定义形式，例如：</p>
-
+</code></pre><p>在Eigen中也提供了很多常见的简化定义形式，例如：</p>
 <pre><code>typedef Matrix&lt; double , 3 , 1&gt; Vector3d
-</code></pre>
-
-<p>注意：</p>
-
+</code></pre><p>注意：</p>
 <ol>
-<li><p>Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都<strong>提供默认构造函数</strong>，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。</p></li>
-
-<li><p>矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：</p>
-
+<li>
+<p>Eigen中无论是矩阵还是数组、向量，无论是静态矩阵还是动态矩阵都<strong>提供默认构造函数</strong>，也就是你定义这些数据结构时都可以不用提供任何参数，其大小均由运行时来确定。</p>
+</li>
+<li>
+<p>矩阵的构造函数中只提供行列数、元素类型的构造参数，而不提供元素值的构造，对于比较小的、固定长度的向量提供初始化元素的定义，例如：</p>
+</li>
+</ol>
 <pre><code>Vector2d a(5.0, 6.0);  
 Vector3d b(5.0, 6.0, 7.0);  
 Vector4d c(5.0, 6.0, 7.0, 8.0);  
-</code></pre></li>
-</ol>
-
-<h2 id="动态矩阵和静态矩阵">动态矩阵和静态矩阵</h2>
-
+</code></pre><h2 id="动态矩阵和静态矩阵">动态矩阵和静态矩阵</h2>
 <p>动态矩阵是指其大小在运行时确定，静态矩阵是指其大小在编译时确定，在Eigen中并未这样称呼矩阵。</p>
-
 <p>第一段代码：</p>
-
-<pre><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;Eigen/Dense&gt;
-using namespace Eigen;
-using namespace std;
-int main()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span><span style="color:#75715e">&lt;Eigen/Dense&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Eigen;
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-	MatrixXd m = MatrixXd::Random( 3, 3);
-	m = (m + MatrixXd::Constant( 3, 3, 1.2 )) * 50;
-	cout &lt;&lt; &quot;m = &quot; &lt;&lt; endl &lt;&lt; m &lt;&lt; endl;
-	VectorXd v(3);
-	v &lt;&lt; 1, 2, 3;
-	cout &lt;&lt; &quot;m*v = &quot; &lt;&lt;endl &lt;&lt; m*v &lt;&lt; endl;
+	MatrixXd m <span style="color:#f92672">=</span> MatrixXd<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Random( <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>);
+	m <span style="color:#f92672">=</span> (m <span style="color:#f92672">+</span> MatrixXd<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Constant( <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1.2</span> )) <span style="color:#f92672">*</span> <span style="color:#ae81ff">50</span>;
+	cout <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">m = </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> m <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl;
+	VectorXd v(<span style="color:#ae81ff">3</span>);
+	v <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>;
+	cout <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">m*v = </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>endl <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> m<span style="color:#f92672">*</span>v <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl;
 }
-</code></pre>
-
-<p>第二段代码：</p>
-
-<pre><code class="language-c++">#include &lt;iostream&gt;  
-#include &lt;Eigen/Dense&gt;  
-using namespace Eigen;
-using namespace std;
-int main()
+</code></pre></div><p>第二段代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;iostream&gt;  </span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;Eigen/Dense&gt;  </span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Eigen;
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-	Matrix3d m = Matrix3d::Random(); 
-	m = (m + Matrix3d::Constant(1.2)) * 50; 
-	cout &lt;&lt; &quot;m = &quot; &lt;&lt; endl &lt;&lt; m &lt;&lt; endl;
-	Vector3d v(1,2,3); 
-	cout &lt;&lt; &quot;m*v = &quot; &lt;&lt;endl &lt;&lt; m*v &lt;&lt; endl;
+	Matrix3d m <span style="color:#f92672">=</span> Matrix3d<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Random(); 
+	m <span style="color:#f92672">=</span> (m <span style="color:#f92672">+</span> Matrix3d<span style="color:#f92672">:</span><span style="color:#f92672">:</span>Constant(<span style="color:#ae81ff">1.2</span>)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">50</span>; 
+	cout <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">m = </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> m <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl;
+	Vector3d v(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>); 
+	cout <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">m*v = </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span>endl <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> m<span style="color:#f92672">*</span>v <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> endl;
 }
-</code></pre>
-
-<p>第一段的运行结果：</p>
-
+</code></pre></div><p>第一段的运行结果：</p>
 <pre><code>before m = 
 	 0.680375   0.59688 -0.329554
 	-0.211234  0.823295  0.536459
@@ -248,24 +257,23 @@ m*v =
 	404.274
 	512.237
 	261.153
-</code></pre>
-
-<p>说明：</p>
-
+</code></pre><p>说明：</p>
 <ol>
-<li><p>代码段1中MatrixXd表示任意大小的元素类型为double的矩阵变量，其大小只有在运行时被赋值之后才能知道；<code>MatrixXd::Random(3,3)</code>表示产生一个元素类型为double的3*3的临时矩阵对象。</p></li>
-
-<li><p>代码段2中<code>Matrix3d</code>表示元素类型为double大小为3*3的矩阵变量，其大小在编译时就知道；</p></li>
-
-<li><p>上例中向量的定义也是类似，不过这里的向量时列优先，在Eigen中行优先的矩阵会在其名字中包含有row，否则就是列优先。</p></li>
-
-<li><p>向量只是一个特殊的矩阵，其一个维度为1而已，如：<code>typedef Matrix&lt; double , 3 , 1&gt; Vector3d</code></p></li>
+<li>
+<p>代码段1中MatrixXd表示任意大小的元素类型为double的矩阵变量，其大小只有在运行时被赋值之后才能知道；<code> MatrixXd::Random(3,3)</code>表示产生一个元素类型为double的3*3的临时矩阵对象。</p>
+</li>
+<li>
+<p>代码段2中<code>Matrix3d</code>表示元素类型为double大小为3*3的矩阵变量，其大小在编译时就知道；</p>
+</li>
+<li>
+<p>上例中向量的定义也是类似，不过这里的向量时列优先，在Eigen中行优先的矩阵会在其名字中包含有row，否则就是列优先。</p>
+</li>
+<li>
+<p>向量只是一个特殊的矩阵，其一个维度为1而已，如：<code>typedef Matrix&lt; double , 3 , 1&gt; Vector3d</code></p>
+</li>
 </ol>
-
 <h2 id="矩阵元素的访问">矩阵元素的访问</h2>
-
 <p>在矩阵的访问中，行索引总是作为第一个参数，需注意Eigen中遵循大家的习惯让矩阵、数组、向量的下标都是从0开始。矩阵元素的访问可以通过（）操作符完成，例如<code>m(2,3)</code>即是获取矩阵m的第2行第3列元素（注意行列数从0开始）。可参看如下代码：</p>
-
 <pre><code>#include&lt;iostream&gt;
 #include&lt;eigen3/Eigen/Dense&gt;
 using namespace Eigen;
@@ -282,10 +290,7 @@ int main()
   v(1) = v(0) - 1;
   std::cout&lt;&lt;&quot;here is the vector v:\n&quot;&lt;&lt;v&lt;&lt;std::endl;
 }
-</code></pre>
-
-<p>运行结果如下：</p>
-
+</code></pre><p>运行结果如下：</p>
 <pre><code>here is the matrix m:
   3  -1
 2.5 1.5
@@ -293,30 +298,21 @@ here is the vector v:
 4
 3
 </code></pre>
-
-<p>针对向量还提供[]操作符，注意矩阵则不可如此使用，原因为：在C++中<code>m[i, j]</code>中逗号表达式<code>“i, j”</code>的值始终都是“j”的值，即<code>m[i, j]</code>对于C++来讲就是<code>m[j]</code>;</p>
-
+<p>针对向量还提供[]操作符，注意矩阵则不可如此使用，原因为：在C++中<code>m[i, j]</code>中逗号表达式<code> “i, j”</code>的值始终都是“j”的值，即<code>m[i, j]</code>对于C++来讲就是<code>m[j]</code>;</p>
 <h2 id="设置矩阵的元素">设置矩阵的元素</h2>
-
-<p>在Eigen中重载了&rdquo;&lt;&lt;&ldquo;操作符，通过该操作符即可以一个一个元素的进行赋值，也可以一块一块的赋值。另外也可以使用下标进行复制。
+<p>在Eigen中重载了&quot;&laquo;&quot;操作符，通过该操作符即可以一个一个元素的进行赋值，也可以一块一块的赋值。另外也可以使用下标进行复制。
 第一段代码：</p>
-
 <pre><code>Matrix3f m; 
 m &lt;&lt; 1, 2, 3, 
 4, 5, 6, 
 7, 8, 9; 
 std::cout &lt;&lt; m; 
-</code></pre>
-
-<p>运行结果是：</p>
-
+</code></pre><p>运行结果是：</p>
 <pre><code>1 2 3
 4 5 6
 7 8 9
 </code></pre>
-
 <p>第二段代码：</p>
-
 <pre><code>VectorXf m_Vector_A; 
 MatrixXf m_matrix_B; 
 int m_iN =-1; 
@@ -349,41 +345,33 @@ bool InitData(int pSrc[100][100], int iWidth, int iHeight)
     m_Vector_A = tmp_A; 
     m_matrix_B = tmp_B; 
 } 
-</code></pre>
-
-<h2 id="重置矩阵大小">重置矩阵大小</h2>
-
+</code></pre><h2 id="重置矩阵大小">重置矩阵大小</h2>
 <p>当前矩阵的行数、列数、大小可以通过<code>rows()</code>，<code>cols()</code>和<code>size()</code>来获取，对于动态矩阵可以通过<code>resize()</code>函数来动态修改矩阵的大小.
 需注意：</p>
-
 <ol>
-<li><p>固定大小的矩阵是不能使用<code>resize()</code>来修改矩阵的大小；</p></li>
-
-<li><p><code>resize()</code>函数会析构掉原来的数据，因此调用<code>resize()</code>函数之后将不能保证元素的值不改变。</p></li>
-
-<li><p>使用“=”操作符操作动态矩阵时，如果左右边的矩阵大小不等，则左边的动态矩阵的大小会被修改为右边的大小。例如下面的代码段</p>
-
-<pre><code>MatrixXf a(2,2);
-std::cout&lt;&lt;&quot;a is of size &quot;&lt;&lt;a.rows()&lt;&lt;&quot;x&quot;&lt;&lt;a.cols()&lt;&lt;std::endl;
-MatrixXf b(3,3);
-a = b;
-std::cout&lt;&lt;&quot;a is of size &quot;&lt;&lt;a.rows()&lt;&lt;&quot;x&quot;&lt;&lt;a.cols()&lt;&lt;std::endl;
-</code></pre></li>
+<li>
+<p>固定大小的矩阵是不能使用<code>resize()</code>来修改矩阵的大小；</p>
+</li>
+<li>
+<p><code>resize()</code>函数会析构掉原来的数据，因此调用<code>resize()</code>函数之后将不能保证元素的值不改变。</p>
+</li>
+<li>
+<p>使用“=”操作符操作动态矩阵时，如果左右边的矩阵大小不等，则左边的动态矩阵的大小会被修改为右边的大小。例如下面的代码段</p>
+</li>
 </ol>
-
-<p>输出结果为：</p>
-
+<pre><code>   MatrixXf a(2,2);
+   std::cout&lt;&lt;&quot;a is of size &quot;&lt;&lt;a.rows()&lt;&lt;&quot;x&quot;&lt;&lt;a.cols()&lt;&lt;std::endl;
+   MatrixXf b(3,3);
+   a = b;
+   std::cout&lt;&lt;&quot;a is of size &quot;&lt;&lt;a.rows()&lt;&lt;&quot;x&quot;&lt;&lt;a.cols()&lt;&lt;std::endl;
+</code></pre><p>输出结果为：</p>
 <pre><code>a is of size 2x2
 a is now of size 3x3
-</code></pre>
-
-<p>如何选择动态矩阵和静态矩阵？
+</code></pre><p>如何选择动态矩阵和静态矩阵？
 Eigen对于这问题的答案是：对于小矩阵（一般大小小于16）的使用固定大小的静态矩阵，它可以带来比较高的效率，对于大矩阵（一般大小大于32）建议使用动态矩阵。
 还需特别注意的是：如果特别大的矩阵使用了固定大小的静态矩阵则可能造成栈溢出的问题</p>
-
 <h2 id="来源">来源</h2>
-
-<p><a href="http://blog.csdn.net/houjixin/article/details/8490941" title="点击跳转" rel="nofollow noreferrer" target="_blank">C++开源矩阵计算工具——Eigen的简单用法（一） 逍遥子_</a></p>
+<p><a href="http://blog.csdn.net/houjixin/article/details/8490941" title="点击跳转">C++开源矩阵计算工具——Eigen的简单用法（一） 逍遥子_</a></p>
 
     </div>
 
@@ -401,6 +389,9 @@ Eigen对于这问题的答案是：对于小矩阵（一般大小小于16）的�
                     <a href=https://ottsion.github.io/2017/2017-01-04-eigen-use-1/>https://ottsion.github.io/2017/2017-01-04-eigen-use-1/</span>
             </p>
             
+            <span id="busuanzi_container_page_pv">
+                本文总阅读量: <span id="busuanzi_value_page_pv"></span>
+            </span>
              
             <p class="copyright-item lincese">
                 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
@@ -434,10 +425,27 @@ Eigen对于这问题的答案是：对于小矩阵（一般大小小于16）的�
         
     </div>
 
+    
     <div class="post-comment">
-          
-                 
-          
+        
+        
+
+<div id="vcomments"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.7/dist/Valine.min.js'></script>
+
+<script type="text/javascript">
+  new Valine({
+      el: '#vcomments' ,
+      appId: 'aq7KX6LvEUKuYC1FReOy9Rq8-gzGzoHsz',
+      appKey: 'AJWv8xzYkd8tJ23S38zDK3TN',
+      notify: 'false', 
+      verify: 'false', 
+      avatar:'mm', 
+      placeholder: '说点什么吧...',
+      visitor: 'true'
+  });
+</script>
     </div>
 </article>
           </div>
@@ -459,7 +467,7 @@ Eigen对于这问题的答案是：对于小矩阵（一般大小小于16）的�
 		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
     </div>
 </footer>
-
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
