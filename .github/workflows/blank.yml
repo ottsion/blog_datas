@@ -13,8 +13,6 @@ jobs:
           submodules: true
       - name: Hugo Actions
         uses: srt32/hugo-action@v0.0.3
-      - name: Build
-        run: hugo --minify
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2.5.1
         env:
