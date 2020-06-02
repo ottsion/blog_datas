@@ -1,26 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>thread on 静心明志</title>
-    <link>https://ottsion.github.io/tags/thread/</link>
-    <description>Recent content in thread on 静心明志</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 05 May 2019 16:58:24 +0800</lastBuildDate>
-    
-	<atom:link href="https://ottsion.github.io/tags/thread/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>方法超时放弃执行</title>
-      <link>https://ottsion.github.io/2019/%E6%96%B9%E6%B3%95%E8%B6%85%E6%97%B6%E6%94%BE%E5%BC%83%E6%89%A7%E8%A1%8C/</link>
-      <pubDate>Sun, 05 May 2019 16:58:24 +0800</pubDate>
-      
-      <guid>https://ottsion.github.io/2019/%E6%96%B9%E6%B3%95%E8%B6%85%E6%97%B6%E6%94%BE%E5%BC%83%E6%89%A7%E8%A1%8C/</guid>
-      <description>遇到一个比较不常见的情况，我在流水线式执行一个方法，方法中涉及到数据的获取，有时候获取很快，有时候十几分钟都没结果，因为我这个任务要追求时间效率，可以牺牲小部分异常，所以想到方法超时放弃这个想法：如果这个方法执行超过60秒，就直接pass继续执行下一次。
-具体其实是应用线程去实现这个想法：
-import java.util.concurrent.Callable;import java.util.concurrent.ExecutionException;import java.util.concurrent.ExecutorService;import java.util.concurrent.Executors;import java.util.concurrent.TimeUnit;import com.sun.corba.se.impl.orbutil.closure.Future;import com.sun.corba.se.impl.orbutil.threadpool.TimeoutException;public class ThreadTest { public static void main(String[] args) throws InterruptedException, ExecutionException { final ExecutorService exec = Executors.newFixedThreadPool(1); Callable&amp;lt;String&amp;gt; task = new Callable&amp;lt;String&amp;gt;() { public String call() throws Exception { //开始执行耗时操作  Thread.sleep(1000 * 5); return &amp;#34;线程执行完成.&amp;#34;; } }; try { Future&amp;lt;String&amp;gt; future = exec.submit(task); String obj = future.get(1, TimeUnit.SECOND); //任务处理超时时间设为 1 秒  System.</description>
-    </item>
-    
-  </channel>
-</rss>

@@ -1,26 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>html on 静心明志</title>
-    <link>https://ottsion.github.io/tags/html/</link>
-    <description>Recent content in html on 静心明志</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 08 May 2019 14:01:43 +0800</lastBuildDate>
-    
-	<atom:link href="https://ottsion.github.io/tags/html/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>js的ajax方式</title>
-      <link>https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/</link>
-      <pubDate>Wed, 08 May 2019 14:01:43 +0800</pubDate>
-      
-      <guid>https://ottsion.github.io/2019/js%E7%9A%84ajax%E6%96%B9%E5%BC%8F/</guid>
-      <description>JS通过ajax调用接口实现数据传送，第一种方式为设置button的点击onclick方法，第二种通过绑定bind点击事件获得访问
-用onclick方式：
-&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta http-equiv=&amp;#34;content-type&amp;#34; content=&amp;#34;text/html; charset=UTF-8&amp;#34;&amp;gt;&amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;&amp;lt;!--src值为文件位置路径 --&amp;gt;&amp;lt;script type=&amp;#34;text/javascript&amp;#34; charset=&amp;#34;UTF-8&amp;#34; src=&amp;#34;javascript/jquery-1.12.1.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;title&amp;gt;测试案例&amp;lt;/title&amp;gt;&amp;lt;!--语法：jQuery.getJSON(url,data,success(data,status,xhr)) --&amp;gt;&amp;lt;script type=&amp;#34;text/javascript&amp;#34; charset=&amp;#34;UTF-8&amp;#34;&amp;gt;function getToken(){$.getJSON(&amp;#34;http://localhost/kdapi/api/access_token&amp;#34;, {&amp;#34;id&amp;#34;:111,&amp;#34;secret&amp;#34;:2352532}, function(result){alert(result.access_token);});}&amp;lt;/script&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;button onclick=&amp;#34;getToken()&amp;#34; style=&amp;#34;width: 120px; height: 60px;&amp;#34;&amp;gt;获取Token&amp;lt;/button&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</description>
-    </item>
-    
-  </channel>
-</rss>
