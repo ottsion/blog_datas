@@ -3,7 +3,7 @@ date: 2017-05-11T23:59:59+00:00
 draft: false
 author: "caicai"
 title: "tensorflow--模型数据保存与打开"
-categories: ["深度学习"]
+categories: ["AI"]
 tags: ["DL, saver"] 
 ---
 

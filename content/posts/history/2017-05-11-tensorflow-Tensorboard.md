@@ -3,7 +3,7 @@ date: 2017-05-11T23:59:59+00:00
 draft: false
 author: "caicai"
 title: "tensorflow--tensorboard"
-categories: ["深度学习"]
+categories: ["AI"]
 tags: ["DL, tensorboard"] 
 ---
 

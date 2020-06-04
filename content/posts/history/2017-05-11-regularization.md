@@ -3,7 +3,7 @@ date: 2017-05-11T23:59:59+00:00
 draft: false
 author: "caicai"
 title: "正则化"
-categories: ["机器学习"]
+categories: ["AI"]
 tags: ["ML, regularization"] 
 ---
 链接:
